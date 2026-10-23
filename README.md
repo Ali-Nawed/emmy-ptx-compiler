@@ -11,9 +11,10 @@ The original competition materials are retained below and in the problems/ direc
 - tools/expressions_extended.py and tools/test_extended.py: fresh PyTorch -> Emmy IR fixtures, independent NumPy expectations, and optional runner checks.
 - tests/EXTENDED.md: extended-suite usage and result definitions.
 
-All eight public MVP problems passed. An initial 80-case PyTorch-generated suite
-produced 8 GPU passes and 72 compiler rejections. Known gaps include zero-axis
-scalar tiles, subtraction, non-f32 datatypes, and broader reduction schedules.
+All eight public MVP problems passed. The 80-case PyTorch-generated suite now
+produces 16 GPU passes (all f32 cases) and 64 compiler rejections for unsupported
+datatypes. Scalar tiles and f32 subtraction are supported. Known gaps include
+non-f32 datatypes, lexical scope handling, and broader reduction schedules.
 These results do not establish hidden-set correctness.
 
 ```bash

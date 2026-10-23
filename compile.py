@@ -271,7 +271,8 @@ class PTXEmitter:
             args = [self.values[arg] for arg in stmt.args]
             operation = stmt.op.name
             result = self.reg("f")
-            binary = {"add": "add.rn.f32", "multiply": "mul.rn.f32", "divide": "div.rn.f32"}
+            binary = {"add": "add.rn.f32", "subtract": "sub.rn.f32",
+                      "multiply": "mul.rn.f32", "divide": "div.rn.f32"}
             if operation in binary and len(args) == 2:
                 # Explicit rounding keeps multiply and add separate (no FMA contraction).
                 self.emit(f"{binary[operation]} {result}, {args[0]}, {args[1]};")
@@ -345,7 +346,9 @@ class PTXEmitter:
         if kernel.serial or len(kernel.body) != 1 or not isinstance(kernel.body[0], Tile):
             raise NotImplementedError("Expected one nonserial Tile")
         tile = kernel.body[0]
-        if not tile.axes or tile.aux_threads or tile.raster_group is not None:
+        # An empty axis tuple is a valid scalar tile: product(()) == 1 worker.
+        # The normal bounds guard below activates only global worker zero.
+        if tile.aux_threads or tile.raster_group is not None:
             raise NotImplementedError("Auxiliary threads and rasterized tiles are unsupported")
         if meta["block"][1:] != [1, 1] or meta["grid"][1:] != [1, 1]:
             raise NotImplementedError("Only one-dimensional launches are supported")

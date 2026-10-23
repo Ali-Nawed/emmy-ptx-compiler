@@ -17,7 +17,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_add_f16_129",
@@ -39,7 +39,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_subtract_f16_129",
@@ -61,7 +61,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_multiply_f16_129",
@@ -83,7 +83,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_scale_shift_f16_129",
@@ -105,7 +105,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_relu_mul_f16_129",
@@ -127,7 +127,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_sum_f16_129",
@@ -149,7 +149,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_mean_f16_129",
@@ -194,8 +194,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_add_f32_129",
@@ -210,7 +220,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 19.744,
+            "median_us": 23.616,
             "registers": {
               "k_add_pointwise": 30
             }
@@ -226,8 +236,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_f32_129",
@@ -237,8 +257,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported arithmetic: ElementwiseImpl('subtract')"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.032,
+            "registers": {
+              "k_sub_pointwise": 30
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_f32_1",
@@ -248,8 +278,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_f32_129",
@@ -264,7 +304,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.768,
+            "median_us": 23.456,
             "registers": {
               "k_mul_pointwise": 30
             }
@@ -280,8 +320,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.448,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_f32_129",
@@ -296,7 +346,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.032,
+            "median_us": 23.648,
             "registers": {
               "k_add_pointwise": 28
             }
@@ -312,8 +362,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_f32_129",
@@ -328,7 +388,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 21.504,
+            "median_us": 23.84,
             "registers": {
               "k_mul_pointwise": 26
             }
@@ -344,8 +404,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.928,
+            "registers": {
+              "k_sum_1_pointwise": 8
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_f32_129",
@@ -360,7 +430,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 20.288,
+            "median_us": 23.52,
             "registers": {
               "k_sum_1_reduce": 19
             }
@@ -376,8 +446,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_731e5e",
+            "median_us": 20.704,
+            "registers": {
+              "k_mean_731e5e": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_f32_129",
@@ -392,7 +472,7 @@
         "kernels": [
           {
             "entry": "k_mean_4ee5eb",
-            "median_us": 21.312,
+            "median_us": 23.68,
             "registers": {
               "k_mean_4ee5eb": 19
             }
@@ -414,7 +494,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_pointwise",
-            "median_us": 20.512,
+            "median_us": 23.36,
             "registers": {
               "k_sum_1_pointwise": 10
             }
@@ -436,7 +516,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 19.808,
+            "median_us": 22.944,
             "registers": {
               "k_sum_1_reduce": 20
             }
@@ -453,7 +533,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_add_f64_129",
@@ -475,7 +555,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_subtract_f64_129",
@@ -497,7 +577,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_multiply_f64_129",
@@ -519,7 +599,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_scale_shift_f64_129",
@@ -541,7 +621,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_relu_mul_f64_129",
@@ -563,7 +643,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_sum_f64_129",
@@ -585,7 +665,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_mean_f64_129",
@@ -631,7 +711,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_add_i32_129",
@@ -653,7 +733,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_subtract_i32_129",
@@ -675,7 +755,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_multiply_i32_129",
@@ -697,7 +777,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_scale_shift_i32_129",
@@ -719,7 +799,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_relu_mul_i32_129",
@@ -741,7 +821,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_sum_i32_129",
@@ -763,7 +843,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_mean_i32_129",
@@ -809,7 +889,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_add_i64_129",
@@ -831,7 +911,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_subtract_i64_129",
@@ -853,7 +933,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_multiply_i64_129",
@@ -875,7 +955,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_scale_shift_i64_129",
@@ -897,7 +977,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_relu_mul_i64_129",
@@ -919,7 +999,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_sum_i64_129",
@@ -941,7 +1021,7 @@
         1
       ],
       "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Auxiliary threads and rasterized tiles are unsupported"
+      "error": "compile.py: Only f32 loads are supported"
     },
     {
       "id": "ext_mean_i64_129",
