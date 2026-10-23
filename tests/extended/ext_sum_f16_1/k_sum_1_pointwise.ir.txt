@@ -1,0 +1,3 @@
+    Tile[] (N=1)
+        in0 = load x[0]
+        sum_1[] = in0

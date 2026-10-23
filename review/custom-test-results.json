@@ -1,0 +1,107 @@
+[
+  {
+    "case": "add_2",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (20.352 us)\n"
+  },
+  {
+    "case": "add_130",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (20.32 us)\n"
+  },
+  {
+    "case": "add_514",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (20.864 us)\n"
+  },
+  {
+    "case": "add_1026",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (14.048 us)\n"
+  },
+  {
+    "case": "scale_12",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 21 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (20.64 us)\n"
+  },
+  {
+    "case": "scale_1028",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_add_pointwise] 21 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (14.848 us)\n"
+  },
+  {
+    "case": "relu_20",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_mul_pointwise] 22 registers\n[k_mul_pointwise] PASS  mul: max abs err 0.000e+00  (17.312 us)\n"
+  },
+  {
+    "case": "relu_1036",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_mul_pointwise] 22 registers\n[k_mul_pointwise] PASS  mul: max abs err 0.000e+00  (14.752 us)\n"
+  },
+  {
+    "case": "sum_1",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 0.000e+00  (20.832 us)\n"
+  },
+  {
+    "case": "sum_31",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 0.000e+00  (20.96 us)\n"
+  },
+  {
+    "case": "sum_127",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 0.000e+00  (20.224 us)\n"
+  },
+  {
+    "case": "sum_129",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 0.000e+00  (21.728 us)\n"
+  },
+  {
+    "case": "sum_1003",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 2.861e-06  (20.96 us)\n"
+  },
+  {
+    "case": "rows_3x129",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 20 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 4.768e-07  (20.736 us)\n"
+  },
+  {
+    "case": "rows_7x513",
+    "compile_ok": true,
+    "assemble_ok": true,
+    "correct": true,
+    "output": "[k_sum_1_reduce] 20 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 2.861e-06  (20.352 us)\n"
+  }
+]

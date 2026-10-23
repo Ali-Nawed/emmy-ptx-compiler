@@ -1,0 +1,922 @@
+[
+  {
+    "id": "ext_add_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); y = torch.randn((1,), dtype=torch.float16); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "add",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_add_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "add",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_subtract_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); y = torch.randn((1,), dtype=torch.float16); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "subtract",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_subtract_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "subtract",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_multiply_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); y = torch.randn((1,), dtype=torch.float16); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "multiply",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_multiply_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "multiply",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); x * -1.25 + 0.5",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "scale_shift",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); x * -1.25 + 0.5",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "scale_shift",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); y = torch.randn((1,), dtype=torch.float16); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "relu_mul",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f16",
+    "operation": "relu_mul",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_sum_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); x.sum()",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "sum",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_sum_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); x.sum()",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "sum",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f16_1",
+    "code": "x = torch.randn((1,), dtype=torch.float16); x.mean()",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "mean",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f16_129",
+    "code": "x = torch.randn((129,), dtype=torch.float16); x.mean()",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "mean",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f16_3x1",
+    "code": "x = torch.randn((3, 1), dtype=torch.float16); x.sum(-1)",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f16_3x129",
+    "code": "x = torch.randn((3, 129), dtype=torch.float16); x.sum(-1)",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_add_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); y = torch.randn((1,), dtype=torch.float32); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "add",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_add_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "add",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_subtract_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); y = torch.randn((1,), dtype=torch.float32); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "subtract",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_subtract_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "subtract",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_multiply_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); y = torch.randn((1,), dtype=torch.float32); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "multiply",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_multiply_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "multiply",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); x * -1.25 + 0.5",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "scale_shift",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); x * -1.25 + 0.5",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "scale_shift",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); y = torch.randn((1,), dtype=torch.float32); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "relu_mul",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f32",
+    "operation": "relu_mul",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_sum_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); x.sum()",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "sum",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_sum_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); x.sum()",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "sum",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f32_1",
+    "code": "x = torch.randn((1,), dtype=torch.float32); x.mean()",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "mean",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f32_129",
+    "code": "x = torch.randn((129,), dtype=torch.float32); x.mean()",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "mean",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f32_3x1",
+    "code": "x = torch.randn((3, 1), dtype=torch.float32); x.sum(-1)",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f32_3x129",
+    "code": "x = torch.randn((3, 129), dtype=torch.float32); x.sum(-1)",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_add_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); y = torch.randn((1,), dtype=torch.float64); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "add",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_add_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "add",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_subtract_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); y = torch.randn((1,), dtype=torch.float64); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "subtract",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_subtract_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "subtract",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_multiply_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); y = torch.randn((1,), dtype=torch.float64); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "multiply",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_multiply_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "multiply",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); x * -1.25 + 0.5",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "scale_shift",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); x * -1.25 + 0.5",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "scale_shift",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); y = torch.randn((1,), dtype=torch.float64); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "relu_mul",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_relu_mul_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "f64",
+    "operation": "relu_mul",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_sum_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); x.sum()",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "sum",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_sum_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); x.sum()",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "sum",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f64_1",
+    "code": "x = torch.randn((1,), dtype=torch.float64); x.mean()",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "mean",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_f64_129",
+    "code": "x = torch.randn((129,), dtype=torch.float64); x.mean()",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "mean",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f64_3x1",
+    "code": "x = torch.randn((3, 1), dtype=torch.float64); x.sum(-1)",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_f64_3x129",
+    "code": "x = torch.randn((3, 129), dtype=torch.float64); x.sum(-1)",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_add_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); y = torch.randint(-8, 9, (1,), dtype=torch.int32); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "add",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_add_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); y = torch.randint(-8, 9, (129,), dtype=torch.int32); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "add",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_subtract_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); y = torch.randint(-8, 9, (1,), dtype=torch.int32); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "subtract",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_subtract_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); y = torch.randint(-8, 9, (129,), dtype=torch.int32); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "subtract",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_multiply_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); y = torch.randint(-8, 9, (1,), dtype=torch.int32); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "multiply",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_multiply_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); y = torch.randint(-8, 9, (129,), dtype=torch.int32); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "multiply",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "scale_shift",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "scale_shift",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_relu_mul_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); y = torch.randint(-8, 9, (1,), dtype=torch.int32); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "relu_mul",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_relu_mul_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); y = torch.randint(-8, 9, (129,), dtype=torch.int32); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "relu_mul",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_sum_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); x.sum()",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "sum",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_sum_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.sum()",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "sum",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_i32_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+    "rtol": 1e-05,
+    "atol": 1e-05,
+    "dtype": "i32",
+    "operation": "mean",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_i32_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+    "rtol": 1e-05,
+    "atol": 1e-05,
+    "dtype": "i32",
+    "operation": "mean",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_i32_3x1",
+    "code": "x = torch.randint(-8, 9, (3, 1), dtype=torch.int32); x.sum(-1)",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_i32_3x129",
+    "code": "x = torch.randint(-8, 9, (3, 129), dtype=torch.int32); x.sum(-1)",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_add_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); y = torch.randint(-8, 9, (1,), dtype=torch.int64); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "add",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_add_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); y = torch.randint(-8, 9, (129,), dtype=torch.int64); x + y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "add",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_subtract_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); y = torch.randint(-8, 9, (1,), dtype=torch.int64); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "subtract",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_subtract_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); y = torch.randint(-8, 9, (129,), dtype=torch.int64); x - y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "subtract",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_multiply_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); y = torch.randint(-8, 9, (1,), dtype=torch.int64); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "multiply",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_multiply_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); y = torch.randint(-8, 9, (129,), dtype=torch.int64); x * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "multiply",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "scale_shift",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "scale_shift",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_relu_mul_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); y = torch.randint(-8, 9, (1,), dtype=torch.int64); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "relu_mul",
+    "shape": [
+      1
+    ]
+  },
+  {
+    "id": "ext_relu_mul_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); y = torch.randint(-8, 9, (129,), dtype=torch.int64); torch.relu(x) * y",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "relu_mul",
+    "shape": [
+      129
+    ]
+  },
+  {
+    "id": "ext_sum_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); x.sum()",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "sum",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_sum_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.sum()",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "sum",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_i64_1",
+    "code": "x = torch.randint(-8, 9, (1,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+    "rtol": 1e-05,
+    "atol": 1e-05,
+    "dtype": "i64",
+    "operation": "mean",
+    "shape": [
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_mean_i64_129",
+    "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+    "rtol": 1e-05,
+    "atol": 1e-05,
+    "dtype": "i64",
+    "operation": "mean",
+    "shape": [
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_i64_3x1",
+    "code": "x = torch.randint(-8, 9, (3, 1), dtype=torch.int64); x.sum(-1)",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      1
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  },
+  {
+    "id": "ext_row_sum_i64_3x129",
+    "code": "x = torch.randint(-8, 9, (3, 129), dtype=torch.int64); x.sum(-1)",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "row_sum",
+    "shape": [
+      3,
+      129
+    ],
+    "knobs": "WORK=t128,REDUCE=coop"
+  }
+]

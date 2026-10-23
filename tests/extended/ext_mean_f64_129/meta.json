@@ -1,0 +1,64 @@
+{
+ "id": "ext_mean_f64_129",
+ "code": "x = torch.randn((129,), dtype=torch.float64); x.mean()",
+ "rtol": 1e-10,
+ "atol": 1e-10,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "mean"
+ ],
+ "kernels": [
+  {
+   "node": "mean",
+   "entry": "k_mean_bb53b5",
+   "arg_order": [
+    "x",
+    "mean_keepdim_count",
+    "mean"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    128,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mean_keepdim_count",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "data": [
+      129.0
+     ]
+    },
+    {
+     "name": "mean",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

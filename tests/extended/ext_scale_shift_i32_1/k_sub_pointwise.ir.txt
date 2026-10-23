@@ -1,0 +1,7 @@
+    Tile[] (N=1)
+        in0 = load mul_c1[0]
+        in2 = load x[0]
+        i32 v0 = multiply(in0, in2)
+        in1 = load sub_c1[0]
+        i32 v1 = subtract(v0, in1)
+        sub[0] = v1

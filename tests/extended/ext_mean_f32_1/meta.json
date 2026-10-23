@@ -1,0 +1,64 @@
+{
+ "id": "ext_mean_f32_1",
+ "code": "x = torch.randn((1,), dtype=torch.float32); x.mean()",
+ "rtol": 0.0001,
+ "atol": 0.0001,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "mean"
+ ],
+ "kernels": [
+  {
+   "node": "mean",
+   "entry": "k_mean_731e5e",
+   "arg_order": [
+    "x",
+    "mean_keepdim_count",
+    "mean"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mean_keepdim_count",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "mean",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

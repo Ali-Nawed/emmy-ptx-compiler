@@ -1,0 +1,8 @@
+{
+  "emmy": "0.3.11",
+  "torch": "2.14.1+cpu",
+  "numpy": "2.5.4",
+  "target": "sm_89",
+  "work": 128,
+  "runner": true
+}

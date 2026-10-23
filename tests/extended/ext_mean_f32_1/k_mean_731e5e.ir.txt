@@ -1,0 +1,5 @@
+    Tile[] (N=1)
+        in0 = load mean_keepdim_count[0]
+        in1 = load x[0]
+        f32 v0 = divide(in1, in0)
+        mean[] = v0

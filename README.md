@@ -1,4 +1,43 @@
-# Emmy Hackathon — write a PTX compiler for Kernel IR
+# Emmy Kernel IR to PTX compiler
+
+Our work-in-progress compiler translates Emmy's typed Kernel IR directly into PTX.
+The original competition materials are retained below and in the problems/ directory.
+
+## Current implementation
+
+- compile.py: direct lowering for f32 pointwise operations and sum/mean reductions.
+- explore_ir.py: editable Marimo notebook for inspecting parsed graph objects.
+- review/: generated PTX snapshots and test notes.
+- tools/expressions_extended.py and tools/test_extended.py: fresh PyTorch -> Emmy IR fixtures, independent NumPy expectations, and optional runner checks.
+- tests/EXTENDED.md: extended-suite usage and result definitions.
+
+All eight public MVP problems passed. An initial 80-case PyTorch-generated suite
+produced 8 GPU passes and 72 compiler rejections. Known gaps include zero-axis
+scalar tiles, subtraction, non-f32 datatypes, and broader reduction schedules.
+These results do not establish hidden-set correctness.
+
+```bash
+uv venv .venv --python 3.12
+uv pip install --python .venv/bin/python emmy-ml==0.3.11 numpy requests
+.venv/bin/python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json > out.ptx
+```
+
+For fixture generation, install CPU PyTorch in the same environment:
+
+```bash
+uv pip install --python .venv/bin/python --index-url https://download.pytorch.org/whl/cpu torch==2.14.1+cpu
+.venv/bin/python tools/test_extended.py --dtypes f32 --ops add sum --sizes 129
+```
+
+Runner tests upload only PTX produced by our own compiler. Local reference CUDA
+and CUDA-generated PTX are retained for study and must not be uploaded by our workflow.
+The compiler itself does not use those references or invoke CUDA/Triton/LLVM code generation.
+
+Original upstream: https://github.com/cloudrift-ai/emmy-hackathon-2026
+
+---
+
+# Original competition README: Emmy Hackathon
 
 Emmy (github.com/cloudrift-ai/emmy) compiles PyTorch to CUDA C++ and builds it with `nvcc`.
 **Your task: write a compiler that takes Emmy's Kernel IR and emits PTX directly**, skipping the

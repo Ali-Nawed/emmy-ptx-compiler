@@ -1,0 +1,85 @@
+# Extended tests generated from PyTorch
+
+## Workflow
+
+1. Choose a PyTorch operation, input shape, dtype and optional reduction scheduling knobs.
+2. Verify the independent NumPy reference against eager CPU PyTorch on small typed inputs.
+3. Run pinned emmy-ml==0.3.11 for target sm_89, using the organizer's tools/generate.py functions.
+4. Keep the fresh per-kernel IR and Emmy-derived launch metadata. Never patch IR text to change dimensions or dtype.
+5. Package expected.npz using the organizer's seeded input construction and our NumPy reference.
+6. Compile through our compile.py; assemble locally. Optionally upload only our compiler-generated PTX for numeric validation.
+
+The PyTorch random constructor establishes the traced input's shape/dtype. Actual test values follow meta.json's NumPy seeds, as on the competition runner; they are not the random samples that happened to be created during tracing.
+
+## Files
+
+- tools/expressions_extended.py: matrix construction, PyTorch source and NumPy references.
+- tools/test_extended.py: generation, reference self-checks, local assembly, optional runner checks and results.
+- tests/extended/<case>/: expression.py, generated .ir.json, .ir.txt, meta.json, expected.npz, provenance and local reference CUDA. Our PTX has an .ours.ptx suffix.
+- tests/extended/results.json: status of every attempted case, including failed generation and unsupported compilation. Saved after each case.
+- tests/extended/matrix.json: selected cases, source expressions, tolerances and scheduling settings, without Python callables.
+
+Reference CUDA is only a local fixture artifact produced by Emmy's normal generator. It is never compiled or uploaded by this test harness. No generation logic is used by the submission compiler.
+
+## Matrix
+
+Runner-supported dtypes: f16, f32, f64, i32, i64. This is exploratory coverage; the compiler currently implements f32 only. BF16 and narrower integer types are outside the runner's documented argument schema.
+
+Operations: addition, subtraction, multiplication, scale/shift, ReLU/multiply, sum, mean and row sum. Integer sum uses PyTorch's default i64 result; integer mean explicitly requests f32. Constants and reference intermediates preserve the appropriate dtype. Integer output comparisons require exact equality, without an f32 conversion.
+
+Default: five dtypes x eight operations x two sizes (1 and 129), with three rows for row-sum tests: 80 attempted cases. Full boundary sizes: 1, 31, 32, 33, 127, 128, 129, 255, 256, 257, 1023, 1024, 1025, 4096 and 65536. Additional row counts and cooperative work widths are configurable.
+
+## Ubuntu commands, from the repo root
+
+```bash
+source .venv/bin/activate
+
+# Start small; generate fixtures and compile/assemble locally.
+python tools/test_extended.py --dtypes f32 --ops add sum row_sum --sizes 129
+
+# All default size/dtype/operation combinations, without contacting the runner.
+python tools/test_extended.py
+
+# Rerun our compiler on existing fixtures after changing it, without retracing.
+python tools/test_extended.py --reuse
+
+# Generate the broad matrix without requiring our compiler to support it yet.
+python tools/test_extended.py --generate-only --full-sizes
+
+# Explicit selection, including real alternate schedules.
+python tools/test_extended.py --dtypes f16 f32 --ops sum row_sum --sizes 127 129 1025 --rows 1 3 17 --work 64
+
+# Hosted correctness tests: only our compiler's output is uploaded, serially.
+python tools/test_extended.py --dtypes f32 --sizes 1 129 --reuse --runner
+```
+
+Case limits are available with --limit. Generating every case can take substantial time. Each invocation writes its own results.json; use --out with a different directory to preserve separate runs. The generator uses isolated temporary evidence files so machine-local tuning data does not select schedules.
+
+## Interpreting results
+
+- reference_failure: fix or investigate NumPy/PyTorch semantics first.
+- generation_failure / packaging_failure: upstream tracing, scheduling or packaging issue; not our compiler failing a valid fixture.
+- fixture_validation_failure: generated input dtype/shape or NumPy output dtype/size does not match the fixture metadata.
+- compiler_unsupported_or_failure: generated case reveals an unsupported IR form or our compiler error. Inspect the saved error.
+- local_assembly_failure / runner_assembly_failure: invalid or unsupported emitted PTX.
+- runner_execution_failure / wrong_result: kernel execution or numerical correctness issue.
+- compiled_not_executed: local compilation succeeded, not a correctness pass.
+- generated_not_tested: only fixture generation succeeded.
+- pass: our generated PTX ran and matched every NumPy expected output.
+
+Reports record the installed Torch/NumPy/Emmy versions. New versions of Torch can change tracing; the competition's PROVENANCE.md records the organizer's original versions. This suite does not claim to reproduce the private hidden set.
+
+## Load the NumPy expected-value object
+
+```python
+from pathlib import Path
+import numpy as np
+
+case = Path("tests/extended/ext_add_f32_129")
+with np.load(case / "expected.npz") as saved:
+    expected = {name: saved[name].copy() for name in saved.files}
+
+# Keys are the graph's actual output buffer names, not hardcoded labels.
+for name, array in expected.items():
+    print(name, array.shape, array.dtype)
+```

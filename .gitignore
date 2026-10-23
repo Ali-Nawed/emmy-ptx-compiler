@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
 .DS_Store
+.venv/
+__marimo__/
+*.cubin
 
 # organizer-only evaluation material
 hidden/

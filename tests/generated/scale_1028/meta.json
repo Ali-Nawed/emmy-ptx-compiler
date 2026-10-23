@@ -1,0 +1,75 @@
+{
+  "id": "scale_1028",
+  "code": "Synthetic typed-IR variant of p02_scale_shift, shape=[1028]",
+  "rtol": 1e-06,
+  "atol": 1e-06,
+  "graph_inputs": [
+    "x"
+  ],
+  "graph_outputs": [
+    "add"
+  ],
+  "kernels": [
+    {
+      "node": "add",
+      "entry": "k_add_pointwise",
+      "arg_order": [
+        "mul_c1",
+        "add_c1",
+        "x",
+        "add"
+      ],
+      "grid": [
+        2,
+        1,
+        1
+      ],
+      "block": [
+        256,
+        1,
+        1
+      ],
+      "smem_bytes": 0,
+      "zero_outputs": [],
+      "args": [
+        {
+          "name": "mul_c1",
+          "dtype": "f32",
+          "shape": [
+            1
+          ],
+          "data": [
+            -1.25
+          ]
+        },
+        {
+          "name": "add_c1",
+          "dtype": "f32",
+          "shape": [
+            1
+          ],
+          "data": [
+            0.3
+          ]
+        },
+        {
+          "name": "x",
+          "dtype": "f32",
+          "shape": [
+            1028
+          ],
+          "seed": 19
+        },
+        {
+          "name": "add",
+          "dtype": "f32",
+          "shape": [
+            1028
+          ],
+          "output": true
+        }
+      ],
+      "final": true
+    }
+  ]
+}

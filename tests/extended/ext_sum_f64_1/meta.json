@@ -1,0 +1,53 @@
+{
+ "id": "ext_sum_f64_1",
+ "code": "x = torch.randn((1,), dtype=torch.float64); x.sum()",
+ "rtol": 1e-10,
+ "atol": 1e-10,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sum_1"
+ ],
+ "kernels": [
+  {
+   "node": "sum_1",
+   "entry": "k_sum_1_pointwise",
+   "arg_order": [
+    "x",
+    "sum_1"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sum_1",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}
