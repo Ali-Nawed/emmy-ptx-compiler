@@ -47,6 +47,22 @@ class ExtendedReferenceTests(unittest.TestCase):
                     status, _ = check_runner(folder, meta, {"k_test": "unit-test PTX"})
                     self.assertEqual(status, "wrong_result")
 
+    def test_checker_records_out_of_range_runner_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            np.savez(folder / "expected.npz", out=np.array([2 ** 63 - 1], dtype=np.int64))
+            meta = {"rtol": 0, "atol": 0, "kernels": [{
+                "entry": "k_test", "grid": [1, 1, 1], "block": [1, 1, 1],
+                "smem_bytes": 0, "zero_outputs": [],
+                "args": [{"name": "out", "shape": [1], "output": True}],
+            }]}
+            responses = [{"ok": True, "cubin_id": "unit-test"},
+                         {"ok": True, "outputs": {"out": {"values": [float(2 ** 63)]}}}]
+            with patch("test_extended.post", side_effect=responses):
+                status, details = check_runner(folder, meta, {"k_test": "unit-test PTX"})
+            self.assertEqual(status, "runner_output_conversion_failure")
+            self.assertEqual(details["dtype"], "int64")
+
 
 if __name__ == "__main__":
     unittest.main()

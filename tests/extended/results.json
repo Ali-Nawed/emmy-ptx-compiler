@@ -21,7 +21,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 19.808,
+            "median_us": 23.68,
             "registers": {
               "k_add_pointwise": 10
             }
@@ -42,7 +42,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.416,
+            "median_us": 23.168,
             "registers": {
               "k_add_pointwise": 18
             }
@@ -63,7 +63,7 @@
         "kernels": [
           {
             "entry": "k_sub_pointwise",
-            "median_us": 20.256,
+            "median_us": 23.424,
             "registers": {
               "k_sub_pointwise": 10
             }
@@ -84,7 +84,7 @@
         "kernels": [
           {
             "entry": "k_sub_pointwise",
-            "median_us": 20.064,
+            "median_us": 23.52,
             "registers": {
               "k_sub_pointwise": 18
             }
@@ -105,7 +105,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 28.128,
+            "median_us": 32.288,
             "registers": {
               "k_mul_pointwise": 10
             }
@@ -126,7 +126,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.512,
+            "median_us": 23.552,
             "registers": {
               "k_mul_pointwise": 18
             }
@@ -147,7 +147,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.8,
+            "median_us": 24.512,
             "registers": {
               "k_add_pointwise": 12
             }
@@ -168,7 +168,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.672,
+            "median_us": 23.328,
             "registers": {
               "k_add_pointwise": 17
             }
@@ -189,7 +189,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.672,
+            "median_us": 23.104,
             "registers": {
               "k_mul_pointwise": 10
             }
@@ -210,7 +210,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.672,
+            "median_us": 23.456,
             "registers": {
               "k_mul_pointwise": 19
             }
@@ -231,7 +231,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_pointwise",
-            "median_us": 20.352,
+            "median_us": 23.584,
             "registers": {
               "k_sum_1_pointwise": 8
             }
@@ -252,7 +252,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 20.672,
+            "median_us": 20.544,
             "registers": {
               "k_sum_1_reduce": 20
             }
@@ -273,7 +273,7 @@
         "kernels": [
           {
             "entry": "k_mean_2a9be0",
-            "median_us": 20.672,
+            "median_us": 24.32,
             "registers": {
               "k_mean_2a9be0": 14
             }
@@ -294,7 +294,7 @@
         "kernels": [
           {
             "entry": "k_mean_1f6c60",
-            "median_us": 20.672,
+            "median_us": 20.128,
             "registers": {
               "k_mean_1f6c60": 20
             }
@@ -316,7 +316,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_pointwise",
-            "median_us": 20.544,
+            "median_us": 23.456,
             "registers": {
               "k_sum_1_pointwise": 10
             }
@@ -338,7 +338,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 20.384,
+            "median_us": 20.352,
             "registers": {
               "k_sum_1_reduce": 21
             }
@@ -359,7 +359,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.224,
+            "median_us": 23.488,
             "registers": {
               "k_add_pointwise": 12
             }
@@ -380,7 +380,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.416,
+            "median_us": 23.232,
             "registers": {
               "k_add_pointwise": 30
             }
@@ -401,7 +401,7 @@
         "kernels": [
           {
             "entry": "k_sub_pointwise",
-            "median_us": 20.544,
+            "median_us": 23.264,
             "registers": {
               "k_sub_pointwise": 12
             }
@@ -422,7 +422,7 @@
         "kernels": [
           {
             "entry": "k_sub_pointwise",
-            "median_us": 20.384,
+            "median_us": 30.176,
             "registers": {
               "k_sub_pointwise": 30
             }
@@ -443,7 +443,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.864,
+            "median_us": 24.032,
             "registers": {
               "k_mul_pointwise": 12
             }
@@ -464,7 +464,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.416,
+            "median_us": 23.616,
             "registers": {
               "k_mul_pointwise": 30
             }
@@ -485,7 +485,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.288,
+            "median_us": 23.232,
             "registers": {
               "k_add_pointwise": 14
             }
@@ -506,7 +506,7 @@
         "kernels": [
           {
             "entry": "k_add_pointwise",
-            "median_us": 20.672,
+            "median_us": 23.84,
             "registers": {
               "k_add_pointwise": 28
             }
@@ -527,7 +527,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.672,
+            "median_us": 24.256,
             "registers": {
               "k_mul_pointwise": 12
             }
@@ -548,7 +548,7 @@
         "kernels": [
           {
             "entry": "k_mul_pointwise",
-            "median_us": 20.288,
+            "median_us": 23.584,
             "registers": {
               "k_mul_pointwise": 26
             }
@@ -569,7 +569,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_pointwise",
-            "median_us": 20.992,
+            "median_us": 23.104,
             "registers": {
               "k_sum_1_pointwise": 8
             }
@@ -590,7 +590,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 20.48,
+            "median_us": 20.224,
             "registers": {
               "k_sum_1_reduce": 19
             }
@@ -611,7 +611,7 @@
         "kernels": [
           {
             "entry": "k_mean_731e5e",
-            "median_us": 20.384,
+            "median_us": 30.144,
             "registers": {
               "k_mean_731e5e": 14
             }
@@ -632,7 +632,7 @@
         "kernels": [
           {
             "entry": "k_mean_4ee5eb",
-            "median_us": 20.384,
+            "median_us": 20.48,
             "registers": {
               "k_mean_4ee5eb": 19
             }
@@ -654,7 +654,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_pointwise",
-            "median_us": 20.544,
+            "median_us": 23.168,
             "registers": {
               "k_sum_1_pointwise": 10
             }
@@ -676,7 +676,7 @@
         "kernels": [
           {
             "entry": "k_sum_1_reduce",
-            "median_us": 20.48,
+            "median_us": 20.352,
             "registers": {
               "k_sum_1_reduce": 20
             }
@@ -692,8 +692,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_add_f64_129",
@@ -703,8 +713,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.808,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_f64_1",
@@ -714,8 +734,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_f64_129",
@@ -725,8 +755,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.128,
+            "registers": {
+              "k_sub_pointwise": 24
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_f64_1",
@@ -736,8 +776,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_f64_129",
@@ -747,8 +797,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.704,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_f64_1",
@@ -758,8 +818,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.968,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_f64_129",
@@ -769,8 +839,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_f64_1",
@@ -780,8 +860,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.704,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_f64_129",
@@ -791,8 +881,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.448,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_f64_1",
@@ -802,8 +902,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.704,
+            "registers": {
+              "k_sum_1_pointwise": 8
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_f64_129",
@@ -813,8 +923,11 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "wrong_result",
+      "details": {
+        "output": "sum_1",
+        "dtype": "float64"
+      }
     },
     {
       "id": "ext_mean_f64_1",
@@ -824,8 +937,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_692a8f",
+            "median_us": 20.416,
+            "registers": {
+              "k_mean_692a8f": 24
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_f64_129",
@@ -835,8 +958,11 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "wrong_result",
+      "details": {
+        "output": "mean",
+        "dtype": "float64"
+      }
     },
     {
       "id": "ext_row_sum_f64_3x1",
@@ -847,8 +973,18 @@
         3,
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_pointwise": 10
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_row_sum_f64_3x129",
@@ -859,8 +995,11 @@
         3,
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: f64"
+      "status": "wrong_result",
+      "details": {
+        "output": "sum_1",
+        "dtype": "float64"
+      }
     },
     {
       "id": "ext_add_i32_1",
@@ -870,8 +1009,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_add_i32_129",
@@ -881,8 +1030,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_i32_1",
@@ -892,8 +1051,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_i32_129",
@@ -903,8 +1072,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 21.024,
+            "registers": {
+              "k_sub_pointwise": 30
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_i32_1",
@@ -914,8 +1093,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_i32_129",
@@ -925,8 +1114,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.0,
+            "registers": {
+              "k_mul_pointwise": 30
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_i32_1",
@@ -936,8 +1135,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_i32_129",
@@ -947,8 +1156,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.832,
+            "registers": {
+              "k_sub_pointwise": 28
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_i32_1",
@@ -958,8 +1177,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_i32_129",
@@ -969,8 +1198,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.0,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_i32_1",
@@ -980,8 +1219,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_sum_1_pointwise": 10
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_i32_129",
@@ -991,8 +1240,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.544,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_i32_1",
@@ -1002,8 +1261,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_3a1b36",
+            "median_us": 20.224,
+            "registers": {
+              "k_mean_3a1b36": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_i32_129",
@@ -1013,8 +1282,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_bed07a",
+            "median_us": 20.352,
+            "registers": {
+              "k_mean_bed07a": 20
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_row_sum_i32_3x1",
@@ -1025,8 +1304,18 @@
         3,
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_row_sum_i32_3x129",
@@ -1037,8 +1326,18 @@
         3,
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i32"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.256,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_add_i64_1",
@@ -1048,8 +1347,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_add_i64_129",
@@ -1059,8 +1368,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.032,
+            "registers": {
+              "k_add_pointwise": 26
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_i64_1",
@@ -1070,8 +1389,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 30.208,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_subtract_i64_129",
@@ -1081,8 +1410,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_sub_pointwise": 26
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_i64_1",
@@ -1092,8 +1431,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_multiply_i64_129",
@@ -1103,8 +1452,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_mul_pointwise": 26
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_i64_1",
@@ -1114,8 +1473,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.0,
+            "registers": {
+              "k_sub_pointwise": 16
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_scale_shift_i64_129",
@@ -1125,8 +1494,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_sub_pointwise": 22
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_i64_1",
@@ -1136,8 +1515,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 28.192,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_relu_mul_i64_129",
@@ -1147,8 +1536,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_mul_pointwise": 26
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_i64_1",
@@ -1158,8 +1557,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_pointwise": 8
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_sum_i64_129",
@@ -1169,8 +1578,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.576,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_i64_1",
@@ -1180,8 +1599,18 @@
       "shape": [
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_469d5c",
+            "median_us": 20.576,
+            "registers": {
+              "k_mean_469d5c": 14
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_mean_i64_129",
@@ -1191,8 +1620,18 @@
       "shape": [
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_dcb537",
+            "median_us": 20.512,
+            "registers": {
+              "k_mean_dcb537": 25
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_row_sum_i64_3x1",
@@ -1203,8 +1642,18 @@
         3,
         1
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 19.328,
+            "registers": {
+              "k_sum_1_pointwise": 10
+            }
+          }
+        ]
+      }
     },
     {
       "id": "ext_row_sum_i64_3x129",
@@ -1215,8 +1664,18 @@
         3,
         129
       ],
-      "status": "compiler_unsupported_or_failure",
-      "error": "compile.py: Unsupported buffer dtype: i64"
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.968,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ]
+      }
     }
   ]
 }

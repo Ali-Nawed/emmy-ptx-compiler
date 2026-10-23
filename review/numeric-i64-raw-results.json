@@ -1,0 +1,167 @@
+[
+  {
+    "dtype": "i64",
+    "operation": "add",
+    "status": "wrong_result",
+    "details": {
+      "output": "add",
+      "dtype": "int64",
+      "mismatch_count": 32,
+      "examples": [
+        {
+          "index": 1,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846979
+        },
+        {
+          "index": 2,
+          "got": -1152921504606846976,
+          "expected": -1152921504606846979
+        },
+        {
+          "index": 9,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846979
+        },
+        {
+          "index": 10,
+          "got": -1152921504606846976,
+          "expected": -1152921504606846979
+        },
+        {
+          "index": 17,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846979
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "subtract",
+    "status": "wrong_result",
+    "details": {
+      "output": "sub",
+      "dtype": "int64",
+      "mismatch_count": 32,
+      "examples": [
+        {
+          "index": 1,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846973
+        },
+        {
+          "index": 2,
+          "got": -1152921504606846976,
+          "expected": -1152921504606846973
+        },
+        {
+          "index": 9,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846973
+        },
+        {
+          "index": 10,
+          "got": -1152921504606846976,
+          "expected": -1152921504606846973
+        },
+        {
+          "index": 17,
+          "got": 1152921504606846976,
+          "expected": 1152921504606846973
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "multiply",
+    "status": "wrong_result",
+    "details": {
+      "output": "mul",
+      "dtype": "int64",
+      "mismatch_count": 17,
+      "examples": [
+        {
+          "index": 0,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 8,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 16,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 24,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 32,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "relu_mul",
+    "status": "wrong_result",
+    "details": {
+      "output": "mul",
+      "dtype": "int64",
+      "mismatch_count": 17,
+      "examples": [
+        {
+          "index": 0,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 8,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 16,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 24,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        },
+        {
+          "index": 32,
+          "got": 1152921508901814272,
+          "expected": 1152921508901814275
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "scale_shift",
+    "status": "runner_output_conversion_failure",
+    "details": {
+      "output": "sub",
+      "dtype": "int64",
+      "error": "Python int too large to convert to C long",
+      "values": [
+        2147483647.0,
+        2.305843009213694e+18,
+        -2.305843009213694e+18,
+        9.223372036854776e+18,
+        9.223372036854776e+18
+      ]
+    }
+  }
+]

@@ -6,7 +6,7 @@
       "kernels": [
         {
           "entry": "k_add_pointwise",
-          "median_us": 23.392,
+          "median_us": 20.224,
           "registers": {
             "k_add_pointwise": 18
           }
@@ -21,7 +21,7 @@
       "kernels": [
         {
           "entry": "k_sub_pointwise",
-          "median_us": 36.8,
+          "median_us": 19.872,
           "registers": {
             "k_sub_pointwise": 18
           }
@@ -36,7 +36,7 @@
       "kernels": [
         {
           "entry": "k_mul_pointwise",
-          "median_us": 23.04,
+          "median_us": 20.16,
           "registers": {
             "k_mul_pointwise": 18
           }
@@ -51,7 +51,7 @@
       "kernels": [
         {
           "entry": "k_add_pointwise",
-          "median_us": 23.712,
+          "median_us": 20.352,
           "registers": {
             "k_add_pointwise": 17
           }
@@ -66,7 +66,7 @@
       "kernels": [
         {
           "entry": "k_mul_pointwise",
-          "median_us": 23.36,
+          "median_us": 20.256,
           "registers": {
             "k_mul_pointwise": 19
           }
@@ -81,7 +81,7 @@
       "kernels": [
         {
           "entry": "k_sum_1_reduce",
-          "median_us": 23.36,
+          "median_us": 20.224,
           "registers": {
             "k_sum_1_reduce": 20
           }
@@ -96,7 +96,7 @@
       "kernels": [
         {
           "entry": "k_mean_1f6c60",
-          "median_us": 23.04,
+          "median_us": 20.608,
           "registers": {
             "k_mean_1f6c60": 20
           }
@@ -111,7 +111,7 @@
       "kernels": [
         {
           "entry": "k_sum_1_reduce",
-          "median_us": 23.36,
+          "median_us": 20.192,
           "registers": {
             "k_sum_1_reduce": 21
           }

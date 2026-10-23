@@ -1,0 +1,94 @@
+[
+  {
+    "case": "ext_sum_f64_129",
+    "input_dtype": "f64",
+    "ir_accumulator_dtype": "f32",
+    "numpy_expected": [
+      7.388847032206026
+    ],
+    "cpu_ir_trace": [
+      7.388847351074219
+    ],
+    "trace_matches_numpy_tolerance": false,
+    "gpu_status": "wrong_result",
+    "gpu_details": {
+      "output": "sum_1",
+      "dtype": "float64",
+      "mismatch_count": 1,
+      "examples": [
+        {
+          "index": 0,
+          "got": 7.388847351074219,
+          "expected": 7.388847032206026
+        }
+      ]
+    },
+    "gpu_mismatches_match_cpu_ir_trace": true
+  },
+  {
+    "case": "ext_mean_f64_129",
+    "input_dtype": "f64",
+    "ir_accumulator_dtype": "f32",
+    "numpy_expected": [
+      0.05727788397058935
+    ],
+    "cpu_ir_trace": [
+      0.0572778864424358
+    ],
+    "trace_matches_numpy_tolerance": false,
+    "gpu_status": "wrong_result",
+    "gpu_details": {
+      "output": "mean",
+      "dtype": "float64",
+      "mismatch_count": 1,
+      "examples": [
+        {
+          "index": 0,
+          "got": 0.0572778864424358,
+          "expected": 0.05727788397058935
+        }
+      ]
+    },
+    "gpu_mismatches_match_cpu_ir_trace": true
+  },
+  {
+    "case": "ext_row_sum_f64_3x129",
+    "input_dtype": "f64",
+    "ir_accumulator_dtype": "f32",
+    "numpy_expected": [
+      7.388847032206026,
+      -7.408513536247675,
+      -14.822208160190325
+    ],
+    "cpu_ir_trace": [
+      7.388847351074219,
+      -7.408513069152832,
+      -14.822206497192383
+    ],
+    "trace_matches_numpy_tolerance": false,
+    "gpu_status": "wrong_result",
+    "gpu_details": {
+      "output": "sum_1",
+      "dtype": "float64",
+      "mismatch_count": 3,
+      "examples": [
+        {
+          "index": 0,
+          "got": 7.388847351074219,
+          "expected": 7.388847032206026
+        },
+        {
+          "index": 1,
+          "got": -7.408513069152832,
+          "expected": -7.408513536247675
+        },
+        {
+          "index": 2,
+          "got": -14.822206497192383,
+          "expected": -14.822208160190325
+        }
+      ]
+    },
+    "gpu_mismatches_match_cpu_ir_trace": true
+  }
+]

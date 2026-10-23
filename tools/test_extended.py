@@ -112,11 +112,20 @@ def check_runner(folder, meta, ptx_by_entry):
         for name in reference.files:
             expected = reference[name]
             # Do not downcast returned f64 or integer values to f32.
-            got = np.asarray(produced[name], dtype=expected.dtype).reshape(expected.shape)
+            try:
+                got = np.asarray(produced[name], dtype=expected.dtype).reshape(expected.shape)
+            except (OverflowError, ValueError) as exc:
+                return "runner_output_conversion_failure", {"output": name, "dtype": str(expected.dtype),
+                                                            "error": str(exc), "values": produced[name][:5]}
             correct = (np.array_equal(got, expected) if np.issubdtype(expected.dtype, np.integer)
                        else np.allclose(got, expected, rtol=meta["rtol"], atol=meta["atol"]))
             if not correct:
-                return "wrong_result", {"output": name, "dtype": str(expected.dtype)}
+                unequal = np.flatnonzero(got.ravel() != expected.ravel())
+                examples = [{"index": int(index), "got": got.ravel()[index].item(),
+                             "expected": expected.ravel()[index].item()}
+                            for index in unequal[:5]]
+                return "wrong_result", {"output": name, "dtype": str(expected.dtype),
+                                        "mismatch_count": len(unequal), "examples": examples}
     return "pass", {"kernels": timings}
 
 

@@ -23,7 +23,7 @@ Reference CUDA is only a local fixture artifact produced by Emmy's normal genera
 
 ## Matrix
 
-Runner-supported dtypes: f16, f32, f64, i32, i64. The compiler currently implements f16/f32 data and f32 reduction state. BF16 and narrower integer types are outside the runner's documented argument schema.
+Runner-supported dtypes: f16, f32, f64, i32, i64. The compiler implements all five, including conversions and typed reduction state. Emmy 0.3.11 generates f32 state for accumulating reductions even with f64/integer inputs; this limits their accuracy. BF16 and narrower integer types are outside the runner's documented argument schema.
 
 Operations: addition, subtraction, multiplication, scale/shift, ReLU/multiply, sum, mean and row sum. Integer sum uses PyTorch's default i64 result; integer mean explicitly requests f32. Constants and reference intermediates preserve the appropriate dtype. Integer output comparisons require exact equality, without an f32 conversion.
 
@@ -62,7 +62,8 @@ Case limits are available with --limit. Generating every case can take substanti
 - fixture_validation_failure: generated input dtype/shape or NumPy output dtype/size does not match the fixture metadata.
 - compiler_unsupported_or_failure: generated case reveals an unsupported IR form or our compiler error. Inspect the saved error.
 - local_assembly_failure / runner_assembly_failure: invalid or unsupported emitted PTX.
-- runner_execution_failure / wrong_result: kernel execution or numerical correctness issue.
+- runner_execution_failure / wrong_result: kernel execution or numerical correctness issue; investigate the IR and runner too.
+- runner_output_conversion_failure: returned values cannot be represented in the declared NumPy output dtype. The raw values and error are retained.
 - compiled_not_executed: local compilation succeeded, not a correctness pass.
 - generated_not_tested: only fixture generation succeeded.
 - pass: our generated PTX ran and matched every NumPy expected output.
@@ -81,8 +82,37 @@ python tools/test_extended.py --dtypes f16 --ops add scale_shift sum row_sum --s
 ```
 
 Edge results are saved in review/f16-edge-results.json; larger-case results in
-tests/extended-f16-large/results.json. The default matrix currently has 32 GPU
-passes and 48 compiler rejections; all 16 f16 and 16 f32 cases pass.
+tests/extended-f16-large/results.json. The default matrix currently has 77 GPU
+passes and three strict f64 reduction failures. Every case compiles and assembles;
+all 16 cases for each of f16, f32, i32 and i64 pass. The small integer inputs in
+this matrix do not establish correctness for wide integer reductions.
+
+## Wide datatype validation
+
+```bash
+python -m unittest discover -s tests -p 'test_*.py'
+python tools/test_numeric_edges.py --runner
+python tools/test_i64_output_bits.py --reuse --runner
+python tools/diagnose_reduction_precision.py --runner
+```
+
+Numeric edges reuse real Emmy IR with explicit input arrays and independent NumPy
+expectations. The f64/i32 pointwise edge cases pass. Raw large i64 outputs lose
+low bits in the hosted response, and some inputs or rounded outputs overflow its
+conversion path. These failures remain in review/numeric-i64-raw-results.json
+and review/numeric-edge-runner-input-limit-results.json.
+
+The eight i64 bit-extraction cases are fresh PyTorch -> Emmy fixtures that retain
+the arithmetic in the traced expression and extract low/high result bits on the
+GPU before returning small exact integers. All eight pass. This tests native
+integer arithmetic without relying on precise serialization of large outputs.
+It does not turn the raw-output failures into passes.
+
+The reduction diagnosis reproduces the f32 accumulation/shuffle/shared-memory
+steps on the CPU. Its results match the GPU on all three failing f64 cases.
+Local backend unit cases separately assemble all 25 datatype conversion pairs
+and explicitly typed f64/i64 reduction state; these are not claimed as fresh
+PyTorch-generated tests. See review/all-dtypes.md for details.
 
 ## Load the NumPy expected-value object
 

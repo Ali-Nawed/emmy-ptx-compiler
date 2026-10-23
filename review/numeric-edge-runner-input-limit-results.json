@@ -1,0 +1,212 @@
+[
+  {
+    "dtype": "f64",
+    "operation": "add",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 23.392,
+          "registers": {
+            "k_add_pointwise": 24
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "f64",
+    "operation": "subtract",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sub_pointwise",
+          "median_us": 23.168,
+          "registers": {
+            "k_sub_pointwise": 24
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "f64",
+    "operation": "multiply",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mul_pointwise",
+          "median_us": 23.04,
+          "registers": {
+            "k_mul_pointwise": 24
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "f64",
+    "operation": "relu_mul",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mul_pointwise",
+          "median_us": 23.68,
+          "registers": {
+            "k_mul_pointwise": 20
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "f64",
+    "operation": "scale_shift",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 23.552,
+          "registers": {
+            "k_add_pointwise": 24
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i32",
+    "operation": "add",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 23.648,
+          "registers": {
+            "k_add_pointwise": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i32",
+    "operation": "subtract",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sub_pointwise",
+          "median_us": 23.68,
+          "registers": {
+            "k_sub_pointwise": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i32",
+    "operation": "multiply",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mul_pointwise",
+          "median_us": 23.712,
+          "registers": {
+            "k_mul_pointwise": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i32",
+    "operation": "relu_mul",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mul_pointwise",
+          "median_us": 24.16,
+          "registers": {
+            "k_mul_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i32",
+    "operation": "scale_shift",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sub_pointwise",
+          "median_us": 23.904,
+          "registers": {
+            "k_sub_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "add",
+    "status": "runner_execution_failure",
+    "details": {
+      "ok": false,
+      "stage": "run",
+      "stderr": "Python int too large to convert to C long"
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "subtract",
+    "status": "runner_execution_failure",
+    "details": {
+      "ok": false,
+      "stage": "run",
+      "stderr": "Python int too large to convert to C long"
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "multiply",
+    "status": "runner_execution_failure",
+    "details": {
+      "ok": false,
+      "stage": "run",
+      "stderr": "Python int too large to convert to C long"
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "relu_mul",
+    "status": "runner_execution_failure",
+    "details": {
+      "ok": false,
+      "stage": "run",
+      "stderr": "Python int too large to convert to C long"
+    }
+  },
+  {
+    "dtype": "i64",
+    "operation": "scale_shift",
+    "status": "runner_execution_failure",
+    "details": {
+      "ok": false,
+      "stage": "run",
+      "stderr": "Python int too large to convert to C long"
+    }
+  }
+]

@@ -1,0 +1,164 @@
+[
+  {
+    "case": "i64_add_bits_0",
+    "ir_operations": [
+      "add",
+      "bitwise_and",
+      "right_shift"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 20.384,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_add_bits_32",
+    "ir_operations": [
+      "add",
+      "bitwise_and",
+      "right_shift"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 38.592,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_subtract_bits_0",
+    "ir_operations": [
+      "bitwise_and",
+      "right_shift",
+      "subtract"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 20.544,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_subtract_bits_32",
+    "ir_operations": [
+      "bitwise_and",
+      "right_shift",
+      "subtract"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 27.392,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_multiply_bits_0",
+    "ir_operations": [
+      "bitwise_and",
+      "multiply",
+      "right_shift"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 19.968,
+          "registers": {
+            "k_and_1_pointwise": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_multiply_bits_32",
+    "ir_operations": [
+      "bitwise_and",
+      "multiply",
+      "right_shift"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 23.84,
+          "registers": {
+            "k_and_1_pointwise": 30
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_scale_shift_bits_0",
+    "ir_operations": [
+      "bitwise_and",
+      "multiply",
+      "right_shift",
+      "subtract"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 20.096,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "i64_scale_shift_bits_32",
+    "ir_operations": [
+      "bitwise_and",
+      "multiply",
+      "right_shift",
+      "subtract"
+    ],
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_and_1_pointwise",
+          "median_us": 23.328,
+          "registers": {
+            "k_and_1_pointwise": 28
+          }
+        }
+      ]
+    }
+  }
+]

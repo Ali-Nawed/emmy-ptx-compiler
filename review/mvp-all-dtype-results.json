@@ -1,0 +1,122 @@
+[
+  {
+    "case": "p00_scalar_add",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 20.704,
+          "registers": {
+            "k_add_pointwise": 18
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "p01_vector_add",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 20.384,
+          "registers": {
+            "k_add_pointwise": 18
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "p02_scale_shift",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_add_pointwise",
+          "median_us": 15.392,
+          "registers": {
+            "k_add_pointwise": 21
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "p03_relu_mul",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mul_pointwise",
+          "median_us": 14.848,
+          "registers": {
+            "k_mul_pointwise": 22
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "r01_array_sum",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sum_1_reduce",
+          "median_us": 20.288,
+          "registers": {
+            "k_sum_1_reduce": 19
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "r02_big_sum",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sum_1_reduce",
+          "median_us": 37.952,
+          "registers": {
+            "k_sum_1_reduce": 19
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "r03_mean",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_mean_ffcca3",
+          "median_us": 42.08,
+          "registers": {
+            "k_mean_ffcca3": 19
+          }
+        }
+      ]
+    }
+  },
+  {
+    "case": "r04_row_sum",
+    "status": "pass",
+    "details": {
+      "kernels": [
+        {
+          "entry": "k_sum_1_reduce",
+          "median_us": 20.288,
+          "registers": {
+            "k_sum_1_reduce": 20
+          }
+        }
+      ]
+    }
+  }
+]

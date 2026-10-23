@@ -5,17 +5,19 @@ The original competition materials are retained below and in the problems/ direc
 
 ## Current implementation
 
-- compile.py: direct lowering for f16/f32 pointwise operations and sum/mean reductions with f32 state.
+- compile.py: direct lowering for f16/f32/f64/i32/i64 pointwise operations and typed sum/mean reductions.
 - explore_ir.py: editable Marimo notebook for inspecting parsed graph objects.
 - review/: generated PTX snapshots and test notes.
 - tools/expressions_extended.py and tools/test_extended.py: fresh PyTorch -> Emmy IR fixtures, independent NumPy expectations, and optional runner checks.
 - tests/EXTENDED.md: extended-suite usage and result definitions.
 
 All eight public MVP problems passed. The 80-case PyTorch-generated suite now
-produces 32 GPU passes (all f16/f32 cases) and 48 compiler rejections for unsupported
-datatypes. Eight additional f16 numerical-edge cases and four larger generated
-f16 cases also pass. Scalar tiles and subtraction are supported. Known gaps include
-f64/integer datatypes, lexical scope handling, and broader reduction schedules.
+produces 77 GPU passes and three strict f64 reduction failures. Emmy 0.3.11 stamps
+these reductions with f32 state; our GPU results match a CPU trace of that IR,
+but lose precision against the independent f64 NumPy expectations. Expectations
+and tolerances remain unchanged. Wide integer reductions have the same upstream
+state-precision limitation. See [datatype validation](review/all-dtypes.md).
+Known gaps include lexical scope handling and broader reduction schedules.
 These results do not establish hidden-set correctness.
 
 ```bash

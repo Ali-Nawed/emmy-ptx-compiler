@@ -1,0 +1,142 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_and_1_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2,
+    .param .u64 arg_3,
+    .param .u64 arg_4,
+    .param .u64 arg_5
+)
+{
+    .reg .b32 %r<38>;
+    .reg .b64 %rd<49>;
+    .reg .b64 %l<31>;
+    .reg .pred %p<2>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    ld.param.u64 %rd7, [arg_3];
+    cvta.to.global.u64 %rd8, %rd7;
+    ld.param.u64 %rd9, [arg_4];
+    cvta.to.global.u64 %rd10, %rd9;
+    ld.param.u64 %rd11, [arg_5];
+    cvta.to.global.u64 %rd12, %rd11;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 43;
+    @%p1 bra DONE;
+    mov.s32 %r5, 0;
+    mul.wide.s32 %rd13, %r5, 8;
+    add.u64 %rd14, %rd4, %rd13;
+    ld.global.s64 %l1, [%rd14+0];
+    mul.lo.s32 %r6, %r4, 3;
+    add.s32 %r7, %r6, 0;
+    mov.s32 %r8, %r7;
+    mul.wide.s32 %rd15, %r8, 8;
+    add.u64 %rd16, %rd10, %rd15;
+    ld.global.s64 %l2, [%rd16+0];
+    mul.lo.s64 %l3, %l1, %l2;
+    mov.s32 %r9, 0;
+    mul.wide.s32 %rd17, %r9, 8;
+    add.u64 %rd18, %rd2, %rd17;
+    ld.global.s64 %l4, [%rd18+0];
+    sub.s64 %l5, %l3, %l4;
+    mov.s32 %r10, 0;
+    mul.wide.s32 %rd19, %r10, 8;
+    add.u64 %rd20, %rd6, %rd19;
+    ld.global.s64 %l6, [%rd20+0];
+    min.u64 %l8, %l6, 64;
+    cvt.s32.s64 %r11, %l8;
+    shr.s64 %l7, %l5, %r11;
+    mov.s32 %r12, 0;
+    mul.wide.s32 %rd21, %r12, 8;
+    add.u64 %rd22, %rd8, %rd21;
+    ld.global.s64 %l9, [%rd22+0];
+    and.b64 %l10, %l7, %l9;
+    mov.s32 %r13, 0;
+    mul.wide.s32 %rd23, %r13, 8;
+    add.u64 %rd24, %rd4, %rd23;
+    ld.global.s64 %l11, [%rd24+0];
+    mul.lo.s32 %r14, %r4, 3;
+    add.s32 %r15, %r14, 1;
+    mov.s32 %r16, %r15;
+    mul.wide.s32 %rd25, %r16, 8;
+    add.u64 %rd26, %rd10, %rd25;
+    ld.global.s64 %l12, [%rd26+0];
+    mul.lo.s64 %l13, %l11, %l12;
+    mov.s32 %r17, 0;
+    mul.wide.s32 %rd27, %r17, 8;
+    add.u64 %rd28, %rd2, %rd27;
+    ld.global.s64 %l14, [%rd28+0];
+    sub.s64 %l15, %l13, %l14;
+    mov.s32 %r18, 0;
+    mul.wide.s32 %rd29, %r18, 8;
+    add.u64 %rd30, %rd6, %rd29;
+    ld.global.s64 %l16, [%rd30+0];
+    min.u64 %l18, %l16, 64;
+    cvt.s32.s64 %r19, %l18;
+    shr.s64 %l17, %l15, %r19;
+    mov.s32 %r20, 0;
+    mul.wide.s32 %rd31, %r20, 8;
+    add.u64 %rd32, %rd8, %rd31;
+    ld.global.s64 %l19, [%rd32+0];
+    and.b64 %l20, %l17, %l19;
+    mov.s32 %r21, 0;
+    mul.wide.s32 %rd33, %r21, 8;
+    add.u64 %rd34, %rd4, %rd33;
+    ld.global.s64 %l21, [%rd34+0];
+    mul.lo.s32 %r22, %r4, 3;
+    add.s32 %r23, %r22, 2;
+    mov.s32 %r24, %r23;
+    mul.wide.s32 %rd35, %r24, 8;
+    add.u64 %rd36, %rd10, %rd35;
+    ld.global.s64 %l22, [%rd36+0];
+    mul.lo.s64 %l23, %l21, %l22;
+    mov.s32 %r25, 0;
+    mul.wide.s32 %rd37, %r25, 8;
+    add.u64 %rd38, %rd2, %rd37;
+    ld.global.s64 %l24, [%rd38+0];
+    sub.s64 %l25, %l23, %l24;
+    mov.s32 %r26, 0;
+    mul.wide.s32 %rd39, %r26, 8;
+    add.u64 %rd40, %rd6, %rd39;
+    ld.global.s64 %l26, [%rd40+0];
+    min.u64 %l28, %l26, 64;
+    cvt.s32.s64 %r27, %l28;
+    shr.s64 %l27, %l25, %r27;
+    mov.s32 %r28, 0;
+    mul.wide.s32 %rd41, %r28, 8;
+    add.u64 %rd42, %rd8, %rd41;
+    ld.global.s64 %l29, [%rd42+0];
+    and.b64 %l30, %l27, %l29;
+    mul.lo.s32 %r29, %r4, 3;
+    add.s32 %r30, %r29, 0;
+    mov.s32 %r31, %r30;
+    mul.wide.s32 %rd43, %r31, 8;
+    add.u64 %rd44, %rd12, %rd43;
+    st.global.s64 [%rd44+0], %l10;
+    mul.lo.s32 %r32, %r4, 3;
+    add.s32 %r33, %r32, 1;
+    mov.s32 %r34, %r33;
+    mul.wide.s32 %rd45, %r34, 8;
+    add.u64 %rd46, %rd12, %rd45;
+    st.global.s64 [%rd46+0], %l20;
+    mul.lo.s32 %r35, %r4, 3;
+    add.s32 %r36, %r35, 2;
+    mov.s32 %r37, %r36;
+    mul.wide.s32 %rd47, %r37, 8;
+    add.u64 %rd48, %rd12, %rd47;
+    st.global.s64 [%rd48+0], %l30;
+DONE:
+    ret;
+}
+
