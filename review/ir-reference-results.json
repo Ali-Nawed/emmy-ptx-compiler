@@ -1,0 +1,23 @@
+{
+  "cases": 80,
+  "gpu_vs_expression": {
+    "pass": 77,
+    "wrong_result": 3
+  },
+  "gpu_vs_kernel_ir": {
+    "pass": 80
+  },
+  "cpu_ir_vs_expression": {
+    "pass": 77,
+    "wrong_result": 3
+  },
+  "expression_expectations_unchanged": true,
+  "refreshed_reference_values_unchanged": true,
+  "failing_expression_cases": [
+    "ext_sum_f64_129",
+    "ext_mean_f64_129",
+    "ext_row_sum_f64_3x129"
+  ],
+  "comparison_policy": "Original meta.json floating tolerances; exact integer comparison",
+  "runner_payload": "Only PTX from our compile.py"
+}

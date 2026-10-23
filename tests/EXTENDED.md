@@ -60,6 +60,7 @@ Case limits are available with --limit. Generating every case can take substanti
 - reference_failure: fix or investigate NumPy/PyTorch semantics first.
 - generation_failure / packaging_failure: upstream tracing, scheduling or packaging issue; not our compiler failing a valid fixture.
 - fixture_validation_failure: generated input dtype/shape or NumPy output dtype/size does not match the fixture metadata.
+- ir_reference_failure: the optional CPU IR interpreter rejected an unsupported form or detected invalid dataflow/memory access.
 - compiler_unsupported_or_failure: generated case reveals an unsupported IR form or our compiler error. Inspect the saved error.
 - local_assembly_failure / runner_assembly_failure: invalid or unsupported emitted PTX.
 - runner_execution_failure / wrong_result: kernel execution or numerical correctness issue; investigate the IR and runner too.
@@ -69,6 +70,42 @@ Case limits are available with --limit. Generating every case can take substanti
 - pass: our generated PTX ran and matched every NumPy expected output.
 
 Reports record the installed Torch/NumPy/Emmy versions. New versions of Torch can change tracing; the competition's PROVENANCE.md records the organizer's original versions. This suite does not claim to reproduce the private hidden set.
+
+## Two independent expectation sets
+
+```bash
+# CPU IR expectations plus local assembly, without uploading anything.
+python tools/test_extended.py --reuse --ir-reference
+
+# Execute our PTX once per case and compare the same returned values with both.
+python tools/test_extended.py --reuse --ir-reference --runner
+
+# Save the IR expectation for one case without running the compiler.
+python tools/ir_reference.py tests/extended/ext_sum_f64_129
+```
+
+`expected.npz` continues to represent the original PyTorch computation using an
+independent NumPy expression. `expected_ir.npz` represents the parsed Kernel IR's
+typed operations and explicit reduction schedule. Its adjacent provenance JSON
+hashes the metadata, IR files and interpreter source. Scalar ABI buffers have
+shape (1,) even when the original NumPy reduction is zero-dimensional.
+
+With --ir-reference, each result contains:
+
+- ir_vs_expression: CPU IR interpretation versus the original expression.
+- details.comparisons.expression: our GPU output versus expected.npz.
+- details.comparisons.kernel_ir: the same GPU output versus expected_ir.npz.
+
+Floating comparisons use the unchanged meta.json tolerances; integers compare
+exactly. The top-level status retains the original expression comparison. The
+command exits unsuccessfully if either GPU comparison fails. Thus the known
+three f64 reductions still produce a failing command even when their PTX/IR
+comparison passes. Omitting --ir-reference preserves the previous report format.
+
+The interpreter imports Emmy's parser and node definitions, not compile.py,
+CUDA renderers, expression references or GPU output. It is a bounded test tool
+for our current subset, not an implementation of all Kernel IR or GPU concurrency.
+See review/ir-reference.md for supported forms and limitations.
 
 ## Additional f16 validation
 

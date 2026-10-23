@@ -74,7 +74,26 @@ def validate_fixture(folder, spec, meta):
                 raise ValueError(f"NumPy expectation for {name} disagrees with generated output dtype/size")
 
 
-def check_runner(folder, meta, ptx_by_entry):
+def compare_outputs(produced, reference, meta):
+    """Compare one set of results without changing the reference's precision."""
+    for name, expected in reference.items():
+        try:
+            got = np.asarray(produced[name], dtype=expected.dtype).reshape(expected.shape)
+        except (OverflowError, ValueError) as exc:
+            return "runner_output_conversion_failure", {"output": name, "dtype": str(expected.dtype),
+                                                        "error": str(exc), "values": produced[name][:5]}
+        equal = (got == expected if np.issubdtype(expected.dtype, np.integer)
+                 else np.isclose(got, expected, rtol=meta["rtol"], atol=meta["atol"]))
+        if not np.all(equal):
+            unequal = np.flatnonzero(~equal.ravel())
+            examples = [{"index": int(index), "got": got.ravel()[index].item(),
+                         "expected": expected.ravel()[index].item()} for index in unequal[:5]]
+            return "wrong_result", {"output": name, "dtype": str(expected.dtype),
+                                    "mismatch_count": len(unequal), "examples": examples}
+    return "pass", {}
+
+
+def check_runner(folder, meta, ptx_by_entry, ir_reference=None):
     """Preserve f64 and integer types; chain multi-kernel graphs as metadata says."""
     produced = {}
     timings = []
@@ -109,24 +128,13 @@ def check_runner(folder, meta, ptx_by_entry):
         timings.append({"entry": kernel["entry"], "median_us": result.get("median_us"),
                         "registers": assembled.get("registers")})
     with np.load(folder / "expected.npz") as reference:
-        for name in reference.files:
-            expected = reference[name]
-            # Do not downcast returned f64 or integer values to f32.
-            try:
-                got = np.asarray(produced[name], dtype=expected.dtype).reshape(expected.shape)
-            except (OverflowError, ValueError) as exc:
-                return "runner_output_conversion_failure", {"output": name, "dtype": str(expected.dtype),
-                                                            "error": str(exc), "values": produced[name][:5]}
-            correct = (np.array_equal(got, expected) if np.issubdtype(expected.dtype, np.integer)
-                       else np.allclose(got, expected, rtol=meta["rtol"], atol=meta["atol"]))
-            if not correct:
-                unequal = np.flatnonzero(got.ravel() != expected.ravel())
-                examples = [{"index": int(index), "got": got.ravel()[index].item(),
-                             "expected": expected.ravel()[index].item()}
-                            for index in unequal[:5]]
-                return "wrong_result", {"output": name, "dtype": str(expected.dtype),
-                                        "mismatch_count": len(unequal), "examples": examples}
-    return "pass", {"kernels": timings}
+        status, details = compare_outputs(produced, reference, meta)
+    if ir_reference is not None:
+        ir_status, ir_details = compare_outputs(produced, ir_reference, meta)
+        return status, {"kernels": timings, "comparisons": {
+            "expression": {"status": status, "details": details},
+            "kernel_ir": {"status": ir_status, "details": ir_details}}}
+    return (status, {"kernels": timings}) if status == "pass" else (status, details)
 
 
 def main():
@@ -138,6 +146,7 @@ def main():
     parser.add_argument("--full-sizes", action="store_true", help="use the full boundary/large-size list")
     parser.add_argument("--work", type=int, choices=(32, 64, 128, 256), default=128)
     parser.add_argument("--runner", action="store_true")
+    parser.add_argument("--ir-reference", action="store_true", help="save independent NumPy IR expectations and report both comparisons")
     parser.add_argument("--generate-only", action="store_true", help="generate fixtures without invoking our compiler")
     parser.add_argument("--reuse", action="store_true", help="reuse matching generated fixtures when iterating on the compiler")
     parser.add_argument("--limit", type=int)
@@ -189,6 +198,14 @@ def main():
             meta = json.loads((folder / "meta.json").read_text())
             row["status"] = "fixture_validation_failure"
             validate_fixture(folder, spec, meta)
+            ir_reference = None
+            if args.ir_reference:
+                from ir_reference import save_reference
+                row["status"] = "ir_reference_failure"
+                ir_reference = save_reference(folder)
+                with np.load(folder / "expected.npz") as expected:
+                    status, details = compare_outputs(ir_reference, expected, meta)
+                row["ir_vs_expression"] = {"status": status, "details": details}
             if args.generate_only:
                 row["status"] = "generated_not_tested"
                 rows.append(row)
@@ -213,7 +230,7 @@ def main():
             row["status"] = "compiled_not_executed"
             if args.runner:
                 row["status"] = "runner_request_failure"
-                row["status"], row["details"] = check_runner(folder, meta, ptx_by_entry)
+                row["status"], row["details"] = check_runner(folder, meta, ptx_by_entry, ir_reference=ir_reference)
                 time.sleep(1)  # Courtesy pacing, not a stated server quota.
         except subprocess.CalledProcessError as exc:
             row["error"] = (exc.stderr or str(exc))[-6000:]
@@ -225,7 +242,10 @@ def main():
         print(f"{row['status']:32} {spec['id']}", flush=True)
         if "error" in row:
             print(row["error"][-600:], flush=True)
-    return int(any(row["status"] not in ("pass", "compiled_not_executed", "generated_not_tested") for row in rows))
+    return int(any(
+        row["status"] not in ("pass", "compiled_not_executed", "generated_not_tested")
+        or row.get("details", {}).get("comparisons", {}).get("kernel_ir", {}).get("status", "pass") != "pass"
+        for row in rows))
 
 
 if __name__ == "__main__":

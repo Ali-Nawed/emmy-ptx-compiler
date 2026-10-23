@@ -9,6 +9,7 @@ The original competition materials are retained below and in the problems/ direc
 - explore_ir.py: editable Marimo notebook for inspecting parsed graph objects.
 - review/: generated PTX snapshots and test notes.
 - tools/expressions_extended.py and tools/test_extended.py: fresh PyTorch -> Emmy IR fixtures, independent NumPy expectations, and optional runner checks.
+- tools/ir_reference.py: independent NumPy interpreter of the supported typed Kernel IR, with separate expected_ir.npz files.
 - tests/EXTENDED.md: extended-suite usage and result definitions.
 
 All eight public MVP problems passed. The 80-case PyTorch-generated suite now
@@ -19,6 +20,12 @@ and tolerances remain unchanged. Wide integer reductions have the same upstream
 state-precision limitation. See [datatype validation](review/all-dtypes.md).
 Known gaps include lexical scope handling and broader reduction schedules.
 These results do not establish hidden-set correctness.
+
+Use `python tools/test_extended.py --reuse --ir-reference --runner` to compare
+our GPU output with both the original expression and the generated Kernel IR.
+The original expected.npz remains unchanged. See [IR checker notes](review/ir-reference.md).
+The hosted run matches the IR expectations on all 80 cases; the three original
+expression failures remain visible.
 
 ```bash
 uv venv .venv --python 3.12
