@@ -1,0 +1,1136 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": true
+  },
+  "cases": [
+    {
+      "id": "ext_add_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); y = torch.randint(-8, 9, (31,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); y = torch.randint(-8, 9, (33,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); y = torch.randint(-8, 9, (257,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.128,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); y = torch.randint(-8, 9, (1025,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 15.136,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); y = torch.randint(-8, 9, (31,), dtype=torch.int32); x - y",
+      "dtype": "i32",
+      "operation": "subtract",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); y = torch.randint(-8, 9, (33,), dtype=torch.int32); x - y",
+      "dtype": "i32",
+      "operation": "subtract",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 27.776,
+            "registers": {
+              "k_sub_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); y = torch.randint(-8, 9, (257,), dtype=torch.int32); x - y",
+      "dtype": "i32",
+      "operation": "subtract",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.768,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); y = torch.randint(-8, 9, (1025,), dtype=torch.int32); x - y",
+      "dtype": "i32",
+      "operation": "subtract",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 14.912,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); y = torch.randint(-8, 9, (31,), dtype=torch.int32); x * y",
+      "dtype": "i32",
+      "operation": "multiply",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.928,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); y = torch.randint(-8, 9, (33,), dtype=torch.int32); x * y",
+      "dtype": "i32",
+      "operation": "multiply",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_mul_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); y = torch.randint(-8, 9, (257,), dtype=torch.int32); x * y",
+      "dtype": "i32",
+      "operation": "multiply",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.936,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); y = torch.randint(-8, 9, (1025,), dtype=torch.int32); x * y",
+      "dtype": "i32",
+      "operation": "multiply",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 14.88,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); x * 2 - 3",
+      "dtype": "i32",
+      "operation": "scale_shift",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); x * 2 - 3",
+      "dtype": "i32",
+      "operation": "scale_shift",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_sub_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); x * 2 - 3",
+      "dtype": "i32",
+      "operation": "scale_shift",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 19.648,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); x * 2 - 3",
+      "dtype": "i32",
+      "operation": "scale_shift",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 14.624,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); y = torch.randint(-8, 9, (31,), dtype=torch.int32); torch.relu(x) * y",
+      "dtype": "i32",
+      "operation": "relu_mul",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); y = torch.randint(-8, 9, (33,), dtype=torch.int32); torch.relu(x) * y",
+      "dtype": "i32",
+      "operation": "relu_mul",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); y = torch.randint(-8, 9, (257,), dtype=torch.int32); torch.relu(x) * y",
+      "dtype": "i32",
+      "operation": "relu_mul",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 29.216,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); y = torch.randint(-8, 9, (1025,), dtype=torch.int32); torch.relu(x) * y",
+      "dtype": "i32",
+      "operation": "relu_mul",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 15.2,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); x.sum()",
+      "dtype": "i32",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.512,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); x.sum()",
+      "dtype": "i32",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.392,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); x.sum()",
+      "dtype": "i32",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.872,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); x.sum()",
+      "dtype": "i32",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.968,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_i32_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+      "dtype": "i32",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_294c80",
+            "median_us": 20.064,
+            "registers": {
+              "k_mean_294c80": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_i32_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+      "dtype": "i32",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_25f0c8",
+            "median_us": 33.504,
+            "registers": {
+              "k_mean_25f0c8": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_i32_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+      "dtype": "i32",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_f2ea19",
+            "median_us": 20.16,
+            "registers": {
+              "k_mean_f2ea19": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_i32_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int32); x.mean(dtype=torch.float32)",
+      "dtype": "i32",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_680c15",
+            "median_us": 20.48,
+            "registers": {
+              "k_mean_680c15": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_i32_3x31",
+      "code": "x = torch.randint(-8, 9, (3, 31), dtype=torch.int32); x.sum(-1)",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.224,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_i32_3x33",
+      "code": "x = torch.randint(-8, 9, (3, 33), dtype=torch.int32); x.sum(-1)",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_i32_3x257",
+      "code": "x = torch.randint(-8, 9, (3, 257), dtype=torch.int32); x.sum(-1)",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.288,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_i32_3x1025",
+      "code": "x = torch.randint(-8, 9, (3, 1025), dtype=torch.int32); x.sum(-1)",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ]
+}

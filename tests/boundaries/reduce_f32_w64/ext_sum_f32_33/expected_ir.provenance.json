@@ -1,0 +1,10 @@
+{
+  "oracle": "independent NumPy typed Kernel IR interpreter",
+  "numpy": "2.5.4",
+  "emmy": "0.3.11",
+  "source_sha256": {
+    "meta.json": "c956ebcef5c6c8fed1e298aefc926a9a05e9cf576f2d8c05751b33d8f2c05b4e",
+    "k_sum_1_reduce.ir.json": "d16ceebba9215b2e84c99f1a283b472f67e30c6f9e889a4c15efe8d14fc2a547",
+    "ir_reference.py": "c3f58e6ec25e5638c741f95cfa9c42336a212b1a0aefd165333d417ea772446a"
+  }
+}

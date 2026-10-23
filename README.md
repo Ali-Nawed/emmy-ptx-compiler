@@ -27,6 +27,13 @@ The original expected.npz remains unchanged. See [IR checker notes](review/ir-re
 The hosted run matches the IR expectations on all 80 cases; the three original
 expression failures remain visible.
 
+An additional 317 boundary/schedule cases and 40 explicit-input reductions all
+match the typed IR on the hosted GPU; 333/357 match their original expressions.
+The remaining 24 expose the IR's accumulator precision or cancellation order.
+See [boundary coverage](tests/BOUNDARIES.md) and the subsequent
+[local Emmy/nvcc PTX comparison](review/ptx-comparison.md), which identifies
+coordinate decoding and grouped stores as the first optimization candidates.
+
 ```bash
 uv venv .venv --python 3.12
 uv pip install --python .venv/bin/python emmy-ml==0.3.11 numpy requests

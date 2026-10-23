@@ -146,12 +146,18 @@ def main():
     parser.add_argument("--full-sizes", action="store_true", help="use the full boundary/large-size list")
     parser.add_argument("--work", type=int, choices=(32, 64, 128, 256), default=128)
     parser.add_argument("--runner", action="store_true")
+    parser.add_argument("--pace", type=float, default=1, help="seconds between serial hosted cases")
     parser.add_argument("--ir-reference", action="store_true", help="save independent NumPy IR expectations and report both comparisons")
     parser.add_argument("--generate-only", action="store_true", help="generate fixtures without invoking our compiler")
     parser.add_argument("--reuse", action="store_true", help="reuse matching generated fixtures when iterating on the compiler")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--out", type=Path, default=ROOT / "tests/extended")
+    parser.add_argument("--report-name", default="results.json", help="report filename within --out")
     args = parser.parse_args()
+    if Path(args.report_name).name != args.report_name:
+        parser.error("--report-name must be a filename")
+    if args.pace < 0:
+        parser.error("--pace cannot be negative")
     if args.generate_only and args.runner:
         parser.error("--generate-only and --runner cannot be combined")
     if importlib.metadata.version("emmy-ml") != "0.3.11":
@@ -209,7 +215,7 @@ def main():
             if args.generate_only:
                 row["status"] = "generated_not_tested"
                 rows.append(row)
-                (args.out / "results.json").write_text(json.dumps({"provenance": provenance, "cases": rows}, indent=2))
+                (args.out / args.report_name).write_text(json.dumps({"provenance": provenance, "cases": rows}, indent=2))
                 print(f"{row['status']:32} {spec['id']}", flush=True)
                 continue
             ptx_by_entry = {}
@@ -231,14 +237,14 @@ def main():
             if args.runner:
                 row["status"] = "runner_request_failure"
                 row["status"], row["details"] = check_runner(folder, meta, ptx_by_entry, ir_reference=ir_reference)
-                time.sleep(1)  # Courtesy pacing, not a stated server quota.
+                time.sleep(args.pace)  # Courtesy pacing, not a stated server quota.
         except subprocess.CalledProcessError as exc:
             row["error"] = (exc.stderr or str(exc))[-6000:]
         except (Exception, SystemExit) as exc:
             row["error"] = str(exc)[-6000:]
         rows.append(row)
         # Save after every case so interrupted runs retain their findings.
-        (args.out / "results.json").write_text(json.dumps({"provenance": provenance, "cases": rows}, indent=2))
+        (args.out / args.report_name).write_text(json.dumps({"provenance": provenance, "cases": rows}, indent=2))
         print(f"{row['status']:32} {spec['id']}", flush=True)
         if "error" in row:
             print(row["error"][-600:], flush=True)

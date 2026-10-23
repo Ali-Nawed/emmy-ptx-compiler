@@ -1,0 +1,464 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": false
+  },
+  "cases": [
+    {
+      "id": "ext_add_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x31",
+      "code": "x = torch.randn((3, 31), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x33",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x257",
+      "code": "x = torch.randn((3, 257), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x1025",
+      "code": "x = torch.randn((3, 1025), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    }
+  ]
+}

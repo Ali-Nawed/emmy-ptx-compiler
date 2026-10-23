@@ -1,0 +1,13 @@
+{
+  "original_fixture": "tests/boundaries/dtype_f16/ext_row_sum_f16_3x257",
+  "unchanged_ir_sha256": {
+    "k_sum_1_reduce.ir.json": "95681f56b23c9a8b8da7ed0b0a558f44fba971a7ba5c821df227122704b2604d",
+    "k_sum_1_reduce.ir.txt": "15ab2562f943b76208dae4661a1af1e7210c96b6a06132124fd8c48ca7c7d022"
+  },
+  "pattern": "large",
+  "dtype": "f16",
+  "shape": [
+    3,
+    257
+  ]
+}

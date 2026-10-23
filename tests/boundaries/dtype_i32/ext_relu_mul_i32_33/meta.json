@@ -1,0 +1,63 @@
+{
+ "id": "ext_relu_mul_i32_33",
+ "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int32); y = torch.randint(-8, 9, (33,), dtype=torch.int32); torch.relu(x) * y",
+ "rtol": 0,
+ "atol": 0,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "mul"
+ ],
+ "kernels": [
+  {
+   "node": "mul",
+   "entry": "k_mul_pointwise",
+   "arg_order": [
+    "x",
+    "y",
+    "mul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "i32",
+     "shape": [
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "y",
+     "dtype": "i32",
+     "shape": [
+      33
+     ],
+     "seed": 1
+    },
+    {
+     "name": "mul",
+     "dtype": "i32",
+     "shape": [
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

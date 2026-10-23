@@ -1,0 +1,180 @@
+{
+  "case": "scale_shift_i64_1025",
+  "entry": "k_sub_pointwise",
+  "fixture": "tests/boundaries/dtype_i64/ext_scale_shift_i64_1025",
+  "grid": [
+    5,
+    1,
+    1
+  ],
+  "block": [
+    256,
+    1,
+    1
+  ],
+  "status": "assembled_local_comparison",
+  "source_sha256": {
+    "k_sub_pointwise.ir.json": "086adcc79166215311d8fceeb58cacffb6e97dbd2c40cdec8bb6edf626a468bc",
+    "k_sub_pointwise.ref.cu": "e6b32a79b5a4d056ab36bfc2080444472aa793bc1c6c8659d8495b0d05b19470",
+    "compile.py": "6bf1465a85ccfb4767e45b5910354cc899d68d9948e734354ee92def47c9474e"
+  },
+  "commands": {
+    "emmy": [
+      "nvcc",
+      "--ptx",
+      "--gpu-architecture=compute_89",
+      "-O3",
+      "--std=c++17",
+      "/mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/review/emmy-ptx-comparison/scale_shift_i64_1025/k_sub_pointwise.emmy.cu",
+      "-o",
+      "/mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/review/emmy-ptx-comparison/scale_shift_i64_1025/emmy.ptx"
+    ],
+    "emmy_no_fma": [
+      "nvcc",
+      "--ptx",
+      "--gpu-architecture=compute_89",
+      "-O3",
+      "--std=c++17",
+      "--fmad=false",
+      "/mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/review/emmy-ptx-comparison/scale_shift_i64_1025/k_sub_pointwise.emmy.cu",
+      "-o",
+      "/mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/review/emmy-ptx-comparison/scale_shift_i64_1025/emmy_no_fma.ptx"
+    ]
+  },
+  "variants": {
+    "ours": {
+      "instruction_count": 33,
+      "opcodes": {
+        "add.u64": 4,
+        "bra": 1,
+        "cvta.to.global.u64": 4,
+        "ld.global.s64": 3,
+        "ld.param.u64": 4,
+        "mad.lo.s32": 1,
+        "mov.s32": 4,
+        "mov.u32": 3,
+        "mul.lo.s64": 1,
+        "mul.wide.s32": 4,
+        "ret": 1,
+        "setp.ge.u32": 1,
+        "st.global.s64": 1,
+        "sub.s64": 1
+      },
+      "vector_memory_instructions": 0,
+      "registers": 16,
+      "spill_store_bytes": 0,
+      "spill_load_bytes": 0,
+      "sass_instruction_count": 40,
+      "sass_opcodes": {
+        "BRA": 1,
+        "EXIT": 2,
+        "IADD3": 2,
+        "IADD3.X": 1,
+        "IMAD": 3,
+        "IMAD.MOV.U32": 2,
+        "IMAD.WIDE": 2,
+        "IMAD.WIDE.U32": 1,
+        "ISETP.GE.U32.AND": 1,
+        "LDG.E.64": 3,
+        "MOV": 4,
+        "NOP": 14,
+        "S2R": 2,
+        "STG.E.64": 1,
+        "ULDC.64": 1
+      },
+      "sass_non_nop_count": 26
+    },
+    "emmy": {
+      "instruction_count": 24,
+      "opcodes": {
+        "add.s64": 2,
+        "bra": 1,
+        "cvta.to.global.u64": 4,
+        "ld.global.u64": 3,
+        "ld.param.u64": 4,
+        "mad.lo.s32": 1,
+        "mov.u32": 3,
+        "mul.lo.s64": 1,
+        "mul.wide.s32": 1,
+        "ret": 1,
+        "setp.gt.s32": 1,
+        "st.global.u64": 1,
+        "sub.s64": 1
+      },
+      "vector_memory_instructions": 0,
+      "registers": 16,
+      "spill_store_bytes": 0,
+      "spill_load_bytes": 0,
+      "sass_instruction_count": 40,
+      "sass_opcodes": {
+        "BRA": 1,
+        "EXIT": 2,
+        "IADD3": 2,
+        "IADD3.X": 1,
+        "IMAD": 3,
+        "IMAD.MOV.U32": 2,
+        "IMAD.WIDE": 2,
+        "IMAD.WIDE.U32": 1,
+        "ISETP.GT.AND": 1,
+        "LDG.E.64": 3,
+        "MOV": 4,
+        "NOP": 14,
+        "S2R": 2,
+        "STG.E.64": 1,
+        "ULDC.64": 1
+      },
+      "sass_non_nop_count": 26
+    },
+    "emmy_no_fma": {
+      "instruction_count": 24,
+      "opcodes": {
+        "add.s64": 2,
+        "bra": 1,
+        "cvta.to.global.u64": 4,
+        "ld.global.u64": 3,
+        "ld.param.u64": 4,
+        "mad.lo.s32": 1,
+        "mov.u32": 3,
+        "mul.lo.s64": 1,
+        "mul.wide.s32": 1,
+        "ret": 1,
+        "setp.gt.s32": 1,
+        "st.global.u64": 1,
+        "sub.s64": 1
+      },
+      "vector_memory_instructions": 0,
+      "registers": 16,
+      "spill_store_bytes": 0,
+      "spill_load_bytes": 0,
+      "sass_instruction_count": 40,
+      "sass_non_nop_count": 26,
+      "sass_opcodes": {
+        "BRA": 1,
+        "EXIT": 2,
+        "IADD3": 2,
+        "IADD3.X": 1,
+        "IMAD": 3,
+        "IMAD.MOV.U32": 2,
+        "IMAD.WIDE": 2,
+        "IMAD.WIDE.U32": 1,
+        "ISETP.GT.AND": 1,
+        "LDG.E.64": 3,
+        "MOV": 4,
+        "NOP": 14,
+        "S2R": 2,
+        "STG.E.64": 1,
+        "ULDC.64": 1
+      }
+    }
+  },
+  "assembler_flags": {
+    "all": [
+      "-arch=sm_89",
+      "-O3",
+      "-v"
+    ],
+    "emmy_no_fma_additional": [
+      "--fmad=false"
+    ]
+  }
+}

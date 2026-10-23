@@ -1,0 +1,1136 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": true
+  },
+  "cases": [
+    {
+      "id": "ext_add_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.448,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.68,
+            "registers": {
+              "k_add_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.512,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.064,
+            "registers": {
+              "k_sub_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.16,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x - y",
+      "dtype": "f16",
+      "operation": "subtract",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.064,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_mul_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); x * y",
+      "dtype": "f16",
+      "operation": "multiply",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.968,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_add_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.84,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); y = torch.randn((31,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_mul_pointwise": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); y = torch.randn((257,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.544,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); y = torch.randn((1025,), dtype=torch.float16); torch.relu(x) * y",
+      "dtype": "f16",
+      "operation": "relu_mul",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.672,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 21.216,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.776,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.448,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x.sum()",
+      "dtype": "f16",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.512,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f16_31",
+      "code": "x = torch.randn((31,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_50fdb6",
+            "median_us": 20.0,
+            "registers": {
+              "k_mean_50fdb6": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f16_33",
+      "code": "x = torch.randn((33,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_fcbe23",
+            "median_us": 20.576,
+            "registers": {
+              "k_mean_fcbe23": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f16_257",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_caf8b2",
+            "median_us": 20.448,
+            "registers": {
+              "k_mean_caf8b2": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f16_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float16); x.mean()",
+      "dtype": "f16",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_523d08",
+            "median_us": 20.448,
+            "registers": {
+              "k_mean_523d08": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x31",
+      "code": "x = torch.randn((3, 31), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.8,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x33",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.544,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x257",
+      "code": "x = torch.randn((3, 257), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f16_3x1025",
+      "code": "x = torch.randn((3, 1025), dtype=torch.float16); x.sum(-1)",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ]
+}

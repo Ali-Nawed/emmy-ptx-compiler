@@ -1,0 +1,12 @@
+{
+  "original_fixture": "tests/boundaries/reduce_f32_w128/ext_sum_f32_257",
+  "unchanged_ir_sha256": {
+    "k_sum_1_reduce.ir.json": "ef74ad210e249e1b3eea5d468792daa640907692bb7a049f0de51160e97a0bed",
+    "k_sum_1_reduce.ir.txt": "932ffb8820866137ca32851784b8f2d1e9bfd46c7b2b60550246d0ba3261d0c9"
+  },
+  "pattern": "large",
+  "dtype": "f32",
+  "shape": [
+    257
+  ]
+}

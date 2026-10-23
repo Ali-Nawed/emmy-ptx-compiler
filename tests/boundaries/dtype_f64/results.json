@@ -1,0 +1,1480 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": true
+  },
+  "cases": [
+    {
+      "id": "ext_add_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); y = torch.randn((31,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); y = torch.randn((257,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_add_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); y = torch.randn((1025,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 14.816,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); y = torch.randn((31,), dtype=torch.float64); x - y",
+      "dtype": "f64",
+      "operation": "subtract",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float64); x - y",
+      "dtype": "f64",
+      "operation": "subtract",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_sub_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); y = torch.randn((257,), dtype=torch.float64); x - y",
+      "dtype": "f64",
+      "operation": "subtract",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 19.808,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_subtract_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); y = torch.randn((1025,), dtype=torch.float64); x - y",
+      "dtype": "f64",
+      "operation": "subtract",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 14.592,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); y = torch.randn((31,), dtype=torch.float64); x * y",
+      "dtype": "f64",
+      "operation": "multiply",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float64); x * y",
+      "dtype": "f64",
+      "operation": "multiply",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); y = torch.randn((257,), dtype=torch.float64); x * y",
+      "dtype": "f64",
+      "operation": "multiply",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 27.808,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_multiply_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); y = torch.randn((1025,), dtype=torch.float64); x * y",
+      "dtype": "f64",
+      "operation": "multiply",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 14.848,
+            "registers": {
+              "k_mul_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); x * -1.25 + 0.5",
+      "dtype": "f64",
+      "operation": "scale_shift",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); x * -1.25 + 0.5",
+      "dtype": "f64",
+      "operation": "scale_shift",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); x * -1.25 + 0.5",
+      "dtype": "f64",
+      "operation": "scale_shift",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_scale_shift_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); x * -1.25 + 0.5",
+      "dtype": "f64",
+      "operation": "scale_shift",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 14.656,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); y = torch.randn((31,), dtype=torch.float64); torch.relu(x) * y",
+      "dtype": "f64",
+      "operation": "relu_mul",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 22.464,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float64); torch.relu(x) * y",
+      "dtype": "f64",
+      "operation": "relu_mul",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.744,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); y = torch.randn((257,), dtype=torch.float64); torch.relu(x) * y",
+      "dtype": "f64",
+      "operation": "relu_mul",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_relu_mul_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); y = torch.randn((1025,), dtype=torch.float64); torch.relu(x) * y",
+      "dtype": "f64",
+      "operation": "relu_mul",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 15.136,
+            "registers": {
+              "k_mul_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); x.sum()",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -4.6542134284973145,
+              "expected": -4.65421317629805
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 28.448,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -4.6542134284973145,
+                  "expected": -4.65421317629805
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); x.sum()",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -5.022614002227783,
+              "expected": -5.022613761084241
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.936,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -5.022614002227783,
+                  "expected": -5.022613761084241
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); x.sum()",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.18290996551513672,
+              "expected": -0.18291050976432732
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.352,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.18290996551513672,
+                  "expected": -0.18291050976432732
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); x.sum()",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -49.88652038574219,
+              "expected": -49.88652004148937
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.416,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -49.88652038574219,
+                  "expected": -49.88652004148937
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_31",
+      "code": "x = torch.randn((31,), dtype=torch.float64); x.mean()",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.15013591704830045,
+              "expected": -0.15013590891284034
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_a380c6",
+            "median_us": 20.672,
+            "registers": {
+              "k_mean_a380c6": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "mean",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.15013591704830045,
+                  "expected": -0.15013590891284034
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_33",
+      "code": "x = torch.randn((33,), dtype=torch.float64); x.mean()",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.15220042430993283,
+              "expected": -0.15220041700255274
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_b3aa61",
+            "median_us": 20.544,
+            "registers": {
+              "k_mean_b3aa61": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "mean",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.15220042430993283,
+                  "expected": -0.15220041700255274
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_257",
+      "code": "x = torch.randn((257,), dtype=torch.float64); x.mean()",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.000711711928074462,
+              "expected": -0.0007117140457755927
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_9f2e30",
+            "median_us": 19.936,
+            "registers": {
+              "k_mean_9f2e30": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "mean",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.000711711928074462,
+                  "expected": -0.0007117140457755927
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float64); x.mean()",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.04866977598608994,
+              "expected": -0.04866977565023353
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_4d92cd",
+            "median_us": 20.576,
+            "registers": {
+              "k_mean_4d92cd": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "mean",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.04866977598608994,
+                  "expected": -0.04866977565023353
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x31",
+      "code": "x = torch.randn((3, 31), dtype=torch.float64); x.sum(-1)",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -4.6542134284973145,
+              "expected": -4.65421317629805
+            },
+            {
+              "index": 1,
+              "got": 7.685729026794434,
+              "expected": 7.685728622953109
+            },
+            {
+              "index": 2,
+              "got": 7.699657917022705,
+              "expected": 7.6996579147327235
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.704,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -4.6542134284973145,
+                  "expected": -4.65421317629805
+                },
+                {
+                  "index": 1,
+                  "got": 7.685729026794434,
+                  "expected": 7.685728622953109
+                },
+                {
+                  "index": 2,
+                  "got": 7.699657917022705,
+                  "expected": 7.6996579147327235
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x33",
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); x.sum(-1)",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -5.022614002227783,
+              "expected": -5.022613761084241
+            },
+            {
+              "index": 1,
+              "got": 9.3679838180542,
+              "expected": 9.367983440413559
+            },
+            {
+              "index": 2,
+              "got": 5.165820121765137,
+              "expected": 5.165819884659667
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.48,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -5.022614002227783,
+                  "expected": -5.022613761084241
+                },
+                {
+                  "index": 1,
+                  "got": 9.3679838180542,
+                  "expected": 9.367983440413559
+                },
+                {
+                  "index": 2,
+                  "got": 5.165820121765137,
+                  "expected": 5.165819884659667
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x257",
+      "code": "x = torch.randn((3, 257), dtype=torch.float64); x.sum(-1)",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.18290996551513672,
+              "expected": -0.18291050976432732
+            },
+            {
+              "index": 1,
+              "got": -12.784160614013672,
+              "expected": -12.784161098734405
+            },
+            {
+              "index": 2,
+              "got": -0.7009744644165039,
+              "expected": -0.7009744661252815
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.704,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.18290996551513672,
+                  "expected": -0.18291050976432732
+                },
+                {
+                  "index": 1,
+                  "got": -12.784160614013672,
+                  "expected": -12.784161098734405
+                },
+                {
+                  "index": 2,
+                  "got": -0.7009744644165039,
+                  "expected": -0.7009744661252815
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x1025",
+      "code": "x = torch.randn((3, 1025), dtype=torch.float64); x.sum(-1)",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "wrong_result",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -49.88652038574219,
+              "expected": -49.88652004148937
+            },
+            {
+              "index": 1,
+              "got": -5.156154632568359,
+              "expected": -5.1561538836025775
+            },
+            {
+              "index": 2,
+              "got": -43.593666076660156,
+              "expected": -43.593660522399674
+            }
+          ]
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.448,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -49.88652038574219,
+                  "expected": -49.88652004148937
+                },
+                {
+                  "index": 1,
+                  "got": -5.156154632568359,
+                  "expected": -5.1561538836025775
+                },
+                {
+                  "index": 2,
+                  "got": -43.593666076660156,
+                  "expected": -43.593660522399674
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ]
+}

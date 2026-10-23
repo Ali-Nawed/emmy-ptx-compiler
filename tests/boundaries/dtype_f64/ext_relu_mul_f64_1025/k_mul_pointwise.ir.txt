@@ -1,0 +1,6 @@
+    Tile[a0] (N=1025)
+        in0 = load x[a0]
+        f64 v0 = relu(in0)
+        in1 = load y[a0]
+        f64 v1 = multiply(in1, v0)
+        mul[a0] = v1

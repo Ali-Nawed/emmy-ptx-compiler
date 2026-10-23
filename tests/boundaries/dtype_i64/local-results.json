@@ -1,0 +1,464 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": false
+  },
+  "cases": [
+    {
+      "id": "ext_add_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); y = torch.randint(-8, 9, (31,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); y = torch.randint(-8, 9, (33,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); y = torch.randint(-8, 9, (257,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); y = torch.randint(-8, 9, (1025,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); y = torch.randint(-8, 9, (31,), dtype=torch.int64); x - y",
+      "dtype": "i64",
+      "operation": "subtract",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); y = torch.randint(-8, 9, (33,), dtype=torch.int64); x - y",
+      "dtype": "i64",
+      "operation": "subtract",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); y = torch.randint(-8, 9, (257,), dtype=torch.int64); x - y",
+      "dtype": "i64",
+      "operation": "subtract",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_subtract_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); y = torch.randint(-8, 9, (1025,), dtype=torch.int64); x - y",
+      "dtype": "i64",
+      "operation": "subtract",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); y = torch.randint(-8, 9, (31,), dtype=torch.int64); x * y",
+      "dtype": "i64",
+      "operation": "multiply",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); y = torch.randint(-8, 9, (33,), dtype=torch.int64); x * y",
+      "dtype": "i64",
+      "operation": "multiply",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); y = torch.randint(-8, 9, (257,), dtype=torch.int64); x * y",
+      "dtype": "i64",
+      "operation": "multiply",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_multiply_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); y = torch.randint(-8, 9, (1025,), dtype=torch.int64); x * y",
+      "dtype": "i64",
+      "operation": "multiply",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); x * 2 - 3",
+      "dtype": "i64",
+      "operation": "scale_shift",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); x * 2 - 3",
+      "dtype": "i64",
+      "operation": "scale_shift",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); x * 2 - 3",
+      "dtype": "i64",
+      "operation": "scale_shift",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); x * 2 - 3",
+      "dtype": "i64",
+      "operation": "scale_shift",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); y = torch.randint(-8, 9, (31,), dtype=torch.int64); torch.relu(x) * y",
+      "dtype": "i64",
+      "operation": "relu_mul",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); y = torch.randint(-8, 9, (33,), dtype=torch.int64); torch.relu(x) * y",
+      "dtype": "i64",
+      "operation": "relu_mul",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); y = torch.randint(-8, 9, (257,), dtype=torch.int64); torch.relu(x) * y",
+      "dtype": "i64",
+      "operation": "relu_mul",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_relu_mul_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); y = torch.randint(-8, 9, (1025,), dtype=torch.int64); torch.relu(x) * y",
+      "dtype": "i64",
+      "operation": "relu_mul",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); x.sum()",
+      "dtype": "i64",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); x.sum()",
+      "dtype": "i64",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); x.sum()",
+      "dtype": "i64",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_sum_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); x.sum()",
+      "dtype": "i64",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_i64_31",
+      "code": "x = torch.randint(-8, 9, (31,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+      "dtype": "i64",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_i64_33",
+      "code": "x = torch.randint(-8, 9, (33,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+      "dtype": "i64",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_i64_257",
+      "code": "x = torch.randint(-8, 9, (257,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+      "dtype": "i64",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_mean_i64_1025",
+      "code": "x = torch.randint(-8, 9, (1025,), dtype=torch.int64); x.mean(dtype=torch.float32)",
+      "dtype": "i64",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_i64_3x31",
+      "code": "x = torch.randint(-8, 9, (3, 31), dtype=torch.int64); x.sum(-1)",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_i64_3x33",
+      "code": "x = torch.randint(-8, 9, (3, 33), dtype=torch.int64); x.sum(-1)",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_i64_3x257",
+      "code": "x = torch.randint(-8, 9, (3, 257), dtype=torch.int64); x.sum(-1)",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_row_sum_i64_3x1025",
+      "code": "x = torch.randint(-8, 9, (3, 1025), dtype=torch.int64); x.sum(-1)",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    }
+  ]
+}

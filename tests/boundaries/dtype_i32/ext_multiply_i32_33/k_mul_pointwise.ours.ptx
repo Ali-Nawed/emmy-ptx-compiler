@@ -1,0 +1,87 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_mul_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<41>;
+    .reg .b64 %rd<25>;
+    .reg .pred %p<2>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 11;
+    @%p1 bra DONE;
+    mul.lo.s32 %r5, %r4, 3;
+    add.s32 %r6, %r5, 0;
+    mov.s32 %r7, %r6;
+    mul.wide.s32 %rd7, %r7, 4;
+    add.u64 %rd8, %rd2, %rd7;
+    ld.global.s32 %r8, [%rd8+0];
+    mul.lo.s32 %r9, %r4, 3;
+    add.s32 %r10, %r9, 0;
+    mov.s32 %r11, %r10;
+    mul.wide.s32 %rd9, %r11, 4;
+    add.u64 %rd10, %rd4, %rd9;
+    ld.global.s32 %r12, [%rd10+0];
+    mul.lo.s32 %r13, %r8, %r12;
+    mul.lo.s32 %r14, %r4, 3;
+    add.s32 %r15, %r14, 1;
+    mov.s32 %r16, %r15;
+    mul.wide.s32 %rd11, %r16, 4;
+    add.u64 %rd12, %rd2, %rd11;
+    ld.global.s32 %r17, [%rd12+0];
+    mul.lo.s32 %r18, %r4, 3;
+    add.s32 %r19, %r18, 1;
+    mov.s32 %r20, %r19;
+    mul.wide.s32 %rd13, %r20, 4;
+    add.u64 %rd14, %rd4, %rd13;
+    ld.global.s32 %r21, [%rd14+0];
+    mul.lo.s32 %r22, %r17, %r21;
+    mul.lo.s32 %r23, %r4, 3;
+    add.s32 %r24, %r23, 2;
+    mov.s32 %r25, %r24;
+    mul.wide.s32 %rd15, %r25, 4;
+    add.u64 %rd16, %rd2, %rd15;
+    ld.global.s32 %r26, [%rd16+0];
+    mul.lo.s32 %r27, %r4, 3;
+    add.s32 %r28, %r27, 2;
+    mov.s32 %r29, %r28;
+    mul.wide.s32 %rd17, %r29, 4;
+    add.u64 %rd18, %rd4, %rd17;
+    ld.global.s32 %r30, [%rd18+0];
+    mul.lo.s32 %r31, %r26, %r30;
+    mul.lo.s32 %r32, %r4, 3;
+    add.s32 %r33, %r32, 0;
+    mov.s32 %r34, %r33;
+    mul.wide.s32 %rd19, %r34, 4;
+    add.u64 %rd20, %rd6, %rd19;
+    st.global.s32 [%rd20+0], %r13;
+    mul.lo.s32 %r35, %r4, 3;
+    add.s32 %r36, %r35, 1;
+    mov.s32 %r37, %r36;
+    mul.wide.s32 %rd21, %r37, 4;
+    add.u64 %rd22, %rd6, %rd21;
+    st.global.s32 [%rd22+0], %r22;
+    mul.lo.s32 %r38, %r4, 3;
+    add.s32 %r39, %r38, 2;
+    mov.s32 %r40, %r39;
+    mul.wide.s32 %rd23, %r40, 4;
+    add.u64 %rd24, %rd6, %rd23;
+    st.global.s32 [%rd24+0], %r31;
+DONE:
+    ret;
+}
+

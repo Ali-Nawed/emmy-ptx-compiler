@@ -1,0 +1,670 @@
+{
+  "generated_boundary_cases": 317,
+  "explicit_input_cases": 40,
+  "gpu_vs_ir": {
+    "pass": 357
+  },
+  "gpu_vs_expression": {
+    "pass": 333,
+    "wrong_result": 24
+  },
+  "generated_vs_expression": {
+    "pass": 305,
+    "wrong_result": 12
+  },
+  "explicit_vs_expression": {
+    "pass": 28,
+    "wrong_result": 12
+  },
+  "all_gpu_statuses_match_cpu_ir_prediction": true,
+  "comparison_policy": "Original floating tolerances; exact integer equality; separate IR expectations",
+  "f32_reduction_schedule_cases": 144,
+  "observed_reduction_blocks": {
+    "32": {
+      "32": 36
+    },
+    "64": {
+      "64": 36
+    },
+    "128": {
+      "128": 36
+    },
+    "256": {
+      "256": 36
+    }
+  },
+  "failures": [
+    {
+      "id": "ext_sum_f64_31",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -4.6542134284973145,
+              "expected": -4.65421317629805
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_33",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -5.022614002227783,
+              "expected": -5.022613761084241
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_257",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.18290996551513672,
+              "expected": -0.18291050976432732
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f64_1025",
+      "dtype": "f64",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -49.88652038574219,
+              "expected": -49.88652004148937
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_31",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        31
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.15013591704830045,
+              "expected": -0.15013590891284034
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_33",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        33
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.15220042430993283,
+              "expected": -0.15220041700255274
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_257",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        257
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.000711711928074462,
+              "expected": -0.0007117140457755927
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_mean_f64_1025",
+      "dtype": "f64",
+      "operation": "mean",
+      "shape": [
+        1025
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "mean",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.04866977598608994,
+              "expected": -0.04866977565023353
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x31",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -4.6542134284973145,
+              "expected": -4.65421317629805
+            },
+            {
+              "index": 1,
+              "got": 7.685729026794434,
+              "expected": 7.685728622953109
+            },
+            {
+              "index": 2,
+              "got": 7.699657917022705,
+              "expected": 7.6996579147327235
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x33",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -5.022614002227783,
+              "expected": -5.022613761084241
+            },
+            {
+              "index": 1,
+              "got": 9.3679838180542,
+              "expected": 9.367983440413559
+            },
+            {
+              "index": 2,
+              "got": 5.165820121765137,
+              "expected": 5.165819884659667
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x257",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -0.18290996551513672,
+              "expected": -0.18291050976432732
+            },
+            {
+              "index": 1,
+              "got": -12.784160614013672,
+              "expected": -12.784161098734405
+            },
+            {
+              "index": 2,
+              "got": -0.7009744644165039,
+              "expected": -0.7009744661252815
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f64_3x1025",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": -49.88652038574219,
+              "expected": -49.88652004148937
+            },
+            {
+              "index": 1,
+              "got": -5.156154632568359,
+              "expected": -5.1561538836025775
+            },
+            {
+              "index": 2,
+              "got": -43.593666076660156,
+              "expected": -43.593660522399674
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "f32_sum_cancellation",
+      "dtype": "f32",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float32",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "f32_row_sum_cancellation",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float32",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 1,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 2,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "f64_sum_cancellation",
+      "dtype": "f64",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "f64_row_sum_cancellation",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 1,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 2,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i32_sum_cancellation",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i32_sum_large",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_cancellation",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 1,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 2,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_large",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 1,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 2,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i64_sum_cancellation",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i64_sum_large",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_cancellation",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 1,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 2,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_large",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 1,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 2,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

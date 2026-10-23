@@ -1,0 +1,1672 @@
+{
+  "cases": [
+    {
+      "id": "f16_sum_zeros",
+      "dtype": "f16",
+      "operation": "sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_sum_negative",
+      "dtype": "f16",
+      "operation": "sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.424,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_sum_cancellation",
+      "dtype": "f16",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_sum_large",
+      "dtype": "f16",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_row_sum_zeros",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_row_sum_negative",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.648,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_row_sum_cancellation",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.36,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f16_row_sum_large",
+      "dtype": "f16",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.064,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_sum_zeros",
+      "dtype": "f32",
+      "operation": "sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.552,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_sum_negative",
+      "dtype": "f32",
+      "operation": "sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.36,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_sum_cancellation",
+      "dtype": "f32",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float32",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.648,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float32",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.0
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_sum_large",
+      "dtype": "f32",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.232,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_row_sum_zeros",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_row_sum_negative",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.424,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_row_sum_cancellation",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float32",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 1,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 2,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.872,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float32",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.0
+                },
+                {
+                  "index": 1,
+                  "got": 0.0,
+                  "expected": 1.0
+                },
+                {
+                  "index": 2,
+                  "got": 0.0,
+                  "expected": 1.0
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f32_row_sum_large",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.488,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_sum_zeros",
+      "dtype": "f64",
+      "operation": "sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.68,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_sum_negative",
+      "dtype": "f64",
+      "operation": "sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.68,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_sum_cancellation",
+      "dtype": "f64",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.68,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.0
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_sum_large",
+      "dtype": "f64",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 26.752,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_row_sum_zeros",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.52,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_row_sum_negative",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.264,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_row_sum_cancellation",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "float64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 1,
+              "got": 0.0,
+              "expected": 1.0
+            },
+            {
+              "index": 2,
+              "got": 0.0,
+              "expected": 1.0
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.872,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.0
+                },
+                {
+                  "index": 1,
+                  "got": 0.0,
+                  "expected": 1.0
+                },
+                {
+                  "index": 2,
+                  "got": 0.0,
+                  "expected": 1.0
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "f64_row_sum_large",
+      "dtype": "f64",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.488,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_sum_zeros",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.488,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_sum_negative",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_sum_cancellation",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 64.768,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 1
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_sum_large",
+      "dtype": "i32",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.584,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_zeros",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.52,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_negative",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.776,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_cancellation",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 1,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 2,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.584,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 1
+                },
+                {
+                  "index": 1,
+                  "got": 0,
+                  "expected": 1
+                },
+                {
+                  "index": 2,
+                  "got": 0,
+                  "expected": 1
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i32_row_sum_large",
+      "dtype": "i32",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 1,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 2,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.488,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                },
+                {
+                  "index": 1,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                },
+                {
+                  "index": 2,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_sum_zeros",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.424,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_sum_negative",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.52,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_sum_cancellation",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.744,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 1
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_sum_large",
+      "dtype": "i64",
+      "operation": "sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 1,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.808,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_zeros",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "zeros",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_negative",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "negative",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.424,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_cancellation",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "cancellation",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 1,
+              "got": 0,
+              "expected": 1
+            },
+            {
+              "index": 2,
+              "got": 0,
+              "expected": 1
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.328,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 1
+                },
+                {
+                  "index": 1,
+                  "got": 0,
+                  "expected": 1
+                },
+                {
+                  "index": 2,
+                  "got": 0,
+                  "expected": 1
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "i64_row_sum_large",
+      "dtype": "i64",
+      "operation": "row_sum",
+      "pattern": "large",
+      "ir_vs_expression": {
+        "status": "wrong_result",
+        "details": {
+          "output": "sum_1",
+          "dtype": "int64",
+          "mismatch_count": 3,
+          "examples": [
+            {
+              "index": 0,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 1,
+              "got": 275951648768,
+              "expected": 275951649025
+            },
+            {
+              "index": 2,
+              "got": 275951648768,
+              "expected": 275951649025
+            }
+          ]
+        }
+      },
+      "status": "wrong_result",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.096,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "int64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                },
+                {
+                  "index": 1,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                },
+                {
+                  "index": 2,
+                  "got": 275951648768,
+                  "expected": 275951649025
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 28,
+    "wrong_result": 12
+  }
+}

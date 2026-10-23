@@ -118,6 +118,10 @@ python tools/test_f16_edges.py --runner
 python tools/test_extended.py --dtypes f16 --ops add scale_shift sum row_sum --sizes 1024 --rows 3 --out tests/extended-f16-large --runner
 ```
 
+The broader boundary/schedule matrix and explicit reduction input patterns are
+documented separately in [BOUNDARIES.md](BOUNDARIES.md). Local-only reference
+PTX comparisons are documented in review/ptx-comparison.md.
+
 Edge results are saved in review/f16-edge-results.json; larger-case results in
 tests/extended-f16-large/results.json. The default matrix currently has 77 GPU
 passes and three strict f64 reduction failures. Every case compiles and assembles;

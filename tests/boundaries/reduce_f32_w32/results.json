@@ -1,0 +1,1299 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 32,
+    "runner": true
+  },
+  "cases": [
+    {
+      "id": "ext_sum_f32_31",
+      "code": "x = torch.randn((31,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 18.912,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_32",
+      "code": "x = torch.randn((32,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        32
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 77.632,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_33",
+      "code": "x = torch.randn((33,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.736,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_127",
+      "code": "x = torch.randn((127,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        127
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.744,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_128",
+      "code": "x = torch.randn((128,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        128
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_255",
+      "code": "x = torch.randn((255,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        255
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.968,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_256",
+      "code": "x = torch.randn((256,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        256
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.288,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_257",
+      "code": "x = torch.randn((257,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.16,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_sum_f32_1025",
+      "code": "x = torch.randn((1025,), dtype=torch.float32); x.sum()",
+      "dtype": "f32",
+      "operation": "sum",
+      "shape": [
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.68,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x31",
+      "code": "x = torch.randn((1, 31), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.224,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x31",
+      "code": "x = torch.randn((3, 31), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x31",
+      "code": "x = torch.randn((17, 31), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        31
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.416,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x32",
+      "code": "x = torch.randn((1, 32), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        32
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.256,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x32",
+      "code": "x = torch.randn((3, 32), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        32
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.032,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x32",
+      "code": "x = torch.randn((17, 32), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        32
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.032,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x33",
+      "code": "x = torch.randn((1, 33), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x33",
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x33",
+      "code": "x = torch.randn((17, 33), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        33
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.904,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x127",
+      "code": "x = torch.randn((1, 127), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        127
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.256,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x127",
+      "code": "x = torch.randn((3, 127), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        127
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.776,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x127",
+      "code": "x = torch.randn((17, 127), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        127
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.648,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x128",
+      "code": "x = torch.randn((1, 128), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        128
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.032,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x128",
+      "code": "x = torch.randn((3, 128), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        128
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x128",
+      "code": "x = torch.randn((17, 128), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        128
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.904,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x255",
+      "code": "x = torch.randn((1, 255), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        255
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.448,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x255",
+      "code": "x = torch.randn((3, 255), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        255
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.968,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x255",
+      "code": "x = torch.randn((17, 255), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        255
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x256",
+      "code": "x = torch.randn((1, 256), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        256
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.256,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x256",
+      "code": "x = torch.randn((3, 256), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        256
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.16,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x256",
+      "code": "x = torch.randn((17, 256), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        256
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x257",
+      "code": "x = torch.randn((1, 257), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x257",
+      "code": "x = torch.randn((3, 257), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.0,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x257",
+      "code": "x = torch.randn((17, 257), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        257
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.064,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_1x1025",
+      "code": "x = torch.randn((1, 1025), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        1,
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 28.64,
+            "registers": {
+              "k_sum_1_reduce": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_3x1025",
+      "code": "x = torch.randn((3, 1025), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        3,
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.064,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "ext_row_sum_f32_17x1025",
+      "code": "x = torch.randn((17, 1025), dtype=torch.float32); x.sum(-1)",
+      "dtype": "f32",
+      "operation": "row_sum",
+      "shape": [
+        17,
+        1025
+      ],
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ]
+}

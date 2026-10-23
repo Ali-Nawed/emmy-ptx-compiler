@@ -1,0 +1,12 @@
+{
+  "original_fixture": "tests/boundaries/dtype_f64/ext_sum_f64_257",
+  "unchanged_ir_sha256": {
+    "k_sum_1_reduce.ir.json": "52a9a22fbcbf4bf25f4e404f5c80b00fa5de88e3ebf0881e5c66cac6ab67f439",
+    "k_sum_1_reduce.ir.txt": "f83ed77a091253cc149dd1b330d50de8f5d76945be1c8d09a32abc6aa5a55515"
+  },
+  "pattern": "large",
+  "dtype": "f64",
+  "shape": [
+    257
+  ]
+}

@@ -1,0 +1,7 @@
+    Tile[a0] (N=257)
+        in1 = load mul_c1[0]
+        in2 = load x[a0]
+        f16 v0 = multiply(in1, in2)
+        in0 = load add_c1[0]
+        f16 v1 = add(in0, v0)
+        add[a0] = v1
