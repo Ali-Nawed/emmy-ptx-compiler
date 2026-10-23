@@ -1,0 +1,42 @@
+[
+  {
+    "problem": "p00_scalar_add",
+    "exit_code": 0,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (26.4 us)\n"
+  },
+  {
+    "problem": "p01_vector_add",
+    "exit_code": 0,
+    "output": "[k_add_pointwise] 18 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (19.936 us)\n"
+  },
+  {
+    "problem": "p02_scale_shift",
+    "exit_code": 0,
+    "output": "[k_add_pointwise] 21 registers\n[k_add_pointwise] PASS  add: max abs err 0.000e+00  (14.56 us)\n"
+  },
+  {
+    "problem": "p03_relu_mul",
+    "exit_code": 0,
+    "output": "[k_mul_pointwise] 22 registers\n[k_mul_pointwise] PASS  mul: max abs err 0.000e+00  (14.496 us)\n"
+  },
+  {
+    "problem": "r01_array_sum",
+    "exit_code": 0,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 3.815e-06  (19.936 us)\n"
+  },
+  {
+    "problem": "r02_big_sum",
+    "exit_code": 0,
+    "output": "[k_sum_1_reduce] 19 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 1.526e-05  (37.28 us)\n"
+  },
+  {
+    "problem": "r03_mean",
+    "exit_code": 0,
+    "output": "[k_mean_ffcca3] 19 registers\n[k_mean_ffcca3] PASS  mean: max abs err 9.313e-10  (27.84 us)\n"
+  },
+  {
+    "problem": "r04_row_sum",
+    "exit_code": 0,
+    "output": "[k_sum_1_reduce] 20 registers\n[k_sum_1_reduce] PASS  sum_1: max abs err 5.722e-06  (20.608 us)\n"
+  }
+]

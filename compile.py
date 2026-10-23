@@ -67,7 +67,7 @@ def inspect_kernel(source: KernelInput) -> None:
 
 
 class PTXEmitter:
-    """Direct emitter for f32 pointwise kernels and block-cooperative reductions.
+    """Direct emitter for f16/f32 pointwise kernels and f32 reduction state.
 
     Keep this first version deliberately narrow. Unsupported forms fail rather
     than generating plausible but incorrect PTX. No problem-name recognition.
@@ -76,8 +76,11 @@ class PTXEmitter:
     def __init__(self, source: KernelInput):
         self.source = source
         self.lines: list[str] = []
-        self.counts = {"r": 0, "rd": 0, "f": 0, "p": 0}
+        self.counts = {"r": 0, "rd": 0, "f": 0, "h": 0, "p": 0}
         self.values: dict[str, str] = {}
+        # Floating values live in f32 registers; f16 values are rounded at each
+        # typed operation boundary. h registers transport the actual half bits.
+        self.value_dtypes: dict[str, str] = {}
         self.pointers: dict[str, str] = {}
         self.buffers = {arg["name"]: arg for arg in source.metadata["args"]}
         self.shared: dict[str, str] = {}
@@ -104,6 +107,19 @@ class PTXEmitter:
 
     def emit(self, instruction: str) -> None:
         self.lines.append(f"    {instruction}")
+
+    @staticmethod
+    def element_bytes(dtype: str) -> int:
+        if dtype not in ("f16", "f32"):
+            raise NotImplementedError(f"Unsupported buffer dtype: {dtype}")
+        return 2 if dtype == "f16" else 4
+
+    def round_half(self, value: str) -> str:
+        """Round to binary16, retaining the rounded value in an f32 register."""
+        half, rounded = self.reg("h"), self.reg("f")
+        self.emit(f"cvt.rn.f16.f32 {half}, {value};")
+        self.emit(f"cvt.f32.f16 {rounded}, {half};")
+        return rounded
 
     def index_expr(self, expr) -> str:
         """Return a 32-bit register/immediate for an integer index expression."""
@@ -137,8 +153,9 @@ class PTXEmitter:
     def address(self, name: str, index) -> str:
         """IR indices count elements; PTX addresses count bytes."""
         buffer = self.buffers[name]
-        if buffer.get("scalar") or buffer["dtype"] != "f32":
-            raise NotImplementedError("Only f32 buffers are supported")
+        if buffer.get("scalar"):
+            raise NotImplementedError("Scalar by-value arguments are unsupported")
+        element_bytes = self.element_bytes(buffer["dtype"])
         shape = buffer["shape"]
         if not index and math.prod(shape) == 1:
             element = "0"  # A scalar reduction result can have index=().
@@ -156,7 +173,7 @@ class PTXEmitter:
         element_reg = self.reg("r")
         self.emit(f"mov.s32 {element_reg}, {element};")
         byte_offset = self.reg("rd")
-        self.emit(f"mul.wide.s32 {byte_offset}, {element_reg}, 4;")
+        self.emit(f"mul.wide.s32 {byte_offset}, {element_reg}, {element_bytes};")
         address = self.reg("rd")
         base = self.shared.get(name, self.pointers.get(name))
         self.emit(f"add.u64 {address}, {base}, {byte_offset};")
@@ -188,6 +205,7 @@ class PTXEmitter:
                     raise NotImplementedError("Only sum accumulators are supported initially")
                 target = self.reg("f")
                 self.values[accumulator.name] = target
+                self.value_dtypes[accumulator.name] = "f32"
                 self.emit(f"mov.f32 {target}, {self.float_literal(accumulator.op.identity)};")
                 seeded.add(accumulator.name)
             elif not stmt.seed and accumulator.name not in self.values:
@@ -220,6 +238,7 @@ class PTXEmitter:
         half = stmt.length // 2
         while half:
             saved = self.values.copy()
+            saved_dtypes = self.value_dtypes.copy()
             active, leader, writer = self.reg("p"), self.reg("p"), self.reg("p")
             self.emit(f"setp.lt.u32 {active}, {self.values['warp']}, {half};")
             self.emit(f"setp.eq.u32 {leader}, {self.values['lane']}, 0;")
@@ -236,6 +255,7 @@ class PTXEmitter:
                 right = self.address(buf, (Var(partner_name),))
                 addresses.append(left)
                 self.values[state], self.values[other] = self.reg("f"), self.reg("f")
+                self.value_dtypes[state] = self.value_dtypes[other] = "f32"
                 self.emit(f"ld.shared.f32 {self.values[state]}, [{left}];")
                 self.emit(f"ld.shared.f32 {self.values[other]}, [{right}];")
             self.merge_states(stmt)
@@ -244,6 +264,7 @@ class PTXEmitter:
             self.lines.append(f"{skip}:")
             self.sync(stmt.barrier_id, stmt.barrier_count)
             self.values = saved
+            self.value_dtypes = saved_dtypes
             half //= 2
         # Every lane receives the block result, as specified by TreeHalve.
         for buf, state in zip(stmt.bufs, stmt.state, strict=True):
@@ -258,18 +279,33 @@ class PTXEmitter:
 
     def statement(self, stmt) -> None:
         if isinstance(stmt, Load):
-            if stmt.dtype is None or stmt.dtype.name != "f32":
-                raise NotImplementedError("Only f32 loads are supported")
+            dtype = self.buffers[stmt.input]["dtype"]
+            width = self.element_bytes(dtype)
+            if stmt.dtype is not None and stmt.dtype.name != dtype:
+                raise NotImplementedError("Load dtype must match its source buffer dtype")
             address = self.address(stmt.input, stmt.index)
             for offset, name in enumerate(stmt.names):
                 result = self.reg("f")
-                self.emit(f"ld.{self.memory_space(stmt.input)}.f32 {result}, [{address}+{offset * 4}];")
+                location = f"[{address}+{offset * width}]"
+                space = self.memory_space(stmt.input)
+                if dtype == "f16":
+                    half = self.reg("h")
+                    self.emit(f"ld.{space}.b16 {half}, {location};")
+                    self.emit(f"cvt.f32.f16 {result}, {half};")
+                else:
+                    self.emit(f"ld.{space}.f32 {result}, {location};")
                 self.values[name] = result
+                self.value_dtypes[name] = dtype
         elif isinstance(stmt, Assign):
-            if stmt.dtype is not None and stmt.dtype.name != "f32":
+            dtype = stmt.dtype.name if stmt.dtype is not None else "f32"
+            if dtype not in ("f16", "f32"):
                 raise NotImplementedError(f"Unsupported arithmetic: {stmt.op}")
             args = [self.values[arg] for arg in stmt.args]
             operation = stmt.op.name
+            if dtype == "f16" and operation != "copy":
+                # Emmy converts operands to the assignment dtype before compute.
+                args = [value if self.value_dtypes[name] == "f16" else self.round_half(value)
+                        for name, value in zip(stmt.args, args, strict=True)]
             result = self.reg("f")
             binary = {"add": "add.rn.f32", "subtract": "sub.rn.f32",
                       "multiply": "mul.rn.f32", "divide": "div.rn.f32"}
@@ -281,16 +317,31 @@ class PTXEmitter:
                 negative = self.reg("p")
                 self.emit(f"setp.lt.f32 {negative}, {args[0]}, 0f00000000;")
                 self.emit(f"selp.f32 {result}, 0f00000000, {args[0]}, {negative};")
+            elif operation == "copy" and len(args) == 1:
+                self.emit(f"mov.f32 {result}, {args[0]};")
             else:
                 raise NotImplementedError(f"Unsupported arithmetic: {stmt.op}")
-            self.values[stmt.name] = result
+            # A half-precision intermediate must round NOW, not just at the final
+            # store, otherwise a chain such as multiply -> add changes semantics.
+            self.values[stmt.name] = self.round_half(result) if dtype == "f16" else result
+            self.value_dtypes[stmt.name] = dtype
         elif isinstance(stmt, Write):
-            if stmt.atomic or stmt.swizzle != "NONE" or stmt.value_dtype.name != "f32":
-                raise NotImplementedError("Only plain f32 global writes are supported")
+            if (stmt.atomic or stmt.swizzle != "NONE" or
+                    (stmt.value_dtype is not None and stmt.value_dtype.name not in ("f16", "f32"))):
+                raise NotImplementedError("Only plain f16/f32 writes are supported")
+            dtype = self.buffers[stmt.output]["dtype"]
+            width = self.element_bytes(dtype)
             address = self.address(stmt.output, stmt.index)
             # Scalarize grouped stores for now: avoids requiring proof of vector alignment.
             for offset, name in enumerate(stmt.values):
-                self.emit(f"st.{self.memory_space(stmt.output)}.f32 [{address}+{offset * 4}], {self.values[name]};")
+                location = f"[{address}+{offset * width}]"
+                space = self.memory_space(stmt.output)
+                if dtype == "f16":
+                    half = self.reg("h")
+                    self.emit(f"cvt.rn.f16.f32 {half}, {self.values[name]};")
+                    self.emit(f"st.{space}.b16 {location}, {half};")
+                else:
+                    self.emit(f"st.{space}.f32 {location}, {self.values[name]};")
         elif isinstance(stmt, StridedLoop):
             self.strided_loop(stmt)
         elif isinstance(stmt, Accum):
@@ -334,6 +385,7 @@ class PTXEmitter:
                     partner = self.reg("f")
                     self.emit(f"shfl.sync.bfly.b32 {partner}, {self.values[state]}, {distance}, 31, {mask};")
                     self.values[other] = partner
+                    self.value_dtypes[other] = "f32"
                 self.merge_states(stmt)
                 distance //= 2
         elif isinstance(stmt, TreeHalve):
@@ -399,7 +451,7 @@ class PTXEmitter:
         # Emit the body first so we know how many registers to declare.
         signature = ",\n".join(f"    .param .u64 arg_{i}"
                                  for i, _ in enumerate(meta["arg_order"]))
-        types = {"r": "b32", "rd": "b64", "f": "f32", "p": "pred"}
+        types = {"r": "b32", "rd": "b64", "f": "f32", "h": "b16", "p": "pred"}
         declarations = [f"    .reg .{types[k]} %{k}<{n + 1}>;"
                         for k, n in self.counts.items() if n]
         return "\n".join([

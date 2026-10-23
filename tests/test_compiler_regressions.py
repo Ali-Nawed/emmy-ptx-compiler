@@ -1,4 +1,4 @@
-"""Compile and assemble the fresh Emmy-generated f32 fixture forms locally."""
+"""Compile and assemble the fresh Emmy-generated f16/f32 fixture forms locally."""
 
 import shutil
 import subprocess
@@ -14,8 +14,8 @@ from expressions_extended import build_specs
 
 @unittest.skipUnless(shutil.which("ptxas"), "requires CUDA ptxas (run in Ubuntu)")
 class CompilerRegressionTests(unittest.TestCase):
-    def test_generated_f32_cases_compile_and_assemble(self):
-        specs = build_specs(dtypes=("f32",), sizes=(1, 129), row_counts=(3,))
+    def test_generated_float_cases_compile_and_assemble(self):
+        specs = build_specs(dtypes=("f16", "f32"), sizes=(1, 129), row_counts=(3,))
         cases = [ROOT / "tests/extended" / spec["id"] for spec in specs]
         with tempfile.TemporaryDirectory() as temporary:
             for case in cases:

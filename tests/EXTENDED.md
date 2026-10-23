@@ -23,7 +23,7 @@ Reference CUDA is only a local fixture artifact produced by Emmy's normal genera
 
 ## Matrix
 
-Runner-supported dtypes: f16, f32, f64, i32, i64. This is exploratory coverage; the compiler currently implements f32 only. BF16 and narrower integer types are outside the runner's documented argument schema.
+Runner-supported dtypes: f16, f32, f64, i32, i64. The compiler currently implements f16/f32 data and f32 reduction state. BF16 and narrower integer types are outside the runner's documented argument schema.
 
 Operations: addition, subtraction, multiplication, scale/shift, ReLU/multiply, sum, mean and row sum. Integer sum uses PyTorch's default i64 result; integer mean explicitly requests f32. Constants and reference intermediates preserve the appropriate dtype. Integer output comparisons require exact equality, without an f32 conversion.
 
@@ -68,6 +68,21 @@ Case limits are available with --limit. Generating every case can take substanti
 - pass: our generated PTX ran and matched every NumPy expected output.
 
 Reports record the installed Torch/NumPy/Emmy versions. New versions of Torch can change tracing; the competition's PROVENANCE.md records the organizer's original versions. This suite does not claim to reproduce the private hidden set.
+
+## Additional f16 validation
+
+```bash
+# Exact numeric checks on rounding-sensitive, subnormal and cancellation inputs.
+# IR is unchanged from the real Emmy-generated f16 fixtures; only input data varies.
+python tools/test_f16_edges.py --runner
+
+# Fresh larger PyTorch -> Emmy cases with their own result report.
+python tools/test_extended.py --dtypes f16 --ops add scale_shift sum row_sum --sizes 1024 --rows 3 --out tests/extended-f16-large --runner
+```
+
+Edge results are saved in review/f16-edge-results.json; larger-case results in
+tests/extended-f16-large/results.json. The default matrix currently has 32 GPU
+passes and 48 compiler rejections; all 16 f16 and 16 f32 cases pass.
 
 ## Load the NumPy expected-value object
 
