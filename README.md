@@ -34,6 +34,11 @@ See [boundary coverage](tests/BOUNDARIES.md) and the subsequent
 [local Emmy/nvcc PTX comparison](review/ptx-comparison.md), which identifies
 coordinate decoding and grouped stores as the first optimization candidates.
 
+Those two emitter improvements are now implemented directly, with conservative
+alignment checks and scalar fallback. All 480 GPU regression cases match the IR
+checker; 453 match their original expressions, with the same 27 known precision
+failures. See [implementation and before/after evidence](review/emitter-optimizations.md).
+
 ```bash
 uv venv .venv --python 3.12
 uv pip install --python .venv/bin/python emmy-ml==0.3.11 numpy requests

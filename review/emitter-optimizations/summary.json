@@ -1,0 +1,33 @@
+{
+  "cases": 480,
+  "gpu_vs_ir": {
+    "pass": 480
+  },
+  "gpu_vs_expression": {
+    "pass": 453,
+    "wrong_result": 27
+  },
+  "unexpected_predictions": 0,
+  "groups": {
+    "mvp": 8,
+    "extended": 80,
+    "boundaries": 317,
+    "inputs": 40,
+    "half_edges": 8,
+    "integer_bits": 8,
+    "half_large": 4,
+    "vectors": 10,
+    "wide_vectors": 5
+  },
+  "compiler_sha256": "73bdd882988bc4bfca143736107a0ae2db46c5e81b2e45233107aa50a363fc7c",
+  "local_unit_tests": 21,
+  "assembly_audit_cases": 19,
+  "new_spills": 0,
+  "changed_semantics": "None: floating arithmetic and reduction order preserved",
+  "report_files": [
+    "validation.json",
+    "wide-vectors.json",
+    "assembly-results.json",
+    "timing-results.json"
+  ]
+}

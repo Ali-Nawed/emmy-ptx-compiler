@@ -1,0 +1,280 @@
+{
+  "compiler_sha256": "73bdd882988bc4bfca143736107a0ae2db46c5e81b2e45233107aa50a363fc7c",
+  "warmup": 10,
+  "iters": 100,
+  "paired_rounds": 3,
+  "reference_uploaded": false,
+  "clocks_locked": false,
+  "cases": [
+    {
+      "case": "p01_vector_add",
+      "fixture": "problems/p01_vector_add",
+      "median_us": {
+        "before": 2.944,
+        "after": 2.976
+      },
+      "after_over_before": 1.0108695652173914,
+      "samples": [
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 2.944
+        },
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 3.008
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 2.944
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 2.944
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 2.976
+        }
+      ],
+      "ptx_sha256": {
+        "before": "1c7e4a2c99ddc6afff5334be0717a19f2c87118f5aaf1698fa47cfa4b084434d",
+        "after": "6b5aacceabaa4aeada541a07746708d78176f86e4aa18eb3d46878b6ac1237ef"
+      }
+    },
+    {
+      "case": "p02_scale_shift",
+      "fixture": "problems/p02_scale_shift",
+      "median_us": {
+        "before": 3.072,
+        "after": 3.04
+      },
+      "after_over_before": 0.9895833333333334,
+      "samples": [
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 3.04
+        },
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 3.072
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 3.104
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 3.04
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 3.04
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 3.072
+        }
+      ],
+      "ptx_sha256": {
+        "before": "3e647d6ff9ad6714d0dfae8a9d2750e898829506a636984f1626e290df00306c",
+        "after": "0763199484587b5051724535f632cbc5de92058c7f022562def3979cbad8ae08"
+      }
+    },
+    {
+      "case": "p03_relu_mul",
+      "fixture": "problems/p03_relu_mul",
+      "median_us": {
+        "before": 2.976,
+        "after": 2.976
+      },
+      "after_over_before": 1.0,
+      "samples": [
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 2.944
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 2.976
+        }
+      ],
+      "ptx_sha256": {
+        "before": "4a5c8edfee6dabb4bbe980f16fdaeb2536a8cfa095f6d6792f4a747952929534",
+        "after": "407f6f0cba3f4b41ec49cc729ec61e4f8612611f78ee913766212faf1966d291"
+      }
+    },
+    {
+      "case": "r04_row_sum",
+      "fixture": "problems/r04_row_sum",
+      "median_us": {
+        "before": 2.976,
+        "after": 2.976
+      },
+      "after_over_before": 1.0,
+      "samples": [
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 2.944
+        }
+      ],
+      "ptx_sha256": {
+        "before": "bfaebd87bb01d59838cbbc7f0aa72935d95e42d394ca650a0b971e7841022b08",
+        "after": "6675fbe6cbcf63546b98ed8952530546aedc5f1be65bc85f805f34c614d45399"
+      }
+    },
+    {
+      "case": "row_sum_f32_17x1025",
+      "fixture": "tests/boundaries/reduce_f32_w128/ext_row_sum_f32_17x1025",
+      "median_us": {
+        "before": 3.04,
+        "after": 2.976
+      },
+      "after_over_before": 0.9789473684210526,
+      "samples": [
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 3.04
+        },
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 2.944
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 3.04
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 3.04
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 2.976
+        }
+      ],
+      "ptx_sha256": {
+        "before": "61bf71db0c4965909ef16f525f761525f7d806b00dcfd1efcf80827784bd8476",
+        "after": "433ddb9ca23f2b991899866c52bcc72afe1fb3ea825f8a51c0e65cc6547b85bf"
+      }
+    },
+    {
+      "case": "r01_array_sum",
+      "fixture": "problems/r01_array_sum",
+      "median_us": {
+        "before": 2.976,
+        "after": 2.976
+      },
+      "after_over_before": 1.0,
+      "samples": [
+        {
+          "variant": "after",
+          "repeat": 0,
+          "median_us": 2.944
+        },
+        {
+          "variant": "before",
+          "repeat": 0,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "median_us": 2.976
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "median_us": 3.04
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "median_us": 2.976
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "median_us": 2.976
+        }
+      ],
+      "ptx_sha256": {
+        "before": "f248e0c0726ff66d154d3b44364a421bf1ce0aa6906076654070eb252f66801e",
+        "after": "f43231c91a0cd9c4df29257fa1e5b22da96acee1a5c6675d57acd9250be6492c"
+      }
+    }
+  ]
+}

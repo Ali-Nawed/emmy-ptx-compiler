@@ -1,0 +1,267 @@
+{
+  "compiler_sha256": "73bdd882988bc4bfca143736107a0ae2db46c5e81b2e45233107aa50a363fc7c",
+  "runner": true,
+  "summary": {
+    "cases": 8,
+    "groups": {
+      "mvp": 8
+    },
+    "statuses": {
+      "pass": 8
+    },
+    "gpu_vs_ir": {
+      "pass": 8
+    },
+    "unexpected_predictions": 0
+  },
+  "cases": [
+    {
+      "group": "mvp",
+      "fixture": "problems/p00_scalar_add",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/p01_vector_add",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 21.44,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/p02_scale_shift",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 14.784,
+            "registers": {
+              "k_add_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/p03_relu_mul",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 14.72,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/r01_array_sum",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.416,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/r02_big_sum",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 39.488,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/r03_mean",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_ffcca3",
+            "median_us": 28.384,
+            "registers": {
+              "k_mean_ffcca3": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "mvp",
+      "fixture": "problems/r04_row_sum",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.576,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    }
+  ]
+}

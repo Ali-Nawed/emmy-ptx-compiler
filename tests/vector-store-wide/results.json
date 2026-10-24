@@ -1,0 +1,82 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": false
+  },
+  "cases": [
+    {
+      "id": "ext_scale_shift_f16_4096",
+      "code": "x = torch.randn((4096,), dtype=torch.float16); x * -1.25 + 0.5",
+      "dtype": "f16",
+      "operation": "scale_shift",
+      "shape": [
+        4096
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f32_4096",
+      "code": "x = torch.randn((4096,), dtype=torch.float32); x * -1.25 + 0.5",
+      "dtype": "f32",
+      "operation": "scale_shift",
+      "shape": [
+        4096
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_f64_4096",
+      "code": "x = torch.randn((4096,), dtype=torch.float64); x * -1.25 + 0.5",
+      "dtype": "f64",
+      "operation": "scale_shift",
+      "shape": [
+        4096
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i32_4096",
+      "code": "x = torch.randint(-8, 9, (4096,), dtype=torch.int32); x * 2 - 3",
+      "dtype": "i32",
+      "operation": "scale_shift",
+      "shape": [
+        4096
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_scale_shift_i64_4096",
+      "code": "x = torch.randint(-8, 9, (4096,), dtype=torch.int64); x * 2 - 3",
+      "dtype": "i64",
+      "operation": "scale_shift",
+      "shape": [
+        4096
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    }
+  ]
+}

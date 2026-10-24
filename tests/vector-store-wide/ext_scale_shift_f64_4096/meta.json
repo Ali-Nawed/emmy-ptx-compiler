@@ -1,0 +1,75 @@
+{
+ "id": "ext_scale_shift_f64_4096",
+ "code": "x = torch.randn((4096,), dtype=torch.float64); x * -1.25 + 0.5",
+ "rtol": 1e-10,
+ "atol": 1e-10,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "add"
+ ],
+ "kernels": [
+  {
+   "node": "add",
+   "entry": "k_add_pointwise",
+   "arg_order": [
+    "mul_c1",
+    "add_c1",
+    "x",
+    "add"
+   ],
+   "grid": [
+    4,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mul_c1",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "data": [
+      -1.25
+     ]
+    },
+    {
+     "name": "add_c1",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.5
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      4096
+     ],
+     "seed": 0
+    },
+    {
+     "name": "add",
+     "dtype": "f64",
+     "shape": [
+      4096
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

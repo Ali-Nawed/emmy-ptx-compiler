@@ -1,0 +1,37 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_sum_1_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<9>;
+    .reg .b64 %rd<9>;
+    .reg .f64 %d<2>;
+    .reg .pred %p<2>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 3;
+    @%p1 bra DONE;
+    mul.lo.s32 %r5, %r4, 1;
+    add.s32 %r6, %r5, 0;
+    mov.s32 %r7, %r6;
+    mul.wide.s32 %rd5, %r7, 8;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.f64 %d1, [%rd6+0];
+    mov.s32 %r8, %r4;
+    mul.wide.s32 %rd7, %r8, 8;
+    add.u64 %rd8, %rd4, %rd7;
+    st.global.f64 [%rd8+0], %d1;
+DONE:
+    ret;
+}

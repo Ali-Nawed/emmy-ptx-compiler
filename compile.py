@@ -83,6 +83,9 @@ class PTXEmitter:
         self.value_dtypes: dict[str, str] = {}
         self.pointers: dict[str, str] = {}
         self.buffers = {arg["name"]: arg for arg in source.metadata["args"]}
+        # The runner allocates each argument as a fresh CUDA buffer (no offset
+        # views in its argument schema). Use only 16 bytes of that alignment.
+        self.buffer_alignments = {name: 16 for name in self.buffers}
         self.shared: dict[str, str] = {}
         self.declarations: list[str] = []
         self.label_count = 0
@@ -209,6 +212,87 @@ class PTXEmitter:
             self.emit(f"st.{space}.b16 {location}, {half};")
         else:
             self.emit(f"st.{space}.{self.ptx_type(dtype)} {location}, {value};")
+
+    @staticmethod
+    def index_divisor(expr) -> int:
+        """A conservative divisor of every possible integer expression value.
+
+        Zero denotes an identically zero expression, divisible by any width.
+        Unknown variables have divisor one. No value/liveness analysis needed.
+        """
+        if isinstance(expr, Literal) and isinstance(expr.value, int):
+            return abs(expr.value)
+        if isinstance(expr, int):
+            return abs(expr)
+        if isinstance(expr, BinaryExpr):
+            left, right = PTXEmitter.index_divisor(expr.left), PTXEmitter.index_divisor(expr.right)
+            if expr.op in ("+", "-"):
+                return math.gcd(left, right)
+            if expr.op == "*":
+                return left * right
+        return 1
+
+    def vector_store(self, stmt, address: str, dtype: str) -> bool:
+        """Use a grouped store only with proved base and byte-offset alignment."""
+        count = len(stmt.values)
+        total_bytes = count * self.element_bytes(dtype)
+        if count not in (2, 4) or total_bytes > 16:
+            return False
+        if self.buffer_alignments[stmt.output] % total_bytes:
+            return False
+        shape = self.buffers[stmt.output]["shape"]
+        if len(stmt.index) != len(shape):
+            return False
+        divisor, stride = 0, 1
+        for index, extent in zip(reversed(stmt.index), reversed(shape), strict=True):
+            divisor = math.gcd(divisor, self.index_divisor(index) * stride)
+            stride *= extent
+        if divisor % count:
+            return False
+        values = [self.operand(name, dtype) for name in stmt.values]
+        kind = self.ptx_type(dtype)
+        if dtype == "f16":
+            halves = []
+            for value in values:
+                half = self.reg("h")
+                self.emit(f"cvt.rn.f16.f32 {half}, {value};")
+                halves.append(half)
+            values, kind = halves, "b16"
+        self.emit(f"st.{self.memory_space(stmt.output)}.v{count}.{kind} [{address}], {{{', '.join(values)}}};")
+        return True
+
+    def unsigned_divide(self, value: str, divisor: int) -> str:
+        if divisor < 1:
+            raise ValueError("Tile divisors must be positive")
+        if divisor == 1:
+            return value
+        result = self.reg("r")
+        if divisor & (divisor - 1) == 0:
+            self.emit(f"shr.u32 {result}, {value}, {divisor.bit_length() - 1};")
+        else:
+            self.emit(f"div.u32 {result}, {value}, {divisor};")
+        return result
+
+    def unsigned_remainder(self, value: str, divisor: int) -> str:
+        if divisor < 1:
+            raise ValueError("Tile extents must be positive")
+        if divisor == 1:
+            return "0"
+        result = self.reg("r")
+        if divisor & (divisor - 1) == 0:
+            self.emit(f"and.b32 {result}, {value}, {divisor - 1};")
+        else:
+            self.emit(f"rem.u32 {result}, {value}, {divisor};")
+        return result
+
+    def tile_coordinates(self, tile, worker: str) -> None:
+        """Decode a worker already proved to be in [0, tile.n_elements)."""
+        stride = tile.n_elements
+        for position, (axis, extent) in enumerate(zip(tile.axes, tile.extents, strict=True)):
+            stride //= extent
+            quotient = self.unsigned_divide(worker, stride)
+            # The outer quotient is < extent by the Tile bounds proof.
+            self.values[axis.name] = quotient if position == 0 else self.unsigned_remainder(quotient, extent)
 
     def round_half(self, value: str) -> str:
         """Round to binary16, retaining the rounded value in an f32 register."""
@@ -408,7 +492,9 @@ class PTXEmitter:
             dtype = self.buffers[stmt.output]["dtype"]
             width = self.element_bytes(dtype)
             address = self.address(stmt.output, stmt.index)
-            # Scalarize grouped stores for now: avoids requiring proof of vector alignment.
+            if self.vector_store(stmt, address, dtype):
+                return
+            # Unknown alignment and unsupported vector widths retain scalar stores.
             for offset, name in enumerate(stmt.values):
                 location = f"[{address}+{offset * width}]"
                 space = self.memory_space(stmt.output)
@@ -446,6 +532,7 @@ class PTXEmitter:
             self.emit(f"mov.u64 {base}, {symbol};")
             self.shared[stmt.name] = base
             self.buffers[stmt.name] = {"dtype": dtype, "shape": list(stmt.extents)}
+            self.buffer_alignments[stmt.name] = stmt.align or width
         elif isinstance(stmt, Sync):
             if stmt.warp:
                 raise NotImplementedError("Warp barriers are not supported yet")
@@ -515,17 +602,7 @@ class PTXEmitter:
             outside = self.reg("p")
             self.emit(f"setp.ge.u32 {outside}, {worker}, {tile.n_elements};")
             self.emit(f"@{outside} bra DONE;")
-        if len(tile.axes) == 1:
-            self.values[tile.axes[0].name] = worker
-        else:
-            # Decode a row-major logical work ID into the Tile's axis coordinates.
-            stride = tile.n_elements
-            for axis, extent in zip(tile.axes, tile.extents, strict=True):
-                stride //= extent
-                quotient, coordinate = self.reg("r"), self.reg("r")
-                self.emit(f"div.u32 {quotient}, {worker}, {stride};")
-                self.emit(f"rem.u32 {coordinate}, {quotient}, {extent};")
-                self.values[axis.name] = coordinate
+        self.tile_coordinates(tile, worker)
         if tile.block_threads is not None:
             lane, warp = self.reg("r"), self.reg("r")
             self.emit(f"and.b32 {lane}, {tid}, 31;")

@@ -1,0 +1,174 @@
+{
+  "compiler_sha256": "73bdd882988bc4bfca143736107a0ae2db46c5e81b2e45233107aa50a363fc7c",
+  "runner": true,
+  "summary": {
+    "cases": 5,
+    "groups": {
+      "wide_vectors": 5
+    },
+    "statuses": {
+      "pass": 5
+    },
+    "gpu_vs_ir": {
+      "pass": 5
+    },
+    "unexpected_predictions": 0
+  },
+  "cases": [
+    {
+      "group": "wide_vectors",
+      "fixture": "tests/vector-store-wide/ext_scale_shift_f16_4096",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 14.656,
+            "registers": {
+              "k_add_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "wide_vectors",
+      "fixture": "tests/vector-store-wide/ext_scale_shift_f32_4096",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 17.664,
+            "registers": {
+              "k_add_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "wide_vectors",
+      "fixture": "tests/vector-store-wide/ext_scale_shift_f64_4096",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 15.36,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "wide_vectors",
+      "fixture": "tests/vector-store-wide/ext_scale_shift_i32_4096",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 15.2,
+            "registers": {
+              "k_sub_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    },
+    {
+      "group": "wide_vectors",
+      "fixture": "tests/vector-store-wide/ext_scale_shift_i64_4096",
+      "status": "pass",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 16.224,
+            "registers": {
+              "k_sub_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "matches_cpu_prediction": true
+    }
+  ]
+}

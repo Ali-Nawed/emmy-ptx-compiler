@@ -1,0 +1,152 @@
+{
+  "provenance": {
+    "emmy": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89",
+    "work": 128,
+    "runner": false
+  },
+  "cases": [
+    {
+      "id": "ext_add_f16_128",
+      "code": "x = torch.randn((128,), dtype=torch.float16); y = torch.randn((128,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        128
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f16_256",
+      "code": "x = torch.randn((256,), dtype=torch.float16); y = torch.randn((256,), dtype=torch.float16); x + y",
+      "dtype": "f16",
+      "operation": "add",
+      "shape": [
+        256
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f32_128",
+      "code": "x = torch.randn((128,), dtype=torch.float32); y = torch.randn((128,), dtype=torch.float32); x + y",
+      "dtype": "f32",
+      "operation": "add",
+      "shape": [
+        128
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f32_256",
+      "code": "x = torch.randn((256,), dtype=torch.float32); y = torch.randn((256,), dtype=torch.float32); x + y",
+      "dtype": "f32",
+      "operation": "add",
+      "shape": [
+        256
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f64_128",
+      "code": "x = torch.randn((128,), dtype=torch.float64); y = torch.randn((128,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        128
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_f64_256",
+      "code": "x = torch.randn((256,), dtype=torch.float64); y = torch.randn((256,), dtype=torch.float64); x + y",
+      "dtype": "f64",
+      "operation": "add",
+      "shape": [
+        256
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i32_128",
+      "code": "x = torch.randint(-8, 9, (128,), dtype=torch.int32); y = torch.randint(-8, 9, (128,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        128
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i32_256",
+      "code": "x = torch.randint(-8, 9, (256,), dtype=torch.int32); y = torch.randint(-8, 9, (256,), dtype=torch.int32); x + y",
+      "dtype": "i32",
+      "operation": "add",
+      "shape": [
+        256
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i64_128",
+      "code": "x = torch.randint(-8, 9, (128,), dtype=torch.int64); y = torch.randint(-8, 9, (128,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        128
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    },
+    {
+      "id": "ext_add_i64_256",
+      "code": "x = torch.randint(-8, 9, (256,), dtype=torch.int64); y = torch.randint(-8, 9, (256,), dtype=torch.int64); x + y",
+      "dtype": "i64",
+      "operation": "add",
+      "shape": [
+        256
+      ],
+      "status": "compiled_not_executed",
+      "ir_vs_expression": {
+        "status": "pass",
+        "details": {}
+      }
+    }
+  ]
+}

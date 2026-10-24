@@ -1,0 +1,57 @@
+[
+  {
+    "id": "ext_scale_shift_f16_4096",
+    "code": "x = torch.randn((4096,), dtype=torch.float16); x * -1.25 + 0.5",
+    "rtol": 0.005,
+    "atol": 0.005,
+    "dtype": "f16",
+    "operation": "scale_shift",
+    "shape": [
+      4096
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f32_4096",
+    "code": "x = torch.randn((4096,), dtype=torch.float32); x * -1.25 + 0.5",
+    "rtol": 0.0001,
+    "atol": 0.0001,
+    "dtype": "f32",
+    "operation": "scale_shift",
+    "shape": [
+      4096
+    ]
+  },
+  {
+    "id": "ext_scale_shift_f64_4096",
+    "code": "x = torch.randn((4096,), dtype=torch.float64); x * -1.25 + 0.5",
+    "rtol": 1e-10,
+    "atol": 1e-10,
+    "dtype": "f64",
+    "operation": "scale_shift",
+    "shape": [
+      4096
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i32_4096",
+    "code": "x = torch.randint(-8, 9, (4096,), dtype=torch.int32); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i32",
+    "operation": "scale_shift",
+    "shape": [
+      4096
+    ]
+  },
+  {
+    "id": "ext_scale_shift_i64_4096",
+    "code": "x = torch.randint(-8, 9, (4096,), dtype=torch.int64); x * 2 - 3",
+    "rtol": 0,
+    "atol": 0,
+    "dtype": "i64",
+    "operation": "scale_shift",
+    "shape": [
+      4096
+    ]
+  }
+]
