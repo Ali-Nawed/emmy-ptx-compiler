@@ -1,0 +1,109 @@
+{
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  },
+  "path": "unchanged submit.py --compiler -> our PTX -> hosted runner",
+  "cases": [
+    {
+      "case": "p00_scalar_add",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "p00_scalar_add",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "p01_vector_add",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "p01_vector_add",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "p02_scale_shift",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "p02_scale_shift",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "p03_relu_mul",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "p03_relu_mul",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "r01_array_sum",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "r01_array_sum",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "r02_big_sum",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "r02_big_sum",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "r03_mean",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "r03_mean",
+        "--compiler",
+        "compile.py"
+      ]
+    },
+    {
+      "case": "r04_row_sum",
+      "status": "pass",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "submit.py",
+        "r04_row_sum",
+        "--compiler",
+        "compile.py"
+      ]
+    }
+  ],
+  "passes": 8,
+  "required_cases": 8,
+  "all_pass": true
+}

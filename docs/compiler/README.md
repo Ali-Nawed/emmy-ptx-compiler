@@ -21,6 +21,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 15. [Sigmoid and tanh: native instructions and accuracy](15-sigmoid-and-tanh.md)
 16. [First native tensor-core matmul](16-first-tensor-core-matmul.md)
 17. [Shared-memory staging and native asynchronous copies](17-shared-memory-async-copies.md)
+18. [3–5 minute presentation walkthrough and feature/run checklist](18-presentation-walkthrough.md)
 
 ## The complete path
 
