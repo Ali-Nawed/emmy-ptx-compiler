@@ -1,12 +1,12 @@
-# Compiler presentation walkthrough — 3–5 minutes
+# Compiler presentation walkthrough
 
-**Read only the block quotes in Part 1 aloud.** Screen directions, code links and Part 2 are preparation/reference material. Aim for roughly 4½ minutes, including brief screen changes. Explain the ideas in your own words rather than reading unfamiliar code verbatim.
+**Read only the block quotes in Part 1 aloud.** Screen directions, code links and Part 2 are preparation/reference material. Explain the ideas in your own words rather than reading unfamiliar code verbatim.
 
 Implementation checkpoint: **60cad9e**. This presentation adds documentation and an MVP audit, without changing the compiler. The audit ran the exact eight required problems through the organizer's unchanged `submit.py --compiler compile.py`: **8/8 passed**. [Audit report](../../review/presentation/mvp-validation.json).
 
-## Part 1 — timed speaker script
+## Part 1 — speaker script
 
-### 0:00–0:45 — Workflow: start simple, then grow real coverage
+### Workflow: start simple, then grow real coverage
 
 **Screen:** show the workflow below, then one generated fixture's expression.py, IR and emmy-proof.json.
 
@@ -27,7 +27,7 @@ flowchart LR
     G --> A
 ```
 
-### 0:45–1:20 — High-level PTX generation
+### High-level PTX generation
 
 **Screen:** open the four functions linked here; do not scroll through the entire file.
 
@@ -37,7 +37,7 @@ flowchart LR
 
 **Code:** [load_kernel](../../compile.py#L40), [compile](../../compile.py#L778), [statement dispatch](../../compile.py#L621), [Tile coordinates](../../compile.py#L405).
 
-### 1:20–1:55 — Category 1: pointwise, extended beyond add
+### Category 1: pointwise, extended beyond add
 
 **Screen:** p00's actual IR, then arithmetic and vector_store. Optionally show the short PTX demo in Part 2.
 
@@ -49,7 +49,7 @@ flowchart LR
 
 **Code:** [arithmetic](../../compile.py#L247), [conversions](../../compile.py#L147), [where/comparisons](../../compile.py#L182), [vector_store](../../compile.py#L352).
 
-### 1:55–2:40 — Category 2 and fused kernels: reductions and normalization
+### Category 2 and fused kernels: reductions and normalization
 
 **Screen:** r04's IR; show its loop, shuffle and shared-memory tree. Briefly show the public RMSNorm or softmax expression.
 
@@ -59,7 +59,7 @@ flowchart LR
 
 **Code:** [counted_loop](../../compile.py#L524), [merge_states](../../compile.py#L489), [tree_halve](../../compile.py#L569), [WarpShuffle emission](../../compile.py#L749).
 
-### 2:40–3:10 — Math operations: an example of the feedback loop
+### Math operations: an example of the feedback loop
 
 **Screen:** the activation helper and the saved accuracy results; no need to explain polynomial coefficients.
 
@@ -67,7 +67,7 @@ flowchart LR
 
 **Code:** [arithmetic dispatch](../../compile.py#L247), [native exp/log](../../ptx_math.py#L63), [activation](../../ptx_math.py#L11). [Accuracy explanation](15-sigmoid-and-tanh.md).
 
-### 3:10–4:10 — Category 3: matmul, tensor cores and asynchronous copies
+### Category 3: matmul, tensor cores and asynchronous copies
 
 **Screen:** show the real staged f16 matmul IR beside its emitted PTX; highlight cp.async, ldmatrix and mma.sync.
 
@@ -79,7 +79,7 @@ flowchart LR
 
 **Helper code:** [cp_async_copy](../../ptx_tensor.py#L38), [staged_matrix_load](../../ptx_tensor.py#L53), [mma_sync](../../ptx_tensor.py#L162), [reg_store](../../ptx_tensor.py#L172).
 
-### 4:10–4:40 — Evidence, limits and future work
+### Evidence, limits and future work
 
 **Screen:** the coverage table and final MVP audit.
 
