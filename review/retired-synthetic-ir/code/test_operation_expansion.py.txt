@@ -1,0 +1,90 @@
+"""Combiner identities/broadcasts, coupled states and explicit math domains."""
+
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+from compile import PTXEmitter, emit_ptx, load_kernel
+from ir_reference import Block, calculate, simulate
+from test_extended import compare_outputs
+from test_operation_backends import reduction_case, save_source, vector_case
+from emmy.compiler.dtype import F32
+from emmy.compiler.ir.kernel.ir import WarpShuffle
+from emmy.compiler.ir.stmt import Assign
+
+
+class OperationExpansionTests(unittest.TestCase):
+    def test_reduction_identities_all_types_and_three_block_widths(self):
+        for dtype in ("f16", "f32", "f64", "i32", "i64"):
+            for operation in ("maximum", "minimum", "multiply"):
+                for work in (32, 128, 256):
+                    with self.subTest(dtype=dtype, op=operation, work=work), tempfile.TemporaryDirectory() as temporary:
+                        source, meta, expected = reduction_case(dtype, operation, work)
+                        folder = Path(temporary)
+                        save_source(folder, source, meta, expected)
+                        # Every row checks the full cross-warp tree and final broadcast.
+                        for name, result in simulate(folder).items():
+                            np.testing.assert_array_equal(result, expected[name])
+
+    def test_public_online_softmax_reference(self):
+        folder = ROOT / "problems/f02_row_softmax"
+        meta = json.loads((folder / "meta.json").read_text())
+        with np.load(folder / "expected.npz") as expected:
+            status, details = compare_outputs(simulate(folder), expected, meta)
+            self.assertEqual(status, "pass", details)
+
+    def test_promoted_merge_returns_to_original_state_type(self):
+        mask = np.ones(32, bool)
+        merge = (Assign(name="state", op="maximum", args=("state", "other")),)
+        shuffle = WarpShuffle(state=("state",), state_b=("other",), combine_states=merge, length=32, dtype=F32)
+        for dtype, value in ((np.float16, 1.), (np.float64, 1.+2**-40), (np.int64, 2**60+3)):
+            with self.subTest(dtype=dtype):
+                block = Block(32, {}, {})
+                block.bind("state", np.full(32, value, dtype=dtype), mask)
+                block.statement(shuffle, mask)
+                self.assertEqual(block.read("state", mask).dtype, np.dtype(dtype))
+                expected = np.asarray(value, dtype=np.float32).astype(dtype)
+                np.testing.assert_array_equal(block.read("state", mask), np.full(32, expected, dtype=dtype))
+
+    def test_integer_power_wrap_and_domain(self):
+        np.testing.assert_array_equal(calculate("power", [np.array([2, -3, 0], np.int32), np.array([31, 3, 0], np.int32)], "i32"),
+                                      [-2147483648, -27, 1])
+        np.testing.assert_array_equal(calculate("power", [np.array([2], np.int64), np.array([63], np.int64)], "i64"), [-2**63])
+        with self.assertRaises(NotImplementedError):
+            calculate("power", [np.array([2]), np.array([-1])], "i64")
+
+    def test_literal_seed_policy_and_unsupported_combiners(self):
+        source = load_kernel(next((ROOT / "problems/p00_scalar_add").glob("*.ir.json")))
+        emitter = PTXEmitter(source)
+        self.assertEqual(emitter.seed_literal(-1e30, "i64"), str(-2**63))
+        self.assertEqual(emitter.seed_literal(1e30, "i32"), str(2**31-1))
+        self.assertEqual(emitter.reduction_operation("prod"), "multiply")
+        for operation in ("subtract", "divide"):
+            with self.assertRaises(NotImplementedError):
+                emitter.reduction_operation(operation)
+
+    @unittest.skipUnless(shutil.which("ptxas"), "requires Ubuntu CUDA ptxas")
+    def test_expanded_math_and_integer_power_assemble(self):
+        for dtype in ("f16", "f32", "f64", "i32", "i64"):
+            operations = ("power",) if dtype.startswith("i") else ("exp", "exp2", "log", "log2", "log10", "power", "rsqrt")
+            for operation in operations:
+                with self.subTest(dtype=dtype, op=operation), tempfile.TemporaryDirectory() as temporary:
+                    source, _, _ = vector_case(dtype, operation, [1, 2], [2, 3])
+                    path = Path(temporary) / "test.ptx"
+                    path.write_text(emit_ptx(source))
+                    result = subprocess.run(["ptxas", "-arch=sm_89", str(path), "-o", str(path.with_suffix(".cubin"))],
+                                            capture_output=True, text=True, timeout=60)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+
+if __name__ == "__main__":
+    unittest.main()

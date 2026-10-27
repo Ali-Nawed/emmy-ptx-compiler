@@ -1,0 +1,81 @@
+{
+  "id": "typed_backend",
+  "kernels": [
+    {
+      "node": "add",
+      "entry": "k_add_pointwise",
+      "arg_order": [
+        "x",
+        "y",
+        "add"
+      ],
+      "grid": [
+        1,
+        1,
+        1
+      ],
+      "block": [
+        256,
+        1,
+        1
+      ],
+      "smem_bytes": 0,
+      "zero_outputs": [],
+      "args": [
+        {
+          "name": "x",
+          "dtype": "f64",
+          "shape": [
+            8
+          ],
+          "data": [
+            -2.0,
+            -1.0,
+            -0.0,
+            0.0,
+            1.0,
+            2.0,
+            1000.0,
+            -1000.0
+          ]
+        },
+        {
+          "name": "y",
+          "dtype": "f64",
+          "shape": [
+            8
+          ],
+          "data": [
+            0.5,
+            3.0,
+            -3.0,
+            0.0,
+            0.0,
+            -3.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "name": "add",
+          "dtype": "i32",
+          "shape": [
+            8
+          ],
+          "output": true
+        }
+      ],
+      "final": true
+    }
+  ],
+  "graph_inputs": [
+    "x",
+    "y"
+  ],
+  "graph_outputs": [
+    "add"
+  ],
+  "rtol": 4E-13,
+  "atol": 0,
+  "comparison": "classify encoded float word output against expected_numeric.npz; ignore NaN payload/sign"
+}

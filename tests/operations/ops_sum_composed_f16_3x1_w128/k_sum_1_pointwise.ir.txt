@@ -1,0 +1,9 @@
+    Tile[a0] (N=3)
+        in2 = load y[a0, 0]
+        f32 v0 = multiply(in2, in2)
+        in0 = load add_c1[0]
+        f32 v1 = add(in0, v0)
+        in1 = load x[a0, 0]
+        f16 v2 = subtract(in1, in2)
+        f32 v3 = divide(v2, v1)
+        sum_1[a0] = v3

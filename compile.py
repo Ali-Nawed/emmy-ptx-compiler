@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Load Emmy's typed Kernel IR and emit our own pointwise/reduction PTX.
+"""Load Emmy's typed Kernel IR and emit our own pointwise/reduction/fused PTX.
 
     python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json --inspect
 
@@ -21,8 +21,9 @@ from typing import Any
 from emmy.compiler.graph import Graph
 from emmy.compiler.ir.kernel.ir import KernelOp
 from emmy.compiler.ir.kernel.ir import Tile, Smem, Sync, WarpShuffle, TreeHalve
-from emmy.compiler.ir.expr import BinaryExpr, Literal, Var
-from emmy.compiler.ir.stmt import Assign, Load, Write, StridedLoop, Accum, Cond
+from emmy.compiler.ir.expr import BinaryExpr, Literal, Var, TernaryExpr
+from emmy.compiler.ir.stmt import Assign, Load, Write, Loop, StridedLoop, Accum, Cond, Let, Init
+from ptx_math import ScalarMath
 
 
 @dataclass
@@ -66,7 +67,7 @@ def inspect_kernel(source: KernelInput) -> None:
         pprint(statement, stream=sys.stderr, width=100, sort_dicts=False)
 
 
-class PTXEmitter:
+class PTXEmitter(ScalarMath):
     """Direct typed emitter for the runner's five scalar datatypes.
 
     Keep this first version deliberately narrow. Unsupported forms fail rather
@@ -124,6 +125,8 @@ class PTXEmitter:
         return {"f16": "f32", "f32": "f32", "f64": "f64", "i32": "s32", "i64": "s64"}[dtype]
 
     def data_reg(self, dtype: str) -> str:
+        if dtype == "bool":
+            return self.reg("p")
         self.element_bytes(dtype)
         return self.reg({"f16": "f", "f32": "f", "f64": "d", "i32": "r", "i64": "l"}[dtype])
 
@@ -137,6 +140,8 @@ class PTXEmitter:
 
     def convert(self, value: str, source: str, destination: str) -> str:
         """Typed numeric conversion; do not route i64/f64 through f32."""
+        if source == destination == "bool":
+            return value
         self.element_bytes(source)
         self.element_bytes(destination)
         if source == destination:
@@ -163,7 +168,75 @@ class PTXEmitter:
         return self.convert(self.values[name], self.value_dtypes[name], dtype)
 
     def move(self, target: str, source: str, dtype: str) -> None:
+        if dtype == "bool":
+            self.emit(f"mov.pred {target}, {source};")
+            return
         self.emit(f"mov.{self.ptx_type(dtype)} {target}, {source};")
+
+    def comparison(self, operation, names):
+        """Comparison result is bool, but operands retain their numeric types."""
+        if len(names) != 2:
+            raise ValueError(f"{operation} expects two operands")
+        left, right = (self.value_dtypes[name] for name in names)
+        if left == right and left != "bool":
+            dtype = left
+        elif {left, right} <= {"f16", "f32", "f64"}:
+            dtype = "f64" if "f64" in (left, right) else "f32"
+        elif {left, right} <= {"i32", "i64"}:
+            dtype = "i64"
+        elif {left, right} <= {"f32", "f64", "i32", "i64"}:
+            # Emmy renders a bare C++ comparison. Floating operands dominate
+            # integer operands, including f32 scalar constants such as zero.
+            dtype = "f64" if "f64" in (left, right) else "f32"
+        else:
+            raise NotImplementedError(f"Mixed comparison operand types: {left}/{right}")
+        predicate = self.reg("p")
+        comparison = {"greater": "gt", "greater_equal": "ge", "less": "lt",
+                      "less_equal": "le", "equal": "eq", "not_equal": "ne"}[operation]
+        # PyTorch/NumPy != is true for NaN; other comparisons are ordered.
+        if operation == "not_equal" and dtype.startswith("f"):
+            comparison = "neu"
+        a, b = (self.operand(name, dtype) for name in names)
+        self.emit(f"setp.{comparison}.{self.ptx_type(dtype)} {predicate}, {a}, {b};")
+        return predicate
+
+    def boolean_assign(self, stmt, dtype):
+        """Handle heterogeneous comparison/selection before numeric arithmetic."""
+        operation, names = stmt.op.name, stmt.args
+        comparisons = {"greater", "greater_equal", "less", "less_equal", "equal", "not_equal"}
+        if operation in comparisons:
+            if dtype != "bool":
+                raise NotImplementedError("Comparison must have a bool result")
+            result = self.comparison(operation, names)
+        elif operation == "where":
+            if len(names) != 3 or self.value_dtypes[names[0]] != "bool" or dtype == "bool":
+                raise NotImplementedError("where requires a bool condition and numeric result")
+            condition = self.values[names[0]]
+            a, b = (self.operand(name, dtype) for name in names[1:])
+            result = self.data_reg(dtype)
+            kind = "b64" if dtype == "i64" else self.ptx_type(dtype)
+            self.emit(f"selp.{kind} {result}, {a}, {b}, {condition};")
+            if dtype == "f16":
+                result = self.round_half(result)
+        elif dtype == "bool":
+            binary = {"logical_and": "and", "logical_or": "or", "logical_xor": "xor",
+                      "bitwise_and": "and", "bitwise_or": "or", "bitwise_xor": "xor"}
+            unary = {"logical_not", "bitwise_not"}
+            if any(self.value_dtypes[name] != "bool" for name in names):
+                raise NotImplementedError("Boolean logic requires bool operands")
+            result = self.reg("p")
+            if operation in binary and len(names) == 2:
+                self.emit(f"{binary[operation]}.pred {result}, {self.values[names[0]]}, {self.values[names[1]]};")
+            elif operation in unary and len(names) == 1:
+                self.emit(f"not.pred {result}, {self.values[names[0]]};")
+            elif operation == "copy" and len(names) == 1:
+                self.move(result, self.values[names[0]], "bool")
+            else:
+                raise NotImplementedError(f"Unsupported boolean operation: {operation}")
+        else:
+            return False
+        self.values[stmt.name], self.value_dtypes[stmt.name] = result, dtype
+        return True
 
     def arithmetic(self, operation: str, operands: list[str], dtype: str) -> str:
         kind = self.ptx_type(dtype)
@@ -174,6 +247,44 @@ class PTXEmitter:
             opcode = binary[operation]
             suffix = ".lo" if integer and operation == "multiply" else "" if integer else ".rn"
             self.emit(f"{opcode}{suffix}.{kind} {result}, {operands[0]}, {operands[1]};")
+        elif operation in ("sqrt", "reciprocal") and not integer and len(operands) == 1:
+            # Preserve the two IR operations and their rounding boundaries:
+            # sqrt followed by reciprocal is not replaced with rsqrt.approx.
+            opcode = "sqrt" if operation == "sqrt" else "rcp"
+            self.emit(f"{opcode}.rn.{kind} {result}, {operands[0]};")
+        elif operation in ("negative", "abs", "absolute") and len(operands) == 1:
+            opcode = "neg" if operation == "negative" else "abs"
+            self.emit(f"{opcode}.{kind} {result}, {operands[0]};")
+        elif operation in ("maximum", "minimum") and len(operands) == 2:
+            if integer:
+                opcode = "max" if operation == "maximum" else "min"
+                self.emit(f"{opcode}.{kind} {result}, {operands[0]}, {operands[1]};")
+            else:
+                # NumPy maximum/minimum propagate NaNs and select the right
+                # input on equal values (including differently signed zero).
+                chosen, unordered = self.reg("p"), self.reg("p")
+                comparison = "gt" if operation == "maximum" else "lt"
+                self.emit(f"setp.{comparison}.{kind} {chosen}, {operands[0]}, {operands[1]};")
+                self.emit(f"selp.{kind} {result}, {operands[0]}, {operands[1]}, {chosen};")
+                self.emit(f"setp.nan.{kind} {unordered}, {operands[0]}, {operands[1]};")
+                self.emit(f"@{unordered} mov.{kind} {result}, {self.literal(math.nan, dtype)};")
+        elif operation in ("exp", "exp_fast", "exp2", "log", "log2", "log10") and not integer and len(operands) == 1:
+            result = self.floating_math(operation, operands, dtype)
+        elif operation in ("sigmoid", "tanh") and not integer and len(operands) == 1:
+            result = self.activation(operation, operands[0], dtype)
+        elif operation in ("power", "pow", "float_power") and not integer and len(operands) == 2:
+            result = self.floating_math(operation, operands, dtype)
+        elif operation in ("power", "pow") and integer and len(operands) == 2:
+            result = self.integer_power(*operands, dtype)
+        elif operation == "square" and len(operands) == 1:
+            suffix = ".lo" if integer else ".rn"
+            self.emit(f"mul{suffix}.{kind} {result}, {operands[0]}, {operands[0]};")
+        elif operation == "rsqrt" and not integer and len(operands) == 1:
+            # One IR operation: do not insert a half rounding boundary between
+            # these internal instructions. Final half rounding remains below.
+            root = self.data_reg(dtype)
+            self.emit(f"sqrt.rn.{kind} {root}, {operands[0]};")
+            self.emit(f"rcp.rn.{kind} {result}, {root};")
         elif operation == "relu" and len(operands) == 1:
             negative = self.reg("p")
             zero = self.literal(0, dtype)
@@ -309,6 +420,12 @@ class PTXEmitter:
             return str(expr.value)
         if isinstance(expr, int):
             return str(expr)
+        if isinstance(expr, TernaryExpr):
+            condition = self.predicate(expr.cond)
+            left, right = self.index_expr(expr.if_true), self.index_expr(expr.if_false)
+            result = self.reg("r")
+            self.emit(f"selp.s32 {result}, {left}, {right}, {condition};")
+            return result
         if isinstance(expr, BinaryExpr):
             instructions = {"+": "add.s32", "-": "sub.s32", "*": "mul.lo.s32"}
             if expr.op in instructions:
@@ -380,27 +497,52 @@ class PTXEmitter:
         self.values.update(targets)
         self.value_dtypes.update(target_types)
 
-    def strided_loop(self, stmt) -> None:
+    @staticmethod
+    def reduction_operation(operation: str) -> str:
+        aliases = {"add": "add", "sum": "add", "multiply": "multiply", "prod": "multiply",
+                   "maximum": "maximum", "amax": "maximum", "minimum": "minimum"}
+        if operation not in aliases:
+            raise NotImplementedError(f"Unsupported reduction combiner: {operation}")
+        return aliases[operation]
+
+    def seed_literal(self, identity, dtype: str) -> str:
+        # Emmy's extrema identities use finite +/-1e30 sentinels. Clamp
+        # out-of-range sentinels to typed integer bounds, never via f32.
+        if dtype.startswith("i"):
+            bits = self.element_bytes(dtype) * 8
+            identity = max(-(1 << (bits - 1)), min((1 << (bits - 1)) - 1, int(identity)))
+        value = self.literal(identity, dtype)
+        return self.round_half(value) if dtype == "f16" else value
+
+    def counted_loop(self, stmt) -> None:
+        serial = isinstance(stmt, Loop)
+        if serial and stmt.carries:
+            raise NotImplementedError("Loop with carried array state is not supported")
+        # Loop locals do not escape. Only this loop's accumulator bindings do.
+        outer_values, outer_dtypes = self.values.copy(), self.value_dtypes.copy()
         # Only seed state owned by this loop, not a nested loop's accumulator.
-        owned = [s for s in stmt.body.iter() if isinstance(s, Accum) and
-                 (not s.axes or stmt.axis.name in s.axes)]
+        owned = ([s for s in stmt.body if isinstance(s, Accum)] if serial else
+                 [s for s in stmt.body.iter() if isinstance(s, Accum) and
+                  (not s.axes or stmt.axis.name in s.axes)])
         seeded = set()
         for accumulator in owned:
             if stmt.seed and accumulator.name not in seeded:
                 dtype = accumulator.dtype.name if accumulator.dtype is not None else "f32"
-                if accumulator.op.name != "add":
-                    raise NotImplementedError("Only sum accumulators are supported initially")
+                self.reduction_operation(accumulator.op.name)
+                if accumulator.op.identity is None:
+                    raise ValueError(f"Accumulator has no identity: {accumulator.op.name}")
                 target = self.data_reg(dtype)
                 self.values[accumulator.name] = target
                 self.value_dtypes[accumulator.name] = dtype
-                self.move(target, self.literal(accumulator.op.identity, dtype), dtype)
+                self.move(target, self.seed_literal(accumulator.op.identity, dtype), dtype)
                 seeded.add(accumulator.name)
             elif not stmt.seed and accumulator.name not in self.values:
                 raise ValueError(f"Uninitialized accumulator: {accumulator.name}")
-        start, step = self.index_expr(stmt.start), self.index_expr(stmt.step)
-        end = self.index_expr(stmt.end) if stmt.end is not None else str(stmt.axis.extent.as_static())
+        start = "0" if serial else self.index_expr(stmt.start)
+        step = "1" if serial else self.index_expr(stmt.step)
+        end = (self.index_expr(stmt.end) if not serial and stmt.end is not None
+               else str(stmt.axis.extent.as_static()))
         coordinate = self.reg("r")
-        previous = self.values.get(stmt.axis.name)
         self.values[stmt.axis.name] = coordinate
         self.emit(f"mov.s32 {coordinate}, {start};")
         head, done = self.label("LOOP"), self.label("LOOP_DONE")
@@ -412,10 +554,10 @@ class PTXEmitter:
         self.emit(f"add.s32 {coordinate}, {coordinate}, {step};")
         self.emit(f"bra {head};")
         self.lines.append(f"{done}:")
-        if previous is None:
-            self.values.pop(stmt.axis.name)
-        else:
-            self.values[stmt.axis.name] = previous
+        carried = {s.name: (self.values[s.name], self.value_dtypes[s.name]) for s in owned}
+        self.values, self.value_dtypes = outer_values, outer_dtypes
+        for name, (value, dtype) in carried.items():
+            self.values[name], self.value_dtypes[name] = value, dtype
 
     def tree_halve(self, stmt) -> None:
         if stmt.inner is not None or stmt.tid_var != "warp":
@@ -470,7 +612,29 @@ class PTXEmitter:
         self.emit(f"bar.sync {barrier_id}{suffix};")
 
     def statement(self, stmt) -> None:
-        if isinstance(stmt, Load):
+        if isinstance(stmt, Init):
+            dtype = stmt.dtype.name
+            target = self.data_reg(dtype)
+            self.move(target, self.seed_literal(stmt.identity, dtype), dtype)
+            self.values[stmt.name], self.value_dtypes[stmt.name] = target, dtype
+        elif isinstance(stmt, Let):
+            dtype = stmt.dtype.name if stmt.dtype is not None else "i32"
+            if isinstance(stmt.value, Literal):
+                value = self.literal(stmt.value.value, dtype)
+                if dtype == "f16":
+                    value = self.round_half(value)
+            elif isinstance(stmt.value, Var) and stmt.value.name in self.value_dtypes:
+                value = self.operand(stmt.value.name, dtype)
+            elif dtype.startswith("i"):
+                value = self.index_expr(stmt.value)
+                if dtype != "i32":
+                    value = self.convert(value, "i32", dtype)
+            else:
+                raise NotImplementedError(f"Unsupported typed Let expression: {stmt.value!r}")
+            target = self.data_reg(dtype)
+            self.move(target, value, dtype)
+            self.values[stmt.name], self.value_dtypes[stmt.name] = target, dtype
+        elif isinstance(stmt, Load):
             dtype = self.buffers[stmt.input]["dtype"]
             width = self.element_bytes(dtype)
             result_dtype = stmt.dtype.name if stmt.dtype is not None else dtype
@@ -483,6 +647,19 @@ class PTXEmitter:
                 self.value_dtypes[name] = result_dtype
         elif isinstance(stmt, Assign):
             dtype = stmt.dtype.name if stmt.dtype is not None else self.combine_dtype or "f32"
+            if self.boolean_assign(stmt, dtype):
+                return
+            if stmt.op.name == "bitcast":
+                if len(stmt.args) != 1:
+                    raise ValueError("bitcast expects one operand")
+                name = stmt.args[0]
+                source_dtype = self.value_dtypes[name]
+                if "f16" in (dtype, source_dtype) or self.element_bytes(dtype) != self.element_bytes(source_dtype):
+                    raise NotImplementedError("bitcast requires equal-width 32/64-bit data")
+                result = self.data_reg(dtype)
+                self.emit(f"mov.b{self.element_bytes(dtype)*8} {result}, {self.values[name]};")
+                self.values[stmt.name], self.value_dtypes[stmt.name] = result, dtype
+                return
             operands = [self.operand(name, dtype) for name in stmt.args]
             self.values[stmt.name] = self.arithmetic(stmt.op.name, operands, dtype)
             self.value_dtypes[stmt.name] = dtype
@@ -499,15 +676,14 @@ class PTXEmitter:
                 location = f"[{address}+{offset * width}]"
                 space = self.memory_space(stmt.output)
                 self.memory_store(location, space, dtype, self.operand(name, dtype))
-        elif isinstance(stmt, StridedLoop):
-            self.strided_loop(stmt)
+        elif isinstance(stmt, (Loop, StridedLoop)):
+            self.counted_loop(stmt)
         elif isinstance(stmt, Accum):
-            if stmt.op.name != "add":
-                raise NotImplementedError("Only sum accumulators are supported initially")
+            operation = self.reduction_operation(stmt.op.name)
             target = self.values[stmt.name]
             dtype = self.value_dtypes[stmt.name]
             base = self.operand(stmt.base, dtype) if stmt.base is not None else target
-            result = self.arithmetic("add", [base, self.operand(stmt.value, dtype)], dtype)
+            result = self.arithmetic(operation, [base, self.operand(stmt.value, dtype)], dtype)
             self.move(target, result, dtype)
         elif isinstance(stmt, Cond):
             condition = self.predicate(stmt.cond)

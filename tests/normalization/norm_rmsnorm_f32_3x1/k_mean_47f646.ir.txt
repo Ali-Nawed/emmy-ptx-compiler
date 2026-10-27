@@ -1,0 +1,11 @@
+    Tile[a0] (N=3)
+        in1 = load mean_count[0]
+        f32 v0 = reciprocal(in1)
+        in2 = load x[a0, 0]
+        f32 v1 = multiply(in2, in2)
+        f32 v2 = multiply(v0, v1)
+        in0 = load add_c1[0]
+        f32 v3 = add(in0, v2)
+        f32 v4 = sqrt(v3)
+        f32 v5 = divide(in2, v4)
+        div[a0, 0] = v5

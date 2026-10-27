@@ -1,0 +1,75 @@
+{
+ "id": "ops_log2_f16_1_w128",
+ "code": "x = torch.randn((1,), dtype=torch.float16); torch.log(x*x + 1) / 0.6931471805599453",
+ "rtol": 0.006,
+ "atol": 0.005,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "div"
+ ],
+ "kernels": [
+  {
+   "node": "div",
+   "entry": "k_div_pointwise",
+   "arg_order": [
+    "x",
+    "add_c1",
+    "div_c1",
+    "div"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "add_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "div_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.6931471805599453
+     ]
+    },
+    {
+     "name": "div",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

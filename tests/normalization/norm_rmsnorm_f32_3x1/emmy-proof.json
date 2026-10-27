@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(3, 1); x / torch.sqrt((x * x).mean(-1, keepdim=True) + 1e-5)",
+  "knobs": "WORK=t128,REDUCE=coop",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_mean_47f646.ir.json": {
+      "sha256": "a1d2a5f16d4b206bcbc91e13eb842fd01f85b8b2d8dce9e933e4f505af1a32d8",
+      "upstream_dump_sha256": "a1d2a5f16d4b206bcbc91e13eb842fd01f85b8b2d8dce9e933e4f505af1a32d8"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+ "id": "norm_l2norm_f32_3x1",
+ "code": "x = torch.randn(3, 1); x / torch.sqrt((x * x).sum(-1, keepdim=True))",
+ "rtol": 0.001,
+ "atol": 0.0001,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "div"
+ ],
+ "kernels": [
+  {
+   "node": "div",
+   "entry": "k_div_pointwise",
+   "arg_order": [
+    "x",
+    "div"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      3,
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "div",
+     "dtype": "f32",
+     "shape": [
+      3,
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

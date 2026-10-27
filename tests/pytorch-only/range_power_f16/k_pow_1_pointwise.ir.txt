@@ -1,0 +1,5 @@
+    Tile[a0] (N=257)
+        in0 = load x[a0]
+        in1 = load y[a0]
+        f32 v0 = pow(in0, in1)
+        pow_1[a0] = v0

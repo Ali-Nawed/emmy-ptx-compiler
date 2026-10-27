@@ -18,7 +18,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from generate import package, trace
+from generate import trace
+from emmy_fixtures import package, verify
 from test_extended import ROOT, check_runner, save_expression, validate_fixture
 from test_numeric_edges import inputs
 from compile import load_kernel
@@ -65,6 +66,8 @@ def main():
                     dump = Path(temporary) / "dump"
                     trace(emmy, spec, dump, "sm_89")
                     package(spec, dump, folder)
+            else:
+                verify(folder)
             save_expression(folder, code)
             meta = json.loads((folder / "meta.json").read_text())
             arrays = inputs("i64", operation)

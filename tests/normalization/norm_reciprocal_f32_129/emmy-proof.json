@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(129, dtype=torch.float32); torch.reciprocal(x * x + 1)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_reciprocal_pointwise.ir.json": {
+      "sha256": "8b7afaf01fb73a72658bb57a7f8abe4af1d1a58bb23539b8790f82eb3f1aedea",
+      "upstream_dump_sha256": "8b7afaf01fb73a72658bb57a7f8abe4af1d1a58bb23539b8790f82eb3f1aedea"
+    }
+  }
+}

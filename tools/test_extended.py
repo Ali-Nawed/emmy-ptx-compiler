@@ -18,7 +18,8 @@ from pathlib import Path
 import numpy as np
 
 from expressions_extended import DTYPES, OPS, SIZES, build_specs
-from generate import package, trace
+from generate import trace
+from emmy_fixtures import package, verify
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -186,6 +187,7 @@ def main():
             save_expression(folder, spec["code"])
             provenance_path = folder / "fixture-provenance.json"
             if args.reuse and provenance_path.exists():
+                verify(folder)
                 old_provenance = json.loads(provenance_path.read_text())
                 old_meta = json.loads((folder / "meta.json").read_text())
                 if (any(old_provenance[key] != provenance[key] for key in

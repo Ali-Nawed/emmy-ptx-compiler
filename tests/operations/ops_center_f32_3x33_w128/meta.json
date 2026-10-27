@@ -1,0 +1,66 @@
+{
+ "id": "ops_center_f32_3x33_w128",
+ "code": "x = torch.randn((3, 33), dtype=torch.float32); x - x.mean(-1, keepdim=True)",
+ "rtol": 3e-05,
+ "atol": 2e-06,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sub"
+ ],
+ "kernels": [
+  {
+   "node": "sub",
+   "entry": "k_mean_edb46a",
+   "arg_order": [
+    "mean_count",
+    "x",
+    "sub"
+   ],
+   "grid": [
+    3,
+    1,
+    1
+   ],
+   "block": [
+    128,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mean_count",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      33.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      3,
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sub",
+     "dtype": "f32",
+     "shape": [
+      3,
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

@@ -18,13 +18,13 @@ from pathlib import Path
 import numpy as np
 
 from emmy.compiler.graph import Graph
-from emmy.compiler.ir.expr import BinaryExpr, Literal, Var
+from emmy.compiler.ir.expr import BinaryExpr, Literal, Var, TernaryExpr
 from emmy.compiler.ir.kernel.ir import KernelOp, Tile, Smem, Sync, WarpShuffle, TreeHalve
-from emmy.compiler.ir.stmt import Accum, Assign, Cond, Load, StridedLoop, Write
+from emmy.compiler.ir.stmt import Accum, Assign, Cond, Load, Loop, StridedLoop, Write, Let, Init
 
 DTYPES = {name: np.dtype(dtype) for name, dtype in
           (("f16", "float16"), ("f32", "float32"), ("f64", "float64"),
-           ("i32", "int32"), ("i64", "int64"))}
+           ("i32", "int32"), ("i64", "int64"), ("bool", "bool"))}
 SHARED_TYPES = {"float": "f32", "double": "f64", "__half": "f16",
                 "int": "i32", "int32_t": "i32", "long long": "i64", "int64_t": "i64"}
 
@@ -39,7 +39,10 @@ def cast(value, dtype):
     value = np.asarray(value)
     if target.kind == "i" and value.dtype.kind == "f":
         width = target.itemsize * 8
-        if np.any(~np.isfinite(value) | (value < -(2 ** (width - 1))) | (value >= 2 ** (width - 1))):
+        # Range validation must not narrow the integer limits to f16/f32.
+        # This widening is only the guard, not the numeric conversion itself.
+        checked = value.astype(np.float64, copy=False)
+        if np.any(~np.isfinite(checked) | (checked < -(2 ** (width - 1))) | (checked >= 2 ** (width - 1))):
             raise NotImplementedError("Out-of-range float-to-integer conversion")
     with np.errstate(over="ignore", invalid="ignore", under="ignore"):
         return value.astype(target)
@@ -47,8 +50,31 @@ def cast(value, dtype):
 
 def calculate(operation, operands, dtype):
     """Evaluate an operation with its declared operand/result precision."""
+    comparisons = {"greater": np.greater, "greater_equal": np.greater_equal,
+                   "less": np.less, "less_equal": np.less_equal,
+                   "equal": np.equal, "not_equal": np.not_equal}
+    if operation in comparisons:
+        # Follow Emmy's C++ comparison promotion for mixed float/int inputs;
+        # NumPy would instead promote i64+f32 to f64.
+        kinds = {np.asarray(value).dtype.kind for value in operands}
+        if "f" in kinds and "i" in kinds:
+            working = np.float64 if any(np.asarray(value).dtype == np.float64 for value in operands) else np.float32
+            operands = [np.asarray(value, dtype=working) for value in operands]
+        return comparisons[operation](*operands).astype(np.bool_)
+    if operation == "where":
+        return cast(np.where(operands[0], cast(operands[1], dtype), cast(operands[2], dtype)), dtype)
+    if dtype == "bool":
+        logical = {"logical_and": np.logical_and, "logical_or": np.logical_or,
+                   "logical_xor": np.logical_xor, "logical_not": np.logical_not,
+                   "bitwise_and": np.logical_and, "bitwise_or": np.logical_or,
+                   "bitwise_xor": np.logical_xor, "bitwise_not": np.logical_not,
+                   "copy": lambda x: x.copy()}
+        if operation not in logical:
+            raise NotImplementedError(f"IR reference boolean operation: {operation}")
+        return logical[operation](*operands).astype(np.bool_)
     args = [cast(value, dtype) for value in operands]
     binary = {"add": np.add, "subtract": np.subtract, "multiply": np.multiply,
+              "maximum": np.maximum, "minimum": np.minimum,
               "bitwise_and": np.bitwise_and, "right_shift": np.right_shift}
     with np.errstate(over="ignore", under="ignore", invalid="ignore", divide="ignore"):
         if operation in binary and len(args) == 2:
@@ -63,6 +89,34 @@ def calculate(operation, operands, dtype):
                 result = np.array([quotient(a, b) for a, b in zip(*args, strict=True)])
             else:
                 result = np.divide(*args)
+        elif operation in ("sqrt", "reciprocal") and not dtype.startswith("i") and len(args) == 1:
+            # Match the backend's documented f16 working representation:
+            # compute in f32, then narrow at the operation boundary.
+            value = args[0].astype(np.float32) if dtype == "f16" else args[0]
+            result = np.sqrt(value) if operation == "sqrt" else np.divide(np.ones_like(value), value)
+        elif operation in ("negative", "abs", "absolute") and len(args) == 1:
+            result = np.negative(args[0]) if operation == "negative" else np.abs(args[0])
+        elif operation in ("sigmoid", "tanh") and dtype.startswith("f") and len(args) == 1:
+            value = args[0].astype(np.float32) if dtype == "f16" else args[0]
+            if operation == "tanh":
+                result = np.tanh(value)
+            else:
+                t = np.exp(-np.abs(value))
+                result = np.where(value >= 0, 1/(1+t), t/(1+t))
+        elif operation in ("exp", "exp_fast", "exp2", "log", "log2", "log10", "rsqrt") and not dtype.startswith("i") and len(args) == 1:
+            value = args[0].astype(np.float32) if dtype == "f16" else args[0]
+            functions = {"exp": np.exp, "exp_fast": np.exp, "exp2": np.exp2,
+                         "log": np.log, "log2": np.log2, "log10": np.log10,
+                         "rsqrt": lambda x: 1 / np.sqrt(x)}
+            result = functions[operation](value)
+        elif operation in ("power", "pow", "float_power") and not dtype.startswith("i") and len(args) == 2:
+            result = np.power(*(value.astype(np.float32) if dtype == "f16" else value for value in args))
+        elif operation in ("power", "pow") and dtype.startswith("i") and len(args) == 2:
+            if np.any(args[1] < 0):
+                raise NotImplementedError("Negative integer exponents are outside integer power's domain")
+            result = np.power(*args)
+        elif operation == "square" and len(args) == 1:
+            result = args[0] * args[0]
         elif operation == "relu" and len(args) == 1:
             result = np.where(args[0] < 0, np.zeros_like(args[0]), args[0])
         elif operation == "copy" and len(args) == 1:
@@ -70,6 +124,14 @@ def calculate(operation, operands, dtype):
         else:
             raise NotImplementedError(f"IR reference operation: {operation}/{dtype}")
     return cast(result, dtype)
+
+
+def accumulator_identity(identity, dtype):
+    if DTYPES[dtype].kind == "i":
+        limits = np.iinfo(DTYPES[dtype])
+        identity = min(limits.max, max(limits.min, int(identity)))
+    with np.errstate(over="ignore"):
+        return np.asarray(identity).astype(DTYPES[dtype])
 
 
 class Block:
@@ -109,6 +171,9 @@ class Block:
             return np.full(self.count, expr.value, dtype=np.int64)
         if isinstance(expr, int):
             return np.full(self.count, expr, dtype=np.int64)
+        if isinstance(expr, TernaryExpr):
+            return np.where(self.expression(expr.cond, mask), self.expression(expr.if_true, mask),
+                            self.expression(expr.if_false, mask))
         if isinstance(expr, BinaryExpr):
             operations = {"+": np.add, "-": np.subtract, "*": np.multiply,
                           "==": np.equal, "!=": np.not_equal, "<": np.less,
@@ -167,12 +232,17 @@ class Block:
         before, valid_before = self.values.copy(), self.valid.copy()
         for assignment in stmt.combine_states:
             args = [self.read(name, mask) for name in assignment.args]
-            result = self.evaluate(assignment.op.name, args, stmt.dtype.name, mask)
+            dtype = assignment.dtype.name if assignment.dtype is not None else stmt.dtype.name
+            result = self.evaluate(assignment.op.name, args, dtype, mask)
+            # The merge program may temporarily promote carried state. Keep
+            # this local binding separate from the outer accumulator dtype.
+            if assignment.name in self.values and self.values[assignment.name].dtype != result.dtype:
+                self.values[assignment.name] = self.values[assignment.name].astype(result.dtype)
             self.bind(assignment.name, result, mask)
         state = {name: (self.values[name], self.valid[name]) for name in stmt.state}
         self.values, self.valid = before, valid_before
         for name, (value, valid) in state.items():
-            self.values[name], self.valid[name] = value, valid
+            self.bind(name, value.astype(before[name].dtype), mask)
 
     def statements(self, body, mask):
         for stmt in body:
@@ -180,7 +250,15 @@ class Block:
                 self.statement(stmt, mask)
 
     def statement(self, stmt, mask):
-        if isinstance(stmt, Load):
+        if isinstance(stmt, Init):
+            self.bind(stmt.name, accumulator_identity(stmt.identity, stmt.dtype.name), mask)
+        elif isinstance(stmt, Let):
+            dtype = stmt.dtype.name if stmt.dtype is not None else "i32"
+            if isinstance(stmt.value, Literal):
+                self.bind(stmt.name, cast(np.asarray(stmt.value.value), dtype), mask)
+            else:
+                self.bind(stmt.name, cast(self.expression(stmt.value, mask), dtype), mask)
+        elif isinstance(stmt, Load):
             indices = self.indices(stmt.input, stmt.index, mask)
             for offset, name in enumerate(stmt.names):
                 value = self.memory_read(stmt.input, indices + offset, mask)
@@ -190,6 +268,12 @@ class Block:
             if stmt.dtype is None:
                 # Explicitly limit unstamped statements rather than guessing promotion.
                 raise NotImplementedError("Unstamped Assign outside a reduction merge")
+            if stmt.op.name == "bitcast":
+                target = DTYPES[stmt.dtype.name]
+                if len(args) != 1 or target.itemsize != args[0].dtype.itemsize or target.itemsize not in (4, 8):
+                    raise NotImplementedError("equal-width 32/64-bit bitcast required")
+                self.bind(stmt.name, args[0].view(target), mask)
+                return
             self.bind(stmt.name, self.evaluate(stmt.op.name, args, stmt.dtype.name, mask), mask)
         elif isinstance(stmt, Write):
             if stmt.atomic or stmt.swizzle != "NONE":
@@ -201,21 +285,25 @@ class Block:
             condition = self.expression(stmt.cond, mask).astype(bool)
             self.scoped(stmt.body, mask & condition)
             self.scoped(stmt.else_body, mask & ~condition)
-        elif isinstance(stmt, StridedLoop):
+        elif isinstance(stmt, (Loop, StridedLoop)):
+            serial = isinstance(stmt, Loop)
+            if serial and stmt.carries:
+                raise NotImplementedError("Loop with carried array state is not supported")
             accumulators = {s.name: s for s in stmt.body if isinstance(s, Accum)}
             for name, accumulator in accumulators.items():
-                if accumulator.op.name != "add":
-                    raise NotImplementedError("Only additive accumulation is modeled")
+                if accumulator.op.name not in ("add", "multiply", "maximum", "minimum"):
+                    raise NotImplementedError(f"Unsupported accumulator: {accumulator.op.name}")
                 if stmt.seed:
                     dtype = accumulator.dtype.name if accumulator.dtype is not None else "f32"
-                    self.bind(name, np.full(self.count, accumulator.op.identity, DTYPES[dtype]), mask)
+                    self.bind(name, np.full(self.count, accumulator_identity(accumulator.op.identity, dtype), DTYPES[dtype]), mask)
                 else:
                     self.read(name, mask)
             old_carried = self.carried.copy()
             self.carried.update(accumulators)
-            coordinate = self.expression(stmt.start, mask).copy()
-            step = self.expression(stmt.step, mask)
-            end = self.expression(stmt.end, mask) if stmt.end is not None else stmt.axis.extent.as_static()
+            coordinate = np.zeros(self.count, dtype=np.int64) if serial else self.expression(stmt.start, mask).copy()
+            step = np.ones(self.count, dtype=np.int64) if serial else self.expression(stmt.step, mask)
+            end = (self.expression(stmt.end, mask) if not serial and stmt.end is not None
+                   else stmt.axis.extent.as_static())
             if np.any(step[mask] <= 0):
                 raise NotImplementedError("Nonpositive loop step")
             old_axis = (self.values.get(stmt.axis.name), self.valid.get(stmt.axis.name))

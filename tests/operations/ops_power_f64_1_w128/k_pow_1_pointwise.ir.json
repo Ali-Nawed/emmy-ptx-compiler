@@ -1,0 +1,113 @@
+{
+  "inputs": [
+    "x",
+    "y"
+  ],
+  "outputs": [
+    "pow_1"
+  ],
+  "nodes": {
+    "add_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "add_c1",
+        "value": 1.0,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "add_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "mul_1_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "mul_1_c1",
+        "value": 0.5,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mul_1_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "x": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "x",
+          "shape": [
+            1
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "y": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "shape": [
+            1
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "pow_1": {
+      "op": "KernelOp",
+      "op_fields": {
+        "body": [
+          "Tile(axes=(), body=(Load(names=('in2',), input='x', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Assign(name='v0', op=ElementwiseImpl('multiply'), args=('in2', 'in2'), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Load(names=('in0',), input='add_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Assign(name='v1', op=ElementwiseImpl('add'), args=('in0', 'v0'), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Load(names=('in1',), input='mul_1_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Load(names=('in3',), input='y', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Assign(name='v2', op=ElementwiseImpl('multiply'), args=('in1', 'in3'), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Assign(name='v3', op=ElementwiseImpl('pow'), args=('v1', 'v2'), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Write(output='pow_1', index=(Literal(value=0, dtype='int'),), values=('v3',), value_dtype=DataType(name='f64', np=dtype('float64'), nbytes=8), atomic=False, swizzle='NONE')), block_threads=None, aux_threads=0, raster_axes=None, raster_group=None, raster_orient='m')"
+        ],
+        "name": "k_pow_1_pointwise",
+        "zero_delegated": [],
+        "serial": []
+      },
+      "inputs": [
+        "y",
+        "mul_1_c1",
+        "x",
+        "add_c1"
+      ],
+      "outputs": [
+        {
+          "name": "pow_1",
+          "shape": [
+            1
+          ],
+          "dtype": "f64"
+        }
+      ]
+    }
+  }
+}

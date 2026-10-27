@@ -1,0 +1,7 @@
+    Tile[] (N=1)
+        in0 = load x[0]
+        in1 = load y[0]
+        i32 v0 = maximum(in0, in1)
+        i32 v1 = minimum(in0, in1)
+        i32 v2 = subtract(v0, v1)
+        sub[0] = v2

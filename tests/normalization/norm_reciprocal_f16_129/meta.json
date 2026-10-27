@@ -1,0 +1,64 @@
+{
+ "id": "norm_reciprocal_f16_129",
+ "code": "x = torch.randn(129, dtype=torch.float16); torch.reciprocal(x * x + 1)",
+ "rtol": 0.002,
+ "atol": 0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "reciprocal"
+ ],
+ "kernels": [
+  {
+   "node": "reciprocal",
+   "entry": "k_reciprocal_pointwise",
+   "arg_order": [
+    "add_c1",
+    "x",
+    "reciprocal"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "add_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "reciprocal",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

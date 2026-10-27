@@ -1,0 +1,54 @@
+{
+ "id": "ops_maximum_f32_3x257_w256",
+ "code": "x = torch.randn((3, 257), dtype=torch.float32); x.amax(-1)",
+ "rtol": 3e-05,
+ "atol": 2e-06,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "amax"
+ ],
+ "kernels": [
+  {
+   "node": "amax",
+   "entry": "k_amax_reduce",
+   "arg_order": [
+    "x",
+    "amax"
+   ],
+   "grid": [
+    3,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      3,
+      257
+     ],
+     "seed": 0
+    },
+    {
+     "name": "amax",
+     "dtype": "f32",
+     "shape": [
+      3
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

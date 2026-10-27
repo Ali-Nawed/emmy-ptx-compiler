@@ -1,0 +1,6 @@
+    Tile[] (N=1)
+        in1 = load y[0]
+        i64 v0 = multiply(in1, in1)
+        in0 = load x[0]
+        i64 v1 = pow(in0, v0)
+        pow_1[0] = v1

@@ -1,0 +1,4 @@
+    Tile[a0] (N=257)
+        in0 = load x[a0]
+        f16 v0 = exp(in0)
+        exp[a0] = v0

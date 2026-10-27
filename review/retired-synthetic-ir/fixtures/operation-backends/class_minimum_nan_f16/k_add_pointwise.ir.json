@@ -1,0 +1,63 @@
+{
+  "inputs": [
+    "x",
+    "y"
+  ],
+  "outputs": [
+    "add"
+  ],
+  "nodes": {
+    "x": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "x",
+          "shape": [
+            8
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "y": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "shape": [
+            8
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "add": {
+      "op": "KernelOp",
+      "op_fields": {
+        "body": [
+          "Tile(axes=(Axis(name='a0', extent=Dim(8), window=None),), body=(Load(names=('a',), input='x', index=(Var(name='a0'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Load(names=('b',), input='y', index=(Var(name='a0'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='root', op=ElementwiseImpl('sqrt'), args=('a',), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='answer', op=ElementwiseImpl('minimum'), args=('root', 'b'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='wide', op=ElementwiseImpl('copy'), args=('answer',), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='bits', op=ElementwiseImpl('bitcast'), args=('wide',), dtype=DataType(name='i32', np=dtype('int32'), nbytes=4)), Assign(name='encoded', op=ElementwiseImpl('copy'), args=('bits',), dtype=DataType(name='i32', np=dtype('int32'), nbytes=4)), Write(output='add', index=(Var(name='a0'),), values=('encoded',), value_dtype=DataType(name='i32', np=dtype('int32'), nbytes=4), atomic=False, swizzle='NONE')), block_threads=None, aux_threads=0, raster_axes=None, raster_group=None, raster_orient='m')"
+        ],
+        "name": "k_add_pointwise",
+        "zero_delegated": [],
+        "serial": []
+      },
+      "inputs": [
+        "x",
+        "y"
+      ],
+      "outputs": [
+        {
+          "name": "add",
+          "shape": [
+            8
+          ],
+          "dtype": "i32"
+        }
+      ]
+    }
+  }
+}

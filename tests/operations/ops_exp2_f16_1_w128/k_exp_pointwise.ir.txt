@@ -1,0 +1,8 @@
+    Tile[] (N=1)
+        in1 = load mul_c1[0]
+        in2 = load x[0]
+        f16 v0 = multiply(in1, in2)
+        in0 = load mul_1_c1[0]
+        f16 v1 = multiply(in0, v0)
+        f16 v2 = exp(v1)
+        exp[0] = v2

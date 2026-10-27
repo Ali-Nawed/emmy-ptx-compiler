@@ -1,0 +1,7 @@
+{
+  "emmy": "0.3.11",
+  "target": "sm_89",
+  "torch": "2.14.1+cpu",
+  "numpy": "2.5.4",
+  "pipeline": "PyTorch expression -> Emmy Kernel IR -> our compile.py"
+}

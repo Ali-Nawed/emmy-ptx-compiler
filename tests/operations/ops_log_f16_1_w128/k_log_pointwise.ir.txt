@@ -1,0 +1,7 @@
+    Tile[] (N=1)
+        in1 = load x[0]
+        f32 v0 = multiply(in1, in1)
+        in0 = load add_c1[0]
+        f32 v1 = add(in0, v0)
+        f32 v2 = log(v1)
+        log[0] = v2

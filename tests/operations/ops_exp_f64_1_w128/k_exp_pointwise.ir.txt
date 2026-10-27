@@ -1,0 +1,6 @@
+    Tile[] (N=1)
+        in0 = load mul_c1[0]
+        in1 = load x[0]
+        f64 v0 = multiply(in0, in1)
+        f64 v1 = exp(v0)
+        exp[0] = v1

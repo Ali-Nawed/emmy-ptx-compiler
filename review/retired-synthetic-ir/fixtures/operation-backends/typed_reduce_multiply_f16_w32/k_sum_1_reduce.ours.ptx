@@ -1,0 +1,109 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_sum_1_reduce(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<17>;
+    .reg .b64 %rd<14>;
+    .reg .f32 %f<24>;
+    .reg .b16 %h<13>;
+    .reg .pred %p<4>;
+    .shared .align 2 .b8 scratch_0[2];
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    shr.u32 %r5, %r4, 5;
+    and.b32 %r6, %r4, 31;
+    and.b32 %r7, %r1, 31;
+    shr.u32 %r8, %r1, 5;
+    cvt.rn.f16.f32 %h1, 0f3F800000;
+    cvt.f32.f16 %f2, %h1;
+    mov.f32 %f1, %f2;
+    mov.s32 %r9, %r6;
+LOOP_1:
+    setp.ge.s32 %p1, %r9, 129;
+    @%p1 bra LOOP_DONE_2;
+    mul.lo.s32 %r10, %r5, 129;
+    add.s32 %r11, %r10, %r9;
+    mov.s32 %r12, %r11;
+    mul.wide.s32 %rd5, %r12, 2;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.b16 %h2, [%rd6+0];
+    cvt.f32.f16 %f3, %h2;
+    mul.rn.f32 %f4, %f1, %f3;
+    cvt.rn.f16.f32 %h3, %f4;
+    cvt.f32.f16 %f5, %h3;
+    mov.f32 %f1, %f5;
+    add.s32 %r9, %r9, 32;
+    bra LOOP_1;
+LOOP_DONE_2:
+    activemask.b32 %r13;
+    shfl.sync.bfly.b32 %f6, %f1, 16, 31, %r13;
+    mul.rn.f32 %f7, %f1, %f6;
+    cvt.rn.f16.f32 %h4, %f7;
+    cvt.f32.f16 %f8, %h4;
+    mov.f32 %f1, %f8;
+    shfl.sync.bfly.b32 %f9, %f1, 8, 31, %r13;
+    mul.rn.f32 %f10, %f1, %f9;
+    cvt.rn.f16.f32 %h5, %f10;
+    cvt.f32.f16 %f11, %h5;
+    mov.f32 %f1, %f11;
+    shfl.sync.bfly.b32 %f12, %f1, 4, 31, %r13;
+    mul.rn.f32 %f13, %f1, %f12;
+    cvt.rn.f16.f32 %h6, %f13;
+    cvt.f32.f16 %f14, %h6;
+    mov.f32 %f1, %f14;
+    shfl.sync.bfly.b32 %f15, %f1, 2, 31, %r13;
+    mul.rn.f32 %f16, %f1, %f15;
+    cvt.rn.f16.f32 %h7, %f16;
+    cvt.f32.f16 %f17, %h7;
+    mov.f32 %f1, %f17;
+    shfl.sync.bfly.b32 %f18, %f1, 1, 31, %r13;
+    mul.rn.f32 %f19, %f1, %f18;
+    cvt.rn.f16.f32 %h8, %f19;
+    cvt.f32.f16 %f20, %h8;
+    mov.f32 %f1, %f20;
+    mov.u64 %rd7, scratch_0;
+    setp.eq.s32 %p2, %r7, 0;
+    @!%p2 bra ELSE_3;
+    mov.s32 %r14, %r8;
+    mul.wide.s32 %rd8, %r14, 2;
+    add.u64 %rd9, %rd7, %rd8;
+    cvt.rn.f16.f32 %h9, %f1;
+    st.shared.b16 [%rd9+0], %h9;
+    bra IF_DONE_4;
+ELSE_3:
+IF_DONE_4:
+    bar.sync 0;
+    mov.s32 %r15, 0;
+    mul.wide.s32 %rd10, %r15, 2;
+    add.u64 %rd11, %rd7, %rd10;
+    ld.shared.b16 %h10, [%rd11];
+    cvt.f32.f16 %f21, %h10;
+    mov.f32 %f1, %f21;
+    setp.eq.s32 %p3, %r6, 0;
+    @!%p3 bra ELSE_5;
+    mov.f32 %f22, %f1;
+    cvt.rn.f16.f32 %h11, %f22;
+    cvt.f32.f16 %f23, %h11;
+    mov.s32 %r16, %r5;
+    mul.wide.s32 %rd12, %r16, 2;
+    add.u64 %rd13, %rd4, %rd12;
+    cvt.rn.f16.f32 %h12, %f23;
+    st.global.b16 [%rd13+0], %h12;
+    bra IF_DONE_6;
+ELSE_5:
+IF_DONE_6:
+DONE:
+    ret;
+}

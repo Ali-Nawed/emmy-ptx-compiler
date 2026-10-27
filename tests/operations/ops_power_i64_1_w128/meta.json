@@ -1,0 +1,63 @@
+{
+ "id": "ops_power_i64_1_w128",
+ "code": "x = torch.randint(-3, 4, (1,), dtype=torch.int64); y = torch.randint(-3, 4, (1,), dtype=torch.int64); torch.pow(x, y*y)",
+ "rtol": 0,
+ "atol": 0,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "pow_1"
+ ],
+ "kernels": [
+  {
+   "node": "pow_1",
+   "entry": "k_pow_1_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "pow_1"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "i64",
+     "shape": [
+      1
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "i64",
+     "shape": [
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "pow_1",
+     "dtype": "i64",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

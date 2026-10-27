@@ -14,10 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from ir_reference import Block, calculate, cast, save_reference, simulate
 from test_extended import check_runner, compare_outputs
-from emmy.compiler.dtype import F32
-from emmy.compiler.ir.expr import Literal, Var
 from emmy.compiler.ir.kernel.ir import WarpShuffle, TreeHalve
-from emmy.compiler.ir.stmt import Assign, Load
+from emmy.compiler.ir.stmt import Load
+from compile import load_kernel
 
 
 class IRReferenceTests(unittest.TestCase):
@@ -72,39 +71,40 @@ class IRReferenceTests(unittest.TestCase):
                     self.assertEqual(status, "pass", details)
 
     def test_masked_load_and_uninitialized_reads(self):
-        block = Block(4, {"x": np.array([10, 20], np.float32)}, {"x": np.ones(2, bool)})
+        source = load_kernel(next((ROOT / "tests/extended/ext_add_f32_129").glob("*.ir.json")))
+        load = next(stmt for stmt in source.kernel.body.iter() if isinstance(stmt, Load))
+        block = Block(4, {load.input: np.array([10, 20, 30, 40], np.float32)}, {load.input: np.ones(4, bool)})
         mask = np.array([True, True, False, False])
-        block.bind("index", np.arange(4, dtype=np.int64), np.ones(4, bool))
-        load = Load(names=("value",), input="x", index=(Var("index"),), dtype=F32)
+        axis = source.kernel.body[0].axes[0]
+        block.bind(axis.name, np.arange(4, dtype=np.int64), np.ones(4, bool))
         block.statement(load, mask)
-        np.testing.assert_array_equal(block.read("value", mask)[mask], [10, 20])
+        np.testing.assert_array_equal(block.read(load.names[0], mask)[mask], [10, 40])
         with self.assertRaises(ValueError):
-            block.read("value", np.ones(4, bool))
+            block.read(load.names[0], np.ones(4, bool))
         with self.assertRaises(IndexError):
             block.statement(load, np.ones(4, bool))
 
     def test_shuffle_keeps_warps_separate_and_updates_simultaneously(self):
+        source = load_kernel(next((ROOT / "problems/r01_array_sum").glob("*.ir.json")))
+        stmt = next(item for item in source.kernel.body.iter() if isinstance(item, WarpShuffle))
         block = Block(64, {}, {})
         mask = np.ones(64, bool)
-        block.bind("state", np.arange(64, dtype=np.float32), mask)
-        merge = (Assign(name="state", op="add", args=("state", "other")),)
-        stmt = WarpShuffle(state=("state",), state_b=("other",), combine_states=merge, length=32, dtype=F32)
+        block.bind(stmt.state[0], np.arange(64, dtype=np.float32), mask)
         block.statement(stmt, mask)
-        np.testing.assert_array_equal(block.read("state", mask), [496] * 32 + [1520] * 32)
+        np.testing.assert_array_equal(block.read(stmt.state[0], mask), [496] * 32 + [1520] * 32)
         with self.assertRaises(NotImplementedError):
             block.statement(stmt, np.arange(64) != 1)
 
     def test_shared_tree_uses_halving_order_and_broadcasts(self):
+        source = load_kernel(next((ROOT / "problems/r01_array_sum").glob("*.ir.json")))
+        stmt = next(item for item in source.kernel.body.iter() if isinstance(item, TreeHalve))
         values = np.array([1e20, 3, -1e20, 4], np.float32)
-        block = Block(128, {"scratch": values.copy()}, {"scratch": np.ones(4, bool)})
+        block = Block(128, {stmt.bufs[0]: values.copy()}, {stmt.bufs[0]: np.ones(4, bool)})
         mask = np.ones(128, bool)
-        block.bind("warp", np.arange(128, dtype=np.int64) // 32, mask)
-        block.bind("state", np.zeros(128, np.float32), mask)
-        merge = (Assign(name="state", op="add", args=("state", "other")),)
-        stmt = TreeHalve(bufs=("scratch",), state=("state",), state_b=("other",),
-                         combine_states=merge, length=4, tid_var="warp", dtype=F32)
+        block.bind(stmt.tid_var, np.arange(128, dtype=np.int64) // 32, mask)
+        block.bind(stmt.state[0], np.zeros(128, np.float32), mask)
         block.statement(stmt, mask)
-        np.testing.assert_array_equal(block.read("state", mask), [7] * 128)
+        np.testing.assert_array_equal(block.read(stmt.state[0], mask), [7] * 128)
 
     def test_saving_does_not_replace_expression_expectations(self):
         import shutil

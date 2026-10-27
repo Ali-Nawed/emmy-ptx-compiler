@@ -1,0 +1,64 @@
+{
+ "id": "norm_sqrt_f64_1",
+ "code": "x = torch.randn(1, dtype=torch.float64); torch.sqrt(x * x + 1)",
+ "rtol": 1e-12,
+ "atol": 0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sqrt"
+ ],
+ "kernels": [
+  {
+   "node": "sqrt",
+   "entry": "k_sqrt_pointwise",
+   "arg_order": [
+    "x",
+    "add_c1",
+    "sqrt"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "add_c1",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "sqrt",
+     "dtype": "f64",
+     "shape": [
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

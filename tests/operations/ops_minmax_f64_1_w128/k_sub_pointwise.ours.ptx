@@ -1,0 +1,51 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_sub_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<8>;
+    .reg .b64 %rd<13>;
+    .reg .f64 %d<6>;
+    .reg .pred %p<6>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 1;
+    @%p1 bra DONE;
+    mov.s32 %r5, 0;
+    mul.wide.s32 %rd7, %r5, 8;
+    add.u64 %rd8, %rd4, %rd7;
+    ld.global.f64 %d1, [%rd8+0];
+    mov.s32 %r6, 0;
+    mul.wide.s32 %rd9, %r6, 8;
+    add.u64 %rd10, %rd2, %rd9;
+    ld.global.f64 %d2, [%rd10+0];
+    setp.gt.f64 %p2, %d1, %d2;
+    selp.f64 %d3, %d1, %d2, %p2;
+    setp.nan.f64 %p3, %d1, %d2;
+    @%p3 mov.f64 %d3, 0d7FF8000000000000;
+    setp.lt.f64 %p4, %d1, %d2;
+    selp.f64 %d4, %d1, %d2, %p4;
+    setp.nan.f64 %p5, %d1, %d2;
+    @%p5 mov.f64 %d4, 0d7FF8000000000000;
+    sub.rn.f64 %d5, %d3, %d4;
+    mov.s32 %r7, 0;
+    mul.wide.s32 %rd11, %r7, 8;
+    add.u64 %rd12, %rd6, %rd11;
+    st.global.f64 [%rd12+0], %d5;
+DONE:
+    ret;
+}

@@ -1,0 +1,85 @@
+{
+ "id": "ops_power_f16_129_w128",
+ "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); torch.pow(x*x + 1, y * 0.5)",
+ "rtol": 0.006,
+ "atol": 0.005,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "pow_1"
+ ],
+ "kernels": [
+  {
+   "node": "pow_1",
+   "entry": "k_pow_1_pointwise",
+   "arg_order": [
+    "mul_1_c1",
+    "add_c1",
+    "x",
+    "y",
+    "pow_1"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mul_1_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.5
+     ]
+    },
+    {
+     "name": "add_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "y",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "seed": 1
+    },
+    {
+     "name": "pow_1",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

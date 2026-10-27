@@ -1,0 +1,95 @@
+"""Unary floating operations and the reduction-to-elementwise handoff."""
+
+from dataclasses import replace
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+from compile import PTXEmitter, emit_ptx, load_kernel
+from ir_reference import calculate, simulate
+from test_extended import compare_outputs
+import json
+
+
+class NormalizationLoweringTests(unittest.TestCase):
+    def source(self):
+        return load_kernel(next((ROOT / "problems/f03_l2norm").glob("*.ir.json")))
+
+    def test_unary_types_rounding_and_rejected_integers(self):
+        for dtype in ("f16", "f32", "f64"):
+            emitter = PTXEmitter(self.source())
+            operand = emitter.data_reg(dtype)
+            for operation, opcode in (("sqrt", "sqrt"), ("reciprocal", "rcp")):
+                emitter.arithmetic(operation, [operand], dtype)
+                self.assertIn(f"{opcode}.rn.{emitter.ptx_type(dtype)}", "\n".join(emitter.lines))
+            self.assertNotIn("approx", "\n".join(emitter.lines))
+            if dtype == "f16":
+                self.assertEqual(sum("cvt.rn.f16.f32" in line for line in emitter.lines), 2)
+        for dtype in ("i32", "i64"):
+            for operation in ("sqrt", "reciprocal"):
+                with self.assertRaises(NotImplementedError):
+                    PTXEmitter(self.source()).arithmetic(operation, ["1"], dtype)
+
+    def test_reference_special_values_and_precision(self):
+        for dtype in ("f16", "f32", "f64"):
+            values = np.array([0.0, -0.0, 4.0, np.inf, -1.0, np.nan], dtype=dtype.replace("f", "float"))
+            roots = calculate("sqrt", [values], dtype)
+            self.assertEqual(roots[2], 2)
+            self.assertTrue(np.signbit(roots[1]))
+            self.assertTrue(np.isnan(roots[4:]).all())
+            inverses = calculate("reciprocal", [values], dtype)
+            self.assertTrue(np.isposinf(inverses[0]))
+            self.assertTrue(np.isneginf(inverses[1]))
+            self.assertEqual(inverses[2], 0.25)
+            self.assertEqual(inverses[3], 0)
+        # A wide value must not be narrowed to f32 first.
+        np.testing.assert_array_equal(calculate("sqrt", [np.array([1e200])], "f64"), [1e100])
+
+    @unittest.skipUnless(shutil.which("ptxas"), "requires Ubuntu CUDA ptxas")
+    def test_public_norms_assemble_and_match_expression_reference(self):
+        for name in ("f03_l2norm", "f01_rmsnorm"):
+            folder = ROOT / "problems" / name
+            meta = json.loads((folder / "meta.json").read_text())
+            with np.load(folder / "expected.npz") as expected:
+                status, details = compare_outputs(simulate(folder), expected, meta)
+                self.assertEqual(status, "pass", details)
+            source = load_kernel(next(folder.glob("*.ir.json")))
+            with tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "kernel.ptx"
+                path.write_text(emit_ptx(source))
+                result = subprocess.run(["ptxas", "-arch=sm_89", str(path), "-o", str(path.with_suffix(".cubin"))],
+                                        capture_output=True, text=True, timeout=35)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    @unittest.skipUnless(shutil.which("ptxas"), "requires Ubuntu CUDA ptxas")
+    def test_unary_f16_f32_f64_assemble(self):
+        from emmy.compiler.dtype import F16, F32, F64
+        from emmy.compiler.ir.elementwise import ElementwiseImpl
+        from emmy.compiler.ir.expr import Literal
+        from emmy.compiler.ir.stmt import Assign, Load, Write
+        for dtype in (F16, F32, F64):
+            source = load_kernel(next((ROOT / f"tests/extended/ext_add_{dtype.name}_1").glob("*.ir.json")))
+            x, _, output = source.metadata["arg_order"]
+            body = (Load(names=("x0",), input=x, index=(Literal(0, "int"),), dtype=dtype),
+                    Assign(name="root", op=ElementwiseImpl("sqrt"), args=("x0",), dtype=dtype),
+                    Assign(name="inverse", op=ElementwiseImpl("reciprocal"), args=("root",), dtype=dtype),
+                    Write(output=output, index=(Literal(0, "int"),), values=("inverse",), value_dtype=dtype))
+            source = replace(source, kernel=replace(source.kernel, body=(replace(source.kernel.body[0], body=body),)))
+            with tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "kernel.ptx"
+                path.write_text(emit_ptx(source))
+                result = subprocess.run(["ptxas", "-arch=sm_89", str(path), "-o", str(path.with_suffix(".cubin"))],
+                                        capture_output=True, text=True, timeout=35)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+
+if __name__ == "__main__":
+    unittest.main()

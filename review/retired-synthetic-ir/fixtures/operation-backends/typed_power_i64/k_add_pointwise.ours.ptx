@@ -1,0 +1,55 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_add_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<8>;
+    .reg .b64 %rd<13>;
+    .reg .b64 %l<8>;
+    .reg .pred %p<4>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 7;
+    @%p1 bra DONE;
+    mov.s32 %r5, %r4;
+    mul.wide.s32 %rd7, %r5, 8;
+    add.u64 %rd8, %rd2, %rd7;
+    ld.global.s64 %l1, [%rd8+0];
+    mov.s32 %r6, %r4;
+    mul.wide.s32 %rd9, %r6, 8;
+    add.u64 %rd10, %rd4, %rd9;
+    ld.global.s64 %l2, [%rd10+0];
+    mov.s64 %l4, 1;
+    mov.s64 %l5, %l1;
+    mov.s64 %l6, %l2;
+IPOW_1:
+    setp.eq.s64 %p2, %l6, 0;
+    @%p2 bra IPOW_DONE_2;
+    and.b64 %l7, %l6, 1;
+    setp.ne.s64 %p3, %l7, 0;
+    @%p3 mul.lo.s64 %l4, %l4, %l5;
+    mul.lo.s64 %l5, %l5, %l5;
+    shr.u64 %l6, %l6, 1;
+    bra IPOW_1;
+IPOW_DONE_2:
+    mov.s32 %r7, %r4;
+    mul.wide.s32 %rd11, %r7, 8;
+    add.u64 %rd12, %rd6, %rd11;
+    st.global.s64 [%rd12+0], %l4;
+DONE:
+    ret;
+}

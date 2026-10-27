@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(1, dtype=torch.float64); torch.sqrt(x * x + 1)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_sqrt_pointwise.ir.json": {
+      "sha256": "893bdfaa1b4203a1f9852b5eb418d00a61431dbb96166cbbe25b633d3d60b3d8",
+      "upstream_dump_sha256": "893bdfaa1b4203a1f9852b5eb418d00a61431dbb96166cbbe25b633d3d60b3d8"
+    }
+  }
+}

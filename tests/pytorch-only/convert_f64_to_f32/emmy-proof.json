@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.float32)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_to_pointwise.ir.json": {
+      "sha256": "53263f64e96e60551041f71f8e2d6d1791b74509689643984c83a7031535bb26",
+      "upstream_dump_sha256": "53263f64e96e60551041f71f8e2d6d1791b74509689643984c83a7031535bb26"
+    }
+  }
+}

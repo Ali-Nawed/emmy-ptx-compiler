@@ -1,0 +1,75 @@
+{
+ "id": "ops_exp2_f32_129_w128",
+ "code": "x = torch.randn((129,), dtype=torch.float32); torch.exp(x * 0.25 * 0.6931471805599453)",
+ "rtol": 3e-05,
+ "atol": 2e-06,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "exp"
+ ],
+ "kernels": [
+  {
+   "node": "exp",
+   "entry": "k_exp_pointwise",
+   "arg_order": [
+    "mul_c1",
+    "mul_1_c1",
+    "x",
+    "exp"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mul_c1",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.25
+     ]
+    },
+    {
+     "name": "mul_1_c1",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.6931471805599453
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "exp",
+     "dtype": "f32",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

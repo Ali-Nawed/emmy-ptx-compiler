@@ -1,0 +1,7 @@
+    Tile[a0] (N=3)
+        in0 = load mean_count[0]
+        f16 v0 = reciprocal(in0)
+        in1 = load x[a0, 0]
+        f16 v1 = multiply(in1, v0)
+        f16 v2 = subtract(in1, v1)
+        sub[a0, 0] = v2

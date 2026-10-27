@@ -1,0 +1,63 @@
+{
+  "inputs": [
+    "x",
+    "y"
+  ],
+  "outputs": [
+    "add"
+  ],
+  "nodes": {
+    "x": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "x",
+          "shape": [
+            257
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "y": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "shape": [
+            257
+          ],
+          "dtype": "f64"
+        }
+      ]
+    },
+    "add": {
+      "op": "KernelOp",
+      "op_fields": {
+        "body": [
+          "Tile(axes=(Axis(name='a0', extent=Dim(257), window=None),), body=(Load(names=('a',), input='x', index=(Var(name='a0'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Load(names=('b',), input='y', index=(Var(name='a0'),), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Assign(name='answer', op=ElementwiseImpl('power'), args=('a', 'b'), dtype=DataType(name='f64', np=dtype('float64'), nbytes=8)), Write(output='add', index=(Var(name='a0'),), values=('answer',), value_dtype=DataType(name='f64', np=dtype('float64'), nbytes=8), atomic=False, swizzle='NONE')), block_threads=None, aux_threads=0, raster_axes=None, raster_group=None, raster_orient='m')"
+        ],
+        "name": "k_add_pointwise",
+        "zero_delegated": [],
+        "serial": []
+      },
+      "inputs": [
+        "x",
+        "y"
+      ],
+      "outputs": [
+        {
+          "name": "add",
+          "shape": [
+            257
+          ],
+          "dtype": "f64"
+        }
+      ]
+    }
+  }
+}

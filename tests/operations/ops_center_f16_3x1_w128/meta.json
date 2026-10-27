@@ -1,0 +1,66 @@
+{
+ "id": "ops_center_f16_3x1_w128",
+ "code": "x = torch.randn((3, 1), dtype=torch.float16); x - x.mean(-1, keepdim=True)",
+ "rtol": 0.006,
+ "atol": 0.005,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sub"
+ ],
+ "kernels": [
+  {
+   "node": "sub",
+   "entry": "k_mean_fa9ce5",
+   "arg_order": [
+    "mean_count",
+    "x",
+    "sub"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mean_count",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      3,
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sub",
+     "dtype": "f16",
+     "shape": [
+      3,
+      1
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

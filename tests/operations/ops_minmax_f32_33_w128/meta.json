@@ -1,0 +1,63 @@
+{
+ "id": "ops_minmax_f32_33_w128",
+ "code": "x = torch.randn((33,), dtype=torch.float32); y = torch.randn((33,), dtype=torch.float32); torch.maximum(x, y) - torch.minimum(x, y)",
+ "rtol": 3e-05,
+ "atol": 2e-06,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "sub"
+ ],
+ "kernels": [
+  {
+   "node": "sub",
+   "entry": "k_sub_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "sub"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "f32",
+     "shape": [
+      33
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sub",
+     "dtype": "f32",
+     "shape": [
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

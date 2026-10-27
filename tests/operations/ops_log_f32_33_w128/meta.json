@@ -1,0 +1,64 @@
+{
+ "id": "ops_log_f32_33_w128",
+ "code": "x = torch.randn((33,), dtype=torch.float32); torch.log(x*x + 1)",
+ "rtol": 3e-05,
+ "atol": 2e-06,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "log"
+ ],
+ "kernels": [
+  {
+   "node": "log",
+   "entry": "k_log_pointwise",
+   "arg_order": [
+    "add_c1",
+    "x",
+    "log"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "add_c1",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "log",
+     "dtype": "f32",
+     "shape": [
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}
