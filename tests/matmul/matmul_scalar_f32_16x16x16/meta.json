@@ -1,0 +1,66 @@
+{
+ "id": "matmul_scalar_f32_16x16x16",
+ "code": "a = torch.randn(16, 16, dtype=torch.float32); b = torch.randn(16, 16, dtype=torch.float32); a @ b",
+ "rtol": 0.0001,
+ "atol": 0.0001,
+ "graph_inputs": [
+  "a",
+  "b"
+ ],
+ "graph_outputs": [
+  "matmul"
+ ],
+ "kernels": [
+  {
+   "node": "matmul",
+   "entry": "k_matmul_383668",
+   "arg_order": [
+    "b",
+    "a",
+    "matmul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "b",
+     "dtype": "f32",
+     "shape": [
+      16,
+      16
+     ],
+     "seed": 1
+    },
+    {
+     "name": "a",
+     "dtype": "f32",
+     "shape": [
+      16,
+      16
+     ],
+     "seed": 0
+    },
+    {
+     "name": "matmul",
+     "dtype": "f32",
+     "shape": [
+      16,
+      16
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

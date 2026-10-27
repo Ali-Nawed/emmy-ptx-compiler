@@ -1,0 +1,61 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_matmul_383668(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<17>;
+    .reg .b64 %rd<13>;
+    .reg .f32 %f<6>;
+    .reg .pred %p<3>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 256;
+    @%p1 bra DONE;
+    shr.u32 %r5, %r4, 4;
+    and.b32 %r6, %r4, 15;
+    mov.f32 %f1, 0f00000000;
+    mov.s32 %r7, 0;
+LOOP_1:
+    setp.ge.s32 %p2, %r7, 16;
+    @%p2 bra LOOP_DONE_2;
+    mul.lo.s32 %r8, %r5, 16;
+    add.s32 %r9, %r8, %r7;
+    mov.s32 %r10, %r9;
+    mul.wide.s32 %rd7, %r10, 4;
+    add.u64 %rd8, %rd4, %rd7;
+    ld.global.f32 %f2, [%rd8+0];
+    mul.lo.s32 %r11, %r7, 16;
+    add.s32 %r12, %r11, %r6;
+    mov.s32 %r13, %r12;
+    mul.wide.s32 %rd9, %r13, 4;
+    add.u64 %rd10, %rd2, %rd9;
+    ld.global.f32 %f3, [%rd10+0];
+    mul.rn.f32 %f4, %f2, %f3;
+    add.rn.f32 %f5, %f1, %f4;
+    mov.f32 %f1, %f5;
+    add.s32 %r7, %r7, 1;
+    bra LOOP_1;
+LOOP_DONE_2:
+    mul.lo.s32 %r14, %r5, 16;
+    add.s32 %r15, %r14, %r6;
+    mov.s32 %r16, %r15;
+    mul.wide.s32 %rd11, %r16, 4;
+    add.u64 %rd12, %rd6, %rd11;
+    st.global.f32 [%rd12+0], %f1;
+DONE:
+    ret;
+}

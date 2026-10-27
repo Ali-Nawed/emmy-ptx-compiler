@@ -1,0 +1,77 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "matmul_scalar_f32_16x16x16",
+      "status": "pass",
+      "knobs": "WORK=t8x4,TILE=f1x1,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "Loop": 1,
+        "Load": 2,
+        "Assign": 1,
+        "Accum": 1,
+        "Write": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_383668",
+            "median_us": 20.192,
+            "registers": {
+              "k_matmul_383668": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_async_f32_16x16x16",
+      "status": "upstream_generation_failed",
+      "knobs": "WORK=t8x4,TILE=f1x1,STAGE=d1/smem-async",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/matmul/matmul_async_f32_16x16x16; regenerate from its PyTorch expression"
+    },
+    {
+      "case": "matmul_mma_global_f16_16x8x16",
+      "status": "compiler_unsupported",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=",
+      "statements": {
+        "Tile": 2,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1,
+        "Loop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "Write": 1
+      },
+      "error": "Unsupported statement: RegFragment"
+    },
+    {
+      "case": "matmul_mma_shared_f16_16x8x16",
+      "status": "compiler_unsupported",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=d1/smem-async",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "Smem": 2,
+        "StridedLoop": 3,
+        "CpAsyncCopy": 2,
+        "CpAsyncCommit": 1,
+        "CpAsyncWait": 1,
+        "Sync": 2,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "error": "Unsupported statement: RegFragment"
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "25ce8939f5fc3d5364074be5ebaaecde7d7decd2a64ee466d47474c420a3a2c9",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e"
+  }
+}
