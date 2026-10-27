@@ -16,6 +16,7 @@ class FixturePolicyTests(unittest.TestCase):
         constructors = {"KernelOp", "Tile", "Assign", "Accum", "Load", "Write", "Let", "Init",
                         "Loop", "StridedLoop", "WarpShuffle", "TreeHalve", "Cond", "Smem", "Sync",
                         "Axis", "Dim", "Var", "Literal", "BinaryExpr", "TernaryExpr", "ElementwiseImpl", "KernelInput"}
+        constructors.update({"RegFragment", "LdmatrixLoad", "MmaSyncPtx", "RegStore", "CpAsyncCopy", "CpAsyncCommit", "CpAsyncWait"})
         for path in [*list((ROOT / "tests").glob("*.py")), *list((ROOT / "tools").glob("*.py"))]:
             if path.name == "generate.py":
                 continue  # Competition-owned upstream generator: read-only.

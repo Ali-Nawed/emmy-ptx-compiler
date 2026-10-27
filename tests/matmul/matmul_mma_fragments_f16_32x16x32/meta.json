@@ -1,0 +1,66 @@
+{
+ "id": "matmul_mma_fragments_f16_32x16x32",
+ "code": "a = torch.randn(32, 32, dtype=torch.float16); b = torch.randn(32, 16, dtype=torch.float16); a @ b",
+ "rtol": 0.002,
+ "atol": 0.002,
+ "graph_inputs": [
+  "a",
+  "b"
+ ],
+ "graph_outputs": [
+  "matmul"
+ ],
+ "kernels": [
+  {
+   "node": "matmul",
+   "entry": "k_matmul_4e9587",
+   "arg_order": [
+    "b",
+    "a",
+    "matmul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    32,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "b",
+     "dtype": "f16",
+     "shape": [
+      32,
+      16
+     ],
+     "seed": 1
+    },
+    {
+     "name": "a",
+     "dtype": "f16",
+     "shape": [
+      32,
+      32
+     ],
+     "seed": 0
+    },
+    {
+     "name": "matmul",
+     "dtype": "f16",
+     "shape": [
+      32,
+      16
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

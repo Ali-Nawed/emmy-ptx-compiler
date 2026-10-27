@@ -51,4 +51,6 @@ The supported path includes ordinary single-Tile pointwise work, add/multiply/ma
 
 Still missing are array-state Loop programs, boolean memory/output ABI, boolean-valued where, asynchronous copies, atomic writes and swizzled layouts. `Let`/`Init`, ordinary scalar-accumulating Loop, internal boolean/numeric selection and integer-index ternaries now have handlers, but this does not imply support for arbitrary pure expression trees. Auxiliary/rasterized Tile schedules, general multidimensional launches, warp barriers and nested shared reduction trees are also unsupported. Matmul and attention remain incomplete.
 
+The [first tensor-core matmul subset](16-first-tensor-core-matmul.md) now supports genuine f16/f32 m16n8k16 MMA with global fragment loads, guarded stores and split-K chaining. It is validated separately from the older scalar tests. Shared staging, arrayed fragment families and the public matmuls' copy/atomic requirements remain unsupported; this is not a claim of complete matmul support.
+
 Refer to the current result JSON for observed successes rather than inferring support from a category name. The hidden evaluation set is unavailable, so our own generated fixtures help explore its likely variations without proving hidden-set coverage.

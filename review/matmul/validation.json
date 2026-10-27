@@ -18,7 +18,7 @@
         "kernels": [
           {
             "entry": "k_matmul_383668",
-            "median_us": 20.192,
+            "median_us": 22.784,
             "registers": {
               "k_matmul_383668": 40
             }
@@ -34,7 +34,7 @@
     },
     {
       "case": "matmul_mma_global_f16_16x8x16",
-      "status": "compiler_unsupported",
+      "status": "pass",
       "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=",
       "statements": {
         "Tile": 2,
@@ -48,7 +48,24 @@
         "Accum": 1,
         "Write": 1
       },
-      "error": "Unsupported statement: RegFragment"
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul__partial",
+            "median_us": 15.392,
+            "registers": {
+              "k_matmul__partial": 28
+            }
+          },
+          {
+            "entry": "k_matmul",
+            "median_us": 20.864,
+            "registers": {
+              "k_matmul": 32
+            }
+          }
+        ]
+      }
     },
     {
       "case": "matmul_mma_shared_f16_16x8x16",
@@ -67,11 +84,11 @@
         "MmaSyncPtx": 1,
         "RegStore": 1
       },
-      "error": "Unsupported statement: RegFragment"
+      "error": "Unsupported statement: CpAsyncCopy"
     }
   ],
   "source_sha256": {
-    "compile.py": "25ce8939f5fc3d5364074be5ebaaecde7d7decd2a64ee466d47474c420a3a2c9",
+    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
     "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e"
   }
 }

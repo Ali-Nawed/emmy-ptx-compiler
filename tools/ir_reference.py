@@ -21,6 +21,7 @@ from emmy.compiler.graph import Graph
 from emmy.compiler.ir.expr import BinaryExpr, Literal, Var, TernaryExpr
 from emmy.compiler.ir.kernel.ir import KernelOp, Tile, Smem, Sync, WarpShuffle, TreeHalve
 from emmy.compiler.ir.stmt import Accum, Assign, Cond, Load, Loop, StridedLoop, Write, Let, Init
+from tensor_reference import TensorReference
 
 DTYPES = {name: np.dtype(dtype) for name, dtype in
           (("f16", "float16"), ("f32", "float32"), ("f64", "float64"),
@@ -134,7 +135,7 @@ def accumulator_identity(identity, dtype):
         return np.asarray(identity).astype(DTYPES[dtype])
 
 
-class Block:
+class Block(TensorReference):
     def __init__(self, count, buffers, initialized):
         self.count = count
         self.buffers = dict(buffers)
@@ -250,6 +251,8 @@ class Block:
                 self.statement(stmt, mask)
 
     def statement(self, stmt, mask):
+        if self.tensor_statement(stmt, mask):
+            return
         if isinstance(stmt, Init):
             self.bind(stmt.name, accumulator_identity(stmt.identity, stmt.dtype.name), mask)
         elif isinstance(stmt, Let):

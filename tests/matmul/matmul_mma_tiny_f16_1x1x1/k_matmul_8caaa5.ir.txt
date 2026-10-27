@@ -1,0 +1,5 @@
+    Tile[] (N=1)
+        in0 = load a[0, 0]
+        in1 = load b[0, 0]
+        f16 v0 = multiply(in0, in1)
+        matmul[0, 0] = v0

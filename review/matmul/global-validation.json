@@ -1,0 +1,344 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "matmul_scalar_f32_16x16x16",
+      "status": "pass",
+      "knobs": "WORK=t8x4,TILE=f1x1,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "Loop": 1,
+        "Load": 2,
+        "Assign": 1,
+        "Accum": 1,
+        "Write": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_383668",
+            "median_us": 23.552,
+            "registers": {
+              "k_matmul_383668": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_global_f16_16x8x16",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=",
+      "statements": {
+        "Tile": 2,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1,
+        "Loop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "Write": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul__partial",
+            "median_us": 16.8,
+            "registers": {
+              "k_matmul__partial": 28
+            }
+          },
+          {
+            "entry": "k_matmul",
+            "median_us": 24.096,
+            "registers": {
+              "k_matmul": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_nosplit_f16_16x8x16",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_7421ac",
+            "median_us": 23.68,
+            "registers": {
+              "k_matmul_7421ac": 38
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_kloop_f16_16x8x32",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_3d38ab",
+            "median_us": 23.648,
+            "registers": {
+              "k_matmul_3d38ab": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_tails_f16_17x13x19",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_0ae725",
+            "median_us": 23.968,
+            "registers": {
+              "k_matmul_0ae725": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_tiles_f16_32x24x32",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_c028b7",
+            "median_us": 23.744,
+            "registers": {
+              "k_matmul_c028b7": 42
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_warps_f16_32x16x32",
+      "status": "pass",
+      "knobs": "WORK=w2x2,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_4e9587",
+            "median_us": 23.328,
+            "registers": {
+              "k_matmul_4e9587": 44
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_transposed_f16_16x8x16",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_1a5cf2",
+            "median_us": 24.64,
+            "registers": {
+              "k_matmul_1a5cf2": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_tiny_f16_1x1x1",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "Load": 2,
+        "Assign": 1,
+        "Write": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_8caaa5",
+            "median_us": 22.976,
+            "registers": {
+              "k_matmul_8caaa5": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "2c9ebeaa94c4ae87bdded8531b2d0502171dfcf4a2ef868a98e90953735b61eb"
+  }
+}

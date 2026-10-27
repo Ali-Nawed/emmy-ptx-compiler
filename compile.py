@@ -21,9 +21,11 @@ from typing import Any
 from emmy.compiler.graph import Graph
 from emmy.compiler.ir.kernel.ir import KernelOp
 from emmy.compiler.ir.kernel.ir import Tile, Smem, Sync, WarpShuffle, TreeHalve
+from emmy.compiler.ir.kernel.ir import RegFragment, LdmatrixLoad, MmaSyncPtx, RegStore
 from emmy.compiler.ir.expr import BinaryExpr, Literal, Var, TernaryExpr
 from emmy.compiler.ir.stmt import Assign, Load, Write, Loop, StridedLoop, Accum, Cond, Let, Init
 from ptx_math import ScalarMath
+from ptx_tensor import TensorMath
 
 
 @dataclass
@@ -67,7 +69,7 @@ def inspect_kernel(source: KernelInput) -> None:
         pprint(statement, stream=sys.stderr, width=100, sort_dicts=False)
 
 
-class PTXEmitter(ScalarMath):
+class PTXEmitter(ScalarMath, TensorMath):
     """Direct typed emitter for the runner's five scalar datatypes.
 
     Keep this first version deliberately narrow. Unsupported forms fail rather
@@ -91,6 +93,7 @@ class PTXEmitter(ScalarMath):
         self.declarations: list[str] = []
         self.label_count = 0
         self.combine_dtype = None
+        self.fragments = {}
 
     def label(self, prefix: str) -> str:
         self.label_count += 1
@@ -612,7 +615,15 @@ class PTXEmitter(ScalarMath):
         self.emit(f"bar.sync {barrier_id}{suffix};")
 
     def statement(self, stmt) -> None:
-        if isinstance(stmt, Init):
+        if isinstance(stmt, RegFragment):
+            self.reg_fragment(stmt)
+        elif isinstance(stmt, LdmatrixLoad):
+            self.matrix_load(stmt)
+        elif isinstance(stmt, MmaSyncPtx):
+            self.mma_sync(stmt)
+        elif isinstance(stmt, RegStore):
+            self.reg_store(stmt)
+        elif isinstance(stmt, Init):
             dtype = stmt.dtype.name
             target = self.data_reg(dtype)
             self.move(target, self.seed_literal(stmt.identity, dtype), dtype)

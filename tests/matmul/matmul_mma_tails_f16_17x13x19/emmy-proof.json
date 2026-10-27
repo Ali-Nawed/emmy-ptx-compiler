@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "a = torch.randn(17, 19, dtype=torch.float16); b = torch.randn(19, 13, dtype=torch.float16); a @ b",
+  "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_matmul_0ae725.ir.json": {
+      "sha256": "d59978c07c209025316e6d19c07abeee3ef9556ef9e175edd1d76c6832841082",
+      "upstream_dump_sha256": "d59978c07c209025316e6d19c07abeee3ef9556ef9e175edd1d76c6832841082"
+    }
+  }
+}

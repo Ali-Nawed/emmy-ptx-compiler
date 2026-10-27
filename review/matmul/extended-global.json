@@ -1,0 +1,137 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "matmul_mma_nosplit_f16_16x8x16",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_7421ac",
+            "median_us": 19.744,
+            "registers": {
+              "k_matmul_7421ac": 38
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_mma_kloop_f16_16x8x32",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_3d38ab",
+            "median_us": 20.032,
+            "registers": {
+              "k_matmul_3d38ab": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_mma_tails_f16_17x13x19",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_0ae725",
+            "median_us": 19.904,
+            "registers": {
+              "k_matmul_0ae725": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_mma_tiles_f16_32x24x32",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_c028b7",
+            "median_us": 20.352,
+            "registers": {
+              "k_matmul_c028b7": 42
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_mma_warps_f16_32x16x32",
+      "status": "pass",
+      "knobs": "WORK=w2x2,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_4e9587",
+            "median_us": 20.064,
+            "registers": {
+              "k_matmul_4e9587": 44
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "matmul_mma_transposed_f16_16x8x16",
+      "status": "upstream_generation_failed",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'a = torch.randn(16, 16, dtype=torch.float16); b = torch.randn(8, 16, dtype=torch.float16); a @ b.T', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2178, in _handle_call_function\n    input_ids = [broadcast_to(g, inp, shape) for inp in input_ids]\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/frontend/decomposition/_broadcast.py\", line 61, in broadcast_to\n    raise ValueError(f\"cannot broadcast shape {inp_shape} to {target_shape}: non-size-1 dim mismatch or rank exceeds target{hint}\")\nValueError: cannot broadcast shape (Dim(8), Dim(16)) to (16, 8): non-size-1 dim mismatch or rank exceeds target\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 518, in handle_compile\n    graph, _, bundle = load_or_trace(args)\n                       ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 629, in load_or_trace\n    return graph_from_code(args.code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 201, in graph_from_code\n    info = trace_inline_code(code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 292, in trace_inline_code\n    graph, const_targets = trace_module_with_constants(module, example_inputs, dynamic_shapes=dynamic_shapes)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 150, in trace_module_with_constants\n    _handle_call_function(g, fx_node, node_map, sym_rename=sym_rename)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2180, in _handle_call_function\n    raise ValueError(f\"cannot map fallback aten.{op_name} as elementwise for output shape {shape}\") from exc\nValueError: cannot map fallback aten.numpy_T as elementwise for output shape (16, 8)\n"
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "2c9ebeaa94c4ae87bdded8531b2d0502171dfcf4a2ef868a98e90953735b61eb"
+  }
+}

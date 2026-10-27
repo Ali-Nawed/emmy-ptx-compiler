@@ -19,6 +19,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 13. [Native exp/log: implementation, validation and coverage gaps](13-native-exp-log-and-coverage.md)
 14. [Boolean comparisons and where](14-boolean-comparisons-and-where.md)
 15. [Sigmoid and tanh: native instructions and accuracy](15-sigmoid-and-tanh.md)
+16. [First native tensor-core matmul](16-first-tensor-core-matmul.md)
 
 ## The complete path
 
@@ -34,7 +35,7 @@ Kernel IR JSON + sibling meta.json
 
 The translation is ours. Emmy provides the input types/parser; our submission does not call Emmy's CUDA renderer, nvcc, LLVM or another compiler to translate the input. The local test generator may use upstream tooling to produce fixtures and metadata. Only PTX emitted by our own `compile.py` is sent to the hosted runner.
 
-`compile.py` imports our [ptx_math.py](../../ptx_math.py) for scalar exp/log/power expansions. Keep both files at the submission repository root. This module is our emission code, not another compiler or a new IR pass.
+`compile.py` imports our [ptx_math.py](../../ptx_math.py) for scalar math and [ptx_tensor.py](../../ptx_tensor.py) for tensor-core fragment emission. Keep all three files at the submission repository root. These modules are our emission code, not another compiler or a new IR pass.
 
 ## Where state lives
 

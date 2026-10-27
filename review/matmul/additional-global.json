@@ -1,0 +1,95 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "matmul_mma_transposed_f16_16x8x16",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 3,
+        "StridedLoop": 1,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 1,
+        "RegStore": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_1a5cf2",
+            "median_us": 21.024,
+            "registers": {
+              "k_matmul_1a5cf2": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_tiny_f16_1x1x1",
+      "status": "pass",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "Load": 2,
+        "Assign": 1,
+        "Write": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_8caaa5",
+            "median_us": 22.912,
+            "registers": {
+              "k_matmul_8caaa5": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "matmul_mma_fragments_f16_32x16x32",
+      "status": "compiler_unsupported",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f2x2,REDUCE=,STAGE=",
+      "statements": {
+        "Tile": 1,
+        "RegFragment": 4,
+        "StridedLoop": 5,
+        "LdmatrixLoad": 2,
+        "MmaSyncPtx": 2,
+        "RegStore": 4
+      },
+      "error": "Only single m16n8k16 f16 A/B and f32 C fragments are supported"
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "2c9ebeaa94c4ae87bdded8531b2d0502171dfcf4a2ef868a98e90953735b61eb"
+  }
+}

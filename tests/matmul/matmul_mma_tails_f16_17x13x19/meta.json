@@ -1,0 +1,66 @@
+{
+ "id": "matmul_mma_tails_f16_17x13x19",
+ "code": "a = torch.randn(17, 19, dtype=torch.float16); b = torch.randn(19, 13, dtype=torch.float16); a @ b",
+ "rtol": 0.002,
+ "atol": 0.002,
+ "graph_inputs": [
+  "a",
+  "b"
+ ],
+ "graph_outputs": [
+  "matmul"
+ ],
+ "kernels": [
+  {
+   "node": "matmul",
+   "entry": "k_matmul_0ae725",
+   "arg_order": [
+    "b",
+    "a",
+    "matmul"
+   ],
+   "grid": [
+    4,
+    1,
+    1
+   ],
+   "block": [
+    32,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "b",
+     "dtype": "f16",
+     "shape": [
+      19,
+      13
+     ],
+     "seed": 1
+    },
+    {
+     "name": "a",
+     "dtype": "f16",
+     "shape": [
+      17,
+      19
+     ],
+     "seed": 0
+    },
+    {
+     "name": "matmul",
+     "dtype": "f16",
+     "shape": [
+      17,
+      13
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

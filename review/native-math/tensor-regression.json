@@ -1,0 +1,1067 @@
+{
+  "source_sha256": {
+    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "fixture": "problems/p00_scalar_add",
+      "status": "pass",
+      "assembly": {
+        "k_add_pointwise": {
+          "instruction_count": 45,
+          "opcodes": {
+            "add.rn.f32": 2,
+            "add.s32": 5,
+            "add.u64": 5,
+            "bra": 1,
+            "cvta.to.global.u64": 3,
+            "ld.global.f32": 4,
+            "ld.param.u64": 3,
+            "mad.lo.s32": 1,
+            "mov.s32": 5,
+            "mov.u32": 3,
+            "mul.lo.s32": 5,
+            "mul.wide.s32": 5,
+            "ret": 1,
+            "setp.ge.u32": 1,
+            "st.global.v2.f32": 1
+          },
+          "vector_memory_instructions": 1,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 32,
+          "sass_non_nop_count": 24,
+          "sass_opcodes": {
+            "BRA": 1,
+            "EXIT": 2,
+            "FADD": 2,
+            "IADD3": 1,
+            "IMAD": 1,
+            "IMAD.WIDE": 5,
+            "ISETP.GE.U32.AND": 1,
+            "LDG.E": 4,
+            "MOV": 2,
+            "NOP": 8,
+            "S2R": 2,
+            "SHF.L.U32": 1,
+            "STG.E.64": 1,
+            "ULDC.64": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.552,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p01_vector_add",
+      "status": "pass",
+      "assembly": {
+        "k_add_pointwise": {
+          "instruction_count": 45,
+          "opcodes": {
+            "add.rn.f32": 2,
+            "add.s32": 5,
+            "add.u64": 5,
+            "bra": 1,
+            "cvta.to.global.u64": 3,
+            "ld.global.f32": 4,
+            "ld.param.u64": 3,
+            "mad.lo.s32": 1,
+            "mov.s32": 5,
+            "mov.u32": 3,
+            "mul.lo.s32": 5,
+            "mul.wide.s32": 5,
+            "ret": 1,
+            "setp.ge.u32": 1,
+            "st.global.v2.f32": 1
+          },
+          "vector_memory_instructions": 1,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 32,
+          "sass_non_nop_count": 24,
+          "sass_opcodes": {
+            "BRA": 1,
+            "EXIT": 2,
+            "FADD": 2,
+            "IADD3": 1,
+            "IMAD": 1,
+            "IMAD.WIDE": 5,
+            "ISETP.GE.U32.AND": 1,
+            "LDG.E": 4,
+            "MOV": 2,
+            "NOP": 8,
+            "S2R": 2,
+            "SHF.L.U32": 1,
+            "STG.E.64": 1,
+            "ULDC.64": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.064,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p02_scale_shift",
+      "status": "pass",
+      "assembly": {
+        "k_add_pointwise": {
+          "instruction_count": 85,
+          "opcodes": {
+            "add.rn.f32": 4,
+            "add.s32": 5,
+            "add.u64": 13,
+            "bra": 1,
+            "cvta.to.global.u64": 4,
+            "ld.global.f32": 12,
+            "ld.param.u64": 4,
+            "mad.lo.s32": 1,
+            "mov.s32": 13,
+            "mov.u32": 3,
+            "mul.lo.s32": 5,
+            "mul.rn.f32": 4,
+            "mul.wide.s32": 13,
+            "ret": 1,
+            "setp.ge.u32": 1,
+            "st.global.v4.f32": 1
+          },
+          "vector_memory_instructions": 1,
+          "registers": 24,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 48,
+          "sass_non_nop_count": 38,
+          "sass_opcodes": {
+            "BRA": 1,
+            "EXIT": 2,
+            "FADD": 4,
+            "FMUL": 4,
+            "IADD3": 3,
+            "IMAD": 1,
+            "IMAD.WIDE": 5,
+            "ISETP.GE.U32.AND": 1,
+            "LDG.E": 6,
+            "MOV": 6,
+            "NOP": 10,
+            "S2R": 2,
+            "SHF.L.U32": 1,
+            "STG.E.128": 1,
+            "ULDC.64": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 16.992,
+            "registers": {
+              "k_add_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p03_relu_mul",
+      "status": "pass",
+      "assembly": {
+        "k_mul_pointwise": {
+          "instruction_count": 79,
+          "opcodes": {
+            "add.s32": 9,
+            "add.u64": 9,
+            "bra": 1,
+            "cvta.to.global.u64": 3,
+            "ld.global.f32": 8,
+            "ld.param.u64": 3,
+            "mad.lo.s32": 1,
+            "mov.s32": 9,
+            "mov.u32": 3,
+            "mul.lo.s32": 9,
+            "mul.rn.f32": 4,
+            "mul.wide.s32": 9,
+            "ret": 1,
+            "selp.f32": 4,
+            "setp.ge.u32": 1,
+            "setp.lt.f32": 4,
+            "st.global.v4.f32": 1
+          },
+          "vector_memory_instructions": 1,
+          "registers": 22,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 56,
+          "sass_non_nop_count": 44,
+          "sass_opcodes": {
+            "BRA": 1,
+            "EXIT": 2,
+            "FMUL": 4,
+            "FSEL": 4,
+            "FSETP.GEU.AND": 4,
+            "IADD3": 3,
+            "IMAD": 1,
+            "IMAD.WIDE": 9,
+            "ISETP.GE.U32.AND": 1,
+            "LDG.E": 8,
+            "MOV": 2,
+            "NOP": 12,
+            "S2R": 2,
+            "SHF.L.U32": 1,
+            "STG.E.128": 1,
+            "ULDC.64": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 16.288,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r01_array_sum",
+      "status": "pass",
+      "assembly": {
+        "k_sum_1_reduce": {
+          "instruction_count": 94,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 3,
+            "add.u64": 8,
+            "and.b32": 1,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 2,
+            "ld.global.f32": 1,
+            "ld.param.u64": 2,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 9,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.wide.s32": 8,
+            "ret": 1,
+            "setp.eq.s32": 2,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 1,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 1,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 112,
+          "sass_non_nop_count": 102,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 6,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "EXIT": 2,
+            "FADD": 14,
+            "IADD3": 10,
+            "IMAD": 1,
+            "IMAD.MOV.U32": 5,
+            "IMAD.SHL.U32": 2,
+            "IMAD.WIDE": 7,
+            "ISETP.GE.AND": 3,
+            "ISETP.GT.AND": 2,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 1,
+            "LDG.E": 7,
+            "LDS": 5,
+            "LOP3.LUT": 1,
+            "MOV": 3,
+            "NOP": 10,
+            "PLOP3.LUT": 3,
+            "S2R": 2,
+            "SHF.L.U32": 3,
+            "SHF.R.U32.HI": 1,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 30.656,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r02_big_sum",
+      "status": "pass",
+      "assembly": {
+        "k_sum_1_reduce": {
+          "instruction_count": 94,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 3,
+            "add.u64": 8,
+            "and.b32": 1,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 2,
+            "ld.global.f32": 1,
+            "ld.param.u64": 2,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 9,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.wide.s32": 8,
+            "ret": 1,
+            "setp.eq.s32": 2,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 1,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 1,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 112,
+          "sass_non_nop_count": 102,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 6,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "EXIT": 2,
+            "FADD": 14,
+            "IADD3": 10,
+            "IMAD": 1,
+            "IMAD.MOV.U32": 5,
+            "IMAD.SHL.U32": 2,
+            "IMAD.WIDE": 7,
+            "ISETP.GE.AND": 3,
+            "ISETP.GT.AND": 2,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 1,
+            "LDG.E": 7,
+            "LDS": 5,
+            "LOP3.LUT": 1,
+            "MOV": 3,
+            "NOP": 10,
+            "PLOP3.LUT": 3,
+            "S2R": 2,
+            "SHF.L.U32": 3,
+            "SHF.R.U32.HI": 1,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 42.24,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r03_mean",
+      "status": "pass",
+      "assembly": {
+        "k_mean_ffcca3": {
+          "instruction_count": 101,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 3,
+            "add.u64": 9,
+            "and.b32": 1,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 3,
+            "div.rn.f32": 1,
+            "ld.global.f32": 2,
+            "ld.param.u64": 3,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 10,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.wide.s32": 9,
+            "ret": 1,
+            "setp.eq.s32": 2,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 1,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 1,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 224,
+          "sass_non_nop_count": 216,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 23,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "CALL.REL.NOINC": 1,
+            "EXIT": 2,
+            "FADD": 14,
+            "FADD.FTZ": 2,
+            "FCHK": 1,
+            "FFMA": 14,
+            "FFMA.RM": 1,
+            "FFMA.RP": 1,
+            "FFMA.RZ": 1,
+            "FSETP.GTU.FTZ.AND": 2,
+            "FSETP.NEU.FTZ.AND": 4,
+            "IADD3": 17,
+            "IMAD": 3,
+            "IMAD.IADD": 4,
+            "IMAD.MOV": 1,
+            "IMAD.MOV.U32": 17,
+            "IMAD.SHL.U32": 5,
+            "IMAD.WIDE": 7,
+            "ISETP.GE.AND": 7,
+            "ISETP.GE.U32.AND": 1,
+            "ISETP.GT.AND": 3,
+            "ISETP.GT.U32.AND": 1,
+            "ISETP.GT.U32.OR": 1,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 5,
+            "ISETP.NE.U32.AND": 1,
+            "LDG.E": 8,
+            "LDS": 5,
+            "LEA": 1,
+            "LOP3.LUT": 18,
+            "MOV": 1,
+            "MUFU.RCP": 2,
+            "MUFU.RSQ": 1,
+            "NOP": 8,
+            "PLOP3.LUT": 7,
+            "RET.REL.NODEC": 1,
+            "S2R": 2,
+            "SEL": 2,
+            "SHF.L.U32": 1,
+            "SHF.R.U32.HI": 6,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_ffcca3",
+            "median_us": 31.392,
+            "registers": {
+              "k_mean_ffcca3": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r04_row_sum",
+      "status": "pass",
+      "assembly": {
+        "k_sum_1_reduce": {
+          "instruction_count": 98,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 4,
+            "add.u64": 8,
+            "and.b32": 2,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 2,
+            "ld.global.f32": 1,
+            "ld.param.u64": 2,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 9,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.lo.s32": 1,
+            "mul.wide.s32": 8,
+            "ret": 1,
+            "setp.eq.s32": 2,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 1,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 2,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 16,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 120,
+          "sass_non_nop_count": 105,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 5,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "EXIT": 2,
+            "FADD": 14,
+            "IADD3": 10,
+            "IMAD": 4,
+            "IMAD.MOV.U32": 2,
+            "IMAD.SHL.U32": 3,
+            "IMAD.WIDE": 8,
+            "ISETP.GE.AND": 2,
+            "ISETP.GT.AND": 2,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 1,
+            "LDG.E": 7,
+            "LDS": 5,
+            "LOP3.LUT": 2,
+            "MOV": 5,
+            "NOP": 15,
+            "PLOP3.LUT": 3,
+            "S2R": 2,
+            "SHF.L.U32": 2,
+            "SHF.R.U32.HI": 2,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.032,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/f01_rmsnorm",
+      "status": "pass",
+      "assembly": {
+        "k_mean_cbd1de": {
+          "instruction_count": 134,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 9,
+            "add.s32": 7,
+            "add.u64": 12,
+            "and.b32": 2,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 5,
+            "ld.global.f32": 5,
+            "ld.param.u64": 5,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 14,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.lo.s32": 3,
+            "mul.rn.f32": 4,
+            "mul.wide.s32": 12,
+            "rcp.rn.f32": 2,
+            "ret": 1,
+            "setp.eq.s32": 1,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 2,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 2,
+            "sqrt.rn.f32": 1,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 18,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 248,
+          "sass_non_nop_count": 240,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 21,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "CALL.REL.NOINC": 3,
+            "EXIT": 1,
+            "FADD": 15,
+            "FADD.FTZ": 6,
+            "FFMA": 14,
+            "FFMA.RM": 1,
+            "FFMA.RP": 1,
+            "FMUL": 10,
+            "FMUL.FTZ": 5,
+            "FSETP.GEU.FTZ.AND": 1,
+            "FSETP.GTU.FTZ.AND": 1,
+            "FSETP.NEU.FTZ.AND": 2,
+            "IADD3": 18,
+            "IMAD": 3,
+            "IMAD.MOV": 1,
+            "IMAD.MOV.U32": 12,
+            "IMAD.SHL.U32": 5,
+            "IMAD.WIDE": 10,
+            "ISETP.GE.AND": 4,
+            "ISETP.GT.AND": 2,
+            "ISETP.GT.U32.AND": 4,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 3,
+            "LDG.E": 11,
+            "LDS": 5,
+            "LEA": 2,
+            "LOP3.LUT": 14,
+            "MOV": 14,
+            "MUFU.RCP": 6,
+            "MUFU.RSQ": 2,
+            "NOP": 8,
+            "PLOP3.LUT": 4,
+            "RET.REL.NODEC": 2,
+            "S2R": 2,
+            "SEL": 2,
+            "SHF.L.U32": 4,
+            "SHF.R.U32.HI": 5,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_cbd1de",
+            "median_us": 17.248,
+            "registers": {
+              "k_mean_cbd1de": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/f03_l2norm",
+      "status": "pass",
+      "assembly": {
+        "k_div_reduce": {
+          "instruction_count": 112,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 7,
+            "add.u64": 9,
+            "and.b32": 2,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvta.to.global.u64": 2,
+            "ld.global.f32": 2,
+            "ld.param.u64": 2,
+            "ld.shared.f32": 5,
+            "mad.lo.s32": 1,
+            "mov.f32": 10,
+            "mov.s32": 11,
+            "mov.u32": 3,
+            "mov.u64": 1,
+            "mul.lo.s32": 3,
+            "mul.rn.f32": 2,
+            "mul.wide.s32": 9,
+            "rcp.rn.f32": 1,
+            "ret": 1,
+            "setp.eq.s32": 1,
+            "setp.eq.u32": 2,
+            "setp.ge.s32": 2,
+            "setp.lt.u32": 2,
+            "shfl.sync.bfly.b32": 5,
+            "shr.u32": 2,
+            "sqrt.rn.f32": 1,
+            "st.global.f32": 1,
+            "st.shared.f32": 3
+          },
+          "vector_memory_instructions": 0,
+          "registers": 18,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 224,
+          "sass_non_nop_count": 216,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 19,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "CALL.REL.NOINC": 2,
+            "EXIT": 1,
+            "FADD": 14,
+            "FADD.FTZ": 5,
+            "FFMA": 12,
+            "FFMA.RM": 1,
+            "FFMA.RP": 1,
+            "FMUL": 8,
+            "FMUL.FTZ": 5,
+            "FSETP.GEU.FTZ.AND": 1,
+            "FSETP.GTU.FTZ.AND": 1,
+            "FSETP.NEU.FTZ.AND": 2,
+            "IADD3": 17,
+            "IMAD": 3,
+            "IMAD.MOV": 1,
+            "IMAD.MOV.U32": 9,
+            "IMAD.SHL.U32": 6,
+            "IMAD.WIDE": 9,
+            "ISETP.GE.AND": 4,
+            "ISETP.GT.AND": 2,
+            "ISETP.GT.U32.AND": 3,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 3,
+            "LDG.E": 8,
+            "LDS": 5,
+            "LEA": 2,
+            "LOP3.LUT": 13,
+            "MOV": 10,
+            "MUFU.RCP": 5,
+            "MUFU.RSQ": 2,
+            "NOP": 8,
+            "PLOP3.LUT": 4,
+            "RET.REL.NODEC": 2,
+            "S2R": 2,
+            "SEL": 2,
+            "SHF.L.U32": 3,
+            "SHF.R.U32.HI": 5,
+            "SHFL.BFLY": 5,
+            "STG.E": 1,
+            "STS": 3,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_reduce",
+            "median_us": 16.576,
+            "registers": {
+              "k_div_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/f02_row_softmax",
+      "status": "pass",
+      "assembly": {
+        "k_softmax_05263d": {
+          "instruction_count": 450,
+          "opcodes": {
+            "activemask.b32": 1,
+            "add.rn.f32": 8,
+            "add.s32": 7,
+            "add.u64": 15,
+            "and.b32": 2,
+            "and.pred": 2,
+            "bar.sync": 3,
+            "bra": 8,
+            "cvt.rni.f32.f32": 17,
+            "cvta.to.global.u64": 2,
+            "ex2.approx.f32": 34,
+            "fma.rn.f32": 34,
+            "ld.global.f32": 2,
+            "ld.param.u64": 2,
+            "ld.shared.f32": 10,
+            "mad.lo.s32": 1,
+            "max.f32": 34,
+            "min.f32": 17,
+            "mov.f32": 37,
+            "mov.s32": 17,
+            "mov.u32": 3,
+            "mov.u64": 2,
+            "mul.lo.s32": 3,
+            "mul.rn.f32": 68,
+            "mul.wide.s32": 15,
+            "neg.f32": 17,
+            "rcp.rn.f32": 1,
+            "ret": 1,
+            "selp.f32": 9,
+            "setp.eq.s32": 1,
+            "setp.eq.u32": 2,
+            "setp.ge.f32": 17,
+            "setp.ge.s32": 2,
+            "setp.gt.f32": 9,
+            "setp.lt.u32": 2,
+            "setp.nan.f32": 9,
+            "shfl.sync.bfly.b32": 10,
+            "shr.u32": 2,
+            "st.global.f32": 1,
+            "st.shared.f32": 6,
+            "sub.rn.f32": 17
+          },
+          "vector_memory_instructions": 0,
+          "registers": 29,
+          "spill_store_bytes": 0,
+          "spill_load_bytes": 0,
+          "sass_instruction_count": 536,
+          "sass_non_nop_count": 523,
+          "sass_opcodes": {
+            "BAR.SYNC": 3,
+            "BRA": 12,
+            "BSSY": 3,
+            "BSYNC": 3,
+            "CALL.REL.NOINC": 1,
+            "EXIT": 1,
+            "FADD": 25,
+            "FADD.FTZ": 3,
+            "FFMA": 41,
+            "FFMA.RM": 1,
+            "FFMA.RP": 1,
+            "FMNMX": 51,
+            "FMUL": 136,
+            "FRND": 17,
+            "FSEL": 16,
+            "FSETP.GE.AND": 17,
+            "FSETP.GEU.AND": 34,
+            "FSETP.GT.AND": 8,
+            "FSETP.NAN.AND": 8,
+            "FSETP.NEU.FTZ.AND": 1,
+            "IADD3": 10,
+            "IMAD": 1,
+            "IMAD.WIDE": 3,
+            "ISETP.GE.AND": 3,
+            "ISETP.GT.U32.AND": 2,
+            "ISETP.LT.U32.AND": 2,
+            "ISETP.NE.AND": 2,
+            "ISETP.NE.U32.AND": 3,
+            "LDG.E": 2,
+            "LDS": 10,
+            "LEA": 2,
+            "LOP3.LUT": 12,
+            "MOV": 11,
+            "MUFU.EX2": 34,
+            "MUFU.RCP": 5,
+            "NOP": 13,
+            "PLOP3.LUT": 1,
+            "RET.REL.NODEC": 1,
+            "S2R": 2,
+            "SEL": 2,
+            "SHF.L.U32": 9,
+            "SHF.R.U32.HI": 5,
+            "SHFL.BFLY": 10,
+            "STG.E": 1,
+            "STS": 6,
+            "ULDC.64": 1,
+            "VOTE.ANY": 1
+          }
+        }
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_05263d",
+            "median_us": 16.32,
+            "registers": {
+              "k_softmax_05263d": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 11
+  }
+}
