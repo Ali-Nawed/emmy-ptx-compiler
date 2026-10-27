@@ -1,0 +1,197 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_sum_1_reduce(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<28>;
+    .reg .b64 %rd<22>;
+    .reg .f32 %f<21>;
+    .reg .f64 %d<40>;
+    .reg .b64 %l<4>;
+    .reg .pred %p<12>;
+    .shared .align 4 .b8 scratch_0[16];
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    shr.u32 %r5, %r4, 7;
+    and.b32 %r6, %r4, 127;
+    and.b32 %r7, %r1, 31;
+    shr.u32 %r8, %r1, 5;
+    mov.f32 %f1, 0f00000000;
+    mov.s32 %r9, %r6;
+LOOP_1:
+    setp.ge.s32 %p1, %r9, 129;
+    @%p1 bra LOOP_DONE_2;
+    mul.lo.s32 %r10, %r5, 129;
+    add.s32 %r11, %r10, %r9;
+    mov.s32 %r12, %r11;
+    mul.wide.s32 %rd5, %r12, 8;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.f64 %d1, [%rd6+0];
+    abs.f64 %d3, %d1;
+    mul.rn.f64 %d4, %d3, 0dC000000000000000;
+    setp.gt.f64 %p2, %d4, 0d4086300000000000;
+    @%p2 mov.f64 %d5, 0d7FF0000000000000;
+    @%p2 bra EXP_DONE_3;
+    setp.lt.f64 %p2, %d4, 0dC087500000000000;
+    @%p2 mov.f64 %d5, 0d0000000000000000;
+    @%p2 bra EXP_DONE_3;
+    setp.nan.f64 %p2, %d4, %d4;
+    @%p2 mov.f64 %d5, %d4;
+    @%p2 bra EXP_DONE_3;
+    mul.rn.f64 %d6, %d4, 0d3FF71547652B82FE;
+    cvt.rni.s32.f64 %r13, %d6;
+    cvt.rn.f64.s32 %d7, %r13;
+    neg.f64 %d8, %d7;
+    fma.rn.f64 %d9, %d8, 0d3FE62E42FEE00000, %d4;
+    fma.rn.f64 %d10, %d8, 0d3DEA39EF35793C76, %d9;
+    fma.rn.f64 %d11, 0d3CA6827863B97D97, %d10, 0d3CE952C77030AD4A;
+    fma.rn.f64 %d12, %d11, %d10, 0d3D2AE7F3E733B81F;
+    fma.rn.f64 %d13, %d12, %d10, 0d3D6AE7F3E733B81F;
+    fma.rn.f64 %d14, %d13, %d10, 0d3DA93974A8C07C9D;
+    fma.rn.f64 %d15, %d14, %d10, 0d3DE6124613A86D09;
+    fma.rn.f64 %d16, %d15, %d10, 0d3E21EED8EFF8D898;
+    fma.rn.f64 %d17, %d16, %d10, 0d3E5AE64567F544E4;
+    fma.rn.f64 %d18, %d17, %d10, 0d3E927E4FB7789F5C;
+    fma.rn.f64 %d19, %d18, %d10, 0d3EC71DE3A556C734;
+    fma.rn.f64 %d20, %d19, %d10, 0d3EFA01A01A01A01A;
+    fma.rn.f64 %d21, %d20, %d10, 0d3F2A01A01A01A01A;
+    fma.rn.f64 %d22, %d21, %d10, 0d3F56C16C16C16C17;
+    fma.rn.f64 %d23, %d22, %d10, 0d3F81111111111111;
+    fma.rn.f64 %d24, %d23, %d10, 0d3FA5555555555555;
+    fma.rn.f64 %d25, %d24, %d10, 0d3FC5555555555555;
+    fma.rn.f64 %d26, %d25, %d10, 0d3FE0000000000000;
+    fma.rn.f64 %d27, %d26, %d10, 0d3FF0000000000000;
+    fma.rn.f64 %d28, %d27, %d10, 0d3FF0000000000000;
+    max.s32 %r14, %r13, -1022;
+    min.s32 %r14, %r14, 1023;
+    sub.s32 %r15, %r13, %r14;
+    add.s32 %r16, %r14, 1023;
+    cvt.u64.u32 %l1, %r16;
+    shl.b64 %l1, %l1, 52;
+    mov.b64 %d29, %l1;
+    add.s32 %r17, %r15, 1023;
+    cvt.u64.u32 %l2, %r17;
+    shl.b64 %l2, %l2, 52;
+    mov.b64 %d30, %l2;
+    mul.rn.f64 %d31, %d28, %d30;
+    mul.rn.f64 %d5, %d31, %d29;
+EXP_DONE_3:
+    add.rn.f64 %d32, 0d3FF0000000000000, %d5;
+    sub.rn.f64 %d35, 0d3FF0000000000000, %d5;
+    div.rn.f64 %d33, %d35, %d32;
+    setp.lt.f64 %p3, %d3, 0d3FC0000000000000;
+    @!%p3 bra TANH_SERIES_DONE_4;
+    mul.rn.f64 %d36, %d3, %d3;
+    mov.f64 %d37, 0dBF57DA36452B75E3;
+    fma.rn.f64 %d37, %d37, %d36, 0d3F6D6D3D0E157DE0;
+    fma.rn.f64 %d37, %d37, %d36, 0dBF8226E355E6C23D;
+    fma.rn.f64 %d37, %d37, %d36, 0d3F9664F4882C10FA;
+    fma.rn.f64 %d37, %d37, %d36, 0dBFABA1BA1BA1BA1C;
+    fma.rn.f64 %d37, %d37, %d36, 0d3FC1111111111111;
+    fma.rn.f64 %d37, %d37, %d36, 0dBFD5555555555555;
+    fma.rn.f64 %d37, %d37, %d36, 0d3FF0000000000000;
+    mul.rn.f64 %d33, %d3, %d37;
+TANH_SERIES_DONE_4:
+    neg.f64 %d34, %d33;
+    mov.b64 %l3, %d1;
+    setp.lt.s64 %p3, %l3, 0;
+    selp.f64 %d33, %d34, %d33, %p3;
+    cvt.rn.f32.f64 %f2, %d33;
+    add.rn.f32 %f3, %f1, %f2;
+    mov.f32 %f1, %f3;
+    add.s32 %r9, %r9, 128;
+    bra LOOP_1;
+LOOP_DONE_2:
+    activemask.b32 %r18;
+    shfl.sync.bfly.b32 %f4, %f1, 16, 31, %r18;
+    add.rn.f32 %f5, %f1, %f4;
+    mov.f32 %f1, %f5;
+    shfl.sync.bfly.b32 %f6, %f1, 8, 31, %r18;
+    add.rn.f32 %f7, %f1, %f6;
+    mov.f32 %f1, %f7;
+    shfl.sync.bfly.b32 %f8, %f1, 4, 31, %r18;
+    add.rn.f32 %f9, %f1, %f8;
+    mov.f32 %f1, %f9;
+    shfl.sync.bfly.b32 %f10, %f1, 2, 31, %r18;
+    add.rn.f32 %f11, %f1, %f10;
+    mov.f32 %f1, %f11;
+    shfl.sync.bfly.b32 %f12, %f1, 1, 31, %r18;
+    add.rn.f32 %f13, %f1, %f12;
+    mov.f32 %f1, %f13;
+    mov.u64 %rd7, scratch_0;
+    setp.eq.s32 %p4, %r7, 0;
+    @!%p4 bra ELSE_5;
+    mov.s32 %r19, %r8;
+    mul.wide.s32 %rd8, %r19, 4;
+    add.u64 %rd9, %rd7, %rd8;
+    st.shared.f32 [%rd9+0], %f1;
+    bra IF_DONE_6;
+ELSE_5:
+IF_DONE_6:
+    bar.sync 0;
+    setp.lt.u32 %p5, %r8, 2;
+    setp.eq.u32 %p6, %r7, 0;
+    and.pred %p7, %p5, %p6;
+    @!%p7 bra TREE_SKIP_7;
+    add.s32 %r20, %r8, 2;
+    mov.s32 %r21, %r8;
+    mul.wide.s32 %rd10, %r21, 4;
+    add.u64 %rd11, %rd7, %rd10;
+    mov.s32 %r22, %r20;
+    mul.wide.s32 %rd12, %r22, 4;
+    add.u64 %rd13, %rd7, %rd12;
+    ld.shared.f32 %f14, [%rd11];
+    ld.shared.f32 %f15, [%rd13];
+    add.rn.f32 %f16, %f14, %f15;
+    mov.f32 %f14, %f16;
+    st.shared.f32 [%rd11], %f14;
+TREE_SKIP_7:
+    bar.sync 0;
+    setp.lt.u32 %p8, %r8, 1;
+    setp.eq.u32 %p9, %r7, 0;
+    and.pred %p10, %p8, %p9;
+    @!%p10 bra TREE_SKIP_8;
+    add.s32 %r23, %r8, 1;
+    mov.s32 %r24, %r8;
+    mul.wide.s32 %rd14, %r24, 4;
+    add.u64 %rd15, %rd7, %rd14;
+    mov.s32 %r25, %r23;
+    mul.wide.s32 %rd16, %r25, 4;
+    add.u64 %rd17, %rd7, %rd16;
+    ld.shared.f32 %f17, [%rd15];
+    ld.shared.f32 %f18, [%rd17];
+    add.rn.f32 %f19, %f17, %f18;
+    mov.f32 %f17, %f19;
+    st.shared.f32 [%rd15], %f17;
+TREE_SKIP_8:
+    bar.sync 0;
+    mov.s32 %r26, 0;
+    mul.wide.s32 %rd18, %r26, 4;
+    add.u64 %rd19, %rd7, %rd18;
+    ld.shared.f32 %f20, [%rd19];
+    mov.f32 %f1, %f20;
+    setp.eq.s32 %p11, %r6, 0;
+    @!%p11 bra ELSE_9;
+    cvt.f64.f32 %d38, %f1;
+    mov.f64 %d39, %d38;
+    mov.s32 %r27, %r5;
+    mul.wide.s32 %rd20, %r27, 8;
+    add.u64 %rd21, %rd4, %rd20;
+    st.global.f64 [%rd21+0], %d39;
+    bra IF_DONE_10;
+ELSE_9:
+IF_DONE_10:
+DONE:
+    ret;
+}

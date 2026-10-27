@@ -1,0 +1,16 @@
+    Tile[a0] (N=11)
+        in0__u0 = load x[((a0 * 3) + 0)]
+        in1__u0 = load y[((a0 * 3) + 0)]
+        bool v0__u0 = greater(in0__u0, in1__u0)
+        f64 v1__u0 = where(v0__u0, in0__u0, in1__u0)
+        in0__u1 = load x[((a0 * 3) + 1)]
+        in1__u1 = load y[((a0 * 3) + 1)]
+        bool v0__u1 = greater(in0__u1, in1__u1)
+        f64 v1__u1 = where(v0__u1, in0__u1, in1__u1)
+        in0__u2 = load x[((a0 * 3) + 2)]
+        in1__u2 = load y[((a0 * 3) + 2)]
+        bool v0__u2 = greater(in0__u2, in1__u2)
+        f64 v1__u2 = where(v0__u2, in0__u2, in1__u2)
+        where[((a0 * 3) + 0)] = v1__u0
+        where[((a0 * 3) + 1)] = v1__u1
+        where[((a0 * 3) + 2)] = v1__u2

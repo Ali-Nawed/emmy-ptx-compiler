@@ -1,0 +1,63 @@
+{
+  "inputs": [
+    "x",
+    "y"
+  ],
+  "outputs": [
+    "where"
+  ],
+  "nodes": {
+    "x": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "x",
+          "shape": [
+            5
+          ],
+          "dtype": "f32"
+        }
+      ]
+    },
+    "y": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "shape": [
+            5
+          ],
+          "dtype": "f32"
+        }
+      ]
+    },
+    "where": {
+      "op": "KernelOp",
+      "op_fields": {
+        "body": [
+          "Tile(axes=(Axis(name='a0', extent=Dim(5), window=None),), body=(Load(names=('in0',), input='x', index=(Var(name='a0'),), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v0', op=ElementwiseImpl('divide'), args=('in0', 'in0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in1',), input='y', index=(Var(name='a0'),), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v1', op=ElementwiseImpl('less'), args=('v0', 'in1'), dtype=DataType(name='bool', np=dtype('bool'), nbytes=1)), Assign(name='v2', op=ElementwiseImpl('negative'), args=('in1',), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v3', op=ElementwiseImpl('where'), args=('v1', 'in1', 'v2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Write(output='where', index=(Var(name='a0'),), values=('v3',), value_dtype=DataType(name='f32', np=dtype('float32'), nbytes=4), atomic=False, swizzle='NONE')), block_threads=None, aux_threads=0, raster_axes=None, raster_group=None, raster_orient='m')"
+        ],
+        "name": "k_where_pointwise",
+        "zero_delegated": [],
+        "serial": []
+      },
+      "inputs": [
+        "y",
+        "x"
+      ],
+      "outputs": [
+        {
+          "name": "where",
+          "shape": [
+            5
+          ],
+          "dtype": "f32"
+        }
+      ]
+    }
+  }
+}

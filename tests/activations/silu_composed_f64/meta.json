@@ -1,0 +1,53 @@
+{
+ "id": "silu_composed_f64",
+ "code": "x = torch.randn(129, dtype=torch.float64); x * torch.sigmoid(x)",
+ "rtol": 2e-12,
+ "atol": 0.0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "mul"
+ ],
+ "kernels": [
+  {
+   "node": "mul",
+   "entry": "k_mul_pointwise",
+   "arg_order": [
+    "x",
+    "mul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mul",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

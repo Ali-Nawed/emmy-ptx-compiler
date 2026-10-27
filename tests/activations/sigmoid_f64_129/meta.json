@@ -1,0 +1,53 @@
+{
+ "id": "sigmoid_f64_129",
+ "code": "x = torch.randn(129, dtype=torch.float64); torch.sigmoid(x)",
+ "rtol": 2e-12,
+ "atol": 0.0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sigmoid"
+ ],
+ "kernels": [
+  {
+   "node": "sigmoid",
+   "entry": "k_sigmoid_pointwise",
+   "arg_order": [
+    "x",
+    "sigmoid"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sigmoid",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

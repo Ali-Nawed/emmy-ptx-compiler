@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x >= y, x, y)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_where_pointwise.ir.json": {
+      "sha256": "4b421c45969a88635a0c57fdcca923500218fba5fc64d2cd2b59f62f996aca59",
+      "upstream_dump_sha256": "4b421c45969a88635a0c57fdcca923500218fba5fc64d2cd2b59f62f996aca59"
+    }
+  }
+}

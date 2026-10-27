@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) == (y + 1152921504606846976), x, y)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_where_pointwise.ir.json": {
+      "sha256": "ddd8a066e5b3d07a46fb4be85f5685b76c6dde7d2794e4363b6353945f0e4176",
+      "upstream_dump_sha256": "ddd8a066e5b3d07a46fb4be85f5685b76c6dde7d2794e4363b6353945f0e4176"
+    }
+  }
+}

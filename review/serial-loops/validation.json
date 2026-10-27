@@ -1,0 +1,518 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "loop_2sums_f16_3x1_w128",
+      "status": "pass",
+      "serial_loops": 0,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.872,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f16_3x33_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f16_3x129_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f32_3x1_w128",
+      "status": "pass",
+      "serial_loops": 0,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.744,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f32_3x33_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f32_3x129_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.488,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f64_3x1_w128",
+      "status": "pass",
+      "serial_loops": 0,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.488,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f64_3x33_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f64_3x129_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 30.336,
+            "registers": {
+              "k_add_reduce": 48
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i32_3x1_w128",
+      "status": "pass",
+      "serial_loops": 0,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.488,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i32_3x33_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 24.48,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i32_3x129_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i64_3x1_w128",
+      "status": "pass",
+      "serial_loops": 0,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.576,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i64_3x33_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.68,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_i64_3x129_w128",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 28.096,
+            "registers": {
+              "k_add_reduce": 46
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f32_3x257_w32",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 23.968,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_2sums_f32_3x257_w256",
+      "status": "pass",
+      "serial_loops": 1,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 26.048,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "loop_3sums_f32_3x129_w128",
+      "status": "pass",
+      "serial_loops": 2,
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_1_reduce",
+            "median_us": 23.84,
+            "registers": {
+              "k_add_1_reduce": 48
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "e4c1b7c6abb351cbab0c87bd30f4708d8cca035dab1b6d569dc98a03c9a6d52e",
+    "ptx_math.py": "829778cc78f700cd3cc8f2bee638d6042da3f4cc0a685bacc19763aa070da3e9",
+    "tools/ir_reference.py": "b5bbe4d17688b10aa25a8ba06a602f41546242224aa0546a484f4a7258da3eb5"
+  },
+  "statuses": {
+    "pass": 18
+  }
+}

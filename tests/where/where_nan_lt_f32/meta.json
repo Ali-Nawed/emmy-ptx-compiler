@@ -1,0 +1,75 @@
+{
+  "id": "where_nan_lt_f32",
+  "code": "x = torch.tensor([0.0, 1.0, -1.0, 2.0, -0.0], dtype=torch.float32); y = torch.tensor([0.0, 1.0, 2.0, -1.0, 0.0], dtype=torch.float32); torch.where((x / x) < y, y, -y)",
+  "rtol": 0.0,
+  "atol": 0.0,
+  "graph_inputs": [
+    "x",
+    "y"
+  ],
+  "graph_outputs": [
+    "where"
+  ],
+  "kernels": [
+    {
+      "node": "where",
+      "entry": "k_where_pointwise",
+      "arg_order": [
+        "y",
+        "x",
+        "where"
+      ],
+      "grid": [
+        1,
+        1,
+        1
+      ],
+      "block": [
+        256,
+        1,
+        1
+      ],
+      "smem_bytes": 0,
+      "zero_outputs": [],
+      "args": [
+        {
+          "name": "y",
+          "dtype": "f32",
+          "shape": [
+            5
+          ],
+          "data": [
+            0.0,
+            1.0,
+            2.0,
+            -1.0,
+            0.0
+          ]
+        },
+        {
+          "name": "x",
+          "dtype": "f32",
+          "shape": [
+            5
+          ],
+          "data": [
+            0.0,
+            1.0,
+            -1.0,
+            2.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "where",
+          "dtype": "f32",
+          "shape": [
+            5
+          ],
+          "output": true
+        }
+      ],
+      "final": true
+    }
+  ]
+}

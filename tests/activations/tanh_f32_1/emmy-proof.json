@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(1, dtype=torch.float32); torch.tanh(x)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_tanh_pointwise.ir.json": {
+      "sha256": "1e8c453ca0d7733cdd5bb336ce463015b9f8ce72549594d86a0b7db85e323e94",
+      "upstream_dump_sha256": "1e8c453ca0d7733cdd5bb336ce463015b9f8ce72549594d86a0b7db85e323e94"
+    }
+  }
+}

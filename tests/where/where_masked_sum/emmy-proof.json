@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn(3, 129); y = torch.randn(3, 129); torch.where(x > y, x, y).sum(-1)",
+  "knobs": "WORK=t128,REDUCE=coop",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_sum_1_reduce.ir.json": {
+      "sha256": "5f7b591287d980898e9b064d1efa3b06063a0c72b1a6935c99bc50999e3234fe",
+      "upstream_dump_sha256": "5f7b591287d980898e9b064d1efa3b06063a0c72b1a6935c99bc50999e3234fe"
+    }
+  }
+}

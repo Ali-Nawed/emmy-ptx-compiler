@@ -1,0 +1,53 @@
+{
+ "id": "tanh_f64_129",
+ "code": "x = torch.randn(129, dtype=torch.float64); torch.tanh(x)",
+ "rtol": 2e-12,
+ "atol": 0.0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "tanh"
+ ],
+ "kernels": [
+  {
+   "node": "tanh",
+   "entry": "k_tanh_pointwise",
+   "arg_order": [
+    "x",
+    "tanh"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "tanh",
+     "dtype": "f64",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

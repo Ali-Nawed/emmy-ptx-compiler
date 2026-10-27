@@ -1,0 +1,5 @@
+import torch
+
+x = torch.randn(3, 129)
+y = torch.randn(3, 129)
+result = torch.where(x > y, x, y).sum(-1)

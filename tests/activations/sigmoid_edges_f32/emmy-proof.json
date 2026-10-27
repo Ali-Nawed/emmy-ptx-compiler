@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.tensor([-80.0, -20.0, -8.0, -1.0, -0.5, -0.1250000149011612, -0.125, -0.1249999925494194, -0.009999999776482582, -9.999999974752427e-07, -9.999999960041972e-13, -1.401298464324817e-45, -0.0, 0.0, 1.401298464324817e-45, 9.999999960041972e-13, 9.999999974752427e-07, 0.009999999776482582, 0.1249999925494194, 0.125, 0.1250000149011612, 0.5, 1.0, 8.0, 20.0, 80.0], dtype=torch.float32); torch.sigmoid(x)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_sigmoid_pointwise.ir.json": {
+      "sha256": "2455dff8829343d79ff660baa90e7c143154e363f1d9c17b783ee334f28a3c19",
+      "upstream_dump_sha256": "2455dff8829343d79ff660baa90e7c143154e363f1d9c17b783ee334f28a3c19"
+    }
+  }
+}

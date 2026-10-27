@@ -1,0 +1,102 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_tanh_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<13>;
+    .reg .b64 %rd<9>;
+    .reg .f32 %f<35>;
+    .reg .pred %p<6>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 13;
+    @%p1 bra DONE;
+    mul.lo.s32 %r5, %r4, 2;
+    add.s32 %r6, %r5, 0;
+    mov.s32 %r7, %r6;
+    mul.wide.s32 %rd5, %r7, 4;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.f32 %f1, [%rd6+0];
+    ld.global.f32 %f2, [%rd6+4];
+    abs.f32 %f4, %f1;
+    mul.rn.f32 %f5, %f4, 0fC0000000;
+    mul.rn.f32 %f7, %f5, 0f3FB8AA3B;
+    cvt.rni.f32.f32 %f8, %f7;
+    max.f32 %f8, %f8, 0fC2FC0000;
+    min.f32 %f8, %f8, 0f42FE0000;
+    neg.f32 %f9, %f8;
+    fma.rn.f32 %f10, %f9, 0f3F317218, %f5;
+    fma.rn.f32 %f10, %f9, 0fB102E308, %f10;
+    mul.rn.f32 %f11, %f10, 0f3FB8AA3B;
+    ex2.approx.f32 %f6, %f11;
+    ex2.approx.f32 %f12, %f8;
+    mul.rn.f32 %f6, %f6, %f12;
+    setp.ge.f32 %p2, %f5, 0fC2CFF1B4;
+    @%p2 max.f32 %f6, %f6, 0f00000001;
+    add.rn.f32 %f13, 0f3F800000, %f6;
+    sub.rn.f32 %f16, 0f3F800000, %f6;
+    div.rn.f32 %f14, %f16, %f13;
+    setp.lt.f32 %p3, %f4, 0f3E000000;
+    @!%p3 bra TANH_SERIES_DONE_1;
+    mul.rn.f32 %f17, %f4, %f4;
+    mov.f32 %f18, 0fBD5D0DD1;
+    fma.rn.f32 %f18, %f18, %f17, 0f3E088889;
+    fma.rn.f32 %f18, %f18, %f17, 0fBEAAAAAB;
+    fma.rn.f32 %f18, %f18, %f17, 0f3F800000;
+    mul.rn.f32 %f14, %f4, %f18;
+TANH_SERIES_DONE_1:
+    neg.f32 %f15, %f14;
+    mov.b32 %r8, %f1;
+    setp.lt.s32 %p3, %r8, 0;
+    selp.f32 %f14, %f15, %f14, %p3;
+    abs.f32 %f20, %f2;
+    mul.rn.f32 %f21, %f20, 0fC0000000;
+    mul.rn.f32 %f23, %f21, 0f3FB8AA3B;
+    cvt.rni.f32.f32 %f24, %f23;
+    max.f32 %f24, %f24, 0fC2FC0000;
+    min.f32 %f24, %f24, 0f42FE0000;
+    neg.f32 %f25, %f24;
+    fma.rn.f32 %f26, %f25, 0f3F317218, %f21;
+    fma.rn.f32 %f26, %f25, 0fB102E308, %f26;
+    mul.rn.f32 %f27, %f26, 0f3FB8AA3B;
+    ex2.approx.f32 %f22, %f27;
+    ex2.approx.f32 %f28, %f24;
+    mul.rn.f32 %f22, %f22, %f28;
+    setp.ge.f32 %p4, %f21, 0fC2CFF1B4;
+    @%p4 max.f32 %f22, %f22, 0f00000001;
+    add.rn.f32 %f29, 0f3F800000, %f22;
+    sub.rn.f32 %f32, 0f3F800000, %f22;
+    div.rn.f32 %f30, %f32, %f29;
+    setp.lt.f32 %p5, %f20, 0f3E000000;
+    @!%p5 bra TANH_SERIES_DONE_2;
+    mul.rn.f32 %f33, %f20, %f20;
+    mov.f32 %f34, 0fBD5D0DD1;
+    fma.rn.f32 %f34, %f34, %f33, 0f3E088889;
+    fma.rn.f32 %f34, %f34, %f33, 0fBEAAAAAB;
+    fma.rn.f32 %f34, %f34, %f33, 0f3F800000;
+    mul.rn.f32 %f30, %f20, %f34;
+TANH_SERIES_DONE_2:
+    neg.f32 %f31, %f30;
+    mov.b32 %r9, %f2;
+    setp.lt.s32 %p5, %r9, 0;
+    selp.f32 %f30, %f31, %f30, %p5;
+    mul.lo.s32 %r10, %r4, 2;
+    add.s32 %r11, %r10, 0;
+    mov.s32 %r12, %r11;
+    mul.wide.s32 %rd7, %r12, 4;
+    add.u64 %rd8, %rd4, %rd7;
+    st.global.v2.f32 [%rd8], {%f14, %f30};
+DONE:
+    ret;
+}

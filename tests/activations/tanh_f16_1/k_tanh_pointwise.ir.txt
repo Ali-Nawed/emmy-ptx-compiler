@@ -1,0 +1,4 @@
+    Tile[] (N=1)
+        in0 = load x[0]
+        f16 v0 = tanh(in0)
+        tanh[0] = v0

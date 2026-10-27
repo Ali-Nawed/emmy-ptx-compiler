@@ -1,0 +1,74 @@
+{
+ "id": "where_nested",
+ "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x > y, torch.where(x > 0, x, y), y)",
+ "rtol": 0.0,
+ "atol": 0.0,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "where_1"
+ ],
+ "kernels": [
+  {
+   "node": "where_1",
+   "entry": "k_where_1_pointwise",
+   "arg_order": [
+    "gt_1_c1",
+    "y",
+    "x",
+    "where_1"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "gt_1_c1",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      0.0
+     ]
+    },
+    {
+     "name": "y",
+     "dtype": "f32",
+     "shape": [
+      129
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "where_1",
+     "dtype": "f32",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

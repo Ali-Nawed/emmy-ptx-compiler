@@ -1,0 +1,10 @@
+    Tile[a0] (N=7)
+        in1 = load add_c1[0]
+        in2 = load x[a0]
+        i64 v0 = add(in1, in2)
+        in0 = load add_1_c1[0]
+        in3 = load y[a0]
+        i64 v1 = add(in0, in3)
+        bool v2 = not_equal(v0, v1)
+        i64 v3 = where(v2, in2, in3)
+        where[a0] = v3

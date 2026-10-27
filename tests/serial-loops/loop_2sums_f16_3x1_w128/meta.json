@@ -1,0 +1,65 @@
+{
+ "id": "loop_2sums_f16_3x1_w128",
+ "code": "x = torch.randn((3, 1), dtype=torch.float16); y = torch.randn((3, 1), dtype=torch.float16); x.sum(-1) + y.sum(-1)",
+ "rtol": 0.003,
+ "atol": 0.02,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "add"
+ ],
+ "kernels": [
+  {
+   "node": "add",
+   "entry": "k_add_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "add"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "f16",
+     "shape": [
+      3,
+      1
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      3,
+      1
+     ],
+     "seed": 0
+    },
+    {
+     "name": "add",
+     "dtype": "f16",
+     "shape": [
+      3
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

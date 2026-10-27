@@ -1,0 +1,1054 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unchanged Kernel IR -> our compiler",
+  "runner": true,
+  "cases": [
+    {
+      "case": "sigmoid_f16_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_sigmoid_pointwise": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f16_33",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_sigmoid_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f16_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_sigmoid_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_edges_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 19.904,
+            "registers": {
+              "k_sigmoid_pointwise": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f16_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.672,
+            "registers": {
+              "k_tanh_pointwise": 8
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f16_33",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_tanh_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f16_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.416,
+            "registers": {
+              "k_tanh_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_edges_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.032,
+            "registers": {
+              "k_tanh_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "silu_composed_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.416,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_sum_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.512,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f32_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_sigmoid_pointwise": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f32_33",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 22.816,
+            "registers": {
+              "k_sigmoid_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f32_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_sigmoid_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_edges_f32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_sigmoid_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f32_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 21.088,
+            "registers": {
+              "k_tanh_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f32_33",
+      "status": "wrong_result",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_tanh_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 14,
+              "examples": [
+                {
+                  "index": 4,
+                  "got": -0.48970508575439453,
+                  "expected": -0.48970285058021545
+                },
+                {
+                  "index": 5,
+                  "got": 0.3466167151927948,
+                  "expected": 0.3466182351112366
+                },
+                {
+                  "index": 6,
+                  "got": 0.8627472519874573,
+                  "expected": 0.8627493381500244
+                },
+                {
+                  "index": 7,
+                  "got": 0.7384615540504456,
+                  "expected": 0.7384586930274963
+                },
+                {
+                  "index": 9,
+                  "got": -0.8525484204292297,
+                  "expected": -0.8525518774986267
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 14,
+              "examples": [
+                {
+                  "index": 4,
+                  "got": -0.48970508575439453,
+                  "expected": -0.48970288038253784
+                },
+                {
+                  "index": 5,
+                  "got": 0.3466167151927948,
+                  "expected": 0.3466182351112366
+                },
+                {
+                  "index": 6,
+                  "got": 0.8627472519874573,
+                  "expected": 0.8627493977546692
+                },
+                {
+                  "index": 7,
+                  "got": 0.7384615540504456,
+                  "expected": 0.7384586334228516
+                },
+                {
+                  "index": 9,
+                  "got": -0.8525484204292297,
+                  "expected": -0.8525519371032715
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f32_129",
+      "status": "wrong_result",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 28.192,
+            "registers": {
+              "k_tanh_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 69,
+              "examples": [
+                {
+                  "index": 4,
+                  "got": -0.48970508575439453,
+                  "expected": -0.48970285058021545
+                },
+                {
+                  "index": 5,
+                  "got": 0.3466167151927948,
+                  "expected": 0.3466182351112366
+                },
+                {
+                  "index": 6,
+                  "got": 0.8627472519874573,
+                  "expected": 0.8627493381500244
+                },
+                {
+                  "index": 7,
+                  "got": 0.7384615540504456,
+                  "expected": 0.7384586930274963
+                },
+                {
+                  "index": 9,
+                  "got": -0.8525484204292297,
+                  "expected": -0.8525518774986267
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 69,
+              "examples": [
+                {
+                  "index": 4,
+                  "got": -0.48970508575439453,
+                  "expected": -0.48970288038253784
+                },
+                {
+                  "index": 5,
+                  "got": 0.3466167151927948,
+                  "expected": 0.3466182351112366
+                },
+                {
+                  "index": 6,
+                  "got": 0.8627472519874573,
+                  "expected": 0.8627493977546692
+                },
+                {
+                  "index": 7,
+                  "got": 0.7384615540504456,
+                  "expected": 0.7384586334228516
+                },
+                {
+                  "index": 9,
+                  "got": -0.8525484204292297,
+                  "expected": -0.8525519371032715
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_edges_f32",
+      "status": "wrong_result",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 28.032,
+            "registers": {
+              "k_tanh_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 4,
+              "examples": [
+                {
+                  "index": 3,
+                  "got": -0.7616009712219238,
+                  "expected": -0.7615941762924194
+                },
+                {
+                  "index": 4,
+                  "got": -0.4621148109436035,
+                  "expected": -0.46211716532707214
+                },
+                {
+                  "index": 21,
+                  "got": 0.4621148109436035,
+                  "expected": 0.46211716532707214
+                },
+                {
+                  "index": 22,
+                  "got": 0.7616009712219238,
+                  "expected": 0.7615941762924194
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "wrong_result",
+            "details": {
+              "output": "tanh",
+              "dtype": "float32",
+              "mismatch_count": 4,
+              "examples": [
+                {
+                  "index": 3,
+                  "got": -0.7616009712219238,
+                  "expected": -0.7615941762924194
+                },
+                {
+                  "index": 4,
+                  "got": -0.4621148109436035,
+                  "expected": -0.46211719512939453
+                },
+                {
+                  "index": 21,
+                  "got": 0.4621148109436035,
+                  "expected": 0.46211719512939453
+                },
+                {
+                  "index": 22,
+                  "got": 0.7616009712219238,
+                  "expected": 0.7615941762924194
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "silu_composed_f32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.584,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_sum_f32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float32",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 2,
+                  "got": -10.591431617736816,
+                  "expected": -10.591400146484375
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f64_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_sigmoid_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f64_33",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 23.04,
+            "registers": {
+              "k_sigmoid_pointwise": 38
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_f64_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 22.336,
+            "registers": {
+              "k_sigmoid_pointwise": 38
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "sigmoid_edges_f64",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sigmoid_pointwise",
+            "median_us": 21.44,
+            "registers": {
+              "k_sigmoid_pointwise": 35
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f64_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_tanh_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f64_33",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 23.168,
+            "registers": {
+              "k_tanh_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_f64_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 22.208,
+            "registers": {
+              "k_tanh_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_edges_f64",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_tanh_pointwise",
+            "median_us": 22.08,
+            "registers": {
+              "k_tanh_pointwise": 29
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "silu_composed_f64",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 21.792,
+            "registers": {
+              "k_mul_pointwise": 38
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "tanh_sum_f64",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sum_1",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": 4.641383171081543,
+            "expected": 4.641383484254022
+          },
+          {
+            "index": 1,
+            "got": -4.910902500152588,
+            "expected": -4.910903273830393
+          },
+          {
+            "index": 2,
+            "got": -10.591400146484375,
+            "expected": -10.591400887127827
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 21.216,
+            "registers": {
+              "k_sum_1_reduce": 35
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 4.641383171081543,
+                  "expected": 4.641383484254022
+                },
+                {
+                  "index": 1,
+                  "got": -4.910902500152588,
+                  "expected": -4.910903273830393
+                },
+                {
+                  "index": 2,
+                  "got": -10.591400146484375,
+                  "expected": -10.591400887127827
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 26,
+    "wrong_result": 4
+  },
+  "source_sha256": {
+    "compile.py": "25ce8939f5fc3d5364074be5ebaaecde7d7decd2a64ee466d47474c420a3a2c9",
+    "ptx_math.py": "e3ff1d218892c42836ea7ac27066915bd6b9f373f9086b46e07a2c63c04dc3a0",
+    "tools/ir_reference.py": "34b8ace7ce3f8af9ad5e190472dc754551162a74a631843ea2338e2b791469a1"
+  }
+}
