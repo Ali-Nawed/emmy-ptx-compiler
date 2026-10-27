@@ -1,99 +1,10 @@
 # Compiler presentation walkthrough
 
-**Read only the block quotes in Part 1 aloud.** Screen directions, code links and Parts 2–3 are preparation/reference material. Explain the ideas in your own words rather than reading unfamiliar code verbatim.
+This walkthrough explains our approach, PTX generation, implementation categories, worked examples, coverage and future work. All examples and explanations are included here. Source links are optional references.
 
-This file is self-contained: Part 1 is the short spoken version, Part 2 contains the coverage/runbook, and Part 3 explains the implementation with actual IR/PTX excerpts, formulas, code excerpts and worked examples. Source/report links are optional ways to inspect evidence; you do not need another guide to understand the explanations here. There are no presentation timestamps.
+Implementation checkpoint: **60cad9e**. The exact eight MVP problems passed through unchanged `submit.py --compiler compile.py`. Compiler sources remain unchanged while this document is edited.
 
-Implementation checkpoint: **60cad9e**. This presentation adds documentation and an MVP audit, without changing the compiler. The audit ran the exact eight required problems through the organizer's unchanged `submit.py --compiler compile.py`: **8/8 passed**. [Audit report](../../review/presentation/mvp-validation.json).
-
-## Part 1 — speaker script
-
-### Workflow: start simple, then grow real coverage
-
-**Screen:** show the workflow below, then one generated fixture's expression.py, IR and emmy-proof.json.
-
-> We built a direct compiler from Emmy Kernel IR to PTX. We started with the simplest pointwise add, then added loads, arithmetic, stores and reductions. After the baseline worked, we expanded the tests at the PyTorch level: changing expressions, sizes, datatypes and scheduling settings before compiling them with pinned Emmy.
->
-> Every generated test keeps Emmy's IR unchanged and has an independent NumPy expected result. A second NumPy interpreter checks what the typed IR actually specifies. Our feedback loop is: generate, emit PTX, assemble, run on the hosted GPU, compare both references, then fix and add a regression. This separates compiler errors from upstream precision choices.
-
-**Code to point at:** [fixture packaging/provenance](../../tools/emmy_fixtures.py), [generated operation cases](../../tools/test_operations.py), [independent interpreter](../../tools/ir_reference.py).
-
-```mermaid
-flowchart LR
-    A[PyTorch expression + settings] --> B[Pinned Emmy]
-    B --> C[Unchanged Kernel IR + metadata]
-    C --> D[Our PTX emitter]
-    D --> E[ptxas + hosted GPU]
-    E --> F[Compare expression and IR references]
-    F --> G[Diagnose, fix, add regression]
-    G --> A
-```
-
-### High-level PTX generation
-
-**Screen:** show the compiler pipeline and the short loader/dispatch excerpts in Part 3. Opening the linked source functions is optional.
-
-> The compiler uses Emmy's existing parser to reconstruct typed nodes. It reads sibling metadata for argument order and launch information, then emits PTX directly. There is no CUDA translation step or additional intermediate representation.
->
-> In compile.py, load_kernel loads the program, compile emits the entry and thread coordinates, and statement dispatches each node. The emitter tracks value bindings, datatypes, pointers and fresh virtual registers. PTX declares those registers, and ptxas performs physical register allocation. We preserve the supplied schedule and typed operation boundaries.
-
-**Code:** [load_kernel](../../compile.py#L40), [compile](../../compile.py#L778), [statement dispatch](../../compile.py#L621), [Tile coordinates](../../compile.py#L405).
-
-### Category 1: pointwise, extended beyond add
-
-**Screen:** p00's actual IR, then arithmetic and vector_store. Optionally show the short PTX demo in Part 2.
-
-> For pointwise work, an add becomes typed loads, add and a store. We extended that baseline to composed arithmetic, five numeric datatypes and conversions, plus boolean comparisons and where selection. Conditions use predicate registers, while selected values retain their numeric type.
->
-> We also simplified Tile-coordinate arithmetic and grouped aligned stores into vector instructions, with a scalar fallback. Half values are rounded at operation boundaries, while double and wide integer data keep their width.
-
-**Example:** `torch.relu(x) * y`, then `torch.where(x > y, x, y)`.
-
-**Code:** [arithmetic](../../compile.py#L247), [conversions](../../compile.py#L147), [where/comparisons](../../compile.py#L182), [vector_store](../../compile.py#L352).
-
-### Category 2 and fused kernels: reductions and normalization
-
-**Screen:** r04's IR; show its loop, shuffle and shared-memory tree. Briefly show the public RMSNorm or softmax expression.
-
-> Reductions need coordination. We translate Emmy's strided loops into per-thread partial sums, then preserve warp shuffles, shared-memory exchanges and barriers. We also added ordinary sequential Loop support, which Emmy emits for expressions such as two row sums added together.
->
-> The same machinery supports the public RMSNorm, L2 normalization and row softmax programs. We follow the actual accumulator identity, datatype and merge instructions, including softmax's coupled state updates. Extended tests vary row widths and cooperative sizes rather than only repeating the public shapes. We preserve reduction order instead of inventing a different algorithm.
-
-**Code:** [counted_loop](../../compile.py#L524), [merge_states](../../compile.py#L489), [tree_halve](../../compile.py#L569), [WarpShuffle emission](../../compile.py#L749).
-
-### Math operations: an example of the feedback loop
-
-**Screen:** the activation helper and the saved accuracy results; no need to explain polynomial coefficients.
-
-> For math operations, we use native PTX instructions where accuracy permits. Float exp and log use hardware base-two instructions with corrections. Sigmoid uses a stable exp-based formula. Native tanh passed our half tests, but failed strict float tests, so float tanh uses a more accurate exp-based formula with a small-input correction. Double math stays double. We changed the implementation, not the test tolerances.
-
-**Code:** [arithmetic dispatch](../../compile.py#L247), [native exp/log](../../ptx_math.py#L63), [activation](../../ptx_math.py#L11). [Accuracy explanation](15-sigmoid-and-tanh.md).
-
-### Category 3: matmul, tensor cores and asynchronous copies
-
-**Screen:** show the real staged f16 matmul IR beside its emitted PTX; highlight cp.async, ldmatrix and mma.sync.
-
-> For matmul, we first generated real Emmy tensor-core schedules. We added register fragments, per-lane operand loads, native mma.sync, and guarded output stores. Our tests cover K tails, output edges, multiple warps, transposed operands and split-K chaining.
->
-> We then added native asynchronous global-to-shared copies, commit and wait groups, swizzled shared layouts and ldmatrix loads. We preserve double and triple buffering from the IR. The public 512-by-512 matmul also needed an aligned dynamic shared arena using its existing metadata budget; it now passes. That public kernel uses scalar arithmetic, while our separate generated f16 examples demonstrate actual tensor-core instructions.
-
-**Code in compile.py:** [statement dispatch](../../compile.py#L621), [shared allocation](../../compile.py#L720).
-
-**Helper code:** [cp_async_copy](../../ptx_tensor.py#L38), [staged_matrix_load](../../ptx_tensor.py#L53), [mma_sync](../../ptx_tensor.py#L162), [reg_store](../../ptx_tensor.py#L172).
-
-### Evidence, limits and future work
-
-**Screen:** the coverage table and final MVP audit.
-
-> All eight MVP problems pass through the organizer's compiler-testing path. Our latest checkpoint also passes 47 local tests and the additional generated matmul checks. We retain precision differences and unsupported cases in the reports, and we cannot claim hidden-set coverage.
->
-> Next are atomic accumulation for the remaining public matmul, arrayed fragment families, fused tensor-core epilogues and attention. Beyond that, we would expand datatype coverage and use profiling to guide further optimization. The submission includes source, reproducible examples and documented limits.
-
----
-
-## Part 2 — preparation and reference appendix, not spoken
-
-### A. What the workflow actually does
+## Workflow and approach
 
 1. **Naive baseline:** start with the supplied add/reduction examples and implement their actual typed statement kinds. Never identify a problem by name inside the compiler or hardcode its output.
 2. **Generate extensions at the source level:** write PyTorch expressions and change shapes, datatypes and Emmy schedule knobs before tracing. Examples include width 1, irregular widths 33/129, different cooperative sizes, boolean compositions and matmul K tails.
@@ -106,158 +17,18 @@ flowchart LR
 
 If pinned Emmy cannot generate a particular source/schedule, that attempted case is out of scope. Trying a valid alternative PyTorch spelling or correcting a schedule knob is allowed; manufacturing replacement IR is not. Earlier synthetic fixtures are retired and excluded from active coverage totals.
 
-### B. MVP and public-problem coverage
-
-The MVP is **exactly the eight pointwise/reduction problems listed in MVP.md**, not all public categories and not every possible hidden variation.
-
-| Category | Required/public problems | Verified status | Extension beyond the base case |
-| --- | --- | --- | --- |
-| 1 — pointwise, MVP | p00_scalar_add, p01_vector_add, p02_scale_shift, p03_relu_mul | **4/4 PASS**, fresh unchanged submit.py audit | Additional operations, five dtypes, conversions, comparison/where, irregular sizes, aligned grouped stores |
-| 2 — reductions, MVP | r01_array_sum, r02_big_sum, r03_mean, r04_row_sum | **4/4 PASS**, same audit | Row/width/cooperative variations, ordinary Loop, composed reductions and normalization |
-| 3 — public matmul | m01_matmul_512 | **PASS** against original expectation | cp.async pipeline, metadata-driven 73,728-byte dynamic arena; separate generated native-MMA examples |
-| 3 — remaining public matmul | m02_matmul_rect | **Unsupported: atomic output writes** | Explicit future work; not included in passing counts |
-| 4 — fused | f01_rmsnorm, f02_row_softmax, f03_l2norm | **3/3 PASS** in current public regression report | Typed math and coupled reduction state; additional generated normalization cases |
-| 5 — attention-like | a01_attention, a02_attention_128 | **No end-to-end support claimed** | Future work; do not present these as passing |
-
-Evidence: [fresh 8-case MVP audit](../../review/presentation/mvp-validation.json), [official-harness logs](../../review/presentation/mvp-logs), [11-case public regression](../../review/native-math/async-regression.json), [public m01 report](../../review/shared-matmul/public-validation.json).
-
-This establishes the complete **open MVP** and 12 verified public problems across those reports. It does not establish hidden-set completeness. The large public m01 was checked against its original NumPy expectation; a full typed-IR interpretation was not run by default.
-
-Latest feature checkpoint: 47 passing local test methods; 9 global-matmul cases and 9 shared-matmul cases passing both references. Historical suites include additional expression-level f64 precision differences caused by explicitly narrower operations in the producer's IR; those remain visible and are not counted as competition passes. Do not add overlapping/historical suite totals into a new unique-case coverage claim.
-
-### C. Feature inventory and source map
-
-| Feature | Implementation and scope | Where to inspect |
-| --- | --- | --- |
-| Submission contract | Parse typed Emmy JSON; sibling metadata supplies entry/argument/launch information; stdout contains PTX | [load_kernel](../../compile.py#L40), [main](../../compile.py#L844) |
-| Launch and indexing | Decode flattened 1-D launches into static Tile coordinates; preserve given cooperative blocks; integer index arithmetic/comparisons/ternaries | [tile_coordinates](../../compile.py#L405), [index_expr](../../compile.py#L421), [predicate](../../compile.py#L446) |
-| Numeric datatypes | f16/f32/f64/i32/i64 paths; 25 source-generated conversion pairs; half boundary rounding; full-width double/integer handling | [convert](../../compile.py#L147), [round_half](../../compile.py#L414), [datatype guide](03-datatypes-and-registers.md) |
-| Memory and constants | Typed global/shared loads and stores; byte addresses from element indices; constants remain metadata arguments | [address](../../compile.py#L457), [memory_load](../../compile.py#L315), [memory_store](../../compile.py#L325) |
-| Grouped stores | Two/four adjacent values, at most 16 bytes, only with proven alignment; scalar fallback otherwise | [vector_store](../../compile.py#L352), [optimization guide](09-optimizations.md) |
-| Basic arithmetic | Add/subtract/multiply/divide, copy, ReLU, negation/abs, square, extrema, sqrt/reciprocal/rsqrt; operation-specific integer domains | [arithmetic](../../compile.py#L247), [full operation table](05-arithmetic.md) |
-| Integer arithmetic | Width-preserving arithmetic, bitwise AND, signed right shift and power for nonnegative exponents | [arithmetic](../../compile.py#L247), [integer_power](../../ptx_math.py#L122) |
-| Floating math | Native-backed f16/f32 exp/log, full-double math, variable power, stable sigmoid and precision-dependent tanh | [ptx_math.py](../../ptx_math.py), [native math](13-native-exp-log-and-coverage.md), [activations](15-sigmoid-and-tanh.md) |
-| Boolean selection | Six numeric comparisons; internal predicates; tested AND/OR/NOT compositions and numeric where; no boolean memory ABI | [comparison](../../compile.py#L182), [boolean_assign](../../compile.py#L209), [where guide](14-boolean-comparisons-and-where.md) |
-| Control flow and state | Cond, ordinary Loop, StridedLoop, typed Init/Let; loop-local bindings and accumulator state | [counted_loop](../../compile.py#L524), [statement](../../compile.py#L621), [control-flow guide](06-control-flow.md) |
-| Reduction machinery | Accumulators, actual identity/base/merge programs, warp shuffles, shared trees and barriers; generated sum/mean/max and fused examples | [merge_states](../../compile.py#L489), [tree_halve](../../compile.py#L569), [WarpShuffle](../../compile.py#L749) |
-| Fused normalization | Public weighted RMSNorm, L2 normalization and online row-softmax programs | [normalization guide](08-normalization.md), [operation expansion](11-operation-expansion.md) |
-| Native tensor cores | Single m16n8k16 f16 A/B, f32 C fragments; global/staged transport, K zero-fill, output guards, transposed B and split-K intermediates | [dispatch](../../compile.py#L621), [ptx_tensor.py](../../ptx_tensor.py), [tensor-core guide](16-first-tensor-core-matmul.md) |
-| Native copy engine | cp.async issue/commit/wait, generated single/double/triple buffers, staged ldmatrix; tested B32/B64/B128 layouts | [cp_async_copy](../../ptx_tensor.py#L38), [staged_matrix_load](../../ptx_tensor.py#L53), [shared guide](17-shared-memory-async-copies.md) |
-| Shared allocation | Static storage or aligned slices of a dynamic arena, bounded by the unchanged metadata budget | [Smem dispatch](../../compile.py#L720), [compile](../../compile.py#L778) |
-| Independent verification | NumPy expression oracles, typed-IR interpreter, per-lane copy-group model and numerical warp-MMA model | [ir_reference.py](../../tools/ir_reference.py), [tensor_reference.py](../../tools/tensor_reference.py), [fixture proof](../../tools/emmy_fixtures.py) |
-
-**Handler-only capabilities are not end-to-end coverage claims.** Product/minimum reduction combiners, direct exp2/log2/log10 names, bitcast, extra boolean aliases, 4/8-byte async copies and swizzle shift overrides have handlers or partial checks, but are not all represented by fresh successful source-generated GPU cases. The pinned producer rejects some direct operations. The support distinctions and worked explanations in this file take precedence over an assumption that every operator/type combination is covered.
-
-**Implemented optimizations:** constant/power-of-two Tile-coordinate simplifications, alignment-proven grouped stores, native-backed scalar math and the IR's native tensor/copy instructions. We do not implement liveness analysis, physical register allocation, general loop-invariant motion, arbitrary multiply/add contraction, schedule retuning or reduction reassociation. ptxas assigns physical registers.
-
-### D. Commands to prepare and demonstrate
-
-Run these commands **inside Ubuntu WSL**. For the existing workspace:
-
-```bash
-cd /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026
-source /tmp/emmy-extended-env/bin/activate
+```mermaid
+flowchart LR
+    A[PyTorch expression + settings] --> B[Pinned Emmy]
+    B --> C[Unchanged Kernel IR + metadata]
+    C --> D[Our PTX emitter]
+    D --> E[ptxas + hosted GPU]
+    E --> F[Compare expression and IR references]
+    F --> G[Diagnose, fix, add regression]
+    G --> A
 ```
 
-For a fresh checkout, use Python 3.12+ and install `emmy-ml==0.3.11 numpy requests` in a virtual environment. Compilation itself needs no local GPU or nvcc. Regenerating fixtures additionally needs CPU PyTorch matching the fixture provenance; local assembly tests need ptxas, and disassembly needs cuobjdump. Reuse the configured environment for the recording rather than reinstalling packages today.
-
-**Short pointwise demo:**
-
-```bash
-mkdir -p review/presentation/demo
-python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json --inspect
-python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json > review/presentation/demo/p00.ours.ptx
-grep -E 'ld.global|add.rn.f32|st.global' review/presentation/demo/p00.ours.ptx
-python submit.py p00_scalar_add --compiler compile.py
-```
-
-**Short native-copy/tensor-core demo:** the glob below selects the single generated kernel in this saved fixture.
-
-```bash
-python compile.py tests/matmul/matmul_mma_shared_f16_16x8x16/*.ir.json > review/presentation/demo/shared.ours.ptx
-grep -E 'cp.async|ldmatrix|mma.sync' review/presentation/demo/shared.ours.ptx
-python tools/test_matmul.py --suite shared --only matmul_mma_shared_f16_16x8x16 --reuse --runner --report-name presentation-shared-demo.json
-```
-
-**Complete MVP check:**
-
-```bash
-python tools/test_mvp.py
-```
-
-This calls unchanged `submit.py <problem> --compiler compile.py` for all eight required cases. It saves per-case logs and source hashes in review/presentation. It tests the compiler, not canned PTX. These hosted checks are not the final event submission.
-
-**Additional reproducible feature checks — prepare these before recording, not all during the video:**
-
-| What to run | Ubuntu command |
-| --- | --- |
-| Local regression suite | `python -m unittest discover -s tests -p 'test_*.py'` |
-| Datatype conversions and math ranges | `python tools/test_pytorch_cases.py --runner` |
-| Pointwise/reduction combinations, fresh f32 cases | `python tools/test_operations.py --dtypes f32 --sizes 33 129 --runner` |
-| Normalization extensions plus public cases | `python tools/validate_normalization.py --generate --runner` |
-| Sequential-loop compositions | `python tools/test_serial_loops.py --reuse --runner` |
-| Comparisons, boolean logic and where | `python tools/test_where.py --reuse --runner` |
-| Sigmoid/tanh and compositions | `python tools/test_activations.py --reuse --runner` |
-| Global-memory tensor-core examples | `python tools/test_matmul.py --reuse --runner` |
-| Shared copies, swizzles and pipelining | `python tools/test_matmul.py --suite shared --runner` |
-| Public 512×512 matmul | `python tools/test_public_matmul.py --runner` |
-
-The activation command retains one f64 expression-level reduction difference and therefore exits nonzero; its GPU/IR checks pass. The shared generator records one upstream-rejected shape/schedule separately from nine passes. Strict --reuse requires provenance, so regenerate older fixtures without proofs instead of inventing a proof. The global and shared test tools upload only our PTX. The public m01 tool checks its original expectation by default; --ir-reference adds a slower full-schedule interpretation.
-
-The earlier native-math benchmark is in [timings.json](../../review/native-math/timings.json). Its paired measurements belong to the recorded source hashes and unlocked GPU clocks. Do not present those ratios as a benchmark of every current kernel or rerun its baseline guard blindly against this later compiler revision.
-
-### E. Future work and honest limits
-
-1. Add and validate atomic output accumulation for public m02, preserving its zero_outputs and split-K behavior.
-2. Support arrayed register-fragment families and dynamic family references generated by larger output tiles.
-3. Add fused fragment epilogues and end-to-end attention coverage.
-4. Broaden producer-generated datatype/layout/shape coverage; investigate additional MMA forms and copy engines where both producer and target support them.
-5. Profile stable cases, then improve addressing/data movement and compare performance with controlled measurements.
-
-Currently unsupported or unproven: full attention, atomic stores, arrayed fragments, general stateful array Loops, arbitrary branch joins, boolean memory/output ABI, additional MMA dtypes/shapes, TMA/WGMMA, general multidimensional launches and dynamic shapes. Numerical sampling does not prove universal math error bounds. Hidden tests remain unavailable.
-
-### F. Recording and submission checklist
-
-- [ ] Rehearse only Part 1; keep the recording between 3 and 5 minutes in your own voice.
-- [ ] Pre-open compile.py, p00/r04 IR, the staged tensor-core IR/PTX and the MVP result. Explain selected functions rather than scrolling through the whole source.
-- [ ] Include compile.py, ptx_math.py and ptx_tensor.py at the repository root; verify the exact compiler command from a clean environment.
-- [ ] Keep the fresh 8/8 MVP report, examples and feature guide in the submitted source tree. Label unsupported features and precision differences honestly.
-- [ ] **Repository visibility:** our working GitHub repository is currently private. The organizer's README requires a public repository. Resolve that before submitting; this documentation work does not change repository visibility.
-- [ ] Make the video accessible to anyone with its link. Confirm the cutoff and submission requirements in the organizer's [README](../../README.md) and [submission portal](https://riftstack.ai/hackathon/submit).
-- [ ] Submit the repository URL and video URL through the event form with a time buffer. Running submit.py is a GPU test, not that final submission.
-
-**If asked why the reference files changed:** they are our independent NumPy checker, not Emmy IR. We extended their semantics for new instructions and fixed checker state handling. We did not rewrite the supplied IR or replace original expectations with interpreter output.
-
-**If asked why some operations still need math sequences:** PTX has useful hardware instructions, but not a correctly rounded native instruction for every operation/datatype. Native tanh was insufficient for our strict f32 samples; f64 must not silently narrow. The emission follows the declared datatype and validated accuracy path.
-
----
-
-## Part 3 — complete technical walkthrough and worked examples
-
-This section supplies the detail behind every claim in the speaker script. It is reference material, not extra text to read during the short video. All IR excerpts below are copied from real supplied or Emmy-generated fixtures; PTX excerpts are from our emitted output. Excerpts are partial views of those files, not manufactured test kernels.
-
-### 1. Terminology and ownership of each stage
-
-| Term | Meaning in this project |
-| --- | --- |
-| PyTorch expression | The source program used to generate extended cases, such as `x.sum(-1)` or `a @ b` |
-| Emmy | The upstream compiler that traces/schedules the source and produces the input IR |
-| Kernel IR | The already scheduled typed program our compiler must translate: loads, assignments, loops, barriers, fragments and copies |
-| Tile | A logical iteration space mapped onto GPU workers; its element count is not automatically the input length or block size |
-| PTX | NVIDIA's virtual GPU instruction language; this is our compiler's output |
-| ptxas / driver compilation | The downstream stage that turns PTX into target machine code and allocates physical registers |
-| SASS | The machine instructions inspected in local disassembly |
-| Warp / block | A warp contains 32 lanes; a block contains one or more cooperating warps with shared memory/barriers |
-| Fixture | Source, IR, metadata, expectations and provenance stored together for one reproducible case |
-| Oracle | An independent reference result used to check execution |
-
-The compilation path is **Kernel IR → our direct PTX emitter → PTX**. We do not reconstruct PyTorch at submission time, add a new lowering IR, call nvcc, invoke cuBLAS or use an external compiler to translate the input. Emmy's earlier Tile/Loop passes already chose the schedule; our job is to implement it faithfully.
-
-The **test-generation** path is different: **PyTorch → pinned Emmy → fixture**. The generator asks Emmy for its CUDA-stage dump so the organizer's packager can extract launch information and the earlier Kernel IR. The reference CUDA file it produces is not our translation path and is never uploaded as our implementation.
-
-We emit PTX targeting sm_89. The hosted runner executes compatible PTX on its RTX 5090/sm_120 target. Target instruction availability still matters: using an instruction merely because the runner is newer does not make it legal for our declared sm_89 program.
-
-### 2. How extra cases and their expected values are generated
+### Generating extended cases
 
 The first baseline was add, then increasingly complex pointwise and reduction programs. We expanded the **source generator**, not the serialized IR. For example, the existing operation generator can build this family:
 
@@ -304,7 +75,7 @@ if json.loads(packaged.read_text()) != upstream:
 
 It then records the packaged and original dump hashes. Strict reuse verifies them. Legacy genuine fixtures without fresh proof are not given fabricated retrospective proof; they must be regenerated for strict reuse. Retired synthetic cases are excluded from active totals.
 
-### 3. What the feedback loop tells us
+### The feedback loop
 
 For every applicable case, we keep both the original expression expectation and the independent typed-IR expectation:
 
@@ -325,7 +96,30 @@ Two actual feedback examples are useful to explain aloud if asked:
 
 Known f64 expression differences are handled separately. For example, the generated tanh-sum kernel computes f64 tanh but explicitly accumulates and merges in f32 before copying to f64. Matching those instructions does not make it an original-expression pass. That distinction remains in the reports.
 
-### 4. Loading, metadata and PTX entry generation
+## High-level overview of PTX generation
+
+### Terminology and stage ownership
+
+| Term | Meaning in this project |
+| --- | --- |
+| PyTorch expression | The source program used to generate extended cases, such as `x.sum(-1)` or `a @ b` |
+| Emmy | The upstream compiler that traces/schedules the source and produces the input IR |
+| Kernel IR | The already scheduled typed program our compiler must translate: loads, assignments, loops, barriers, fragments and copies |
+| Tile | A logical iteration space mapped onto GPU workers; its element count is not automatically the input length or block size |
+| PTX | NVIDIA's virtual GPU instruction language; this is our compiler's output |
+| ptxas / driver compilation | The downstream stage that turns PTX into target machine code and allocates physical registers |
+| SASS | The machine instructions inspected in local disassembly |
+| Warp / block | A warp contains 32 lanes; a block contains one or more cooperating warps with shared memory/barriers |
+| Fixture | Source, IR, metadata, expectations and provenance stored together for one reproducible case |
+| Oracle | An independent reference result used to check execution |
+
+The compilation path is **Kernel IR → our direct PTX emitter → PTX**. We do not reconstruct PyTorch at submission time, add a new lowering IR, call nvcc, invoke cuBLAS or use an external compiler to translate the input. Emmy's earlier Tile/Loop passes already chose the schedule; our job is to implement it faithfully.
+
+The **test-generation** path is different: **PyTorch → pinned Emmy → fixture**. The generator asks Emmy for its CUDA-stage dump so the organizer's packager can extract launch information and the earlier Kernel IR. The reference CUDA file it produces is not our translation path and is never uploaded as our implementation.
+
+We emit PTX targeting sm_89. The hosted runner executes compatible PTX on its RTX 5090/sm_120 target. Target instruction availability still matters: using an instruction merely because the runner is newer does not make it legal for our declared sm_89 program.
+
+### Loading the program and emitting its entry
 
 The key loader statement in compile.py is:
 
@@ -365,7 +159,7 @@ The emitter generates the body before printing register declarations, so it know
 
 Our register names are virtual names. `%f`, `%d`, `%l`, `%r`, `%rd`, `%h` and `%p` distinguish working banks for f32, f64, i64/packed bits, 32-bit integers, pointers, half storage bits and predicates. ptxas allocates physical registers afterward. We did not implement a physical register allocator or liveness pass.
 
-### 5. Worked pointwise example: the actual p00 kernel
+## Category 1 — pointwise operations
 
 The source is `torch.randn(128) + torch.randn(128)`. Its actual readable Kernel IR is:
 
@@ -415,7 +209,7 @@ This is two scalar additions followed by one vector **memory store**, not one sp
 
 For a row-major buffer, address() flattens `[row, col]` as `row*columns+col`, then multiplies by element size. For higher ranks it repeats the same multiply-and-add construction. Scalars with one stored element also have a supported empty-index form.
 
-### 6. Datatypes, arithmetic and safe pointwise extensions
+### Datatypes, arithmetic and optimizations
 
 | Tensor dtype | Memory width | Working representation |
 | --- | --- | --- |
@@ -466,7 +260,7 @@ The implemented operation families are:
 
 The Tile helpers also replace division by a power of two with a shift, modulo by a power of two with a mask, and unit-extent coordinates with constants. They rely on the validated in-range worker coordinate. These are local emission simplifications, not a new optimization-pass pipeline. We do not infer liveness, reorder reductions or contract arbitrary multiply/add nodes into FMA.
 
-### 7. Boolean comparisons and where
+### Boolean comparisons and where
 
 Consider the tested source expression:
 
@@ -489,7 +283,7 @@ Integer-to-integer comparisons retain integer width. For mixed integer/floating 
 
 Numeric where supports the five output datatypes. A bool memory/output interface, boolean-valued where and arbitrary branch joins are not part of this support.
 
-### 8. Worked reduction: r04 and ordinary loops
+## Category 2 — reductions
 
 The public row sum has input shape 64×512. Its actual IR is:
 
@@ -530,7 +324,7 @@ Reduction combination is separate from elementwise arithmetic: subtraction may f
 
 `merge_states()` executes the supplied combine program before copying its results back into the original state registers. This avoids updating one state too early when another state still needs the old value. For 64-bit shuffle values, we shuffle two 32-bit halves and reassemble them. Shared allocation, barriers and the supplied tree shape remain explicit.
 
-### 9. Fused normalization and online softmax
+## Category 4 — fused normalization and softmax
 
 The supported public programs include these formulas:
 
@@ -554,7 +348,7 @@ When partial states merge, the sum must be rescaled to the merged maximum. Addin
 
 This is why coupled-state merge ordering, literal Let values and typed math matter beyond a simple reduction. Normalization also shows why a supplied sqrt followed by reciprocal is kept as two rounded operations rather than replaced with an arbitrary approximate rsqrt.
 
-### 10. Math expansions and accuracy decisions
+## Extended scalar math
 
 PTX provides useful primitives, not one native instruction for every operation and datatype. Our paths are:
 
@@ -593,7 +387,7 @@ The f64 series extends through degree fifteen. The sign-bit path preserves negat
 
 Floating power uses exp(y*log(abs(x))) with explicit real-domain/sign and special-case handling. Negative finite bases require integral exponents; odd exponents restore a negative sign. Integer power instead repeatedly squares the base and halves the nonnegative exponent, retaining the declared integer width. Its invalid negative-exponent domain is not claimed as supported.
 
-### 11. Worked tensor-core matmul
+## Category 3 — matmul and native tensor cores
 
 The source below is a real generated case:
 
@@ -647,7 +441,7 @@ Emmy may also split K across kernels. Our global example writes f32 partial tile
 
 Arrayed fragment families such as `_a[_r0]` are genuinely generated by larger output tiles but remain unsupported. We retain that example and test explicit rejection rather than treating all m16n8k16 programs as covered.
 
-### 12. Shared copies, swizzles, barriers and pipelining
+### Shared-memory copies and pipelining
 
 The shared version stages A and B, loads warp fragments and issues the same native MMA. These lines are copied from our emitted single-warp PTX:
 
@@ -681,7 +475,7 @@ The public m01 kernel uses scalar multiply/add loops with this copy pipeline; th
 
 Local disassembly of the staged single-warp example contains LDGSTS, LDSM, HMMA and dependency barriers. It uses sixteen physical registers and no spills in that recorded sm_89 assembly. This is evidence of instruction selection, not a universal speedup claim or the hosted driver's final sm_120 code.
 
-### 13. What the two reference implementations model
+## Independent reference implementations
 
 `ir_reference.py` interprets actual typed statements and tracks per-thread values, valid bindings, buffer initialization and scoped mutable state. `tensor_reference.py` extends it with numerical fragments, copy queues and the three supported shared layouts. These files are testing code, not an intermediate IR used by the compiler.
 
@@ -691,7 +485,26 @@ For async copies, it snapshots each lane's source values, queues writes, closes 
 
 Mutable Init state must survive enclosing staging loops when an inner seed=False loop updates it. Ordinary temporary bindings must remain scoped. Correcting this distinction fixed the scalar checker discrepancy without changing the emitted kernel or original expected result.
 
-### 14. The exact MVP evidence, included here
+## Coverage and validation
+
+The MVP is **exactly the eight pointwise/reduction problems listed in MVP.md**, not all public categories and not every possible hidden variation.
+
+| Category | Required/public problems | Verified status | Extension beyond the base case |
+| --- | --- | --- | --- |
+| 1 — pointwise, MVP | p00_scalar_add, p01_vector_add, p02_scale_shift, p03_relu_mul | **4/4 PASS**, fresh unchanged submit.py audit | Additional operations, five dtypes, conversions, comparison/where, irregular sizes, aligned grouped stores |
+| 2 — reductions, MVP | r01_array_sum, r02_big_sum, r03_mean, r04_row_sum | **4/4 PASS**, same audit | Row/width/cooperative variations, ordinary Loop, composed reductions and normalization |
+| 3 — public matmul | m01_matmul_512 | **PASS** against original expectation | cp.async pipeline, metadata-driven 73,728-byte dynamic arena; separate generated native-MMA examples |
+| 3 — remaining public matmul | m02_matmul_rect | **Unsupported: atomic output writes** | Explicit future work; not included in passing counts |
+| 4 — fused | f01_rmsnorm, f02_row_softmax, f03_l2norm | **3/3 PASS** in current public regression report | Typed math and coupled reduction state; additional generated normalization cases |
+| 5 — attention-like | a01_attention, a02_attention_128 | **No end-to-end support claimed** | Future work; do not present these as passing |
+
+Evidence: [fresh 8-case MVP audit](../../review/presentation/mvp-validation.json), [official-harness logs](../../review/presentation/mvp-logs), [11-case public regression](../../review/native-math/async-regression.json), [public m01 report](../../review/shared-matmul/public-validation.json).
+
+This establishes the complete **open MVP** and 12 verified public problems across those reports. It does not establish hidden-set completeness. The large public m01 was checked against its original NumPy expectation; a full typed-IR interpretation was not run by default.
+
+Latest feature checkpoint: 47 passing local test methods; 9 global-matmul cases and 9 shared-matmul cases passing both references. Historical suites include additional expression-level f64 precision differences caused by explicitly narrower operations in the producer's IR; those remain visible and are not counted as competition passes. Do not add overlapping/historical suite totals into a new unique-case coverage claim.
+
+### Exact MVP results
 
 The fresh audit called unchanged `submit.py <problem> --compiler compile.py` for each required problem. Every command returned success. The recorded maximum absolute errors were:
 
@@ -710,9 +523,90 @@ These values are within each original problem's tolerance. They are correctness 
 
 This confirms the complete open MVP. Separately, the three public fused programs and public m01 pass in the recorded reports. m02 and the two attention programs are not included in passing counts. The 47 local test methods and generated suites are supporting evidence, not a substitute for this official-harness MVP check.
 
-### 15. Complete startup, demonstration and troubleshooting sequence
+### Complete feature inventory and source map
 
-For the existing Ubuntu workspace, activate the environment and change directory using Part 2's commands. For a clean Linux checkout, this is the minimal compiler/test-client setup:
+| Feature | Implementation and scope | Where to inspect |
+| --- | --- | --- |
+| Submission contract | Parse typed Emmy JSON; sibling metadata supplies entry/argument/launch information; stdout contains PTX | [load_kernel](../../compile.py#L40), [main](../../compile.py#L844) |
+| Launch and indexing | Decode flattened 1-D launches into static Tile coordinates; preserve given cooperative blocks; integer index arithmetic/comparisons/ternaries | [tile_coordinates](../../compile.py#L405), [index_expr](../../compile.py#L421), [predicate](../../compile.py#L446) |
+| Numeric datatypes | f16/f32/f64/i32/i64 paths; 25 source-generated conversion pairs; half boundary rounding; full-width double/integer handling | [convert](../../compile.py#L147), [round_half](../../compile.py#L414), [datatype guide](03-datatypes-and-registers.md) |
+| Memory and constants | Typed global/shared loads and stores; byte addresses from element indices; constants remain metadata arguments | [address](../../compile.py#L457), [memory_load](../../compile.py#L315), [memory_store](../../compile.py#L325) |
+| Grouped stores | Two/four adjacent values, at most 16 bytes, only with proven alignment; scalar fallback otherwise | [vector_store](../../compile.py#L352), [optimization guide](09-optimizations.md) |
+| Basic arithmetic | Add/subtract/multiply/divide, copy, ReLU, negation/abs, square, extrema, sqrt/reciprocal/rsqrt; operation-specific integer domains | [arithmetic](../../compile.py#L247), [full operation table](05-arithmetic.md) |
+| Integer arithmetic | Width-preserving arithmetic, bitwise AND, signed right shift and power for nonnegative exponents | [arithmetic](../../compile.py#L247), [integer_power](../../ptx_math.py#L122) |
+| Floating math | Native-backed f16/f32 exp/log, full-double math, variable power, stable sigmoid and precision-dependent tanh | [ptx_math.py](../../ptx_math.py), [native math](13-native-exp-log-and-coverage.md), [activations](15-sigmoid-and-tanh.md) |
+| Boolean selection | Six numeric comparisons; internal predicates; tested AND/OR/NOT compositions and numeric where; no boolean memory ABI | [comparison](../../compile.py#L182), [boolean_assign](../../compile.py#L209), [where guide](14-boolean-comparisons-and-where.md) |
+| Control flow and state | Cond, ordinary Loop, StridedLoop, typed Init/Let; loop-local bindings and accumulator state | [counted_loop](../../compile.py#L524), [statement](../../compile.py#L621), [control-flow guide](06-control-flow.md) |
+| Reduction machinery | Accumulators, actual identity/base/merge programs, warp shuffles, shared trees and barriers; generated sum/mean/max and fused examples | [merge_states](../../compile.py#L489), [tree_halve](../../compile.py#L569), [WarpShuffle](../../compile.py#L749) |
+| Fused normalization | Public weighted RMSNorm, L2 normalization and online row-softmax programs | [normalization guide](08-normalization.md), [operation expansion](11-operation-expansion.md) |
+| Native tensor cores | Single m16n8k16 f16 A/B, f32 C fragments; global/staged transport, K zero-fill, output guards, transposed B and split-K intermediates | [dispatch](../../compile.py#L621), [ptx_tensor.py](../../ptx_tensor.py), [tensor-core guide](16-first-tensor-core-matmul.md) |
+| Native copy engine | cp.async issue/commit/wait, generated single/double/triple buffers, staged ldmatrix; tested B32/B64/B128 layouts | [cp_async_copy](../../ptx_tensor.py#L38), [staged_matrix_load](../../ptx_tensor.py#L53), [shared guide](17-shared-memory-async-copies.md) |
+| Shared allocation | Static storage or aligned slices of a dynamic arena, bounded by the unchanged metadata budget | [Smem dispatch](../../compile.py#L720), [compile](../../compile.py#L778) |
+| Independent verification | NumPy expression oracles, typed-IR interpreter, per-lane copy-group model and numerical warp-MMA model | [ir_reference.py](../../tools/ir_reference.py), [tensor_reference.py](../../tools/tensor_reference.py), [fixture proof](../../tools/emmy_fixtures.py) |
+
+**Handler-only capabilities are not end-to-end coverage claims.** Product/minimum reduction combiners, direct exp2/log2/log10 names, bitcast, extra boolean aliases, 4/8-byte async copies and swizzle shift overrides have handlers or partial checks, but are not all represented by fresh successful source-generated GPU cases. The pinned producer rejects some direct operations. The support distinctions and worked explanations in this file take precedence over an assumption that every operator/type combination is covered.
+
+**Implemented optimizations:** constant/power-of-two Tile-coordinate simplifications, alignment-proven grouped stores, native-backed scalar math and the IR's native tensor/copy instructions. We do not implement liveness analysis, physical register allocation, general loop-invariant motion, arbitrary multiply/add contraction, schedule retuning or reduction reassociation. ptxas assigns physical registers.
+
+## How to run the compiler and tests
+
+Run these commands **inside Ubuntu WSL**. For the existing workspace:
+
+```bash
+cd /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026
+source /tmp/emmy-extended-env/bin/activate
+```
+
+For a fresh checkout, use Python 3.12+ and install `emmy-ml==0.3.11 numpy requests` in a virtual environment. Compilation itself needs no local GPU or nvcc. Regenerating fixtures additionally needs CPU PyTorch matching the fixture provenance; local assembly tests need ptxas, and disassembly needs cuobjdump. The configured environment already contains these dependencies.
+
+**Pointwise compilation and hosted check:**
+
+```bash
+mkdir -p review/presentation/demo
+python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json --inspect
+python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json > review/presentation/demo/p00.ours.ptx
+grep -E 'ld.global|add.rn.f32|st.global' review/presentation/demo/p00.ours.ptx
+python submit.py p00_scalar_add --compiler compile.py
+```
+
+**Native-copy/tensor-core compilation and hosted check:** the glob below selects the single generated kernel in this saved fixture.
+
+```bash
+python compile.py tests/matmul/matmul_mma_shared_f16_16x8x16/*.ir.json > review/presentation/demo/shared.ours.ptx
+grep -E 'cp.async|ldmatrix|mma.sync' review/presentation/demo/shared.ours.ptx
+python tools/test_matmul.py --suite shared --only matmul_mma_shared_f16_16x8x16 --reuse --runner --report-name presentation-shared-demo.json
+```
+
+**Complete MVP check:**
+
+```bash
+python tools/test_mvp.py
+```
+
+This calls unchanged `submit.py <problem> --compiler compile.py` for all eight required cases. It saves per-case logs and source hashes in review/presentation. It tests the compiler, not canned PTX. These hosted checks are not the final event submission.
+
+**Additional reproducible feature checks:**
+
+| What to run | Ubuntu command |
+| --- | --- |
+| Local regression suite | `python -m unittest discover -s tests -p 'test_*.py'` |
+| Datatype conversions and math ranges | `python tools/test_pytorch_cases.py --runner` |
+| Pointwise/reduction combinations, fresh f32 cases | `python tools/test_operations.py --dtypes f32 --sizes 33 129 --runner` |
+| Normalization extensions plus public cases | `python tools/validate_normalization.py --generate --runner` |
+| Sequential-loop compositions | `python tools/test_serial_loops.py --reuse --runner` |
+| Comparisons, boolean logic and where | `python tools/test_where.py --reuse --runner` |
+| Sigmoid/tanh and compositions | `python tools/test_activations.py --reuse --runner` |
+| Global-memory tensor-core examples | `python tools/test_matmul.py --reuse --runner` |
+| Shared copies, swizzles and pipelining | `python tools/test_matmul.py --suite shared --runner` |
+| Public 512×512 matmul | `python tools/test_public_matmul.py --runner` |
+
+The activation command retains one f64 expression-level reduction difference and therefore exits nonzero; its GPU/IR checks pass. The shared generator records one upstream-rejected shape/schedule separately from nine passes. Strict --reuse requires provenance, so regenerate older fixtures without proofs instead of inventing a proof. The global and shared test tools upload only our PTX. The public m01 tool checks its original expectation by default; --ir-reference adds a slower full-schedule interpretation.
+
+The earlier native-math benchmark is in [timings.json](../../review/native-math/timings.json). Its paired measurements belong to the recorded source hashes and unlocked GPU clocks. Do not present those ratios as a benchmark of every current kernel or rerun its baseline guard blindly against this later compiler revision.
+
+### Clean setup and troubleshooting
+
+For the existing Ubuntu workspace, use the activation commands above. For a clean Linux checkout, this is the minimal compiler/test-client setup:
 
 ```bash
 python3.12 -m venv .venv
@@ -731,7 +625,7 @@ For one concrete extension of the baseline reduction, this command changes the e
 python tools/test_operations.py --dtypes f32 --ops sum_composed --sizes 129 --work 128 --runner
 ```
 
-For a quick tensor/copy demonstration, use the one saved shared fixture and a separate report name, as shown in Part 2. Avoid regenerating every suite during the recording. The video should show that you understand the implementation and one or two real results, not spend its duration waiting on a large matrix of tests.
+The shared-copy command above selects one saved fixture and writes a separate report. The broader commands regenerate or validate the corresponding feature families.
 
 | Symptom | First thing to check |
 | --- | --- |
@@ -743,7 +637,15 @@ For a quick tensor/copy demonstration, use the one saved shared fixture and a se
 | Runner unreachable or busy | Read the harness error/retry behavior; do not reinterpret it as a numeric failure |
 | Unsupported atomic or arrayed fragment node | A documented feature gap, not a reason to rewrite the input IR |
 
-### 16. What future work changes technically
+## Submission requirements
+
+- [ ] Include compile.py, ptx_math.py and ptx_tensor.py at the repository root; verify the exact compiler command from a clean environment.
+- [ ] Keep the fresh 8/8 MVP report, examples and feature guide in the submitted source tree. Label unsupported features and precision differences honestly.
+- [ ] **Repository visibility:** our working GitHub repository is currently private. The organizer's README requires a public repository. Resolve that before submitting; this documentation work does not change repository visibility.
+- [ ] Make the video accessible to anyone with its link. Confirm the cutoff and submission requirements in the organizer's [README](../../README.md) and [submission portal](https://riftstack.ai/hackathon/submit).
+- [ ] Submit the repository URL and video URL through the event form with a time buffer. Running submit.py is a GPU test, not that final submission.
+
+## Future work
 
 - **Atomic m02 output:** multiple K partitions must accumulate into the supplied zero-initialized output. Add a real atomic store path and validate it under the unchanged launch/zero_outputs contract. A plain store would lose contributions.
 - **Arrayed fragment families:** larger schedules index a family of register fragments. PTX registers are statically named, so resolving those references requires deliberate lowering/emission support; accepting the declaration alone is insufficient.
@@ -752,3 +654,5 @@ For a quick tensor/copy demonstration, use the one saved shared fixture and a se
 - **Optimization:** profile verified cases, improve addressing and transport where measurements justify it, and retain numerical boundaries. Compare controlled before/after results rather than inferring speed from fewer virtual registers or a vector mnemonic.
 
 The presentation's supported-feature claims are limited to the implementation and evidence described in this file. Original competition files stay unchanged, only our compiler output is tested on the runner, and the final event submission still requires a public repository plus the accessible video link.
+
+Currently unsupported or unproven: full attention, atomic stores, arrayed fragments, general stateful array Loops, arbitrary branch joins, boolean memory/output ABI, additional MMA dtypes/shapes, TMA/WGMMA, general multidimensional launches and dynamic shapes. Numerical sampling does not prove universal math error bounds. Hidden tests remain unavailable.
