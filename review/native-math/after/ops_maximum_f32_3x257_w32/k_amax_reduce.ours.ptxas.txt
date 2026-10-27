@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'k_amax_reduce' for 'sm_89'
+ptxas info    : Function properties for k_amax_reduce
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, 368 bytes cmem[0]

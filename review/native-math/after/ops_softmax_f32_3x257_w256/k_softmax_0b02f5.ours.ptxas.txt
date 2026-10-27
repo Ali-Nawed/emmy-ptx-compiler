@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'k_softmax_0b02f5' for 'sm_89'
+ptxas info    : Function properties for k_softmax_0b02f5
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 29 registers, 64 bytes smem, 368 bytes cmem[0]

@@ -1,0 +1,66 @@
+{
+  "id": "native_exp_edges_f16",
+  "code": "x = torch.tensor([-17.375, -17.34375, -17.328125, -17.3125, -17.28125, -16.0, -10.0, 0.0, 10.0, 11.0, 11.078125, 11.0859375], dtype=torch.float16); torch.exp(x)",
+  "rtol": 0.002,
+  "atol": 0,
+  "graph_inputs": [
+    "x"
+  ],
+  "graph_outputs": [
+    "exp"
+  ],
+  "kernels": [
+    {
+      "node": "exp",
+      "entry": "k_exp_pointwise",
+      "arg_order": [
+        "x",
+        "exp"
+      ],
+      "grid": [
+        1,
+        1,
+        1
+      ],
+      "block": [
+        256,
+        1,
+        1
+      ],
+      "smem_bytes": 0,
+      "zero_outputs": [],
+      "args": [
+        {
+          "name": "x",
+          "dtype": "f16",
+          "shape": [
+            12
+          ],
+          "data": [
+            -17.375,
+            -17.34375,
+            -17.328125,
+            -17.3125,
+            -17.28125,
+            -16.0,
+            -10.0,
+            0.0,
+            10.0,
+            11.0,
+            11.078125,
+            11.0859375
+          ]
+        },
+        {
+          "name": "exp",
+          "dtype": "f16",
+          "shape": [
+            12
+          ],
+          "output": true
+        }
+      ],
+      "final": true
+    }
+  ]
+}

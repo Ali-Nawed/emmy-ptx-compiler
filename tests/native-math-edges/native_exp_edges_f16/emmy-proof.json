@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.tensor([-17.375, -17.34375, -17.328125, -17.3125, -17.28125, -16.0, -10.0, 0.0, 10.0, 11.0, 11.078125, 11.0859375], dtype=torch.float16); torch.exp(x)",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_exp_pointwise.ir.json": {
+      "sha256": "11af4714e58f45526c861507a44b9eac8c55086ce13eb253497a5c01d3831e0c",
+      "upstream_dump_sha256": "11af4714e58f45526c861507a44b9eac8c55086ce13eb253497a5c01d3831e0c"
+    }
+  }
+}

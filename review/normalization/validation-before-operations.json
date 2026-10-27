@@ -1,0 +1,765 @@
+{
+  "compiler_sha256": "3ea74b1a42b0f2ea524dc72434a0d25d8dfa803070d679c46b88cfc049d36993",
+  "runner": true,
+  "cases": [
+    {
+      "fixture": "problems/p00_scalar_add",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 25.408,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p01_vector_add",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.48,
+            "registers": {
+              "k_add_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p02_scale_shift",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 17.12,
+            "registers": {
+              "k_add_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/p03_relu_mul",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 17.056,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r01_array_sum",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.032,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r02_big_sum",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 42.656,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r03_mean",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_ffcca3",
+            "median_us": 32.992,
+            "registers": {
+              "k_mean_ffcca3": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/r04_row_sum",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.512,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/f03_l2norm",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_reduce",
+            "median_us": 14.752,
+            "registers": {
+              "k_div_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "problems/f01_rmsnorm",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_cbd1de",
+            "median_us": 15.456,
+            "registers": {
+              "k_mean_cbd1de": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_div_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1025",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_reduce",
+            "median_us": 14.912,
+            "registers": {
+              "k_div_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_reduce",
+            "median_us": 20.928,
+            "registers": {
+              "k_div_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_reciprocal_pointwise": 13
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.896,
+            "registers": {
+              "k_reciprocal_pointwise": 15
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_reciprocal_pointwise": 13
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_reciprocal_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_reciprocal_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_reciprocal_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_reciprocal_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_47f646",
+            "median_us": 20.64,
+            "registers": {
+              "k_mean_47f646": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1025",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_5f6fa0",
+            "median_us": 15.36,
+            "registers": {
+              "k_mean_5f6fa0": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_0c103c",
+            "median_us": 21.216,
+            "registers": {
+              "k_mean_0c103c": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_sqrt_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_sqrt_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.768,
+            "registers": {
+              "k_sqrt_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_sqrt_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_1",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.128,
+            "registers": {
+              "k_sqrt_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_129",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sqrt_pointwise",
+            "median_us": 20.704,
+            "registers": {
+              "k_sqrt_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 28
+  }
+}

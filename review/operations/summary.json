@@ -1,0 +1,71 @@
+{
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "fd9860094dd41ca8d859a738f2e9846c756f2c7bbab1de3dd1bd79317c3828e3"
+  },
+  "hosted_cases": 169,
+  "statuses": {
+    "pass": 162,
+    "wrong_result": 7
+  },
+  "numeric_gpu_vs_ir": {
+    "pass": 169
+  },
+  "classification_cases": 0,
+  "excluded_historical_synthetic_cases": 88,
+  "known_expression_gaps": [
+    "ops_log2_f64_129_w128",
+    "ops_log10_f64_129_w128",
+    "ops_sum_composed_f64_3x129_w128",
+    "ops_center_f64_3x1_w128",
+    "ops_center_f64_3x129_w128",
+    "ops_maximum_f64_3x129_w128",
+    "ops_softmax_f64_3x129_w128"
+  ],
+  "unexpected": [],
+  "suites": [
+    {
+      "report": "review/operations/f32.json",
+      "cases": 28,
+      "statuses": {
+        "pass": 28
+      }
+    },
+    {
+      "report": "review/operations/other-types.json",
+      "cases": 72,
+      "statuses": {
+        "pass": 65,
+        "wrong_result": 7
+      }
+    },
+    {
+      "report": "review/operations/work32.json",
+      "cases": 3,
+      "statuses": {
+        "pass": 3
+      }
+    },
+    {
+      "report": "review/operations/work256.json",
+      "cases": 3,
+      "statuses": {
+        "pass": 3
+      }
+    },
+    {
+      "report": "review/normalization/validation.json",
+      "cases": 29,
+      "statuses": {
+        "pass": 29
+      }
+    },
+    {
+      "report": "review/pytorch-only/validation.json",
+      "cases": 34,
+      "statuses": {
+        "pass": 34
+      }
+    }
+  ]
+}

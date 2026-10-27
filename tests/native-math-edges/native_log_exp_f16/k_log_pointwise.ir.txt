@@ -1,0 +1,5 @@
+    Tile[a0] (N=11)
+        in0 = load x[a0]
+        f16 v0 = exp(in0)
+        f16 v1 = log(v0)
+        log[a0] = v1

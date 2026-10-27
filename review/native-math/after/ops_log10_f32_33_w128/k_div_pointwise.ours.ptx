@@ -1,0 +1,162 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_div_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2,
+    .param .u64 arg_3
+)
+{
+    .reg .b32 %r<29>;
+    .reg .b64 %rd<33>;
+    .reg .f32 %f<46>;
+    .reg .pred %p<8>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    ld.param.u64 %rd7, [arg_3];
+    cvta.to.global.u64 %rd8, %rd7;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 11;
+    @%p1 bra DONE;
+    mov.s32 %r5, 0;
+    mul.wide.s32 %rd9, %r5, 4;
+    add.u64 %rd10, %rd4, %rd9;
+    ld.global.f32 %f1, [%rd10+0];
+    rcp.rn.f32 %f2, %f1;
+    mul.lo.s32 %r6, %r4, 3;
+    add.s32 %r7, %r6, 0;
+    mov.s32 %r8, %r7;
+    mul.wide.s32 %rd11, %r8, 4;
+    add.u64 %rd12, %rd6, %rd11;
+    ld.global.f32 %f3, [%rd12+0];
+    mul.rn.f32 %f4, %f3, %f3;
+    mov.s32 %r9, 0;
+    mul.wide.s32 %rd13, %r9, 4;
+    add.u64 %rd14, %rd2, %rd13;
+    ld.global.f32 %f5, [%rd14+0];
+    add.rn.f32 %f6, %f5, %f4;
+    lg2.approx.f32 %f8, %f6;
+    setp.ge.f32 %p2, %f6, 0f3F400000;
+    setp.le.f32 %p3, %f6, 0f3FA00000;
+    and.pred %p2, %p2, %p3;
+    @!%p2 bra LOG_NATIVE_DONE_1;
+    sub.rn.f32 %f9, %f6, 0f3F800000;
+    add.rn.f32 %f10, %f6, 0f3F800000;
+    div.rn.f32 %f11, %f9, %f10;
+    mul.rn.f32 %f12, %f11, %f11;
+    mov.f32 %f13, 0f3DE38E39;
+    fma.rn.f32 %f13, %f13, %f12, 0f3E124925;
+    fma.rn.f32 %f13, %f13, %f12, 0f3E4CCCCD;
+    fma.rn.f32 %f13, %f13, %f12, 0f3EAAAAAB;
+    fma.rn.f32 %f13, %f13, %f12, 0f3F800000;
+    mul.rn.f32 %f11, %f11, 0f40000000;
+    mul.rn.f32 %f13, %f13, %f11;
+    mul.rn.f32 %f8, %f13, 0f3FB8AA3B;
+LOG_NATIVE_DONE_1:
+    mul.rn.f32 %f14, %f8, 0f3F317218;
+    mul.rn.f32 %f15, %f2, %f14;
+    mov.s32 %r10, 0;
+    mul.wide.s32 %rd15, %r10, 4;
+    add.u64 %rd16, %rd4, %rd15;
+    ld.global.f32 %f16, [%rd16+0];
+    rcp.rn.f32 %f17, %f16;
+    mul.lo.s32 %r11, %r4, 3;
+    add.s32 %r12, %r11, 1;
+    mov.s32 %r13, %r12;
+    mul.wide.s32 %rd17, %r13, 4;
+    add.u64 %rd18, %rd6, %rd17;
+    ld.global.f32 %f18, [%rd18+0];
+    mul.rn.f32 %f19, %f18, %f18;
+    mov.s32 %r14, 0;
+    mul.wide.s32 %rd19, %r14, 4;
+    add.u64 %rd20, %rd2, %rd19;
+    ld.global.f32 %f20, [%rd20+0];
+    add.rn.f32 %f21, %f20, %f19;
+    lg2.approx.f32 %f23, %f21;
+    setp.ge.f32 %p4, %f21, 0f3F400000;
+    setp.le.f32 %p5, %f21, 0f3FA00000;
+    and.pred %p4, %p4, %p5;
+    @!%p4 bra LOG_NATIVE_DONE_2;
+    sub.rn.f32 %f24, %f21, 0f3F800000;
+    add.rn.f32 %f25, %f21, 0f3F800000;
+    div.rn.f32 %f26, %f24, %f25;
+    mul.rn.f32 %f27, %f26, %f26;
+    mov.f32 %f28, 0f3DE38E39;
+    fma.rn.f32 %f28, %f28, %f27, 0f3E124925;
+    fma.rn.f32 %f28, %f28, %f27, 0f3E4CCCCD;
+    fma.rn.f32 %f28, %f28, %f27, 0f3EAAAAAB;
+    fma.rn.f32 %f28, %f28, %f27, 0f3F800000;
+    mul.rn.f32 %f26, %f26, 0f40000000;
+    mul.rn.f32 %f28, %f28, %f26;
+    mul.rn.f32 %f23, %f28, 0f3FB8AA3B;
+LOG_NATIVE_DONE_2:
+    mul.rn.f32 %f29, %f23, 0f3F317218;
+    mul.rn.f32 %f30, %f17, %f29;
+    mov.s32 %r15, 0;
+    mul.wide.s32 %rd21, %r15, 4;
+    add.u64 %rd22, %rd4, %rd21;
+    ld.global.f32 %f31, [%rd22+0];
+    rcp.rn.f32 %f32, %f31;
+    mul.lo.s32 %r16, %r4, 3;
+    add.s32 %r17, %r16, 2;
+    mov.s32 %r18, %r17;
+    mul.wide.s32 %rd23, %r18, 4;
+    add.u64 %rd24, %rd6, %rd23;
+    ld.global.f32 %f33, [%rd24+0];
+    mul.rn.f32 %f34, %f33, %f33;
+    mov.s32 %r19, 0;
+    mul.wide.s32 %rd25, %r19, 4;
+    add.u64 %rd26, %rd2, %rd25;
+    ld.global.f32 %f35, [%rd26+0];
+    add.rn.f32 %f36, %f35, %f34;
+    lg2.approx.f32 %f38, %f36;
+    setp.ge.f32 %p6, %f36, 0f3F400000;
+    setp.le.f32 %p7, %f36, 0f3FA00000;
+    and.pred %p6, %p6, %p7;
+    @!%p6 bra LOG_NATIVE_DONE_3;
+    sub.rn.f32 %f39, %f36, 0f3F800000;
+    add.rn.f32 %f40, %f36, 0f3F800000;
+    div.rn.f32 %f41, %f39, %f40;
+    mul.rn.f32 %f42, %f41, %f41;
+    mov.f32 %f43, 0f3DE38E39;
+    fma.rn.f32 %f43, %f43, %f42, 0f3E124925;
+    fma.rn.f32 %f43, %f43, %f42, 0f3E4CCCCD;
+    fma.rn.f32 %f43, %f43, %f42, 0f3EAAAAAB;
+    fma.rn.f32 %f43, %f43, %f42, 0f3F800000;
+    mul.rn.f32 %f41, %f41, 0f40000000;
+    mul.rn.f32 %f43, %f43, %f41;
+    mul.rn.f32 %f38, %f43, 0f3FB8AA3B;
+LOG_NATIVE_DONE_3:
+    mul.rn.f32 %f44, %f38, 0f3F317218;
+    mul.rn.f32 %f45, %f32, %f44;
+    mul.lo.s32 %r20, %r4, 3;
+    add.s32 %r21, %r20, 0;
+    mov.s32 %r22, %r21;
+    mul.wide.s32 %rd27, %r22, 4;
+    add.u64 %rd28, %rd8, %rd27;
+    st.global.f32 [%rd28+0], %f15;
+    mul.lo.s32 %r23, %r4, 3;
+    add.s32 %r24, %r23, 1;
+    mov.s32 %r25, %r24;
+    mul.wide.s32 %rd29, %r25, 4;
+    add.u64 %rd30, %rd8, %rd29;
+    st.global.f32 [%rd30+0], %f30;
+    mul.lo.s32 %r26, %r4, 3;
+    add.s32 %r27, %r26, 2;
+    mov.s32 %r28, %r27;
+    mul.wide.s32 %rd31, %r28, 4;
+    add.u64 %rd32, %rd8, %rd31;
+    st.global.f32 [%rd32+0], %f45;
+DONE:
+    ret;
+}

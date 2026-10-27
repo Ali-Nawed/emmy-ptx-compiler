@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'k_mean_fa9ce5' for 'sm_89'
+ptxas info    : Function properties for k_mean_fa9ce5
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 15 registers, 376 bytes cmem[0]

@@ -1,0 +1,2056 @@
+{
+  "source_sha256": {
+    "compile.py": "b74c27789ddea6dce0eda8bc7dabb3befffa2f73431eebb7733c0a0a22771c41",
+    "ptx_math.py": "49917a281f62b663901a092b28782f4cb54360d624754a940b82ad1fd4617c7c"
+  },
+  "provenance": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "case": "ops_divide_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.544,
+            "registers": {
+              "k_div_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_divide_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_div_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 12.032,
+            "registers": {
+              "k_sub_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 34.656,
+            "registers": {
+              "k_sub_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.672,
+            "registers": {
+              "k_add_pointwise": 11
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.672,
+            "registers": {
+              "k_add_pointwise": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.8,
+            "registers": {
+              "k_exp_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_exp_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.672,
+            "registers": {
+              "k_exp_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_exp_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 20.736,
+            "registers": {
+              "k_log_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 22.208,
+            "registers": {
+              "k_log_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.768,
+            "registers": {
+              "k_div_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 22.72,
+            "registers": {
+              "k_div_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 31.968,
+            "registers": {
+              "k_div_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 25.888,
+            "registers": {
+              "k_div_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 35.328,
+            "registers": {
+              "k_pow_1_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 31.936,
+            "registers": {
+              "k_pow_1_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f16_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 19.872,
+            "registers": {
+              "k_rsqrt_pointwise": 11
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f16_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_rsqrt_pointwise": 15
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f16_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_sum_1_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f16_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f16_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_fa9ce5",
+            "median_us": 20.192,
+            "registers": {
+              "k_mean_fa9ce5": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f16_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_f776f2",
+            "median_us": 20.704,
+            "registers": {
+              "k_mean_f776f2": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f16_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_amax_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f16_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    },
+    {
+      "case": "ops_softmax_f16_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_b2e274",
+            "median_us": 20.256,
+            "registers": {
+              "k_softmax_b2e274": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f16_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    },
+    {
+      "case": "ops_divide_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_div_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_divide_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 23.296,
+            "registers": {
+              "k_div_pointwise": 29
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 12.032,
+            "registers": {
+              "k_sub_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 11.808,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.416,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_exp_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 21.056,
+            "registers": {
+              "k_exp_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_exp_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.992,
+            "registers": {
+              "k_exp_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 20.544,
+            "registers": {
+              "k_log_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 21.344,
+            "registers": {
+              "k_log_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 12.832,
+            "registers": {
+              "k_div_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f64_129_w128",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "div",
+        "dtype": "float64",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0.02262786775827408,
+            "expected": 0.022627866748868172
+          },
+          {
+            "index": 1,
+            "got": 0.02496030181646347,
+            "expected": 0.024960301936258495
+          },
+          {
+            "index": 2,
+            "got": 0.49583959579467773,
+            "expected": 0.4958396000682352
+          },
+          {
+            "index": 3,
+            "got": 0.01578875444829464,
+            "expected": 0.015788754565457117
+          },
+          {
+            "index": 4,
+            "got": 0.36394667625427246,
+            "expected": 0.3639466738267866
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 22.016,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "div",
+              "dtype": "float64",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.02262786775827408,
+                  "expected": 0.022627866748868172
+                },
+                {
+                  "index": 1,
+                  "got": 0.02496030181646347,
+                  "expected": 0.024960301936258495
+                },
+                {
+                  "index": 2,
+                  "got": 0.49583959579467773,
+                  "expected": 0.4958396000682352
+                },
+                {
+                  "index": 3,
+                  "got": 0.01578875444829464,
+                  "expected": 0.015788754565457117
+                },
+                {
+                  "index": 4,
+                  "got": 0.36394667625427246,
+                  "expected": 0.3639466738267866
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 23.872,
+            "registers": {
+              "k_div_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f64_129_w128",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "div",
+        "dtype": "float64",
+        "mismatch_count": 128,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0.006811666768044233,
+            "expected": 0.00681166662929693
+          },
+          {
+            "index": 1,
+            "got": 0.007513799238950014,
+            "expected": 0.007513799583643555
+          },
+          {
+            "index": 2,
+            "got": 0.14926259219646454,
+            "expected": 0.14926259265857098
+          },
+          {
+            "index": 3,
+            "got": 0.004752888344228268,
+            "expected": 0.004752888718379218
+          },
+          {
+            "index": 4,
+            "got": 0.10955885797739029,
+            "expected": 0.10955886564399793
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 40.448,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "div",
+              "dtype": "float64",
+              "mismatch_count": 128,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.006811666768044233,
+                  "expected": 0.00681166662929693
+                },
+                {
+                  "index": 1,
+                  "got": 0.007513799238950014,
+                  "expected": 0.007513799583643555
+                },
+                {
+                  "index": 2,
+                  "got": 0.14926259219646454,
+                  "expected": 0.14926259265857098
+                },
+                {
+                  "index": 3,
+                  "got": 0.004752888344228268,
+                  "expected": 0.004752888718379218
+                },
+                {
+                  "index": 4,
+                  "got": 0.10955885797739029,
+                  "expected": 0.10955886564399793
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 28.48,
+            "registers": {
+              "k_pow_1_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 17.248,
+            "registers": {
+              "k_pow_1_pointwise": 36
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_rsqrt_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 24.352,
+            "registers": {
+              "k_rsqrt_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f64_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_sum_1_pointwise": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f64_3x129_w128",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sum_1",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": 7.012343883514404,
+            "expected": 7.0123436968621435
+          },
+          {
+            "index": 1,
+            "got": 4.0658392906188965,
+            "expected": 4.065838924678406
+          },
+          {
+            "index": 2,
+            "got": -5.038094520568848,
+            "expected": -5.038093883178194
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 28.992,
+            "registers": {
+              "k_sum_1_reduce": 35
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 7.012343883514404,
+                  "expected": 7.0123436968621435
+                },
+                {
+                  "index": 1,
+                  "got": 4.0658392906188965,
+                  "expected": 4.065838924678406
+                },
+                {
+                  "index": 2,
+                  "got": -5.038094520568848,
+                  "expected": -5.038093883178194
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f64_3x1_w128",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sub",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": 4.590249985669814e-09,
+            "expected": 0.0
+          },
+          {
+            "index": 1,
+            "got": -4.53523651966492e-09,
+            "expected": 0.0
+          },
+          {
+            "index": 2,
+            "got": 8.212294511089624e-09,
+            "expected": 0.0
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_712baf",
+            "median_us": 20.704,
+            "registers": {
+              "k_mean_712baf": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sub",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 4.590249985669814e-09,
+                  "expected": 0.0
+                },
+                {
+                  "index": 1,
+                  "got": -4.53523651966492e-09,
+                  "expected": 0.0
+                },
+                {
+                  "index": 2,
+                  "got": 8.212294511089624e-09,
+                  "expected": 0.0
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f64_3x129_w128",
+      "status": "wrong_result",
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sub",
+        "dtype": "float64",
+        "mismatch_count": 387,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0.06845233303377721,
+            "expected": 0.06845233712280395
+          },
+          {
+            "index": 1,
+            "got": -0.18938275135091798,
+            "expected": -0.18938274726189125
+          },
+          {
+            "index": 2,
+            "got": 0.583144762383666,
+            "expected": 0.5831447664726928
+          },
+          {
+            "index": 3,
+            "got": 0.04762222909342362,
+            "expected": 0.04762223318245036
+          },
+          {
+            "index": 4,
+            "got": -0.592947261220727,
+            "expected": -0.5929472571317003
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_5ce018",
+            "median_us": 20.448,
+            "registers": {
+              "k_mean_5ce018": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sub",
+              "dtype": "float64",
+              "mismatch_count": 387,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.06845233303377721,
+                  "expected": 0.06845233712280395
+                },
+                {
+                  "index": 1,
+                  "got": -0.18938275135091798,
+                  "expected": -0.18938274726189125
+                },
+                {
+                  "index": 2,
+                  "got": 0.583144762383666,
+                  "expected": 0.5831447664726928
+                },
+                {
+                  "index": 3,
+                  "got": 0.04762222909342362,
+                  "expected": 0.04762223318245036
+                },
+                {
+                  "index": 4,
+                  "got": -0.592947261220727,
+                  "expected": -0.5929472571317003
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f64_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_pointwise",
+            "median_us": 19.712,
+            "registers": {
+              "k_amax_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f64_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    },
+    {
+      "case": "ops_softmax_f64_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_2fd77c",
+            "median_us": 20.352,
+            "registers": {
+              "k_softmax_2fd77c": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f64_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    },
+    {
+      "case": "ops_minmax_i32_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 21.152,
+            "registers": {
+              "k_sub_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_i32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.992,
+            "registers": {
+              "k_sub_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_i32_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.928,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_i32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_add_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_i32_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_amax_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_i32_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    },
+    {
+      "case": "ops_minmax_i64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_sub_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_i64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.288,
+            "registers": {
+              "k_sub_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_i64_1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 21.024,
+            "registers": {
+              "k_add_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_i64_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 11.68,
+            "registers": {
+              "k_add_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_i64_3x1_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_amax_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_i64_3x129_w128",
+      "status": "ir_reference_failure",
+      "error": "A binding changes dtype within a scope: acc0"
+    }
+  ],
+  "statuses": {
+    "pass": 57,
+    "ir_reference_failure": 6,
+    "wrong_result": 5
+  }
+}

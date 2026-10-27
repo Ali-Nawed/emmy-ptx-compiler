@@ -1,0 +1,2486 @@
+{
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "fd9860094dd41ca8d859a738f2e9846c756f2c7bbab1de3dd1bd79317c3828e3"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "case": "typed_exp_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.552,
+            "registers": {
+              "k_add_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.776,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_exp2_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.808,
+            "registers": {
+              "k_add_pointwise": 11
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log2_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.096,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log10_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.608,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_f16",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 27.552,
+            "registers": {
+              "k_add_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "class_sqrt_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_reciprocal_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "got_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_exp_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "got_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_log_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_power_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          3,
+          4
+        ],
+        "got_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          3,
+          4
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_maximum_nan_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_minimum_nan_f16",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "typed_exp_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.616,
+            "registers": {
+              "k_add_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.616,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_exp2_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.36,
+            "registers": {
+              "k_add_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log2_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.096,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log10_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 25.408,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_f32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 27.168,
+            "registers": {
+              "k_add_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "class_sqrt_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_reciprocal_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "got_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_exp_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "got_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_log_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_power_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "got_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_maximum_nan_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_minimum_nan_f32",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "typed_exp_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.232,
+            "registers": {
+              "k_add_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.776,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_exp2_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.256,
+            "registers": {
+              "k_add_pointwise": 10
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log2_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.808,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_log10_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.36,
+            "registers": {
+              "k_add_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_f64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 25.952,
+            "registers": {
+              "k_add_pointwise": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "class_sqrt_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_reciprocal_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "got_classes": [
+          2,
+          2,
+          4,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_exp_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "got_classes": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          0
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_log_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          4,
+          4,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_power_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "got_classes": [
+          5,
+          2,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_maximum_nan_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          1,
+          0,
+          2,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "class_minimum_nan_f64",
+      "kind": "classification",
+      "status": "pass",
+      "details": {
+        "expected_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "got_classes": [
+          5,
+          5,
+          2,
+          0,
+          0,
+          2,
+          2,
+          5
+        ],
+        "class_codes": {
+          "positive_zero": 0,
+          "negative_zero": 1,
+          "finite_nonzero": 2,
+          "positive_inf": 3,
+          "negative_inf": 4,
+          "nan": 5
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f16_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.096,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f16_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 37.568,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f16_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f16_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.392,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f16_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 11.168,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f16_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f16_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.224,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f16_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.2,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f16_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.296,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.744,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.584,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.328,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 11.904,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 35.36,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.776,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.808,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.264,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.288,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.256,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_f64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.872,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.32,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_f64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.936,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.136,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.904,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_f64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.904,
+            "registers": {
+              "k_sum_1_reduce": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.48,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.328,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 24.192,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.616,
+            "registers": {
+              "k_sum_1_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.456,
+            "registers": {
+              "k_sum_1_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i32_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.328,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i32_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 11.136,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i32_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.136,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.776,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_maximum_i64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.096,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_minimum_i64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.832,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i64_w32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 21.024,
+            "registers": {
+              "k_sum_1_reduce": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i64_w128",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.16,
+            "registers": {
+              "k_sum_1_reduce": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_reduce_multiply_i64_w256",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.288,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_i32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 11.168,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_wrap_i32",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 44.48,
+            "registers": {
+              "k_add_pointwise": 14
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_i64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_add_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "typed_power_wrap_i64",
+      "kind": "typed_backend",
+      "status": "pass",
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.384,
+            "registers": {
+              "k_add_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ]
+}

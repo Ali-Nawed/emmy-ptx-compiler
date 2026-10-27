@@ -1,0 +1,102 @@
+{
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "fd9860094dd41ca8d859a738f2e9846c756f2c7bbab1de3dd1bd79317c3828e3"
+  },
+  "provenance": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "case": "ops_sum_composed_f32_3x257_w32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.768,
+            "registers": {
+              "k_sum_1_reduce": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f32_3x257_w32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_reduce",
+            "median_us": 20.064,
+            "registers": {
+              "k_amax_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f32_3x257_w32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_0b02f5",
+            "median_us": 58.304,
+            "registers": {
+              "k_softmax_0b02f5": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    }
+  ],
+  "statuses": {
+    "pass": 3
+  }
+}

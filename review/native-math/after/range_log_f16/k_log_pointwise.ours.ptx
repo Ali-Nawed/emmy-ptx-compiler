@@ -1,0 +1,59 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_log_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<7>;
+    .reg .b64 %rd<9>;
+    .reg .f32 %f<11>;
+    .reg .b16 %h<4>;
+    .reg .pred %p<4>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 257;
+    @%p1 bra DONE;
+    mov.s32 %r5, %r4;
+    mul.wide.s32 %rd5, %r5, 2;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.b16 %h1, [%rd6+0];
+    cvt.f32.f16 %f1, %h1;
+    lg2.approx.f32 %f3, %f1;
+    setp.ge.f32 %p2, %f1, 0f3F400000;
+    setp.le.f32 %p3, %f1, 0f3FA00000;
+    and.pred %p2, %p2, %p3;
+    @!%p2 bra LOG_NATIVE_DONE_1;
+    sub.rn.f32 %f4, %f1, 0f3F800000;
+    add.rn.f32 %f5, %f1, 0f3F800000;
+    div.rn.f32 %f6, %f4, %f5;
+    mul.rn.f32 %f7, %f6, %f6;
+    mov.f32 %f8, 0f3DE38E39;
+    fma.rn.f32 %f8, %f8, %f7, 0f3E124925;
+    fma.rn.f32 %f8, %f8, %f7, 0f3E4CCCCD;
+    fma.rn.f32 %f8, %f8, %f7, 0f3EAAAAAB;
+    fma.rn.f32 %f8, %f8, %f7, 0f3F800000;
+    mul.rn.f32 %f6, %f6, 0f40000000;
+    mul.rn.f32 %f8, %f8, %f6;
+    mul.rn.f32 %f3, %f8, 0f3FB8AA3B;
+LOG_NATIVE_DONE_1:
+    mul.rn.f32 %f9, %f3, 0f3F317218;
+    cvt.rn.f16.f32 %h2, %f9;
+    cvt.f32.f16 %f10, %h2;
+    mov.s32 %r6, %r4;
+    mul.wide.s32 %rd7, %r6, 2;
+    add.u64 %rd8, %rd4, %rd7;
+    cvt.rn.f16.f32 %h3, %f10;
+    st.global.b16 [%rd8+0], %h3;
+DONE:
+    ret;
+}

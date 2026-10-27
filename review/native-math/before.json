@@ -1,0 +1,1698 @@
+{
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "fd9860094dd41ca8d859a738f2e9846c756f2c7bbab1de3dd1bd79317c3828e3"
+  },
+  "cases": [
+    {
+      "fixture": "problems/p00_scalar_add",
+      "meta_sha256": "67f4c80a5c78c9fa571f4088633acc56cae0a758d2a65e7c89c07a96e665709c",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "d93c0b232c48f7161c88f0276ea8a69481b06608a24b6e8ed2d5025bd17f4e32",
+          "ptx": "review/native-math/before/p00_scalar_add/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/p01_vector_add",
+      "meta_sha256": "4607a6a14553ec256b2073ff8fef18a850e315033f4fdace21f26fdcc2a867c6",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "90088bc4c7346b9a5916205fdb96926f52cc0f5e3c5c08527d7b0796b0c47fc5",
+          "ptx": "review/native-math/before/p01_vector_add/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/p02_scale_shift",
+      "meta_sha256": "7c1c3ea69e4d61128d72fbaf3a82a76125a5273c3ced6197ac2f150d03d121e1",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "2bae0a54cbcd037d6c13e70b5c4f5728f2f94af163a53ebe35b88ab8f68ec021",
+          "ptx": "review/native-math/before/p02_scale_shift/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/p03_relu_mul",
+      "meta_sha256": "a2dbbe3a3cec7c45fcdde2c08f0d3276647c2a4b56ede3345be16404d1ded8c9",
+      "kernels": {
+        "k_mul_pointwise": {
+          "ir_sha256": "b2429e790dac9fd0db9fafadaa3624cafaeff85c834851a9034a730a1620a892",
+          "ptx": "review/native-math/before/p03_relu_mul/k_mul_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/r01_array_sum",
+      "meta_sha256": "46cf07073f4e612e811decbc2ca900ea210811194a1e336053a6f179ecb4b00e",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "a5ad6af023562e1632e929afb8cd6387603c2edcd4d4b1590b1a3b2ee962675f",
+          "ptx": "review/native-math/before/r01_array_sum/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/r02_big_sum",
+      "meta_sha256": "db364be00e35402a3d6f10fcd55562115c7604dea94f8126a02179a80476d19e",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "777e3f2dd170849133e19d303cdb3d273c135c9a9896786ee40fbc6a2ff4ec7c",
+          "ptx": "review/native-math/before/r02_big_sum/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/r03_mean",
+      "meta_sha256": "d7ab661c388ad447f5661a3b36cba448cf5142402756f1e1c35d110db06c84fe",
+      "kernels": {
+        "k_mean_ffcca3": {
+          "ir_sha256": "7eeca2c7869ab2ddf880a0ac7fb689d3ab814d7523eab472ec80ad2458100b86",
+          "ptx": "review/native-math/before/r03_mean/k_mean_ffcca3.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/r04_row_sum",
+      "meta_sha256": "803cb710590156ad319eb44b2d2aa6c1ee9b0e3a666ebc09de259e50d83a3ba1",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "4c7befc76b72c6c69be4675d69ccd14e336b9139fe22aaec1b94230858c8ab03",
+          "ptx": "review/native-math/before/r04_row_sum/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/f01_rmsnorm",
+      "meta_sha256": "f45014c6b0963ec9727fc0f1c9bb585319c4ac94292260bc8f7c10557c1b8e1d",
+      "kernels": {
+        "k_mean_cbd1de": {
+          "ir_sha256": "a8e6819e3144b942d8983b52b6865fa692868105b20de30f6ba4df424a07862a",
+          "ptx": "review/native-math/before/f01_rmsnorm/k_mean_cbd1de.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/f03_l2norm",
+      "meta_sha256": "cbf67c2d198f4fea1bb140083ec65c4bf14202090daaa4aac77f1514ecc60b95",
+      "kernels": {
+        "k_div_reduce": {
+          "ir_sha256": "34abdb33fe950100029930242777d0b22a12e523117de21bc9d78b43310c567d",
+          "ptx": "review/native-math/before/f03_l2norm/k_div_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "problems/f02_row_softmax",
+      "meta_sha256": "ddbe97ea42c7b077d30d140b751f8062caf47b5620cb423a02c1dd848cd61900",
+      "kernels": {
+        "k_softmax_05263d": {
+          "ir_sha256": "d48b030e9d9a765aa631287f72935bc59f20926f3ccb09dc7f7932106770af03",
+          "ptx": "review/native-math/before/f02_row_softmax/k_softmax_05263d.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f16_3x129_w128",
+      "meta_sha256": "24fcc3098ea08e57ae0c20e3a7229a01234982fbb20a18f66d33e6c654adc39e",
+      "kernels": {
+        "k_mean_f776f2": {
+          "ir_sha256": "16cafb5fbf2815fa69337057f7d64924db28036045cdea7ae5799caef9381187",
+          "ptx": "review/native-math/before/ops_center_f16_3x129_w128/k_mean_f776f2.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f16_3x1_w128",
+      "meta_sha256": "e20449e33b703b022e021ad3ab99f8b64ef39b7f2f6da1b18c860d093141d6ad",
+      "kernels": {
+        "k_mean_fa9ce5": {
+          "ir_sha256": "62fecc79aca3a6f9863a3d3226b29bb82288f5472eb1cd4e8ff2203e94a46f2f",
+          "ptx": "review/native-math/before/ops_center_f16_3x1_w128/k_mean_fa9ce5.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f32_3x129_w128",
+      "meta_sha256": "33dfd388fa12cb9b2fcc4a741d8c17df60c860a62aac4d9ade5d216419b02889",
+      "kernels": {
+        "k_mean_f63f78": {
+          "ir_sha256": "0743d833ecac2257557f6d9b956d2c60014adf0bf819296f61d8e05548f6f5d1",
+          "ptx": "review/native-math/before/ops_center_f32_3x129_w128/k_mean_f63f78.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f32_3x33_w128",
+      "meta_sha256": "42100222a4dfb7228f11a29c44ea62e3f818ac27e178f67e22dcc39cf12d3e5d",
+      "kernels": {
+        "k_mean_edb46a": {
+          "ir_sha256": "639528d1bff12eb00eb6bb7671942615f4c1f55aa18964a31d3021169ec4102d",
+          "ptx": "review/native-math/before/ops_center_f32_3x33_w128/k_mean_edb46a.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f64_3x129_w128",
+      "meta_sha256": "fb8588dfe5c771f1094a043a38a5dbc1d7fd036da69407d589b20dbdd57fbdf7",
+      "kernels": {
+        "k_mean_5ce018": {
+          "ir_sha256": "091bedc0cc4462d12ae7caa22c3a52f57e94af6b1c8cf191b51197818a229f91",
+          "ptx": "review/native-math/before/ops_center_f64_3x129_w128/k_mean_5ce018.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_center_f64_3x1_w128",
+      "meta_sha256": "aa6b61af762233aec04067d3d30d071b5a11cb3306565cde05b613c471adcf45",
+      "kernels": {
+        "k_mean_712baf": {
+          "ir_sha256": "ab74eb02207ae1df15da17b3f2876875889fbcd5fca25fe857fc328f17003d7d",
+          "ptx": "review/native-math/before/ops_center_f64_3x1_w128/k_mean_712baf.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f16_129_w128",
+      "meta_sha256": "19f429efc5a2e74f5d5418ec2c21152ec83e944cef9fc63172fc993c330ef40c",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "891f49a0cc9834f08c576b0b52580f0787888f7acf25626cf279ae92fd29f13f",
+          "ptx": "review/native-math/before/ops_divide_f16_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f16_1_w128",
+      "meta_sha256": "f463d406972b67f808fa9057f02a3f694d7be27c38c99aa361cc687bfc59a395",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "5904e57c8c5a751cb63fec519546f064e66ffa4a1ae621dcf30ff37fd1df59c3",
+          "ptx": "review/native-math/before/ops_divide_f16_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f32_129_w128",
+      "meta_sha256": "2b149f1f61651c65a4f1dda3f498f53b542b7f0c61d7c53ad2a09411cd06d1c3",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "a3c04a99ced23c4ebf14a26584d2fb199a37430c30891b5c89446d919c851352",
+          "ptx": "review/native-math/before/ops_divide_f32_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f32_33_w128",
+      "meta_sha256": "30398ff4f5c0ad8969f4cd6c96d47788ddc1f7dd16ae41ce6a5df62880f2349a",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "e04533bf05641505171a5e9225568cddeae60f1244c6016c80b077e050c390a6",
+          "ptx": "review/native-math/before/ops_divide_f32_33_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f64_129_w128",
+      "meta_sha256": "5a8fe5779303bd88d6540b459fd74f3edb8a36d82eb50da794615246add8010a",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "59958e74ff9ae3a87c6c5f9790fc0c34f1a376066c843a7fbd08f3fc3e00cb17",
+          "ptx": "review/native-math/before/ops_divide_f64_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_divide_f64_1_w128",
+      "meta_sha256": "ecc704aa0ef23dea9d9f74ea8672ca26e1fca7a3029102fe809fa4e7c357f8d1",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "29bd787146bcd3af1fb0570dd3d5e6fd68d4a921324d9ca9f4a7f34c99257599",
+          "ptx": "review/native-math/before/ops_divide_f64_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f16_129_w128",
+      "meta_sha256": "ca961bec1a3f396bf0b7a67e1803597f6ee6e131876bfe8be5d2e494ecb19476",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "f4ba28f0165ebabc88f7ce9f6ab29dbf97b7c9c67e1d1ced8a4ed9f2f5dc56dc",
+          "ptx": "review/native-math/before/ops_exp2_f16_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f16_1_w128",
+      "meta_sha256": "654751f9deeadd116c874efb508ce060582e2d72d66ff7367de37b9967fcefc5",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "115cec614b80ff76a13c36114e80236dfe8368bc66dc93cab49ed7c985f7afe3",
+          "ptx": "review/native-math/before/ops_exp2_f16_1_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f32_129_w128",
+      "meta_sha256": "52ed4858264434896e0e3ee338f9c67215932d64a6cb52d3014ba7f80c7e0e6b",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "93683ff77eae1c6ef9ef4b2042088b71ec2f8017818141ce14665c883d4c5dff",
+          "ptx": "review/native-math/before/ops_exp2_f32_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f32_33_w128",
+      "meta_sha256": "7b0d7820e2d7b2e3841501997f5fc8beef20f0a3219ac3bd4bb1112d756d973d",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "b220add42e67e5e390c6839d7a95742d3e8a17697da1f0cf8a94a8f50bcf2204",
+          "ptx": "review/native-math/before/ops_exp2_f32_33_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f64_129_w128",
+      "meta_sha256": "9016506bc81fdbaa1b3cc001de249f71f5eff14429b50fa4797bc408ce45d2f6",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "061311172a43a31381605f05b3d0a11b5428a485e8c1da816fbf09d106ef3a8c",
+          "ptx": "review/native-math/before/ops_exp2_f64_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp2_f64_1_w128",
+      "meta_sha256": "a6f463ce304ee37e8cf2d3bafbdfbb01b8ab4a713e232d510b8a34c1da66fb67",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "b811dfec8d190f5d6103765d787efc6d966e68abc39dec0f9d35ef9fd27a0ada",
+          "ptx": "review/native-math/before/ops_exp2_f64_1_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f16_129_w128",
+      "meta_sha256": "0e337bffa076060fb45ee6e9f69d9b1d96ebe1cccbaf63d43675fb4e17ea5a58",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "f3c29d426b08b1deccf822f464e2fb1983b137675898cc4a85098196242a871e",
+          "ptx": "review/native-math/before/ops_exp_f16_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f16_1_w128",
+      "meta_sha256": "e7e85541322388bdf4abddb03551a53234ceec5daa378752168dcf533dce788d",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "c9c497c0b3a9137bd0d681368ae327105dfa9690668cc1456466ffea926f3573",
+          "ptx": "review/native-math/before/ops_exp_f16_1_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f32_129_w128",
+      "meta_sha256": "0c16ddbf08bbc62b73377fa2f788ad765b2ac801a9b998d2f6f31c2e4dcd22f6",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "f0392bcbf14aa80e1203971515e6b4cbfc7184ac19ae90724cf79b63fe7f5a11",
+          "ptx": "review/native-math/before/ops_exp_f32_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f32_33_w128",
+      "meta_sha256": "7b8ec46d40b6750006a84a8d1117792f3a04dbec6cec0b8c4b3471d2a5380cf2",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "b61502403822cff69924d8842989b801875030ab694d2a8ed8635ebcf0509863",
+          "ptx": "review/native-math/before/ops_exp_f32_33_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f64_129_w128",
+      "meta_sha256": "3dcf8aac9b18a2f148dc75da10a8255bc1a6bb3bfe8f3e259e09ef9cd194383c",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "51d3ba55c5bec62996a5444746e0a138b8bd6ebf4b5b72a3c63bd33c09b8eba9",
+          "ptx": "review/native-math/before/ops_exp_f64_129_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_exp_f64_1_w128",
+      "meta_sha256": "55a31d52dbb0da4533e7ea0caaa108615c0319339a13ee011e10c13f08e4e908",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "b5611b786a0bd7cf1279dc198a460d17d026738ed72c980ce92b3d126aa21ff9",
+          "ptx": "review/native-math/before/ops_exp_f64_1_w128/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f16_129_w128",
+      "meta_sha256": "92fc26f9fe1c448302eeb0a9996bc3bde9171186093b385349789bfb59b1607a",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "a9ab9f207c97b9a3efe799fbef418f7c4cfb5b69b8bef9902c650d440320323a",
+          "ptx": "review/native-math/before/ops_log10_f16_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f16_1_w128",
+      "meta_sha256": "6a5d82fed3bdbcbd58b5914617cbfb1b85563cb296f87a6d3dc923a99f82891e",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "5c100c8fa04ae1f93cc88ffbd3653c16490655c43873826c7572bde60d4a4a4c",
+          "ptx": "review/native-math/before/ops_log10_f16_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f32_129_w128",
+      "meta_sha256": "99321f92132f14775099f9a16bd1df9d962dd5ee50f74264f4a1d44bbc353e96",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "0800ba78933e2648338fa8f2d4176d9f9be77a3055a033792ce94f0c283bda24",
+          "ptx": "review/native-math/before/ops_log10_f32_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f32_33_w128",
+      "meta_sha256": "4b73e4a3649f4c8a7fea4395b01e1c9be88e51de2acee0440a5a5d546ee61fcc",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "e2e4484c81670af6622846293ad4ad5b704b1d5d194180a6f32c7f11113e4ad3",
+          "ptx": "review/native-math/before/ops_log10_f32_33_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f64_129_w128",
+      "meta_sha256": "160d16ced1967fa7a1b6f2976af35d33f9b206332e99f33423da7a07c4a77ba3",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "f3cb62c5e57f26d21d201c83d7761c4521e81679f482531b2f6f1b0e23ede845",
+          "ptx": "review/native-math/before/ops_log10_f64_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log10_f64_1_w128",
+      "meta_sha256": "175c9e879c847f9bed3cf652aabe7e6c82e33ae311757a0c092ba758fb4d0b0e",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "f3614b85de84322c17eb5387ae9cc4f1a3f522a13b75510c5e9f5ed2bd5619c2",
+          "ptx": "review/native-math/before/ops_log10_f64_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f16_129_w128",
+      "meta_sha256": "7f2069cde1b098b18761d99f18cbd9c03727c729201f9c568d948e402a6b1e72",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "b90565ebfcc1f7fef6b573106f9d71a23b2def4fed8acab2d065dcef6d08d0ed",
+          "ptx": "review/native-math/before/ops_log2_f16_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f16_1_w128",
+      "meta_sha256": "f7222df54d7c779087946702acbcc9dc04ac4dfbcf663b47015cb77ff55835a2",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "b5d464b377bfab623b9740b4bdb0a734a9d0f07c3e544d1113849bed9ebb07fe",
+          "ptx": "review/native-math/before/ops_log2_f16_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f32_129_w128",
+      "meta_sha256": "992ff61c1906ba79685a9af9b54a392b98db77f9e8d7243f7e52d005cabb4e07",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "c8add2408101a5773c286730f4de7e416041f46e527e5ebb18a9e20c7d643ab6",
+          "ptx": "review/native-math/before/ops_log2_f32_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f32_33_w128",
+      "meta_sha256": "d4047a60e0e207bc0874b5f57096f99a5013dc8e72a68d9240002ec2162b96d5",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "6b4624b5b84c44111e82400c71239cca5d0c88d8654168a8de93d05b92b9d004",
+          "ptx": "review/native-math/before/ops_log2_f32_33_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f64_129_w128",
+      "meta_sha256": "e6ee75e43f512308e9b21e14f6f18f8cad8a9242828e811d30a60cab2ea5082c",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "398809e69c370e52ca55c563621e1903efb4b5993091175bf60525e0d6c168d7",
+          "ptx": "review/native-math/before/ops_log2_f64_129_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log2_f64_1_w128",
+      "meta_sha256": "fadc28fa334a51fb1f7d690a64a75518dc50afdfdb9954f48ad01539e68bc654",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "811815c1d324df174bd5a720907cd944fb96e5a84493f34fcbbeb9f981d79ead",
+          "ptx": "review/native-math/before/ops_log2_f64_1_w128/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f16_129_w128",
+      "meta_sha256": "404d316b25bcb2e62b247be78f4d503f6472dfb44c0f0cf0c870dd6d6ee4c2e6",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "fdc6887eb95f91db0ac3448cd96c6d0882396022f3a6099feb5e7037cb3f7700",
+          "ptx": "review/native-math/before/ops_log_f16_129_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f16_1_w128",
+      "meta_sha256": "8e8fc5813c6455f49999a331db5ca6c01e2b019255c73f1bccc5fac73e66cbc7",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "668cf85784ef196575ca7b1778994ef5849755041dee42878745526df5678889",
+          "ptx": "review/native-math/before/ops_log_f16_1_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f32_129_w128",
+      "meta_sha256": "48e9007f0b2e26daec823580096b1642508f95e31fe46d997efa316b38ae3dca",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "285fb3756dddad7b580ee4cc92c912bd2e8dadee546a2be23c620e552b6aa0a2",
+          "ptx": "review/native-math/before/ops_log_f32_129_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f32_33_w128",
+      "meta_sha256": "7d556701305fb9331aadeb4a6a81e511da113e46e1efb299b124286d2ad2116a",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "4dbb2f2c881476948a7edfec1dff6e48d7cc374768078c4ca68f4372ce429c19",
+          "ptx": "review/native-math/before/ops_log_f32_33_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f64_129_w128",
+      "meta_sha256": "0a6b8018fd533568120f6afe446a3a1d0e79bfd40101d70d25cb055e42de7a0e",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "12f296e994ddaf76daaeef9384e44ce4c7318d095285f0547b3cff4fddce7553",
+          "ptx": "review/native-math/before/ops_log_f64_129_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_log_f64_1_w128",
+      "meta_sha256": "ef444453528dbc008dbca0cc6dafec8c6deafbc439226e0771f5a37343e0075e",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "dc86a019231be672da6217b25712ca1f7ca23a8cbd8cbffec42aafcddc5f399a",
+          "ptx": "review/native-math/before/ops_log_f64_1_w128/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f16_3x129_w128",
+      "meta_sha256": "fa79eef86060fb722a5578caab74fe5d424963a7081a15574b7141b17b67b85d",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "590a5d9da36168c25286ac7ed2c4b100c109ca82fecb509b89015b1fa553f422",
+          "ptx": "review/native-math/before/ops_maximum_f16_3x129_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f16_3x1_w128",
+      "meta_sha256": "0cba58c2d1ee7cf5938adbe0656861aa4624b256cf2a2246f44d543bb09e9ab8",
+      "kernels": {
+        "k_amax_pointwise": {
+          "ir_sha256": "efd19e027f0a1bf42caf926a70632173910b96ad4e0004a087adbdc8edf877f7",
+          "ptx": "review/native-math/before/ops_maximum_f16_3x1_w128/k_amax_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f32_3x129_w128",
+      "meta_sha256": "3a8bf1488c31f267b6d2a23c54a21e2bc7537b5d62be6a919116aa3446533fef",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "b849cf51ce83a5fad0683fc360d86bd83819a4e3ba25fcb5848a4240ba793042",
+          "ptx": "review/native-math/before/ops_maximum_f32_3x129_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f32_3x257_w256",
+      "meta_sha256": "6b76c4c713244360e45f9c35f8f1308af45f454e1fe65149808ac29f15f0e785",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "0c0da961afe8fa6967ec6541b88796e173c749870061c2db5f1d0c4f749f1509",
+          "ptx": "review/native-math/before/ops_maximum_f32_3x257_w256/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f32_3x257_w32",
+      "meta_sha256": "dfd7446a43819067c3a60e30872bc45fb779a001b45d0396253f8ad233803ca3",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "4a1f52cd68370cc31d634871974f3892d43efabf8a9ecf5e43f5939fa29b4012",
+          "ptx": "review/native-math/before/ops_maximum_f32_3x257_w32/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f32_3x33_w128",
+      "meta_sha256": "a5381a55d35f1e4e6e3a09b19378e5b82be81bc28ce7b517683dfaeccad30f00",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "33728089b0581d14d6c4c1997b21ae3ee26b5e1bbef19db10f3aea490db2f2e8",
+          "ptx": "review/native-math/before/ops_maximum_f32_3x33_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f64_3x129_w128",
+      "meta_sha256": "4f4dd4c8eca962c5e56900e4a428c52535d05e919c42f6cbd8ad6499f1a14039",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "5ba4709c55f2eabd0c9770dd282925e5c05973458c3bc80aee51bdf262e42ef2",
+          "ptx": "review/native-math/before/ops_maximum_f64_3x129_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_f64_3x1_w128",
+      "meta_sha256": "b91092b96b1190948cd748b775d464fc4ed688201e2cf311b01204b96aebc0fa",
+      "kernels": {
+        "k_amax_pointwise": {
+          "ir_sha256": "06d70fe1f751605542ddb55199b3e79e75a94c0850eb3cdd4077162f03941c88",
+          "ptx": "review/native-math/before/ops_maximum_f64_3x1_w128/k_amax_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_i32_3x129_w128",
+      "meta_sha256": "0d32c1e104e45449e647d5590f6a6c7c5b6a1ca5c86dcfe766f5048337cb642a",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "5d26992111fd40b288785a6ddab4967119099f2cc456711f84c1f468b98a25af",
+          "ptx": "review/native-math/before/ops_maximum_i32_3x129_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_i32_3x1_w128",
+      "meta_sha256": "8ff0d162c8473d7ecd8dd05d6dae12d1e5f460987ab2f67a87cfeed21ef612a8",
+      "kernels": {
+        "k_amax_pointwise": {
+          "ir_sha256": "33fdeb3aa5d2da92127cbdbf4a9738734fc4272b9c61c2db74fd8abc69222efa",
+          "ptx": "review/native-math/before/ops_maximum_i32_3x1_w128/k_amax_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_i64_3x129_w128",
+      "meta_sha256": "07472dba514346abf771164e84524413f7485d66d990d48a1d40d27fbe3666f8",
+      "kernels": {
+        "k_amax_reduce": {
+          "ir_sha256": "466fab5571da9f4775d42bc629e8d0294f0eadcd474784c3a1d273275aa4fcc4",
+          "ptx": "review/native-math/before/ops_maximum_i64_3x129_w128/k_amax_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_maximum_i64_3x1_w128",
+      "meta_sha256": "5dced401d245598cf75be431a4c492c80c121a6c1066e72380bd0b732469a2e6",
+      "kernels": {
+        "k_amax_pointwise": {
+          "ir_sha256": "ffc240ea65eb3622e00533bfa4a4103f24474bb7319fcf854e4b8fdf05d1fc59",
+          "ptx": "review/native-math/before/ops_maximum_i64_3x1_w128/k_amax_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f16_129_w128",
+      "meta_sha256": "fd6b555fbbfd90294d57057f1fc137586e3c422550d9120b45fa7b6c87dc449b",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "f2b417e5beab0af7c7822a26446bb7a39de5961db59abebc7bf7514a6313f74c",
+          "ptx": "review/native-math/before/ops_minmax_f16_129_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f16_1_w128",
+      "meta_sha256": "7df718f5271ab00cdf46402c13a9425fe2d9ed42a240d75416c4c9a4f56a70ff",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "79d2ad788069eb07ad0168f4670d9511503d8ac22c39080ff3ab56e10b185869",
+          "ptx": "review/native-math/before/ops_minmax_f16_1_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f32_129_w128",
+      "meta_sha256": "ac7f83f3ad839bc8800f2af4930dbacba2c6d20fec608cb5a10f1b7fed1b6d31",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "20c392eb0e204bc861b1b4e0391c1564b74e295fc96ee6ff8189e3b0b8028b34",
+          "ptx": "review/native-math/before/ops_minmax_f32_129_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f32_33_w128",
+      "meta_sha256": "7cca70d8d39194089b8ed9cd096497476d293228321dea3589d3d11f8e9409a6",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "fc235047b78228c629d91e52b0250a0072f3a20ca1aff3535b66bdc579bfd2f5",
+          "ptx": "review/native-math/before/ops_minmax_f32_33_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f64_129_w128",
+      "meta_sha256": "1a2704c0b64f53bbe7909529f3ea427e6916df087a688c3863dac8f626ce3ebc",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "dde2027b1c2f684cf6ad03525a24260ca9ad8723241126fca16783cb76924cfc",
+          "ptx": "review/native-math/before/ops_minmax_f64_129_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_f64_1_w128",
+      "meta_sha256": "3e57f483f9611ce3e25f669aae4cba10c186a574e2aa47a59a72410ed975a25f",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "23c1ee6cbec358bebc76bfd3829aafd096b0bb97bbfdb9b0b7a7c1dfa1458bf4",
+          "ptx": "review/native-math/before/ops_minmax_f64_1_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_i32_129_w128",
+      "meta_sha256": "52dd4af2a8d0f1b0821fdbd9231384d03b8e9432a3e979376372cc05df5f1c55",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "6fb5b34e5200c96ae7dff6286b059f16067cca9903af58a8c65172fe39f985db",
+          "ptx": "review/native-math/before/ops_minmax_i32_129_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_i32_1_w128",
+      "meta_sha256": "5bb0fb0664fccbe4c6dc00212e2306bb628010b08a6a1301aa6e100fa3b4dc4d",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "f79d9409306842d4124603997bfb70f525cdec12100f785e902354bc781dbb0c",
+          "ptx": "review/native-math/before/ops_minmax_i32_1_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_i64_129_w128",
+      "meta_sha256": "4f90e1682acfbe24a148c6be01b9df68816fb0e815e0196716ab5c2b48d7acc1",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "17ba4859262ae9e31c8fb9369d0095901ce802190c0c603f5ec473a171a5288b",
+          "ptx": "review/native-math/before/ops_minmax_i64_129_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_minmax_i64_1_w128",
+      "meta_sha256": "ef8a975ec8d55f70d2d51f1058d6a64ab3eb9c094ac68445f113521ef4dbf14c",
+      "kernels": {
+        "k_sub_pointwise": {
+          "ir_sha256": "6e8047201af76705ea9f6cf872d02daf17846a01bcf1545f66c0808329a1166c",
+          "ptx": "review/native-math/before/ops_minmax_i64_1_w128/k_sub_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f16_129_w128",
+      "meta_sha256": "81e5f315783cbc690c7302931d0fcc11ca3f5c06f256b22462b8500ad4bd92b8",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "c80a944fc1c5b3c3f0743270eee9a1ae210f877a516cc1c3a13f26a1131ccc7d",
+          "ptx": "review/native-math/before/ops_negative_abs_f16_129_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f16_1_w128",
+      "meta_sha256": "f7da5ed2ff8a8c193952d8698e7a0c24e21a66d94a49c08f81a797dc699bb926",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "239366cb5c6580e22f31d181a73512d6a92e670e841772ea95673fe69608d451",
+          "ptx": "review/native-math/before/ops_negative_abs_f16_1_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f32_129_w128",
+      "meta_sha256": "0399ad4557dd77a8162e5c09401843b785835483783b6782d2eb5316738101e6",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "f288e442e64289acea82282ca1bf3e7a7f1fc1a3af017cf75b0c3298c448839c",
+          "ptx": "review/native-math/before/ops_negative_abs_f32_129_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f32_33_w128",
+      "meta_sha256": "e6a9a5ca21c38b52be5435abbcf6638718848c25a3d0e0fbc10b19d70590cf09",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "a13375765c39a1bd934d4bb590c3c2c4ba0de9c3bae80068643b53ca7ebf3185",
+          "ptx": "review/native-math/before/ops_negative_abs_f32_33_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f64_129_w128",
+      "meta_sha256": "22300c3d266186db8e1f2e21b08b81be95c112d0fc224d8cd588cec2a806e973",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "949b19d25d55ac530d8b78b459c7631be7c3bf8cd28f77f992abf4038370dc24",
+          "ptx": "review/native-math/before/ops_negative_abs_f64_129_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_f64_1_w128",
+      "meta_sha256": "2d8d6e5c96070d45ebbb913f31414c0eb9781d1f5c361622cc28c02bf01942db",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "e0f9592ef9ef24d78ffdc9484232e8a74ed3b3effe36d45210c784e1e6bcbf5b",
+          "ptx": "review/native-math/before/ops_negative_abs_f64_1_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_i32_129_w128",
+      "meta_sha256": "86f4a59e8d3147a88223c409775190636a72b47db291c6b580b16eedddb8542c",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "dc22c13adfea250eb434e2195ab603bcc832593dabd9af211af270c957313310",
+          "ptx": "review/native-math/before/ops_negative_abs_i32_129_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_i32_1_w128",
+      "meta_sha256": "3abd86b040104fb895daf6d8d87525c1a056f59705dacff45ff6f4456a91ce58",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "10bf36eecb94c379c3dc5b41b0f658eecb456470b23871f524d3a0237fe97671",
+          "ptx": "review/native-math/before/ops_negative_abs_i32_1_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_i64_129_w128",
+      "meta_sha256": "c0269270ce96a4a7ec263417acb6b83338cd64799b34e47e7ee9474360b2a28d",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "01d85c73a85b6df5d6827932b9cf2d004c6b6a866b3236bea25e8cbbd8d38a37",
+          "ptx": "review/native-math/before/ops_negative_abs_i64_129_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_negative_abs_i64_1_w128",
+      "meta_sha256": "5d5de7902e0dc24f37fa25733b9f49357f13d0220b8ab1366299bda13a630718",
+      "kernels": {
+        "k_add_pointwise": {
+          "ir_sha256": "74a5d9854d3c09fa2072899329a1375dbd287bc9ccb81eba1c7d1155c366f28a",
+          "ptx": "review/native-math/before/ops_negative_abs_i64_1_w128/k_add_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f16_129_w128",
+      "meta_sha256": "2446db6d8091832e12de742b33ffa358d014c34c433b721ea97056b6ea17ca4d",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "37598b94a16879b821f39530a531f86741faf72db52bc56b8fa68d0ed33c28be",
+          "ptx": "review/native-math/before/ops_power_f16_129_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f16_1_w128",
+      "meta_sha256": "f87e97ccdbaae6b8800462dbb9838ee271065e11fc9086e2eb859492c5cb2329",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "8e3d9ea75a73781adb7d64a1d44caceb450356a72ae71ffff934b2d9b0b86f87",
+          "ptx": "review/native-math/before/ops_power_f16_1_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f32_129_w128",
+      "meta_sha256": "20c2b59c3a2aeb1c2af17429fcdedca5aa49709b24d9ed45c4c384705ea4fbbe",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "a7d1f5835c837578aefa81b7173774d6faba94e2f4606e819335a396d69998e2",
+          "ptx": "review/native-math/before/ops_power_f32_129_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f32_33_w128",
+      "meta_sha256": "2550fa22b9e8fced866167512729c6906461280dfc6f2f67b0aea266789f38bf",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "20f68e355124b5c405e181f88ffb0c8b73d839a194908a86c4fef4bc65536e0d",
+          "ptx": "review/native-math/before/ops_power_f32_33_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f64_129_w128",
+      "meta_sha256": "5f94f819b16c9b0f579f48e18d0e324c270148800df95688e6686cc779e11f9c",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "ef71c0c0f0e0c46a9f7e9b27bb0950042e36b0ace602ab49c535e2df95206189",
+          "ptx": "review/native-math/before/ops_power_f64_129_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_f64_1_w128",
+      "meta_sha256": "451e25df1f533bc45e50c13f588ea2a0b507542c6c384cd61bdd673d8175fa2d",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "0def020314076ab9add956416652cca4d4bd3429662650a20931ea933df8535d",
+          "ptx": "review/native-math/before/ops_power_f64_1_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_i32_129_w128",
+      "meta_sha256": "3a5a99e5ff1f27d531608d65c1370e1d006fe271ed076b6e19640005242bb50b",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "76c09ed7e5b730cc9b2ef7b32642ee83215a548ed2e7a4785c7c86849450f837",
+          "ptx": "review/native-math/before/ops_power_i32_129_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_i32_1_w128",
+      "meta_sha256": "b128baf4c952764db2720358a48c13c316f30373154d06a45497fbd9cef558a9",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "7a34649d35bd16e558d32b7cf270857cfa8eafe9e7d487d2f403621a3e6383fd",
+          "ptx": "review/native-math/before/ops_power_i32_1_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_i64_129_w128",
+      "meta_sha256": "fbb6422c4b498fa1f889ec2febc89eedf0ecb2e9ffdff9fe2494f4e1766ff371",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "47faaa17e6801cffbd35f603b72e2c6487d0dd9d45a6095606639102af0d7878",
+          "ptx": "review/native-math/before/ops_power_i64_129_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_power_i64_1_w128",
+      "meta_sha256": "e4162025c28e52c9a7106736352b5385312db83b01115fc87157cd8b753b07e9",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "91f5d77ae19d63a6c727981caaf041b7cd2b15412c03b1532fc758c5f6ca7c5f",
+          "ptx": "review/native-math/before/ops_power_i64_1_w128/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f16_129_w128",
+      "meta_sha256": "999a66bfee498f1a57ba98dedda2040b37d8759355c682f010a09053595ac584",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "cb53e2e736809af3a9103a3e43593df621ad95f2514887485a8e137f2b406268",
+          "ptx": "review/native-math/before/ops_rsqrt_f16_129_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f16_1_w128",
+      "meta_sha256": "dc995f367ec05556a3dd412a4f7c6da2cbd7870e4270488699fa646617070e93",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "7fdf7d6aab8f6d22811ec880e380462d1c2b279acd61643b0f1e8ec3a5a6a4ba",
+          "ptx": "review/native-math/before/ops_rsqrt_f16_1_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f32_129_w128",
+      "meta_sha256": "15a99e31fe1a0ae373222148a7541bb276e0cc924542e61295586d7905769f99",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "f33c340ff807f3afceafb66666bbde4efb4cb3280b5a3457b65fba179cd14e90",
+          "ptx": "review/native-math/before/ops_rsqrt_f32_129_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f32_33_w128",
+      "meta_sha256": "8b3a88b2219ecfcc271df2ec550551281a6d2831e1da9b6ddf7a6436843814c6",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "87787b830720a8d11b99e1c78af92d79416493907860b1075d2e1d325f73e886",
+          "ptx": "review/native-math/before/ops_rsqrt_f32_33_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f64_129_w128",
+      "meta_sha256": "970619922c676899e6414b7f3ae8ca984c9dcf3a541f595035e0056c12cc8ecb",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "a8331b4677461ac017243d6994983751e5e2303e6ac1aaedb452d37738689dc2",
+          "ptx": "review/native-math/before/ops_rsqrt_f64_129_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_rsqrt_f64_1_w128",
+      "meta_sha256": "25d434dcf42c8de439d7199449a4c0cd03d046c06275af97a0509a4312961eb7",
+      "kernels": {
+        "k_rsqrt_pointwise": {
+          "ir_sha256": "4efc9fc60783ccf1a93f02c89ce896b3f6f39f3554cea60dcdb9ff4b1eb568b2",
+          "ptx": "review/native-math/before/ops_rsqrt_f64_1_w128/k_rsqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f16_3x129_w128",
+      "meta_sha256": "1f354a9213918f457039b21481fe0bbc3dc52f17164f2c1786bd295c0f5a7417",
+      "kernels": {
+        "k_softmax_ee2bf4": {
+          "ir_sha256": "360afc740da0b0fbf3afa8459d4662c8e0e59e177e74e237a6c9addc9321b1ed",
+          "ptx": "review/native-math/before/ops_softmax_f16_3x129_w128/k_softmax_ee2bf4.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f16_3x1_w128",
+      "meta_sha256": "6a0b604266df7873fa771240965b525be014abbea179fc9aca9f3706f95af103",
+      "kernels": {
+        "k_softmax_b2e274": {
+          "ir_sha256": "37338e4d25ff1cfc23dddaa472e41313f5f9fa0f8c258c50fcd1d0b13856974a",
+          "ptx": "review/native-math/before/ops_softmax_f16_3x1_w128/k_softmax_b2e274.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f32_3x129_w128",
+      "meta_sha256": "596ad9c619e07ba339fd28496e2a776783daa1fcf235bfa402b7334855b5235a",
+      "kernels": {
+        "k_softmax_87d414": {
+          "ir_sha256": "1a4e444ad15f5b9a23c20af79d178b4bfdbbd9bf48ac742f8597bad14545a6d6",
+          "ptx": "review/native-math/before/ops_softmax_f32_3x129_w128/k_softmax_87d414.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f32_3x257_w256",
+      "meta_sha256": "c43f9a7f8711884f486a9ecc72be4b383c26b334e4d3946166888fc3c65716db",
+      "kernels": {
+        "k_softmax_0b02f5": {
+          "ir_sha256": "3345873f17d547a596e03746ffb0b88c75405370e72554138c15196990d1dcf2",
+          "ptx": "review/native-math/before/ops_softmax_f32_3x257_w256/k_softmax_0b02f5.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f32_3x257_w32",
+      "meta_sha256": "231238b47407ccd093ec122e881ba809ab0aad276504cfaf7b4e4d40c350b611",
+      "kernels": {
+        "k_softmax_0b02f5": {
+          "ir_sha256": "8fa6f3787594ab00f46bfe1725e2c45222074714b3df3faf2b0e5f62058d7240",
+          "ptx": "review/native-math/before/ops_softmax_f32_3x257_w32/k_softmax_0b02f5.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f32_3x33_w128",
+      "meta_sha256": "02649d56c61066a98d1b3b286324ce8b1fa5be95329712638f8510e7813abbdb",
+      "kernels": {
+        "k_softmax_b01fd0": {
+          "ir_sha256": "46c48994ed4de99d5de7f39baa927da444c0316c174f660d2607cf24fd3222f8",
+          "ptx": "review/native-math/before/ops_softmax_f32_3x33_w128/k_softmax_b01fd0.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f64_3x129_w128",
+      "meta_sha256": "3ad2a162d598a27febf094ad9a6ab09a02e178171e0654f96b161d90e7068ce3",
+      "kernels": {
+        "k_softmax_c5c5b1": {
+          "ir_sha256": "d439a219c45363ee195c9d017724b7c9e5e82a9381896803bea60c32e108bbd2",
+          "ptx": "review/native-math/before/ops_softmax_f64_3x129_w128/k_softmax_c5c5b1.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_softmax_f64_3x1_w128",
+      "meta_sha256": "cd0dda3f2a14fc733f4231e8d81b9b93415be58b6695ad17d16aa7086faf165b",
+      "kernels": {
+        "k_softmax_2fd77c": {
+          "ir_sha256": "ead44fde6bcf37c754b8f201c62f8ff2224b0144ed7f6338e6ff97116c149af4",
+          "ptx": "review/native-math/before/ops_softmax_f64_3x1_w128/k_softmax_2fd77c.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f16_3x129_w128",
+      "meta_sha256": "64f81ccb56cfd1edb6c34aadc410d4e86d14d1f22d77f40a149e9438465cfba4",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "7063b931f163cce24951129b17842afde176a898c985b25517d0b46005582327",
+          "ptx": "review/native-math/before/ops_sum_composed_f16_3x129_w128/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f16_3x1_w128",
+      "meta_sha256": "5d621bda9c9cd282a443e8e20e03357ff1e5fcc25f83030b19a835f3fba1c8e9",
+      "kernels": {
+        "k_sum_1_pointwise": {
+          "ir_sha256": "44c3c9a3031f0ce5bed4c4e2ba641d45f72aef23b46d4f7d53acadc7f6300ec2",
+          "ptx": "review/native-math/before/ops_sum_composed_f16_3x1_w128/k_sum_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f32_3x129_w128",
+      "meta_sha256": "39ea100aa3988fc152323d2e85be934ab258c34080f73be800dfc0f6f13cf633",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "dc0a1c7052687bc7f364fa219a3227655ef24ca5044cefe83b87b3226a5cde50",
+          "ptx": "review/native-math/before/ops_sum_composed_f32_3x129_w128/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f32_3x257_w256",
+      "meta_sha256": "a248ff963018716c4266b8e988285eaa77ff01220843acf6da48dfe0d05e6d2b",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "c6ad68c7bc22be3dbab16713488d1ac68985fb40c759a727e0917e252efe1e2b",
+          "ptx": "review/native-math/before/ops_sum_composed_f32_3x257_w256/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f32_3x257_w32",
+      "meta_sha256": "886c8fff3d5e37e5ed524753b9ac75e0e3862c45fe50a982c0227bac49a0fd46",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "190fca4d65e93524633c8a8cc311a3ff9a929549491328870502d908674df7d5",
+          "ptx": "review/native-math/before/ops_sum_composed_f32_3x257_w32/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f32_3x33_w128",
+      "meta_sha256": "13b27fc42eb5674055da31c02b5363d93b88275cba3996fe20413206c6dbaaee",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "d7928f314023de0acc402618755b67b5630cfa564d7116039edb825d1b1c107c",
+          "ptx": "review/native-math/before/ops_sum_composed_f32_3x33_w128/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f64_3x129_w128",
+      "meta_sha256": "7c5bc5d2ae22a3e0861cd5aa309b4666568fb059624a6ec99c63e167bdf65d3d",
+      "kernels": {
+        "k_sum_1_reduce": {
+          "ir_sha256": "aaf9bf83ae2af4924f55174013bbf73f7fae9185df4cc912fe78368592f7d51b",
+          "ptx": "review/native-math/before/ops_sum_composed_f64_3x129_w128/k_sum_1_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/operations/ops_sum_composed_f64_3x1_w128",
+      "meta_sha256": "2711d0d7022695d5593083c9025a6bf916154e55b28a08706e6d755b4ff1e4a7",
+      "kernels": {
+        "k_sum_1_pointwise": {
+          "ir_sha256": "926f0440627baeb25f56e2f80da6f685eeca7fd5d1568825bca18da7d3bfb7f2",
+          "ptx": "review/native-math/before/ops_sum_composed_f64_3x1_w128/k_sum_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1",
+      "meta_sha256": "d6f06e04fa3efacb363ee8893237b416b1b2181a3b39b1c9c25d62407bfc6cb5",
+      "kernels": {
+        "k_div_pointwise": {
+          "ir_sha256": "f6afdede068b95a876dc9e78dc8b168e2c1cad31f039ad1278d9602f490571a2",
+          "ptx": "review/native-math/before/norm_l2norm_f32_3x1/k_div_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1025",
+      "meta_sha256": "c60c8371d18e2f08f13643a1fd61df2db21c5a520b3b0c0bb479f12e30b6929e",
+      "kernels": {
+        "k_div_reduce": {
+          "ir_sha256": "e34da5e85f026ad3787ea91f23dba32cc4e8ebf34913d7ab88bd912798d805b6",
+          "ptx": "review/native-math/before/norm_l2norm_f32_3x1025/k_div_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x129",
+      "meta_sha256": "1816feb71a83573f0ce2b0951cd472dae2cb8c5a4368415adf19735517783d2d",
+      "kernels": {
+        "k_div_reduce": {
+          "ir_sha256": "b0fe9272a1ee44a099754f3827648acdb25230fa24bffc4ab49239ee5e7e05a5",
+          "ptx": "review/native-math/before/norm_l2norm_f32_3x129/k_div_reduce.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_1",
+      "meta_sha256": "18def15baf0327a361f7f037b1b9206fb44a0352288275a9e7b80e381797c24b",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "2d1efe132be0b127a3dc73178786830fd1217bf94ac9aec1ae69bc2ff083fb2d",
+          "ptx": "review/native-math/before/norm_reciprocal_f16_1/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_129",
+      "meta_sha256": "573b953ad7ac895c9725e872c850bf3918acbe69675bb5a4634ee99bcd45c028",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "a328c67e278524efd98f95b1d73db38e8282dee0c8e082679a3f0968a4f5a1ed",
+          "ptx": "review/native-math/before/norm_reciprocal_f16_129/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_1",
+      "meta_sha256": "eac2e98fe786632fe25d5061a9fce11245b0fe2c774a9cb467d34193fcc418c5",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "80f2cd5e37490af1ca83d26d6b13e8a37620465a30429c0b81a141ca312dbefc",
+          "ptx": "review/native-math/before/norm_reciprocal_f32_1/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_129",
+      "meta_sha256": "d274c421f3a7323c68a8d747fb5474713a753d51c0f4d35a843b0ae1ec660b0c",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "8b7afaf01fb73a72658bb57a7f8abe4af1d1a58bb23539b8790f82eb3f1aedea",
+          "ptx": "review/native-math/before/norm_reciprocal_f32_129/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_1",
+      "meta_sha256": "34e0b98c95e63f3740c1f001511a4aaead4759a8ae1aa0ccf86f3723a9133d30",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "c6b5f57593f4e2687b8bf2391cdd5b87285ffde3f10479884a7b069da9ffa41b",
+          "ptx": "review/native-math/before/norm_reciprocal_f64_1/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_129",
+      "meta_sha256": "0ee34d69ce997e0d9431b56c666fbee255207950d0c931c2a736a385d85f8fc1",
+      "kernels": {
+        "k_reciprocal_pointwise": {
+          "ir_sha256": "17fe9fa46ecae1ec26d4b60456e9f8f1fb951d6a84908bcc89454676ace7e85c",
+          "ptx": "review/native-math/before/norm_reciprocal_f64_129/k_reciprocal_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1",
+      "meta_sha256": "3c188e9bbbb143caea486606055af58bbe828285f8a5ea3a33df374eac6a9c76",
+      "kernels": {
+        "k_mean_47f646": {
+          "ir_sha256": "a1d2a5f16d4b206bcbc91e13eb842fd01f85b8b2d8dce9e933e4f505af1a32d8",
+          "ptx": "review/native-math/before/norm_rmsnorm_f32_3x1/k_mean_47f646.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1025",
+      "meta_sha256": "94d03c34c08617a8c2cc7823646a0649b908d9d03da9c1667b661af601f34d8c",
+      "kernels": {
+        "k_mean_5f6fa0": {
+          "ir_sha256": "63ea54fd2b1c2fccbbbc5688d011412576f2ce006138eacda62ace6333b79942",
+          "ptx": "review/native-math/before/norm_rmsnorm_f32_3x1025/k_mean_5f6fa0.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x129",
+      "meta_sha256": "6a97e979b47f82fea5b910b36de5560c426fcd5c28851892fbd653a23a8951f5",
+      "kernels": {
+        "k_mean_0c103c": {
+          "ir_sha256": "d7544f08c3b776a49c72328564345888422aee814297bc30e0cc0ced8ce1d9f3",
+          "ptx": "review/native-math/before/norm_rmsnorm_f32_3x129/k_mean_0c103c.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_1",
+      "meta_sha256": "edb0d0e5a5420489c8d21273348778d44cd059c06b9bb68d6a3fd63dbc97bc7b",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "4080d387f4e55d6397b12412b7c7d4916b2a0c62881b104d62e83ddaa9fbc097",
+          "ptx": "review/native-math/before/norm_sqrt_f16_1/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_129",
+      "meta_sha256": "b47197d6a20b99ea1f5e4390061ce807e4e01c58ad7ad22a3745ed48432f6e17",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "e111bef99696039410cd25141bacc15d7dda842ffd14f36e3a393167f52c88ce",
+          "ptx": "review/native-math/before/norm_sqrt_f16_129/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_1",
+      "meta_sha256": "2f227b78be8e7203aae17e5c37c8a5792014033e7c4f9a0097182acd86a33739",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "f9b0c57e85f7fd0057114d1dd8ba44e0ba3e782a35ad377601f3633a1594c775",
+          "ptx": "review/native-math/before/norm_sqrt_f32_1/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_129",
+      "meta_sha256": "3abf430d8b506d058db12022a746887bbb76455642e8d48995c6f1192f8f44d8",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "71be7bc9c86a96b6e91193f3e41cffe6c4cb8d78c649bd9b9414578d5499db84",
+          "ptx": "review/native-math/before/norm_sqrt_f32_129/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_1",
+      "meta_sha256": "3cca2a93b9cf4d94057c9e8a728f86009a8dc90881c16debc97741d18e1ab7ac",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "893bdfaa1b4203a1f9852b5eb418d00a61431dbb96166cbbe25b633d3d60b3d8",
+          "ptx": "review/native-math/before/norm_sqrt_f64_1/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_129",
+      "meta_sha256": "79725cdd8d5c5bc564534c6017ad732478e4e33cb9e2b2ce69f015a11798d1fa",
+      "kernels": {
+        "k_sqrt_pointwise": {
+          "ir_sha256": "012b53a0a9efb14c682e1244fe9f3a620ccf4ff0d865b25b629df9207a74af88",
+          "ptx": "review/native-math/before/norm_sqrt_f64_129/k_sqrt_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f16",
+      "meta_sha256": "f989693ae87a5ec43c3983def92fc028e46fd746c3eaf05c4ec1429a96b8a684",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "c4ad149ad108f03a1e3947a772ff133a5e8f3808b2af98943310ad18d9190bdf",
+          "ptx": "review/native-math/before/convert_f16_to_f16/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f32",
+      "meta_sha256": "0055e70c698bbb6a7c9ca775767e8151a279f0bd8411e73aa9650436d6333398",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "dc8f15cce07ac623e571dcddcd86c0a6cc71b65dc38cfe2d5c01a5fa9a5df228",
+          "ptx": "review/native-math/before/convert_f16_to_f32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f64",
+      "meta_sha256": "ea11e6a99cba375dc1b67a94fdc7d42b5fcd4b9c93a2c35406d2ba8aa18ae0bb",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "3f19dd7643583dea7b382cd5ec0158412af285d71dd087f89fe60c541d397144",
+          "ptx": "review/native-math/before/convert_f16_to_f64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_i32",
+      "meta_sha256": "9499e8fb780b12a0420fa39d014a1ea787a4b488992825f989006930e0305b3d",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "2492eba5c716166cac2e3764698e78ec2016ba5dbe10777d7c0ae9c257656f2c",
+          "ptx": "review/native-math/before/convert_f16_to_i32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_i64",
+      "meta_sha256": "38a6834bd1f4e0c161d04492249c69f77b9a37abb0e44600975e84da5169d3ef",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "b5a6359f08aa16f0ad48910f4d10d678653399f4ca13e645e070fbe4def056a6",
+          "ptx": "review/native-math/before/convert_f16_to_i64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f16",
+      "meta_sha256": "0dbfd87a5e3df73153cd8c993e58dbbc2964f3d27117d13507a95b54b8895b33",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "0564a2fa1311c204daab82777e2ba57c16bc2033397ff0450990afcc273b4af6",
+          "ptx": "review/native-math/before/convert_f32_to_f16/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f32",
+      "meta_sha256": "7b6bff9ef942657a39284776d8a2cc326c3a30bca9e3023dd26af957f1b68c4e",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "f601312096ae323f1458be70b885d2e1e3aac8fd5b4351b1c7cbdfb8cec7b337",
+          "ptx": "review/native-math/before/convert_f32_to_f32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f64",
+      "meta_sha256": "56406c59e5de0971b50595bdd32109bcdb6d996e4b488fc77ea71673568b9691",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "5ad6ce89aa73d59a3758897fd70b411a6bfb993e3bef35452cda75249def8920",
+          "ptx": "review/native-math/before/convert_f32_to_f64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_i32",
+      "meta_sha256": "6d4b9f71b9717377d5d248d4dae940d73c525577583c6ee0bc987ac3e04d9aea",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "3ca5a182be2696a3cb2d0693a40f896bc27a91b557ef40a92e58fb69507c66da",
+          "ptx": "review/native-math/before/convert_f32_to_i32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_i64",
+      "meta_sha256": "7d61ebbaa3ff14a2fed3bff23bdc7c1bf985e876d60906a6ade7e1a16cd008ed",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "c058e9406fbb8e1c0d3584705811c1e095f94e849b820af1d1fbc65b10075762",
+          "ptx": "review/native-math/before/convert_f32_to_i64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f16",
+      "meta_sha256": "aa33bf418c9e7d316bf08ff5051f0958a4203a28fbea669ea006fda5702f54ff",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "5a96807fa1a52e16163c3cee1e9a4655cd32346ec03f94818163e9426a7320ee",
+          "ptx": "review/native-math/before/convert_f64_to_f16/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f32",
+      "meta_sha256": "50ea1293c4127be7449c40d352c248d0fdce46cd2246299090eb88c097431034",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "53263f64e96e60551041f71f8e2d6d1791b74509689643984c83a7031535bb26",
+          "ptx": "review/native-math/before/convert_f64_to_f32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f64",
+      "meta_sha256": "131584b7d994dddd43a0bb2e50990e92b7034f74f576f809751edf708ae0fead",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "987ff2763980427bf064196703c9d1ab792069ecdb012c62a6e7b8ace57ece3b",
+          "ptx": "review/native-math/before/convert_f64_to_f64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_i32",
+      "meta_sha256": "e8e9bb0636e9ee006d64f1d5f290fbd5509085f3404769712f4be0a34170c045",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "0cd09df38a96328d784d5efb5d8d5247a527e5db9921537f3964808028a8173c",
+          "ptx": "review/native-math/before/convert_f64_to_i32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_i64",
+      "meta_sha256": "481a7f438acc07ae5168e87b156d65ab29d939f57110be0ca80dd83d7be71721",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "a0952ae992e73ec1814cdea6c64234647839acadfe777e2945da3a0d21a6fd1e",
+          "ptx": "review/native-math/before/convert_f64_to_i64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f16",
+      "meta_sha256": "732aaa72a69947436ac94793f9f3c86dfcd7300d7efc9e0b0176ecee0d725360",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "d5a0dfe593029dad510e243f315dfda0715931340793c589a5e8d2b694d53131",
+          "ptx": "review/native-math/before/convert_i32_to_f16/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f32",
+      "meta_sha256": "36ee3af6af09ca575aed8d9d05a604ebd250432e69a71f54648717bbfef3487f",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "d996e4aed157ed5bdfdf67d937e6b9954a7597c95919eb86395e46ca67980d72",
+          "ptx": "review/native-math/before/convert_i32_to_f32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f64",
+      "meta_sha256": "2a9849654527f0c2969dea91cf83334ab99d43aff08720689bb824d6b8d9350b",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "a5302491f559b8d890ec0dee22e1eb18edc47ef8281f100c282a5020f657b916",
+          "ptx": "review/native-math/before/convert_i32_to_f64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_i32",
+      "meta_sha256": "50e3fb278d1f356164d7c7c63fee5821cb3465e292cbd801fcc0c5651732ea55",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "b1691f8c8266342bcc5e4efc30d192abd0ae823fdb4988adc4a0d216ca25dea5",
+          "ptx": "review/native-math/before/convert_i32_to_i32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_i64",
+      "meta_sha256": "fbd86589ba870f2e1571fb69b72caf03203f6538a96ce18e0be06d688c247c54",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "ffc7debc4ec36c3cb3721fbcb2d90a1630e07b1e2c7c7502c601f66d9e777fca",
+          "ptx": "review/native-math/before/convert_i32_to_i64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f16",
+      "meta_sha256": "bbdc9cc8d4e9fd68823fc1ed23b5a12cbf3be237928b8c3df8253157179618ee",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "3e885e7e8b78833dd83f9696cbcd9dab6fb4a506af9ac7267fc39047dcc9ed59",
+          "ptx": "review/native-math/before/convert_i64_to_f16/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f32",
+      "meta_sha256": "a0548fa5f690dbd77d2a3168c369907c00c9dc642c7a134a2cc90b5fd4fba423",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "5c00e4f9dd1ba2f3a066b9586483c86d274e48bd3a4808657ab4e093ac1abb4a",
+          "ptx": "review/native-math/before/convert_i64_to_f32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f64",
+      "meta_sha256": "fa4c8ea4e52b1b26d966abd1d979be6b598091af293a6fdbd8c08f5a8a93247a",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "5be30cef9ca95d2b2ee079f23f988b6576b506eff21ff5fadfb42e4c608d3812",
+          "ptx": "review/native-math/before/convert_i64_to_f64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_i32",
+      "meta_sha256": "72d5e00b2c73ef164f4a19af0799572440462f4b047a42d2bbe0dcfc861e058e",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "b0fe5e9e9872036cc532dc6374c30ddf7c22225df5a373936c81db7bc2056154",
+          "ptx": "review/native-math/before/convert_i64_to_i32/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_i64",
+      "meta_sha256": "9fd36223403b117eb8606c115199b12181cabd1664887baaf775c4a65cb8868b",
+      "kernels": {
+        "k_to_pointwise": {
+          "ir_sha256": "d50007b37556b1304d112cc093c298695bc1e9d0d87713a1067851d1bbc65bcc",
+          "ptx": "review/native-math/before/convert_i64_to_i64/k_to_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f16",
+      "meta_sha256": "e385472fbf8206c3fdb052a4ed5fc8eb6e062cbe9c3424d2e75fe8feb171d8c3",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "f6c97a63dba9ea4e1961f1d904199a22b45d3fc5e841a3a8b20acbe34cba4d4e",
+          "ptx": "review/native-math/before/range_exp_f16/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f32",
+      "meta_sha256": "c495b81c693dcba628486c25bfdcc1d3a66bfd11f6f59d3888b9c2bf31997c33",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "04306cbfe38664dc9a2eacb537fb429803b647cda6144bb437b36824b65a1b41",
+          "ptx": "review/native-math/before/range_exp_f32/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f64",
+      "meta_sha256": "601b323c4f28e5565110888e4f1a47ad8c5a5b69ed13614bb269087d8daf42db",
+      "kernels": {
+        "k_exp_pointwise": {
+          "ir_sha256": "e5d2278d34a60573a8d36c2c6b63e13320fd42fa42ecaa71e34c504f83b3e0bd",
+          "ptx": "review/native-math/before/range_exp_f64/k_exp_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f16",
+      "meta_sha256": "8c54ba6808da1799d1ad284658d0cc4e80553c4758d13a525084e36189884531",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "a1bfc190168fe5126626132f55d08cc4ebe38a8f411bae52a92c298010e9cc51",
+          "ptx": "review/native-math/before/range_log_f16/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f32",
+      "meta_sha256": "dcef9d0d6e677d5e9d4ad8d80317fd009d9dd19958144e0b8c96a203171727e8",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "2d1ac22103067139c8f57c3031aa3622d1c58d51464134f263265d7796a97a44",
+          "ptx": "review/native-math/before/range_log_f32/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f64",
+      "meta_sha256": "58e4491c3d966cb5a43af96a1b93c390b2deb192c1cf113853d67887fbcc7a6b",
+      "kernels": {
+        "k_log_pointwise": {
+          "ir_sha256": "f5a87da7fe3d705673fd72112fc6d6585a8d9e21e4a14a03a5ef0e63a2dff3f6",
+          "ptx": "review/native-math/before/range_log_f64/k_log_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f16",
+      "meta_sha256": "3c7bb25ab416b29ea84f49ab768930865339520b768b9c34c8030921e18dc86e",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "55cd992147e6bdb9e3d7eb637616d193f0f7c2187daf0ea933e0a374d48d95bf",
+          "ptx": "review/native-math/before/range_power_f16/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f32",
+      "meta_sha256": "59d0b10d6c4a8ac1fae129ab6e7b4f433ae59d87fffaabd0dc9df178e88de649",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "9e76cfba3dd0710274ac7fafb5657d8276e6d4ee1356ef112d9475e45463e882",
+          "ptx": "review/native-math/before/range_power_f32/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f64",
+      "meta_sha256": "446375f8891aace9621983ef8430443b5d2ef9cc6d110d5e599d8787d29babbd",
+      "kernels": {
+        "k_pow_1_pointwise": {
+          "ir_sha256": "f437cbb295b969492246f3c790b4f5b1efb0f000b32c0ad3c8699e34b5a39b67",
+          "ptx": "review/native-math/before/range_power_f64/k_pow_1_pointwise.ours.ptx"
+        }
+      }
+    }
+  ]
+}

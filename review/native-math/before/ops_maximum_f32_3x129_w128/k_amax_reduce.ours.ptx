@@ -1,0 +1,147 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_amax_reduce(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<23>;
+    .reg .b64 %rd<22>;
+    .reg .f32 %f<21>;
+    .reg .pred %p<26>;
+    .shared .align 4 .b8 scratch_0[16];
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    shr.u32 %r5, %r4, 7;
+    and.b32 %r6, %r4, 127;
+    and.b32 %r7, %r1, 31;
+    shr.u32 %r8, %r1, 5;
+    mov.f32 %f1, 0fF149F2CA;
+    mov.s32 %r9, %r6;
+LOOP_1:
+    setp.ge.s32 %p1, %r9, 129;
+    @%p1 bra LOOP_DONE_2;
+    mul.lo.s32 %r10, %r5, 129;
+    add.s32 %r11, %r10, %r9;
+    mov.s32 %r12, %r11;
+    mul.wide.s32 %rd5, %r12, 4;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.f32 %f2, [%rd6+0];
+    setp.gt.f32 %p2, %f1, %f2;
+    selp.f32 %f3, %f1, %f2, %p2;
+    setp.nan.f32 %p3, %f1, %f2;
+    @%p3 mov.f32 %f3, 0f7FC00000;
+    mov.f32 %f1, %f3;
+    add.s32 %r9, %r9, 128;
+    bra LOOP_1;
+LOOP_DONE_2:
+    activemask.b32 %r13;
+    shfl.sync.bfly.b32 %f4, %f1, 16, 31, %r13;
+    setp.gt.f32 %p4, %f1, %f4;
+    selp.f32 %f5, %f1, %f4, %p4;
+    setp.nan.f32 %p5, %f1, %f4;
+    @%p5 mov.f32 %f5, 0f7FC00000;
+    mov.f32 %f1, %f5;
+    shfl.sync.bfly.b32 %f6, %f1, 8, 31, %r13;
+    setp.gt.f32 %p6, %f1, %f6;
+    selp.f32 %f7, %f1, %f6, %p6;
+    setp.nan.f32 %p7, %f1, %f6;
+    @%p7 mov.f32 %f7, 0f7FC00000;
+    mov.f32 %f1, %f7;
+    shfl.sync.bfly.b32 %f8, %f1, 4, 31, %r13;
+    setp.gt.f32 %p8, %f1, %f8;
+    selp.f32 %f9, %f1, %f8, %p8;
+    setp.nan.f32 %p9, %f1, %f8;
+    @%p9 mov.f32 %f9, 0f7FC00000;
+    mov.f32 %f1, %f9;
+    shfl.sync.bfly.b32 %f10, %f1, 2, 31, %r13;
+    setp.gt.f32 %p10, %f1, %f10;
+    selp.f32 %f11, %f1, %f10, %p10;
+    setp.nan.f32 %p11, %f1, %f10;
+    @%p11 mov.f32 %f11, 0f7FC00000;
+    mov.f32 %f1, %f11;
+    shfl.sync.bfly.b32 %f12, %f1, 1, 31, %r13;
+    setp.gt.f32 %p12, %f1, %f12;
+    selp.f32 %f13, %f1, %f12, %p12;
+    setp.nan.f32 %p13, %f1, %f12;
+    @%p13 mov.f32 %f13, 0f7FC00000;
+    mov.f32 %f1, %f13;
+    mov.u64 %rd7, scratch_0;
+    setp.eq.s32 %p14, %r7, 0;
+    @!%p14 bra ELSE_3;
+    mov.s32 %r14, %r8;
+    mul.wide.s32 %rd8, %r14, 4;
+    add.u64 %rd9, %rd7, %rd8;
+    st.shared.f32 [%rd9+0], %f1;
+    bra IF_DONE_4;
+ELSE_3:
+IF_DONE_4:
+    bar.sync 0;
+    setp.lt.u32 %p15, %r8, 2;
+    setp.eq.u32 %p16, %r7, 0;
+    and.pred %p17, %p15, %p16;
+    @!%p17 bra TREE_SKIP_5;
+    add.s32 %r15, %r8, 2;
+    mov.s32 %r16, %r8;
+    mul.wide.s32 %rd10, %r16, 4;
+    add.u64 %rd11, %rd7, %rd10;
+    mov.s32 %r17, %r15;
+    mul.wide.s32 %rd12, %r17, 4;
+    add.u64 %rd13, %rd7, %rd12;
+    ld.shared.f32 %f14, [%rd11];
+    ld.shared.f32 %f15, [%rd13];
+    setp.gt.f32 %p18, %f14, %f15;
+    selp.f32 %f16, %f14, %f15, %p18;
+    setp.nan.f32 %p19, %f14, %f15;
+    @%p19 mov.f32 %f16, 0f7FC00000;
+    mov.f32 %f14, %f16;
+    st.shared.f32 [%rd11], %f14;
+TREE_SKIP_5:
+    bar.sync 0;
+    setp.lt.u32 %p20, %r8, 1;
+    setp.eq.u32 %p21, %r7, 0;
+    and.pred %p22, %p20, %p21;
+    @!%p22 bra TREE_SKIP_6;
+    add.s32 %r18, %r8, 1;
+    mov.s32 %r19, %r8;
+    mul.wide.s32 %rd14, %r19, 4;
+    add.u64 %rd15, %rd7, %rd14;
+    mov.s32 %r20, %r18;
+    mul.wide.s32 %rd16, %r20, 4;
+    add.u64 %rd17, %rd7, %rd16;
+    ld.shared.f32 %f17, [%rd15];
+    ld.shared.f32 %f18, [%rd17];
+    setp.gt.f32 %p23, %f17, %f18;
+    selp.f32 %f19, %f17, %f18, %p23;
+    setp.nan.f32 %p24, %f17, %f18;
+    @%p24 mov.f32 %f19, 0f7FC00000;
+    mov.f32 %f17, %f19;
+    st.shared.f32 [%rd15], %f17;
+TREE_SKIP_6:
+    bar.sync 0;
+    mov.s32 %r21, 0;
+    mul.wide.s32 %rd18, %r21, 4;
+    add.u64 %rd19, %rd7, %rd18;
+    ld.shared.f32 %f20, [%rd19];
+    mov.f32 %f1, %f20;
+    setp.eq.s32 %p25, %r6, 0;
+    @!%p25 bra ELSE_7;
+    mov.s32 %r22, %r5;
+    mul.wide.s32 %rd20, %r22, 4;
+    add.u64 %rd21, %rd4, %rd20;
+    st.global.f32 [%rd21+0], %f1;
+    bra IF_DONE_8;
+ELSE_7:
+IF_DONE_8:
+DONE:
+    ret;
+}

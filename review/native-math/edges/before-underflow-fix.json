@@ -1,0 +1,198 @@
+{
+  "pipeline": "PyTorch -> Emmy -> unmodified Kernel IR -> our compiler",
+  "runner": true,
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "0cb34d148da87ae7faa5e654ebde2ce33272f58bc5bcecd54f4451f65a5e965a"
+  },
+  "cases": [
+    {
+      "case": "native_exp_edges_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.0,
+            "registers": {
+              "k_exp_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "native_log_edges_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 22.624,
+            "registers": {
+              "k_log_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "native_log_exp_f16",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 20.512,
+            "registers": {
+              "k_log_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "native_exp_edges_f32",
+      "status": "wrong_result",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.544,
+            "registers": {
+              "k_exp_pointwise": 12
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "exp",
+              "dtype": "float32",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.401298464324817e-45
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "wrong_result",
+            "details": {
+              "output": "exp",
+              "dtype": "float32",
+              "mismatch_count": 1,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.0,
+                  "expected": 1.401298464324817e-45
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "native_log_edges_f32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_log_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "native_log_exp_f32",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 20.032,
+            "registers": {
+              "k_log_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 5,
+    "wrong_result": 1
+  }
+}

@@ -1,0 +1,802 @@
+{
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "fd9860094dd41ca8d859a738f2e9846c756f2c7bbab1de3dd1bd79317c3828e3"
+  },
+  "provenance": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "case": "ops_divide_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 26.176,
+            "registers": {
+              "k_div_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_divide_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 23.584,
+            "registers": {
+              "k_div_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 23.52,
+            "registers": {
+              "k_sub_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 24.448,
+            "registers": {
+              "k_sub_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 23.648,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 24.352,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 23.424,
+            "registers": {
+              "k_exp_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 24.096,
+            "registers": {
+              "k_exp_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 24.352,
+            "registers": {
+              "k_exp_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 23.904,
+            "registers": {
+              "k_exp_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 25.888,
+            "registers": {
+              "k_log_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 25.056,
+            "registers": {
+              "k_log_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 25.888,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 25.344,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 26.208,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log10_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 31.136,
+            "registers": {
+              "k_div_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 26.976,
+            "registers": {
+              "k_pow_1_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 29.344,
+            "registers": {
+              "k_pow_1_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 23.36,
+            "registers": {
+              "k_rsqrt_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 23.424,
+            "registers": {
+              "k_rsqrt_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.712,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 23.552,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_edb46a",
+            "median_us": 23.648,
+            "registers": {
+              "k_mean_edb46a": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_f63f78",
+            "median_us": 23.584,
+            "registers": {
+              "k_mean_f63f78": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_reduce",
+            "median_us": 24.288,
+            "registers": {
+              "k_amax_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_reduce",
+            "median_us": 23.744,
+            "registers": {
+              "k_amax_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_b01fd0",
+            "median_us": 33.312,
+            "registers": {
+              "k_softmax_b01fd0": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_87d414",
+            "median_us": 36.128,
+            "registers": {
+              "k_softmax_87d414": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    }
+  ],
+  "statuses": {
+    "pass": 28
+  }
+}

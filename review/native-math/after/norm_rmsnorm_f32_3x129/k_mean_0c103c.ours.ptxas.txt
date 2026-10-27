@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'k_mean_0c103c' for 'sm_89'
+ptxas info    : Function properties for k_mean_0c103c
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, 16 bytes smem, 384 bytes cmem[0]

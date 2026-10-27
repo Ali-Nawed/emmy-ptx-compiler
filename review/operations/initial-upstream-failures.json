@@ -1,0 +1,685 @@
+{
+  "source_sha256": {
+    "compile.py": "cac35aab0d3d044dce1bdd37ef8a07d93135e870bf8701682705bb73942204f3",
+    "ptx_math.py": "49917a281f62b663901a092b28782f4cb54360d624754a940b82ad1fd4617c7c"
+  },
+  "provenance": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4",
+    "target": "sm_89"
+  },
+  "runner": true,
+  "cases": [
+    {
+      "case": "ops_divide_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 21.728,
+            "registers": {
+              "k_div_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_divide_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_div_pointwise",
+            "median_us": 20.608,
+            "registers": {
+              "k_div_pointwise": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_sub_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minmax_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_sub_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_negative_abs_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 19.872,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 20.064,
+            "registers": {
+              "k_exp_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_exp_pointwise",
+            "median_us": 33.664,
+            "registers": {
+              "k_exp_pointwise": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_exp2_f32_33_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((33,), dtype=torch.float32); torch.exp2(x * 0.25)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='exp2' not supported\n"
+    },
+    {
+      "case": "ops_exp2_f32_129_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((129,), dtype=torch.float32); torch.exp2(x * 0.25)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='exp2' not supported\n"
+    },
+    {
+      "case": "ops_log_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 21.6,
+            "registers": {
+              "k_log_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_log_pointwise",
+            "median_us": 21.92,
+            "registers": {
+              "k_log_pointwise": 31
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_log2_f32_33_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((33,), dtype=torch.float32); torch.log2(x*x + 1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='log2' not supported\n"
+    },
+    {
+      "case": "ops_log2_f32_129_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((129,), dtype=torch.float32); torch.log2(x*x + 1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='log2' not supported\n"
+    },
+    {
+      "case": "ops_log10_f32_33_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((33,), dtype=torch.float32); torch.log10(x*x + 1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='log10' not supported\n"
+    },
+    {
+      "case": "ops_log10_f32_129_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((129,), dtype=torch.float32); torch.log10(x*x + 1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 549, in handle_compile\n    result = Pipeline.build(passes).run(graph, db=db, dump=dump)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 560, in run\n    return GreedyStrategy(self, backend=backend, db=db, dump=dump).run(graph, ctx)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/strategy/greedy.py\", line 92, in run\n    terminal, trace = run.resolve(graph.copy(), greedy_decide(blocked=blocked, db=db))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 869, in resolve\n    self._step(cand, decide=decide, trace=trace)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/pipeline.py\", line 784, in _step\n    options = cand.try_rewrite(match)\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/candidate.py\", line 106, in try_rewrite\n    result = rule.rewrite(**_build_rewrite_kwargs(rule, match, self.ctx))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/lowering/cuda/010_lower_kernelop.py\", line 98, in rewrite\n    source = render_kernelop(kernel, tensors=tensors, runtime_args=runtime_args, indirect_inputs=indirect)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/render.py\", line 1366, in render_kernelop\n    body_text = \"\\n\".join(render_body(kernel_op.body, ctx))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/kernel/ir.py\", line 441, in render\n    out.extend(render_body(self.body, inner))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 865, in render_body\n    out.extend(s.render(ctx))\n               ^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/leaves.py\", line 365, in render\n    expr = op_to_expr(op_name, promoted, dtype=\"f32\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/stmt/base.py\", line 327, in op_to_expr\n    raise NotImplementedError(f\"render: elementwise fn={fn!r} not supported\")\nNotImplementedError: render: elementwise fn='log10' not supported\n"
+    },
+    {
+      "case": "ops_power_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 26.592,
+            "registers": {
+              "k_pow_1_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_power_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_pow_1_pointwise",
+            "median_us": 25.088,
+            "registers": {
+              "k_pow_1_pointwise": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f32_33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_rsqrt_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_rsqrt_f32_129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_rsqrt_pointwise",
+            "median_us": 19.872,
+            "registers": {
+              "k_rsqrt_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.544,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_sum_composed_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_reduce": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_edb46a",
+            "median_us": 20.064,
+            "registers": {
+              "k_mean_edb46a": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_center_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_f63f78",
+            "median_us": 20.128,
+            "registers": {
+              "k_mean_f63f78": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_reduce",
+            "median_us": 19.808,
+            "registers": {
+              "k_amax_reduce": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_maximum_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_amax_reduce",
+            "median_us": 21.12,
+            "registers": {
+              "k_amax_reduce": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_minimum_f32_3x33_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((3, 33), dtype=torch.float32); x.amin(-1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2178, in _handle_call_function\n    input_ids = [broadcast_to(g, inp, shape) for inp in input_ids]\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/frontend/decomposition/_broadcast.py\", line 61, in broadcast_to\n    raise ValueError(f\"cannot broadcast shape {inp_shape} to {target_shape}: non-size-1 dim mismatch or rank exceeds target{hint}\")\nValueError: cannot broadcast shape (Dim(3), Dim(33)) to (3,): non-size-1 dim mismatch or rank exceeds target\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 518, in handle_compile\n    graph, _, bundle = load_or_trace(args)\n                       ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 629, in load_or_trace\n    return graph_from_code(args.code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 201, in graph_from_code\n    info = trace_inline_code(code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 292, in trace_inline_code\n    graph, const_targets = trace_module_with_constants(module, example_inputs, dynamic_shapes=dynamic_shapes)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 150, in trace_module_with_constants\n    _handle_call_function(g, fx_node, node_map, sym_rename=sym_rename)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2180, in _handle_call_function\n    raise ValueError(f\"cannot map fallback aten.{op_name} as elementwise for output shape {shape}\") from exc\nValueError: cannot map fallback aten.amin as elementwise for output shape (3,)\n"
+    },
+    {
+      "case": "ops_minimum_f32_3x129_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((3, 129), dtype=torch.float32); x.amin(-1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2178, in _handle_call_function\n    input_ids = [broadcast_to(g, inp, shape) for inp in input_ids]\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/frontend/decomposition/_broadcast.py\", line 61, in broadcast_to\n    raise ValueError(f\"cannot broadcast shape {inp_shape} to {target_shape}: non-size-1 dim mismatch or rank exceeds target{hint}\")\nValueError: cannot broadcast shape (Dim(3), Dim(129)) to (3,): non-size-1 dim mismatch or rank exceeds target\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 518, in handle_compile\n    graph, _, bundle = load_or_trace(args)\n                       ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 629, in load_or_trace\n    return graph_from_code(args.code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 201, in graph_from_code\n    info = trace_inline_code(code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 292, in trace_inline_code\n    graph, const_targets = trace_module_with_constants(module, example_inputs, dynamic_shapes=dynamic_shapes)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 150, in trace_module_with_constants\n    _handle_call_function(g, fx_node, node_map, sym_rename=sym_rename)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2180, in _handle_call_function\n    raise ValueError(f\"cannot map fallback aten.{op_name} as elementwise for output shape {shape}\") from exc\nValueError: cannot map fallback aten.amin as elementwise for output shape (3,)\n"
+    },
+    {
+      "case": "ops_product_f32_3x33_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((3, 33), dtype=torch.float32); (1 + x * 0.01).prod(-1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2178, in _handle_call_function\n    input_ids = [broadcast_to(g, inp, shape) for inp in input_ids]\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/frontend/decomposition/_broadcast.py\", line 61, in broadcast_to\n    raise ValueError(f\"cannot broadcast shape {inp_shape} to {target_shape}: non-size-1 dim mismatch or rank exceeds target{hint}\")\nValueError: cannot broadcast shape (Dim(3), Dim(33)) to (3,): non-size-1 dim mismatch or rank exceeds target\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 518, in handle_compile\n    graph, _, bundle = load_or_trace(args)\n                       ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 629, in load_or_trace\n    return graph_from_code(args.code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 201, in graph_from_code\n    info = trace_inline_code(code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 292, in trace_inline_code\n    graph, const_targets = trace_module_with_constants(module, example_inputs, dynamic_shapes=dynamic_shapes)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 150, in trace_module_with_constants\n    _handle_call_function(g, fx_node, node_map, sym_rename=sym_rename)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2180, in _handle_call_function\n    raise ValueError(f\"cannot map fallback aten.{op_name} as elementwise for output shape {shape}\") from exc\nValueError: cannot map fallback aten.prod as elementwise for output shape (3,)\n"
+    },
+    {
+      "case": "ops_product_f32_3x129_w128",
+      "status": "generation_failure",
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn((3, 129), dtype=torch.float32); (1 + x * 0.01).prod(-1)', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2178, in _handle_call_function\n    input_ids = [broadcast_to(g, inp, shape) for inp in input_ids]\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/passes/frontend/decomposition/_broadcast.py\", line 61, in broadcast_to\n    raise ValueError(f\"cannot broadcast shape {inp_shape} to {target_shape}: non-size-1 dim mismatch or rank exceeds target{hint}\")\nValueError: cannot broadcast shape (Dim(3), Dim(129)) to (3,): non-size-1 dim mismatch or rank exceeds target\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/emmy-extended-env/bin/emmy\", line 10, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/emmy.py\", line 82, in main\n    args.func(args)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 518, in handle_compile\n    graph, _, bundle = load_or_trace(args)\n                       ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/compile.py\", line 629, in load_or_trace\n    return graph_from_code(args.code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 201, in graph_from_code\n    info = trace_inline_code(code, dynamic_shapes=dynamic_shapes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/commands/trace.py\", line 292, in trace_inline_code\n    graph, const_targets = trace_module_with_constants(module, example_inputs, dynamic_shapes=dynamic_shapes)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 150, in trace_module_with_constants\n    _handle_call_function(g, fx_node, node_map, sym_rename=sym_rename)\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/trace/torch.py\", line 2180, in _handle_call_function\n    raise ValueError(f\"cannot map fallback aten.{op_name} as elementwise for output shape {shape}\") from exc\nValueError: cannot map fallback aten.prod as elementwise for output shape (3,)\n"
+    },
+    {
+      "case": "ops_softmax_f32_3x33_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_b01fd0",
+            "median_us": 29.696,
+            "registers": {
+              "k_softmax_b01fd0": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    },
+    {
+      "case": "ops_softmax_f32_3x129_w128",
+      "status": "pass",
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_softmax_87d414",
+            "median_us": 33.952,
+            "registers": {
+              "k_softmax_87d414": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      },
+      "gpu_vs_ir": "pass"
+    }
+  ],
+  "statuses": {
+    "pass": 22,
+    "generation_failure": 10
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "runner": true,
+  "cases": [
+    {
+      "case": "row_broadcast",
+      "status": "pass",
+      "emmy_generated": true,
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 28.736,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "column_broadcast",
+      "status": "pass",
+      "emmy_generated": true,
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_add_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "case": "multi_axis_sum",
+      "status": "upstream_generation_failed",
+      "emmy_generated": false,
+      "error": "Command '['/tmp/emmy-extended-env/bin/emmy', 'compile', '-c', 'x = torch.randn(2, 3, 129); x.sum((0, 2))', '--ir', 'cuda', '--target', 'sm_89']' returned non-zero exit status 1.\n        ^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/policy/greedy.py\", line 1001, in decide\n    return pick(fp)\n           ^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/policy/greedy.py\", line 1020, in pick\n    dkey = _decision_key(fp, blocked)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/pipeline/search/policy/greedy.py\", line 213, in _decision_key\n    pid if pid is not None else (fp.root_op.identity_key(with_io=True, with_knobs=True), schedule_pin_fingerprint()),\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/base.py\", line 215, in identity_key\n    identity = self._typed_identity_clustered if structural else self._typed_identity_exact\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/functools.py\", line 995, in __get__\n    val = self.func(instance)\n          ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/base.py\", line 187, in _typed_identity_clustered\n    return self._body_identity(structural=True, typed=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/tile/ir.py\", line 702, in _body_identity\n    body = self.loop_body\n           ^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/functools.py\", line 995, in __get__\n    val = self.func(instance)\n          ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/tile/ir.py\", line 684, in loop_body\n    body = self.op.lower(frozenset(axis.name for axis in (*glue, *serial)), self.output_specs, self.axes)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/utils.py\", line 30, in bound\n    memo[key] = self.fn(instance, *args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/emmy-extended-env/lib/python3.12/site-packages/emmy/compiler/ir/pure/fold.py\", line 1230, in lower\n    raise ValueError(f\"lower: no extent for coordinates {sorted(missing)} \u2014 the closed program takes them as axes\")\nValueError: lower: no extent for coordinates ['out_coord_1'] \u2014 the closed program takes them as axes\n"
+    },
+    {
+      "case": "two_row_sums",
+      "status": "compiler_unsupported",
+      "emmy_generated": true,
+      "error": "Unsupported statement: Loop"
+    },
+    {
+      "case": "where",
+      "status": "compiler_unsupported",
+      "emmy_generated": true,
+      "error": "Unsupported buffer dtype: bool"
+    },
+    {
+      "case": "sigmoid",
+      "status": "compiler_unsupported",
+      "emmy_generated": true,
+      "error": "Unsupported arithmetic: sigmoid/f32"
+    },
+    {
+      "case": "tanh",
+      "status": "compiler_unsupported",
+      "emmy_generated": true,
+      "error": "Unsupported arithmetic: tanh/f32"
+    },
+    {
+      "case": "variance_composition",
+      "status": "pass",
+      "emmy_generated": true,
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_reduce_cb35f5",
+            "median_us": 20.896,
+            "registers": {
+              "k_mean_reduce_cb35f5": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "a2c685520d345d81f977c44a9fba14bfc31745e697bc8be8f3b13e089347f03c",
+    "ptx_math.py": "829778cc78f700cd3cc8f2bee638d6042da3f4cc0a685bacc19763aa070da3e9"
+  },
+  "statuses": {
+    "pass": 3,
+    "upstream_generation_failed": 1,
+    "compiler_unsupported": 4
+  }
+}

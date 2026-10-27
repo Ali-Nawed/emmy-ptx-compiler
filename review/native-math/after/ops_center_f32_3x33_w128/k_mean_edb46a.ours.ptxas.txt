@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function 'k_mean_edb46a' for 'sm_89'
+ptxas info    : Function properties for k_mean_edb46a
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 17 registers, 16 bytes smem, 376 bytes cmem[0]

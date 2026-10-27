@@ -1,0 +1,75 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_exp_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1
+)
+{
+    .reg .b32 %r<11>;
+    .reg .b64 %rd<9>;
+    .reg .f32 %f<21>;
+    .reg .b16 %h<7>;
+    .reg .pred %p<4>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 6;
+    @%p1 bra DONE;
+    mul.lo.s32 %r5, %r4, 2;
+    add.s32 %r6, %r5, 0;
+    mov.s32 %r7, %r6;
+    mul.wide.s32 %rd5, %r7, 2;
+    add.u64 %rd6, %rd2, %rd5;
+    ld.global.b16 %h1, [%rd6+0];
+    cvt.f32.f16 %f1, %h1;
+    ld.global.b16 %h2, [%rd6+2];
+    cvt.f32.f16 %f2, %h2;
+    mul.rn.f32 %f5, %f1, 0f3FB8AA3B;
+    cvt.rni.f32.f32 %f6, %f5;
+    max.f32 %f6, %f6, 0fC2FC0000;
+    min.f32 %f6, %f6, 0f42FE0000;
+    neg.f32 %f7, %f6;
+    fma.rn.f32 %f8, %f7, 0f3F317218, %f1;
+    fma.rn.f32 %f8, %f7, 0fB102E308, %f8;
+    mul.rn.f32 %f9, %f8, 0f3FB8AA3B;
+    ex2.approx.f32 %f4, %f9;
+    ex2.approx.f32 %f10, %f6;
+    mul.rn.f32 %f4, %f4, %f10;
+    setp.ge.f32 %p2, %f1, 0fC2CFF1B4;
+    @%p2 max.f32 %f4, %f4, 0f00000001;
+    cvt.rn.f16.f32 %h3, %f4;
+    cvt.f32.f16 %f11, %h3;
+    mul.rn.f32 %f14, %f2, 0f3FB8AA3B;
+    cvt.rni.f32.f32 %f15, %f14;
+    max.f32 %f15, %f15, 0fC2FC0000;
+    min.f32 %f15, %f15, 0f42FE0000;
+    neg.f32 %f16, %f15;
+    fma.rn.f32 %f17, %f16, 0f3F317218, %f2;
+    fma.rn.f32 %f17, %f16, 0fB102E308, %f17;
+    mul.rn.f32 %f18, %f17, 0f3FB8AA3B;
+    ex2.approx.f32 %f13, %f18;
+    ex2.approx.f32 %f19, %f15;
+    mul.rn.f32 %f13, %f13, %f19;
+    setp.ge.f32 %p3, %f2, 0fC2CFF1B4;
+    @%p3 max.f32 %f13, %f13, 0f00000001;
+    cvt.rn.f16.f32 %h4, %f13;
+    cvt.f32.f16 %f20, %h4;
+    mul.lo.s32 %r8, %r4, 2;
+    add.s32 %r9, %r8, 0;
+    mov.s32 %r10, %r9;
+    mul.wide.s32 %rd7, %r10, 2;
+    add.u64 %rd8, %rd4, %rd7;
+    cvt.rn.f16.f32 %h5, %f11;
+    cvt.rn.f16.f32 %h6, %f20;
+    st.global.v2.b16 [%rd8], {%h5, %h6};
+DONE:
+    ret;
+}

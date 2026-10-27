@@ -1,0 +1,4 @@
+    Tile[a0] (N=71)
+        in0 = load x[a0]
+        f32 v0 = log(in0)
+        log[a0] = v0
