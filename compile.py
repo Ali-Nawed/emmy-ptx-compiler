@@ -22,6 +22,7 @@ from emmy.compiler.graph import Graph
 from emmy.compiler.ir.kernel.ir import KernelOp
 from emmy.compiler.ir.kernel.ir import Tile, Smem, Sync, WarpShuffle, TreeHalve
 from emmy.compiler.ir.kernel.ir import RegFragment, LdmatrixLoad, MmaSyncPtx, RegStore
+from emmy.compiler.ir.kernel.ir import CpAsyncCopy, CpAsyncCommit, CpAsyncWait
 from emmy.compiler.ir.expr import BinaryExpr, Literal, Var, TernaryExpr
 from emmy.compiler.ir.stmt import Assign, Load, Write, Loop, StridedLoop, Accum, Cond, Let, Init
 from ptx_math import ScalarMath
@@ -91,9 +92,11 @@ class PTXEmitter(ScalarMath, TensorMath):
         self.buffer_alignments = {name: 16 for name in self.buffers}
         self.shared: dict[str, str] = {}
         self.declarations: list[str] = []
+        self.module_declarations: list[str] = []
         self.label_count = 0
         self.combine_dtype = None
         self.fragments = {}
+        self.dynamic_shared_offset = 0
 
     def label(self, prefix: str) -> str:
         self.label_count += 1
@@ -430,7 +433,8 @@ class PTXEmitter(ScalarMath, TensorMath):
             self.emit(f"selp.s32 {result}, {left}, {right}, {condition};")
             return result
         if isinstance(expr, BinaryExpr):
-            instructions = {"+": "add.s32", "-": "sub.s32", "*": "mul.lo.s32"}
+            instructions = {"+": "add.s32", "-": "sub.s32", "*": "mul.lo.s32",
+                            "/": "div.s32", "//": "div.s32", "%": "rem.s32"}
             if expr.op in instructions:
                 left = self.index_expr(expr.left)
                 right = self.index_expr(expr.right)
@@ -615,7 +619,15 @@ class PTXEmitter(ScalarMath, TensorMath):
         self.emit(f"bar.sync {barrier_id}{suffix};")
 
     def statement(self, stmt) -> None:
-        if isinstance(stmt, RegFragment):
+        if isinstance(stmt, CpAsyncCopy):
+            self.cp_async_copy(stmt)
+        elif isinstance(stmt, CpAsyncCommit):
+            self.emit("cp.async.commit_group;")
+        elif isinstance(stmt, CpAsyncWait):
+            if not isinstance(stmt.group, int) or not 0 <= stmt.group <= 7:
+                raise ValueError("cp.async wait group must be an integer in [0, 7]")
+            self.emit(f"cp.async.wait_group {stmt.group};")
+        elif isinstance(stmt, RegFragment):
             self.reg_fragment(stmt)
         elif isinstance(stmt, LdmatrixLoad):
             self.matrix_load(stmt)
@@ -714,9 +726,19 @@ class PTXEmitter(ScalarMath, TensorMath):
             width = self.element_bytes(dtype)
             symbol = f"scratch_{len(self.shared)}"
             size = math.prod(stmt.extents) * width
-            self.declarations.append(f"    .shared .align {stmt.align or width} .b8 {symbol}[{size}];")
             base = self.reg("rd")
-            self.emit(f"mov.u64 {base}, {symbol};")
+            if self.source.metadata["smem_bytes"]:
+                alignment = stmt.align or width
+                offset = (self.dynamic_shared_offset+alignment-1)//alignment*alignment
+                self.dynamic_shared_offset = offset+size
+                if self.dynamic_shared_offset > self.source.metadata["smem_bytes"]:
+                    raise ValueError("Shared allocations exceed the supplied dynamic shared-memory budget")
+                self.emit(f"mov.u64 {base}, dynamic_shared;")
+                if offset:
+                    self.emit(f"add.u64 {base}, {base}, {offset};")
+            else:
+                self.declarations.append(f"    .shared .align {stmt.align or width} .b8 {symbol}[{size}];")
+                self.emit(f"mov.u64 {base}, {symbol};")
             self.shared[stmt.name] = base
             self.buffers[stmt.name] = {"dtype": dtype, "shape": list(stmt.extents)}
             self.buffer_alignments[stmt.name] = stmt.align or width
@@ -758,6 +780,9 @@ class PTXEmitter(ScalarMath, TensorMath):
         if kernel.serial or len(kernel.body) != 1 or not isinstance(kernel.body[0], Tile):
             raise NotImplementedError("Expected one nonserial Tile")
         tile = kernel.body[0]
+        if meta["smem_bytes"]:
+            alignment = max([16] + [s.align for s in kernel.body.iter() if isinstance(s, Smem)])
+            self.module_declarations.append(f".extern .shared .align {alignment} .b8 dynamic_shared[];")
         # An empty axis tuple is a valid scalar tile: product(()) == 1 worker.
         # The normal bounds guard below activates only global worker zero.
         if tile.aux_threads or tile.raster_group is not None:
@@ -806,7 +831,7 @@ class PTXEmitter(ScalarMath, TensorMath):
         declarations = [f"    .reg .{types[k]} %{k}<{n + 1}>;"
                         for k, n in self.counts.items() if n]
         return "\n".join([
-            ".version 8.0", ".target sm_89", ".address_size 64", "",
+            ".version 8.0", ".target sm_89", ".address_size 64", *self.module_declarations, "",
             f".visible .entry {kernel.name}(\n{signature}\n)", "{",
             *declarations, *self.declarations, "", *self.lines, "}", "",
         ])

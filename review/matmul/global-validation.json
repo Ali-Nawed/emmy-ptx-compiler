@@ -20,7 +20,7 @@
         "kernels": [
           {
             "entry": "k_matmul_383668",
-            "median_us": 23.552,
+            "median_us": 23.168,
             "registers": {
               "k_matmul_383668": 40
             }
@@ -60,14 +60,14 @@
         "kernels": [
           {
             "entry": "k_matmul__partial",
-            "median_us": 16.8,
+            "median_us": 16.576,
             "registers": {
               "k_matmul__partial": 28
             }
           },
           {
             "entry": "k_matmul",
-            "median_us": 24.096,
+            "median_us": 24.16,
             "registers": {
               "k_matmul": 32
             }
@@ -103,7 +103,7 @@
         "kernels": [
           {
             "entry": "k_matmul_7421ac",
-            "median_us": 23.68,
+            "median_us": 23.36,
             "registers": {
               "k_matmul_7421ac": 38
             }
@@ -139,7 +139,7 @@
         "kernels": [
           {
             "entry": "k_matmul_3d38ab",
-            "median_us": 23.648,
+            "median_us": 30.784,
             "registers": {
               "k_matmul_3d38ab": 40
             }
@@ -175,7 +175,7 @@
         "kernels": [
           {
             "entry": "k_matmul_0ae725",
-            "median_us": 23.968,
+            "median_us": 23.616,
             "registers": {
               "k_matmul_0ae725": 40
             }
@@ -211,7 +211,7 @@
         "kernels": [
           {
             "entry": "k_matmul_c028b7",
-            "median_us": 23.744,
+            "median_us": 23.936,
             "registers": {
               "k_matmul_c028b7": 42
             }
@@ -247,7 +247,7 @@
         "kernels": [
           {
             "entry": "k_matmul_4e9587",
-            "median_us": 23.328,
+            "median_us": 23.264,
             "registers": {
               "k_matmul_4e9587": 44
             }
@@ -283,7 +283,7 @@
         "kernels": [
           {
             "entry": "k_matmul_1a5cf2",
-            "median_us": 24.64,
+            "median_us": 23.584,
             "registers": {
               "k_matmul_1a5cf2": 34
             }
@@ -317,7 +317,7 @@
         "kernels": [
           {
             "entry": "k_matmul_8caaa5",
-            "median_us": 22.976,
+            "median_us": 23.936,
             "registers": {
               "k_matmul_8caaa5": 10
             }
@@ -337,8 +337,8 @@
     }
   ],
   "source_sha256": {
-    "compile.py": "d150b3f2bb2ed5837a281d43c26eb90de1a92b50c376d86c8c7703a14d17154a",
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
     "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
-    "ptx_tensor.py": "2c9ebeaa94c4ae87bdded8531b2d0502171dfcf4a2ef868a98e90953735b61eb"
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
   }
 }

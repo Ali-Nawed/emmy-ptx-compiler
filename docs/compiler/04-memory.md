@@ -57,8 +57,8 @@ For `row * 8 + col * 4`, the guarantee is `gcd(8, 4) = 4`, enough for a four-ele
 
 ## Shared memory
 
-`Smem` declares a static byte array with the appropriate size and alignment, binds its address and records its element shape/type. Subsequent ordinary `Load` and `Write` nodes use `ld.shared` / `st.shared` through `memory_space()`.
+`Smem` declares static storage when metadata requests no dynamic shared memory, or allocates an aligned slice of one dynamic arena when smem_bytes is positive. It binds the address and records the element shape/type. Subsequent ordinary `Load` and `Write` nodes use `ld.shared` / `st.shared` through `memory_space()`.
 
-Atomic writes, swizzled writes and asynchronous copies are not supported yet. The compiler rejects them instead of silently using plain stores.
+Native asynchronous copies and their B32/B64/B128 shared layouts are now supported; see [shared staging](17-shared-memory-async-copies.md). Atomic writes and general swizzled ordinary Write nodes remain unsupported and are rejected rather than silently emitted as plain stores.
 
 Next: [arithmetic](05-arithmetic.md).

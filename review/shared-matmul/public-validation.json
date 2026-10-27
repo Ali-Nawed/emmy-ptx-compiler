@@ -1,0 +1,27 @@
+{
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  },
+  "runner": true,
+  "only_our_compiler_uploaded": true,
+  "cases": [
+    {
+      "case": "m01_matmul_512",
+      "status": "pass",
+      "ir_reference": false,
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_2967be",
+            "median_us": 119.168,
+            "registers": {
+              "k_matmul_2967be": 40
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_matmul_3d38ab(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<136>;
+    .reg .b64 %rd<31>;
+    .reg .f32 %f<9>;
+    .reg .b16 %h<9>;
+    .reg .pred %p<4>;
+    .shared .align 256 .b8 scratch_0[512];
+    .shared .align 16 .b8 scratch_1[256];
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    shr.u32 %r5, %r4, 5;
+    shr.u32 %r6, %r4, 5;
+    shr.u32 %r7, %r4, 5;
+    shr.u32 %r8, %r4, 5;
+    and.b32 %r9, %r4, 31;
+    and.b32 %r10, %r1, 31;
+    shr.u32 %r11, %r1, 5;
+    mov.f32 %f1, 0f00000000;
+    mov.f32 %f2, 0f00000000;
+    mov.f32 %f3, 0f00000000;
+    mov.f32 %f4, 0f00000000;
+    mov.u64 %rd7, scratch_0;
+    mov.u64 %rd8, scratch_1;
+    mov.s32 %r18, 0;
+LOOP_1:
+    setp.ge.s32 %p1, %r18, 32;
+    @%p1 bra LOOP_DONE_2;
+    mul.lo.s32 %r19, 0, 1;
+    add.s32 %r20, %r19, 0;
+    mul.lo.s32 %r21, %r20, 32;
+    add.s32 %r22, %r21, %r9;
+    mul.lo.s32 %r23, %r22, 8;
+    div.s32 %r24, %r23, 16;
+    mul.lo.s32 %r25, 0, 1;
+    add.s32 %r26, %r25, 0;
+    mul.lo.s32 %r27, %r26, 32;
+    add.s32 %r28, %r27, %r9;
+    mul.lo.s32 %r29, %r28, 8;
+    rem.s32 %r30, %r29, 16;
+    add.s32 %r31, 0, %r24;
+    add.s32 %r32, 0, %r30;
+    mul.lo.s32 %r33, %r31, 16;
+    add.s32 %r34, %r33, %r32;
+    shr.u32 %r35, %r34, 6;
+    and.b32 %r36, %r35, 1;
+    shl.b32 %r37, %r36, 3;
+    xor.b32 %r38, %r34, %r37;
+    mul.wide.s32 %rd9, %r38, 2;
+    add.u64 %rd10, %rd7, %rd9;
+    cvt.u32.u64 %r39, %rd10;
+    mul.lo.s32 %r40, %r5, 16;
+    mul.lo.s32 %r41, 0, 1;
+    add.s32 %r42, %r41, 0;
+    mul.lo.s32 %r43, %r42, 32;
+    add.s32 %r44, %r43, %r9;
+    mul.lo.s32 %r45, %r44, 8;
+    div.s32 %r46, %r45, 16;
+    add.s32 %r47, %r46, 0;
+    add.s32 %r48, %r40, %r47;
+    mul.lo.s32 %r49, %r48, 32;
+    mul.lo.s32 %r51, 0, 1;
+    add.s32 %r52, %r51, 0;
+    mul.lo.s32 %r53, %r52, 32;
+    add.s32 %r54, %r53, %r9;
+    mul.lo.s32 %r55, %r54, 8;
+    rem.s32 %r56, %r55, 16;
+    add.s32 %r57, %r18, %r56;
+    add.s32 %r50, %r49, %r57;
+    mov.s32 %r58, %r50;
+    mul.wide.s32 %rd11, %r58, 2;
+    add.u64 %rd12, %rd4, %rd11;
+    cp.async.cg.shared.global [%r39], [%rd12], 16;
+    mul.lo.s32 %r59, 0, 1;
+    add.s32 %r60, %r59, 0;
+    mul.lo.s32 %r61, %r60, 32;
+    add.s32 %r62, %r61, %r9;
+    mov.s32 %r63, %r62;
+LOOP_3:
+    setp.ge.s32 %p2, %r63, 16;
+    @%p2 bra LOOP_DONE_4;
+    mul.lo.s32 %r64, %r63, 8;
+    div.s32 %r65, %r64, 8;
+    add.s32 %r66, %r65, 0;
+    mul.lo.s32 %r67, %r63, 8;
+    rem.s32 %r68, %r67, 8;
+    add.s32 %r69, %r68, 0;
+    mul.lo.s32 %r70, %r66, 8;
+    add.s32 %r71, %r70, %r69;
+    mul.wide.s32 %rd13, %r71, 2;
+    add.u64 %rd14, %rd8, %rd13;
+    cvt.u32.u64 %r72, %rd14;
+    mul.lo.s32 %r73, %r63, 8;
+    div.s32 %r74, %r73, 8;
+    add.s32 %r75, %r18, %r74;
+    mul.lo.s32 %r76, %r75, 8;
+    mul.lo.s32 %r78, 0, 8;
+    mul.lo.s32 %r79, %r63, 8;
+    rem.s32 %r80, %r79, 8;
+    add.s32 %r81, %r78, %r80;
+    add.s32 %r77, %r76, %r81;
+    mov.s32 %r82, %r77;
+    mul.wide.s32 %rd15, %r82, 2;
+    add.u64 %rd16, %rd2, %rd15;
+    cp.async.cg.shared.global [%r72], [%rd16], 16;
+    add.s32 %r63, %r63, 32;
+    bra LOOP_3;
+LOOP_DONE_4:
+    cp.async.commit_group;
+    cp.async.wait_group 0;
+    bar.sync 0;
+    mov.s32 %r83, 0;
+LOOP_5:
+    setp.ge.s32 %p3, %r83, 16;
+    @%p3 bra LOOP_DONE_6;
+    and.b32 %r84, %r10, 15;
+    shr.u32 %r85, %r10, 4;
+    mul.lo.s32 %r86, %r85, 8;
+    mul.lo.s32 %r87, 0, 16;
+    add.s32 %r88, %r87, 0;
+    add.s32 %r89, %r88, %r84;
+    add.s32 %r90, %r83, %r86;
+    mul.lo.s32 %r91, %r89, 16;
+    add.s32 %r92, %r91, %r90;
+    shr.u32 %r93, %r92, 6;
+    and.b32 %r94, %r93, 1;
+    shl.b32 %r95, %r94, 3;
+    xor.b32 %r96, %r92, %r95;
+    mul.wide.s32 %rd17, %r96, 2;
+    add.u64 %rd18, %rd7, %rd17;
+    cvt.u32.u64 %r97, %rd18;
+    ldmatrix.sync.aligned.m8n8.x4.shared.b16 {%r12, %r13, %r14, %r15}, [%r97];
+    and.b32 %r98, %r10, 15;
+    add.s32 %r99, %r83, %r98;
+    mul.lo.s32 %r100, 0, 8;
+    add.s32 %r101, %r100, 0;
+    add.s32 %r102, %r101, 0;
+    mul.lo.s32 %r103, %r99, 8;
+    add.s32 %r104, %r103, %r102;
+    mul.wide.s32 %rd19, %r104, 2;
+    add.u64 %rd20, %rd8, %rd19;
+    cvt.u32.u64 %r105, %rd20;
+    ldmatrix.sync.aligned.m8n8.x2.trans.shared.b16 {%r16, %r17}, [%r105];
+    mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 {%f1, %f2, %f3, %f4}, {%r12, %r13, %r14, %r15}, {%r16, %r17}, {%f1, %f2, %f3, %f4};
+    add.s32 %r83, %r83, 16;
+    bra LOOP_5;
+LOOP_DONE_6:
+    bar.sync 0;
+    add.s32 %r18, %r18, 16;
+    bra LOOP_1;
+LOOP_DONE_2:
+    mul.lo.s32 %r106, %r5, 16;
+    mul.lo.s32 %r107, 0, 16;
+    add.s32 %r108, %r106, %r107;
+    add.s32 %r109, %r108, 0;
+    mul.lo.s32 %r110, %r109, 8;
+    mul.lo.s32 %r112, 0, 8;
+    mul.lo.s32 %r113, 0, 8;
+    add.s32 %r114, %r112, %r113;
+    add.s32 %r115, %r114, 0;
+    add.s32 %r111, %r110, %r115;
+    mov.s32 %r116, %r111;
+    mul.wide.s32 %rd21, %r116, 2;
+    add.u64 %rd22, %rd6, %rd21;
+    shr.u32 %r117, %r10, 2;
+    and.b32 %r118, %r10, 3;
+    mul.lo.s32 %r119, %r118, 2;
+    add.s32 %r120, %r117, 0;
+    add.s32 %r121, %r119, 0;
+    mul.lo.s32 %r122, %r120, 8;
+    add.s32 %r123, %r122, %r121;
+    mul.wide.s32 %rd23, %r123, 2;
+    add.u64 %rd24, %rd22, %rd23;
+    cvt.rn.f16.f32 %h1, %f1;
+    cvt.f32.f16 %f5, %h1;
+    cvt.rn.f16.f32 %h2, %f5;
+    st.global.b16 [%rd24], %h2;
+FRAGMENT_STORE_DONE_7:
+    add.s32 %r124, %r117, 0;
+    add.s32 %r125, %r119, 1;
+    mul.lo.s32 %r126, %r124, 8;
+    add.s32 %r127, %r126, %r125;
+    mul.wide.s32 %rd25, %r127, 2;
+    add.u64 %rd26, %rd22, %rd25;
+    cvt.rn.f16.f32 %h3, %f2;
+    cvt.f32.f16 %f6, %h3;
+    cvt.rn.f16.f32 %h4, %f6;
+    st.global.b16 [%rd26], %h4;
+FRAGMENT_STORE_DONE_8:
+    add.s32 %r128, %r117, 8;
+    add.s32 %r129, %r119, 0;
+    mul.lo.s32 %r130, %r128, 8;
+    add.s32 %r131, %r130, %r129;
+    mul.wide.s32 %rd27, %r131, 2;
+    add.u64 %rd28, %rd22, %rd27;
+    cvt.rn.f16.f32 %h5, %f3;
+    cvt.f32.f16 %f7, %h5;
+    cvt.rn.f16.f32 %h6, %f7;
+    st.global.b16 [%rd28], %h6;
+FRAGMENT_STORE_DONE_9:
+    add.s32 %r132, %r117, 8;
+    add.s32 %r133, %r119, 1;
+    mul.lo.s32 %r134, %r132, 8;
+    add.s32 %r135, %r134, %r133;
+    mul.wide.s32 %rd29, %r135, 2;
+    add.u64 %rd30, %rd22, %rd29;
+    cvt.rn.f16.f32 %h7, %f4;
+    cvt.f32.f16 %f8, %h7;
+    cvt.rn.f16.f32 %h8, %f8;
+    st.global.b16 [%rd30], %h8;
+FRAGMENT_STORE_DONE_10:
+DONE:
+    ret;
+}

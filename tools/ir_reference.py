@@ -176,6 +176,14 @@ class Block(TensorReference):
             return np.where(self.expression(expr.cond, mask), self.expression(expr.if_true, mask),
                             self.expression(expr.if_false, mask))
         if isinstance(expr, BinaryExpr):
+            if expr.op in ("/", "//", "%"):
+                left, right = self.expression(expr.left, mask), self.expression(expr.right, mask)
+                if np.any(right[mask] == 0):
+                    raise ValueError("Zero divisor in IR index expression")
+                # Integer indices use C++/PTX truncation toward zero, not
+                # Python floor division when the operands have opposite signs.
+                quotient = (np.abs(left)//np.maximum(np.abs(right), 1))*np.where((left < 0) ^ (right < 0), -1, 1)
+                return left-quotient*right if expr.op == "%" else quotient
             operations = {"+": np.add, "-": np.subtract, "*": np.multiply,
                           "==": np.equal, "!=": np.not_equal, "<": np.less,
                           "<=": np.less_equal, ">": np.greater, ">=": np.greater_equal}
@@ -223,8 +231,10 @@ class Block(TensorReference):
     def scoped(self, body, mask):
         # Locals in a condition/loop body cannot leak into its enclosing scope.
         before, valid_before = self.values.copy(), self.valid.copy()
+        outer_carried = self.carried.copy()
         self.statements(body, mask)
-        carried = {name: (self.values[name], self.valid[name]) for name in self.carried}
+        carried = {name: (self.values[name], self.valid[name]) for name in outer_carried}
+        self.carried = outer_carried
         self.values, self.valid = before, valid_before
         for name, (value, valid) in carried.items():
             self.values[name], self.valid[name] = value, valid
@@ -255,6 +265,9 @@ class Block(TensorReference):
             return
         if isinstance(stmt, Init):
             self.bind(stmt.name, accumulator_identity(stmt.identity, stmt.dtype.name), mask)
+            # Init names mutable state that seed=False inner loops update.
+            # Keep those updates across an enclosing staging-loop scope.
+            self.carried.add(stmt.name)
         elif isinstance(stmt, Let):
             dtype = stmt.dtype.name if stmt.dtype is not None else "i32"
             if isinstance(stmt.value, Literal):

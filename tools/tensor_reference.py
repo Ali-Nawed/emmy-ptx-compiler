@@ -7,9 +7,67 @@ This module imports no compiler emitter and invokes no CUDA implementation.
 import numpy as np
 
 from emmy.compiler.ir.kernel.ir import RegFragment, LdmatrixLoad, MmaSyncPtx, RegStore
+from emmy.compiler.ir.kernel.ir import CpAsyncCopy, CpAsyncCommit, CpAsyncWait
 
 
 class TensorReference:
+    @staticmethod
+    def swizzle_elements(flat, mode):
+        name, sep, override = mode.partition("@")
+        if name == "NONE" and not sep:
+            return flat
+        masks = {"B32": 1, "B64": 3, "B128": 7}
+        if name not in masks or (sep and not override.isdecimal()):
+            raise NotImplementedError(f"Reference swizzle: {mode}")
+        shift = int(override) if sep else 6
+        if not 3 <= shift < 32:
+            raise NotImplementedError("Reference swizzle shift")
+        return flat ^ (((flat >> shift) & masks[name])*8)
+
+    def async_statement(self, stmt, mask):
+        if not isinstance(stmt, (CpAsyncCopy, CpAsyncCommit, CpAsyncWait)):
+            return False
+        if not hasattr(self, "async_open"):
+            self.async_open = [[] for _ in range(self.count)]
+            self.async_groups = [[] for _ in range(self.count)]
+        if isinstance(stmt, CpAsyncCopy):
+            if stmt.nbytes not in (4, 8, 16):
+                raise NotImplementedError("Reference async copy size")
+            dtype = self.buffers[stmt.src].dtype
+            if self.buffers[stmt.smem].dtype != dtype or stmt.nbytes % dtype.itemsize:
+                raise NotImplementedError("Reference async copies require matching element types")
+            source = self.indices(stmt.src, stmt.src_index, mask)
+            destination = self.indices(stmt.smem, stmt.smem_index, mask)
+            if stmt.lane_index is not None:
+                destination += self.expression(stmt.lane_index[0],mask)*self.buffers[stmt.smem].shape[-1]
+                destination += self.expression(stmt.lane_index[1],mask)
+            destination = self.swizzle_elements(destination,stmt.swizzle)
+            if np.any((source[mask]*dtype.itemsize) % stmt.nbytes) or np.any((destination[mask]*dtype.itemsize) % stmt.nbytes):
+                raise ValueError("Misaligned async copy in generated IR")
+            elements = stmt.nbytes//dtype.itemsize
+            values = np.stack([self.memory_read(stmt.src, source+offset, mask) for offset in range(elements)],axis=1)
+            for lane in np.flatnonzero(mask):
+                self.async_open[lane].append((stmt.smem, int(destination[lane]), values[lane].copy()))
+        elif isinstance(stmt, CpAsyncCommit):
+            for lane in np.flatnonzero(mask):
+                self.async_groups[lane].append(self.async_open[lane])
+                self.async_open[lane] = []
+                if len(self.async_groups[lane]) > 8:
+                    raise ValueError("Too many outstanding cp.async groups")
+        else:
+            if not isinstance(stmt.group, int) or not 0 <= stmt.group <= 7:
+                raise ValueError("Invalid cp.async wait group")
+            for lane in np.flatnonzero(mask):
+                groups = self.async_groups[lane]
+                while len(groups) > stmt.group:
+                    for name, start, data in groups.pop(0):
+                        indices = start+np.arange(len(data))
+                        if np.any((indices < 0) | (indices >= self.buffers[name].size)):
+                            raise IndexError("Async copy outside shared allocation")
+                        self.buffers[name].ravel()[indices] = data
+                        self.initialized[name].ravel()[indices] = True
+        return True
+
     def fragment_coordinates(self, role):
         lane = np.arange(self.count) % 32
         group, thread = lane // 4, lane % 4
@@ -27,6 +85,8 @@ class TensorReference:
         return rows, cols
 
     def tensor_statement(self, stmt, mask):
+        if self.async_statement(stmt, mask):
+            return True
         if isinstance(stmt, RegFragment):
             if tuple(stmt.shape) != (16, 8, 16) or stmt.count != 1:
                 raise NotImplementedError("Reference supports single m16n8k16 fragments")
@@ -36,8 +96,10 @@ class TensorReference:
             self.tensor_values[stmt.name] = {"role": stmt.role,
                 "data": np.zeros((self.count, count), np.float32 if stmt.role == "c" else np.float16)}
         elif isinstance(stmt, LdmatrixLoad):
-            if stmt.staged or stmt.swizzle != "NONE" or stmt.pair_frag or stmt.fragment_layout != "m16n8k16":
-                raise NotImplementedError("Reference supports global m16n8k16 fragment loads")
+            if stmt.pair_frag or stmt.fragment_layout != "m16n8k16" or stmt.byte_slab or stmt.scale_buffer:
+                raise NotImplementedError("Reference supports single f16 m16n8k16 fragment loads")
+            if not stmt.staged and stmt.swizzle != "NONE":
+                raise NotImplementedError("Reference global fragment load cannot be swizzled")
             rows, cols = self.fragment_coordinates(stmt.role)
             rows, cols = rows.copy(), cols.copy()
             k = cols.copy() if stmt.role == "a" else rows.copy()
@@ -59,6 +121,8 @@ class TensorReference:
             data = self.tensor_values[stmt.frag]["data"]
             for element in range(data.shape[1]):
                 indices = base + rows[:, element]*stride + cols[:, element]
+                if stmt.staged:
+                    indices = self.swizzle_elements(indices,stmt.swizzle)
                 data[mask, element] = self.memory_read(stmt.src_buffer, indices, valid[:, element])[mask]
         elif isinstance(stmt, MmaSyncPtx):
             if tuple(stmt.shape) != (16, 8, 16) or stmt.ab_dtype != "f16" or stmt.c_dtype != "f32":

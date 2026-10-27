@@ -1,5 +1,7 @@
 # First native tensor-core matmul
 
+Update: [native shared staging](17-shared-memory-async-copies.md) was implemented after this first global-transport increment. It adds cp.async, swizzled staged ldmatrix loads, dynamic shared allocation and passing public m01 coverage. The global-only results and remaining gaps below describe the initial increment.
+
 The compiler now translates a real Emmy f16-input, f32-accumulator tensor-core program into native `mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32` PTX. This is a working global-memory transport baseline, not shared-memory staging or a tuned GEMM implementation.
 
 ## Start with a genuine PyTorch expression

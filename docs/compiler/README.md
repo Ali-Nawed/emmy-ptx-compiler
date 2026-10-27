@@ -20,6 +20,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 14. [Boolean comparisons and where](14-boolean-comparisons-and-where.md)
 15. [Sigmoid and tanh: native instructions and accuracy](15-sigmoid-and-tanh.md)
 16. [First native tensor-core matmul](16-first-tensor-core-matmul.md)
+17. [Shared-memory staging and native asynchronous copies](17-shared-memory-async-copies.md)
 
 ## The complete path
 

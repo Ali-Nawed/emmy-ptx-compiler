@@ -18,7 +18,7 @@ class TensorLoweringTests(unittest.TestCase):
     def test_generated_global_matmuls_assemble_and_match_numpy(self):
         count = 0
         for spec in specifications():
-            if spec["path"] in ("async", "mma_shared", "mma_fragments"):
+            if spec["suite"] != "global":
                 continue
             count += 1
             folder = ROOT / "tests/matmul" / spec["id"]
@@ -41,9 +41,8 @@ class TensorLoweringTests(unittest.TestCase):
         self.assertIn("ld.global.b16", ptx)
         self.assertNotIn("ldmatrix.sync", ptx)  # This fixture explicitly selects global transport.
 
-    def test_unsupported_shared_transport_and_fragment_families_fail_explicitly(self):
-        for case, message in (("matmul_mma_shared_f16_16x8x16", "CpAsyncCopy"),
-                              ("matmul_mma_fragments_f16_32x16x32", "single m16n8k16")):
+    def test_unsupported_fragment_families_fail_explicitly(self):
+        for case, message in (("matmul_mma_fragments_f16_32x16x32", "single m16n8k16"),):
             folder = ROOT / "tests/matmul" / case
             verify(folder)
             source = load_kernel(next(folder.glob("*.ir.json")))

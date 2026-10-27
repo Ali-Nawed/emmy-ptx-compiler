@@ -4,7 +4,7 @@ Implementation: `index_expr`, `predicate`, `counted_loop`, `label`, and the `Con
 
 ## Index expressions
 
-`index_expr()` recursively handles `Var`, integer `Literal`, Python integers, and `BinaryExpr` with `+`, `-` or `*`. It emits signed 32-bit index arithmetic. This is distinct from `Assign`, which implements typed tensor-data arithmetic.
+`index_expr()` recursively handles `Var`, integer `Literal`, Python integers, and `BinaryExpr` with `+`, `-`, `*`, integer division or remainder. It emits signed 32-bit index arithmetic with division truncated toward zero. Division/remainder support is exercised by [shared staging and ring-buffer indices](17-shared-memory-async-copies.md). This is distinct from `Assign`, which implements typed tensor-data arithmetic.
 
 `predicate()` accepts an integer comparison: `==`, `!=`, `<`, `<=`, `>` or `>=`. It emits a `setp.*.s32` predicate. Index `TernaryExpr` uses this predicate plus a `selp.s32` between its two index expressions. Numeric tensor comparisons, internal boolean logic and numeric `where` now have a separate [typed Assign path](14-boolean-comparisons-and-where.md); this does not extend index predicates to arbitrary boolean expression trees.
 
