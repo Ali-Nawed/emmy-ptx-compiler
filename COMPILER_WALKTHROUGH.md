@@ -71,6 +71,10 @@ For `v0 = add(a, b)`, look up `a`/`b`, allocate a result, emit `add`, then bind 
 
 Code: [reg](compile.py#L114), [data_reg](compile.py#L133), [declarations](compile.py#L826).
 
+### How the three source files fit together
+
+`PTXEmitter` inherits `ScalarMath` from [ptx_math.py](ptx_math.py) and `TensorMath` from [ptx_tensor.py](ptx_tensor.py). Their methods share the emitter's register counters, state and instruction buffer. Math helpers return result registers; tensor helpers emit copy, fragment and matrix instructions into the same kernel.
+
 ## 3. Features: PyTorch → IR → PTX
 
 ### Pointwise: two elements per worker
@@ -99,6 +103,21 @@ Two local emission improvements came from comparing our PTX with nvcc's:
 
 These simplify indexing and memory instructions while preserving arithmetic and reduction order. Code: [Tile coordinates](compile.py#L405).
 
+### Scalar math: `ptx_math.py`
+
+`arithmetic()` delegates operations such as exp, log and power to `floating_math()`. One IR operation can require several PTX instructions to meet accuracy requirements.
+
+| Path | Implementation and reasoning |
+| --- | --- |
+| f16/f32 exp and log | Native `ex2.approx.f32` / `lg2.approx.f32`, with exp range reduction and a log series near one to control error |
+| f64 math and floating power | Double-precision range reduction/series and domain fixups; floating power also uses this path for f16/f32 inputs before conversion back |
+| Sigmoid and tanh | Stable exp-based formulas; a near-zero tanh polynomial avoids cancellation. f16 tanh uses the native approximate instruction followed by half rounding |
+| Integer power | Exponentiation by squaring for nonnegative exponents, preserving integer width |
+
+The main emitter applies f16 rounding at the IR operation boundary. These are tested approximations, not a correctly-rounded math library. Explicit FMA inside a math expansion does not contract arbitrary IR multiply/add pairs.
+
+Code: [floating_math](ptx_math.py#L249), [native_math32](ptx_math.py#L63), [activation](ptx_math.py#L11).
+
 ### Reductions: partial sums → one result
 
 ```python
@@ -125,13 +144,19 @@ result = a @ b
 
 | Generated IR node | Native PTX mapping |
 | --- | --- |
+| `RegFragment` | Allocate A/B/C register tuples; initialize the C accumulator |
 | `CpAsyncCopy`, commit/wait | `cp.async` + completion groups: stage into shared memory |
 | `LdmatrixLoad` | `ldmatrix.sync.aligned`: load warp fragments |
 | `MmaSyncPtx` | `mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32` |
+| `RegStore` | Map each lane's accumulator values to output coordinates, convert and store |
+
+`ptx_tensor.py` tracks `fragments[name] = {role, dtype, registers}`. For the supported atom, each thread holds four packed A registers, two packed B registers and four f32 C registers; the warp jointly computes the matrix tile.
+
+The helper implements global or staged fragment loads and Emmy's shared-memory swizzle. The main visitor preserves commit/wait/barrier order. Unsupported fragment shapes and epilogues fail explicitly.
 
 **Beyond basic matmul:** guarded edges, split-K, transposed B, multiple warps, swizzles and double/triple buffering. The public scalar matmul also supports dynamic shared memory.
 
-Code: [tensor emission](ptx_tensor.py).
+Code: [fragment allocation](ptx_tensor.py#L93), [matrix_load](ptx_tensor.py#L107), [mma_sync](ptx_tensor.py#L162), [reg_store](ptx_tensor.py#L172).
 
 ## 4. Verified coverage
 
