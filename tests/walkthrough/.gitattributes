@@ -1,0 +1,2 @@
+# Preserve exact bytes for the Emmy provenance hashes across checkouts.
+* -text

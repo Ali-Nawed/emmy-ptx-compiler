@@ -1,0 +1,291 @@
+{
+  "pipeline": "PyTorch -> Emmy 0.3.11 -> unchanged IR -> our compiler",
+  "status": "pass",
+  "ir_vs_expression": "pass",
+  "ir_comparison_details": {},
+  "metadata": {
+    "node": "mul",
+    "entry": "k_mul_pointwise",
+    "arg_order": [
+      "mul_c1",
+      "x",
+      "mul"
+    ],
+    "grid": [
+      1,
+      1,
+      1
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "smem_bytes": 0,
+    "zero_outputs": [],
+    "args": [
+      {
+        "name": "mul_c1",
+        "dtype": "f16",
+        "shape": [
+          1
+        ],
+        "data": [
+          1.5
+        ]
+      },
+      {
+        "name": "x",
+        "dtype": "f16",
+        "shape": [
+          128
+        ],
+        "seed": 0
+      },
+      {
+        "name": "mul",
+        "dtype": "f16",
+        "shape": [
+          128
+        ],
+        "output": true
+      }
+    ],
+    "final": true
+  },
+  "pointers": {
+    "mul_c1": "%rd2",
+    "x": "%rd4",
+    "mul": "%rd6"
+  },
+  "register_counts": {
+    "r": 15,
+    "rd": 16,
+    "f": 14,
+    "h": 10,
+    "d": 0,
+    "l": 0,
+    "p": 1
+  },
+  "statements": [
+    {
+      "node": "Load",
+      "instructions": [
+        "    mul.lo.s32 %r5, %r4, 2;",
+        "    add.s32 %r6, %r5, 0;",
+        "    mov.s32 %r7, %r6;",
+        "    mul.wide.s32 %rd7, %r7, 2;",
+        "    add.u64 %rd8, %rd4, %rd7;",
+        "    ld.global.b16 %h1, [%rd8+0];",
+        "    cvt.f32.f16 %f1, %h1;"
+      ],
+      "bindings": {
+        "in1__u0": {
+          "register": "%f1",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 2,
+      "ir": "in1__u0 = load x[((a0 * 2) + 0)]",
+      "ptx_lines": [
+        29,
+        35
+      ]
+    },
+    {
+      "node": "Assign",
+      "instructions": [
+        "    tanh.approx.f32 %f3, %f1;",
+        "    cvt.rn.f16.f32 %h2, %f3;",
+        "    cvt.f32.f16 %f4, %h2;"
+      ],
+      "bindings": {
+        "v0__u0": {
+          "register": "%f4",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 3,
+      "ir": "f16 v0__u0 = tanh(in1__u0)",
+      "ptx_lines": [
+        36,
+        38
+      ]
+    },
+    {
+      "node": "Load",
+      "instructions": [
+        "    mov.s32 %r8, 0;",
+        "    mul.wide.s32 %rd9, %r8, 2;",
+        "    add.u64 %rd10, %rd2, %rd9;",
+        "    ld.global.b16 %h3, [%rd10+0];",
+        "    cvt.f32.f16 %f5, %h3;"
+      ],
+      "bindings": {
+        "in0__u0": {
+          "register": "%f5",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 4,
+      "ir": "in0__u0 = load mul_c1[0]",
+      "ptx_lines": [
+        39,
+        43
+      ]
+    },
+    {
+      "node": "Assign",
+      "instructions": [
+        "    mul.rn.f32 %f6, %f5, %f4;",
+        "    cvt.rn.f16.f32 %h4, %f6;",
+        "    cvt.f32.f16 %f7, %h4;"
+      ],
+      "bindings": {
+        "v1__u0": {
+          "register": "%f7",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 5,
+      "ir": "f16 v1__u0 = multiply(in0__u0, v0__u0)",
+      "ptx_lines": [
+        44,
+        46
+      ]
+    },
+    {
+      "node": "Load",
+      "instructions": [
+        "    mul.lo.s32 %r9, %r4, 2;",
+        "    add.s32 %r10, %r9, 1;",
+        "    mov.s32 %r11, %r10;",
+        "    mul.wide.s32 %rd11, %r11, 2;",
+        "    add.u64 %rd12, %rd4, %rd11;",
+        "    ld.global.b16 %h5, [%rd12+0];",
+        "    cvt.f32.f16 %f8, %h5;"
+      ],
+      "bindings": {
+        "in1__u1": {
+          "register": "%f8",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 6,
+      "ir": "in1__u1 = load x[((a0 * 2) + 1)]",
+      "ptx_lines": [
+        47,
+        53
+      ]
+    },
+    {
+      "node": "Assign",
+      "instructions": [
+        "    tanh.approx.f32 %f10, %f8;",
+        "    cvt.rn.f16.f32 %h6, %f10;",
+        "    cvt.f32.f16 %f11, %h6;"
+      ],
+      "bindings": {
+        "v0__u1": {
+          "register": "%f11",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 7,
+      "ir": "f16 v0__u1 = tanh(in1__u1)",
+      "ptx_lines": [
+        54,
+        56
+      ]
+    },
+    {
+      "node": "Load",
+      "instructions": [
+        "    mov.s32 %r12, 0;",
+        "    mul.wide.s32 %rd13, %r12, 2;",
+        "    add.u64 %rd14, %rd2, %rd13;",
+        "    ld.global.b16 %h7, [%rd14+0];",
+        "    cvt.f32.f16 %f12, %h7;"
+      ],
+      "bindings": {
+        "in0__u1": {
+          "register": "%f12",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 8,
+      "ir": "in0__u1 = load mul_c1[0]",
+      "ptx_lines": [
+        57,
+        61
+      ]
+    },
+    {
+      "node": "Assign",
+      "instructions": [
+        "    mul.rn.f32 %f13, %f12, %f11;",
+        "    cvt.rn.f16.f32 %h8, %f13;",
+        "    cvt.f32.f16 %f14, %h8;"
+      ],
+      "bindings": {
+        "v1__u1": {
+          "register": "%f14",
+          "dtype": "f16"
+        }
+      },
+      "ir_line": 9,
+      "ir": "f16 v1__u1 = multiply(in0__u1, v0__u1)",
+      "ptx_lines": [
+        62,
+        64
+      ]
+    },
+    {
+      "node": "Write",
+      "instructions": [
+        "    mul.lo.s32 %r13, %r4, 2;",
+        "    add.s32 %r14, %r13, 0;",
+        "    mov.s32 %r15, %r14;",
+        "    mul.wide.s32 %rd15, %r15, 2;",
+        "    add.u64 %rd16, %rd6, %rd15;",
+        "    cvt.rn.f16.f32 %h9, %f7;",
+        "    cvt.rn.f16.f32 %h10, %f14;",
+        "    st.global.v2.b16 [%rd16], {%h9, %h10};"
+      ],
+      "bindings": {},
+      "ir_line": 10,
+      "ir": "mul[((a0 * 2) + 0)] = (v1__u0, v1__u1)",
+      "ptx_lines": [
+        65,
+        72
+      ]
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  },
+  "ptx_sha256": "02d4fab50ecc7facaea16baf2127b64b1ac2619e0f9418ec20b31ec22ff4733e",
+  "details": {
+    "kernels": [
+      {
+        "entry": "k_mul_pointwise",
+        "median_us": 23.168,
+        "registers": {
+          "k_mul_pointwise": 14
+        }
+      }
+    ],
+    "comparisons": {
+      "expression": {
+        "status": "pass",
+        "details": {}
+      },
+      "kernel_ir": {
+        "status": "pass",
+        "details": {}
+      }
+    }
+  }
+}

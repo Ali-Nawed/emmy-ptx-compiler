@@ -1,0 +1,64 @@
+{
+ "id": "tanh_scale_f16_128",
+ "code": "x = torch.randn(128, dtype=torch.float16); torch.tanh(x) * 1.5",
+ "rtol": 0.002,
+ "atol": 0.0,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "mul"
+ ],
+ "kernels": [
+  {
+   "node": "mul",
+   "entry": "k_mul_pointwise",
+   "arg_order": [
+    "mul_c1",
+    "x",
+    "mul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mul_c1",
+     "dtype": "f16",
+     "shape": [
+      1
+     ],
+     "data": [
+      1.5
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      128
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mul",
+     "dtype": "f16",
+     "shape": [
+      128
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}
