@@ -1,6 +1,6 @@
 # Running our Emmy Kernel IR → PTX compiler
 
-Start with the [three-minute walkthrough](docs/compiler/18-presentation-walkthrough.md) for the approach and examples, or the [implementation guide](docs/compiler/README.md) for details.
+Start with the [three-minute walkthrough](PRESENTATION_WALKTHROUGH.md) for the approach and examples, or the [implementation guide](docs/compiler/README.md) for details.
 
 ## Setup on Ubuntu / WSL
 
@@ -89,4 +89,4 @@ For pointwise/reduction variations beyond the eight public cases, see the [hidde
 - Native f16-input/f32-accumulator tensor-core matmul, asynchronous shared-memory copies, swizzles and buffered schedules.
 - Unsupported forms fail explicitly. Atomic accumulation for public m02 and arrayed register fragments remain future work. Historical f64 expression-reference differences are documented; passing public cases does not establish hidden-set completeness.
 
-The compiler emits PTX directly: it does not invoke CUDA, Triton or LLVM to translate kernels. See the [feature walkthrough](docs/compiler/18-presentation-walkthrough.md) and [testing policy](docs/compiler/12-required-test-pipeline.md) for evidence and scope.
+The compiler emits PTX directly: it does not invoke CUDA, Triton or LLVM to translate kernels. See the [feature walkthrough](PRESENTATION_WALKTHROUGH.md) and [testing policy](docs/compiler/12-required-test-pipeline.md) for evidence and scope.

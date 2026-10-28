@@ -45,7 +45,7 @@ flowchart LR
 
 `statement()` dispatches operations and recursively visits loop bodies. Python generates instructions; the GPU executes them later. **ptxas allocates physical registers.**
 
-Code: [load_kernel](../../compile.py#L40) → [compile](../../compile.py#L778) → [statement](../../compile.py#L621).
+Code: [load_kernel](compile.py#L40) → [compile](compile.py#L778) → [statement](compile.py#L621).
 
 ## 3. Features: PyTorch → IR → PTX
 
@@ -64,7 +64,7 @@ The `N=64` tile covers 128 elements. Each worker computes two adds, then writes 
 
 **Beyond the baseline:** f16/f32/f64/i32/i64, conversions, composed arithmetic, comparisons and `where`.
 
-Code: [arithmetic](../../compile.py#L247), [vector_store](../../compile.py#L352).
+Code: [arithmetic](compile.py#L247), [vector_store](compile.py#L352).
 
 ### Reductions: partial sums → one result
 
@@ -80,7 +80,7 @@ result = torch.randn(64, 512).sum(-1)
 
 **Beyond sum:** sequential loops, varied reduction widths, RMSNorm, L2 normalization and online softmax. Accumulator types, identities and coupled-state merges remain explicit.
 
-Code: [counted_loop](../../compile.py#L524), [merge_states](../../compile.py#L489).
+Code: [counted_loop](compile.py#L524), [merge_states](compile.py#L489).
 
 ### Tensor cores and asynchronous copies
 
@@ -98,13 +98,13 @@ result = a @ b
 
 **Beyond basic matmul:** guarded edges, split-K, transposed B, multiple warps, swizzles and double/triple buffering. The public scalar matmul also supports dynamic shared memory.
 
-Code: [tensor emission](../../ptx_tensor.py).
+Code: [tensor emission](ptx_tensor.py).
 
 ## 4. Verified coverage
 
 **MVP: 8/8 · Local tests: 47 · Generated matmul: 9 global + 9 shared**, passing both references. Public fused examples and 512×512 scalar matmul also pass. Hidden coverage remains unproven.
 
-[Fresh hidden-style MVP variants](19-mvp-hidden-coverage.md): 71/71 GPU results match the IR; 62/71 match NumPy. Nine generated-program/precision disagreements and five Emmy generation failures remain recorded.
+[Fresh hidden-style MVP variants](docs/compiler/19-mvp-hidden-coverage.md): 71/71 GPU results match the IR; 62/71 match NumPy. Nine generated-program/precision disagreements and five Emmy generation failures remain recorded.
 
 ```bash
 python tools/test_mvp.py

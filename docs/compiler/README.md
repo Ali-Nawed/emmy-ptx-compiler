@@ -1,6 +1,6 @@
 # Our Kernel IR to PTX compiler
 
-For setup, compilation and validation commands, see the root [compiler run guide](../../COMPILER_README.md). For the short presentation, see the [walkthrough](18-presentation-walkthrough.md).
+For setup, compilation and validation commands, see the root [compiler run guide](../../COMPILER_README.md). For the short presentation, see the [walkthrough](../../PRESENTATION_WALKTHROUGH.md).
 
 Read these notes alongside [compile.py](../../compile.py). They describe the current implementation, including its limitations; they are not a plan for an additional compiler framework.
 
@@ -23,7 +23,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 15. [Sigmoid and tanh: native instructions and accuracy](15-sigmoid-and-tanh.md)
 16. [First native tensor-core matmul](16-first-tensor-core-matmul.md)
 17. [Shared-memory staging and native asynchronous copies](17-shared-memory-async-copies.md)
-18. [Presentation walkthrough and feature/run checklist](18-presentation-walkthrough.md)
+18. [Presentation walkthrough and feature/run checklist](../../PRESENTATION_WALKTHROUGH.md)
 19. [Hidden-style MVP coverage: fresh PyTorch matrix and remaining gaps](19-mvp-hidden-coverage.md)
 
 ## The complete path
