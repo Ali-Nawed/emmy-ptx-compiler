@@ -11,7 +11,8 @@ flowchart LR
     B --> R[Emmy emits reference CUDA]
     R --> N[nvcc emits reference PTX]
     C --> D[Assemble + run on GPU]
-    D --> E[Compare + inspect + profile]
+    C --> E[Compare PTX + check GPU results]
+    D --> E
     N --> E
     E --> F[Fix / extend / optimize]
     F --> A
@@ -19,13 +20,13 @@ flowchart LR
 
 Vary operations, sizes, datatypes and schedules **before tracing through pinned Emmy**. Use its unchanged IR; compare GPU output with independent NumPy results and a typed-IR interpreter.
 
-Locally compare **our PTX against Emmy CUDA → nvcc PTX**, then assemble both to inspect SASS, registers and spills. This revealed redundant coordinate math and scalar stores. Only our compiler's PTX goes to the hosted GPU; static differences guide experiments, not speedup claims.
+Compare **our PTX against Emmy CUDA → nvcc PTX**: instruction selection, address arithmetic, scalar/vector memory operations and conversions. Use the differences to guide emitter improvements, then validate correctness and measure on the GPU. Only our compiler's PTX goes to the hosted runner; fewer PTX instructions alone do not prove a speedup.
 
 | What the test reveals | Our next step |
 | --- | --- |
 | Unsupported generated IR | Add the missing PTX emission feature |
 | Assembly failure or output mismatch | Trace IR → PTX, isolate the bug and retain a regression case |
-| Correct output with inefficient PTX/SASS | Optimize, rerun correctness checks and benchmark |
+| Correct output with redundant or inefficient PTX | Optimize, rerun correctness checks and benchmark |
 
 Examples: strict f32 tanh failures led to a math fix without relaxing tolerance; grouped writes led to aligned vector stores. New cases exercise each change and repeat the loop.
 
