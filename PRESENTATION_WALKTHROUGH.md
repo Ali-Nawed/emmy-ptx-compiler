@@ -38,14 +38,32 @@ Our compiler translates **scheduled Emmy Kernel IR directly into PTX**, preservi
 flowchart LR
     A[Load IR + metadata] --> B[Parse with Emmy]
     B --> C[Visit statement]
-    C --> D[Emit typed PTX]
-    D --> C
-    C -->|finished| E[Return kernel]
+    C --> D[Resolve operands + allocate virtual registers]
+    D --> G[Emit typed PTX]
+    G --> C
+    C -->|finished| E[Prepend register declarations + return PTX]
 ```
 
-`statement()` dispatches operations and recursively visits loop bodies. Python generates instructions; the GPU executes them later. **ptxas allocates physical registers.**
+`statement()` dispatches operations and recursively visits loop bodies. Python generates instructions; the GPU executes them later.
 
 Code: [load_kernel](compile.py#L40) → [compile](compile.py#L778) → [statement](compile.py#L621).
+
+### Register allocation and tracking
+
+| Mechanism | What it tracks |
+| --- | --- |
+| `counts` + `reg(kind)` | A counter per register bank; `reg("f")` returns a fresh `%f1`, `%f2`, … |
+| `values` | IR name → current PTX register or immediate, e.g. `v0__u0` → `%f3` |
+| `value_dtypes` | IR name → numeric type, so operands receive the correct conversions |
+| `pointers` / `shared` | Buffer name → global/shared address register |
+
+`data_reg(dtype)` selects the bank: f32 uses `%f`, f64 `%d`, i32 `%r`, i64 `%l`, and predicates `%p`. Addresses use `%rd`; f16 uses rounded f32 working values and `%h` for half bits.
+
+For `v0 = add(a, b)`, look up `a`/`b`, allocate a result, emit `add`, then bind `v0` to that register and type. Loop scopes save/restore bindings; accumulators update their carried registers.
+
+**Emit the body first, then prepend declarations from the counters.** Three allocated f32 names produce `.reg .f32 %f<4>;`: names start at one, leaving `%f0` unused. These are virtual names; **ptxas performs physical register allocation**. We do not run liveness analysis.
+
+Code: [reg](compile.py#L114), [data_reg](compile.py#L133), [declarations](compile.py#L826).
 
 ## 3. Features: PyTorch → IR → PTX
 
