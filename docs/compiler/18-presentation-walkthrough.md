@@ -8,13 +8,18 @@ Start with a naive compiler for the public cases, then **generate more cases to 
 flowchart LR
     A[Write PyTorch cases] --> B[Emmy generates Kernel IR]
     B --> C[Our compiler emits PTX]
+    B --> R[Emmy emits reference CUDA]
+    R --> N[nvcc emits reference PTX]
     C --> D[Assemble + run on GPU]
     D --> E[Compare + inspect + profile]
+    N --> E
     E --> F[Fix / extend / optimize]
     F --> A
 ```
 
 Vary operations, sizes, datatypes and schedules **before tracing through pinned Emmy**. Use its unchanged IR; compare GPU output with independent NumPy results and a typed-IR interpreter.
+
+Locally compare **our PTX against Emmy CUDA → nvcc PTX**, then assemble both to inspect SASS, registers and spills. This revealed redundant coordinate math and scalar stores. Only our compiler's PTX goes to the hosted GPU; static differences guide experiments, not speedup claims.
 
 | What the test reveals | Our next step |
 | --- | --- |
