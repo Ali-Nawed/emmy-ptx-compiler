@@ -1,0 +1,3 @@
+# Keep compiler-output evidence byte-for-byte, including nvcc's final blank line.
+* -text
+*.ptx whitespace=-blank-at-eof

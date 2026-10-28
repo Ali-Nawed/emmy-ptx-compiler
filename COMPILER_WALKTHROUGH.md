@@ -38,6 +38,8 @@ flowchart LR
 
 `PTXEmitter` inherits `ScalarMath` and `TensorMath`, sharing register counters, maps and instructions without an additional IR.
 
+The file split keeps **scalar numerical algorithms** (`ptx_math.py`) and **warp-level matrix layouts** (`ptx_tensor.py`) separately reviewable. Both are our direct emission code, called by `compile.py`.
+
 Code: [load_kernel](compile.py#L40), [statement](compile.py#L621), [compile](compile.py#L778).
 
 ## 3. Worked example: every IR statement → our PTX
@@ -144,6 +146,18 @@ cvt.f32.f16 %f4, %h2;
 
 Our helper emits **native PTX sequences**. Round to half, then widen: multiplication receives the half-rounded intermediate. The same rounding pattern produces `%f7` after line 5.
 
+**Why `ptx_math.py` here?** The IR operation name alone does not determine a safe instruction sequence:
+
+| Example decision | Code responsible | Reason |
+| --- | --- | --- |
+| This f16 `tanh` uses native approximate tanh | `ScalarMath.activation()` | It met the half-precision checks; keep the short native path |
+| An f32 `tanh` needs a different sequence | `activation()` + `native_math32()` | Native tanh failed strict f32 checks; use an exp-based formula and a near-zero polynomial to avoid cancellation |
+| Round before multiplying by 1.5 | Main emitter's `round_half()` | The IR requires an f16 intermediate, even though our working register is f32 |
+
+For small x, subtracting nearly equal numbers in the exp-based tanh formula loses accuracy. The polynomial starts `x - x³/3 + 2x⁵/15`; this dtype/range decision motivates the math helper beyond a simple opcode lookup.
+
+**nvcc comparison:** local CUDA 12.0.140 also expands Emmy's f32 `tanhf` into polynomial FMAs plus exp/reciprocal approximations and corrections. Neither default nor tested fast-math PTX uses `tanh.approx.f32`. This supports choosing sequences by accuracy requirements; our algorithm is independently implemented. [Versioned audit and PTX](review/walkthrough/tanh-nvcc/README.md).
+
 ### E. Optimize the store and finalize declarations
 
 ```ptx
@@ -174,10 +188,10 @@ Code: [reg](compile.py#L114), [arithmetic](compile.py#L247), [activation](ptx_ma
 
 | Path | Implementation and reasoning |
 | --- | --- |
-| f16/f32 exp/log | Native `ex2.approx` / `lg2.approx`, exp range reduction and a near-one log series |
-| f64 math / floating power | Double-precision expansions and domain handling; floating power converts back for f16/f32 |
-| Sigmoid / tanh | Stable exp-based formulas and a near-zero tanh polynomial; f16 tanh uses the native path shown above |
-| Integer power | Exponentiation by squaring for nonnegative exponents |
+| f16/f32 exp/log | Native instructions are base-two approximations. Split `x = k*ln(2) + r` for exp; use a series near one for log, where its result approaches zero and relative error matters |
+| f64 math / floating power | Preserve double precision through the expansion. `exp(y*log(x))` alone misses negative-base/integer-exponent and zero cases, so power needs domain/sign handling |
+| Sigmoid / tanh | Evaluate exp on nonpositive arguments for stable activations; use a tanh polynomial near zero. f16 tanh retains the native path above |
+| Integer power | Build powers by repeated squaring: `x¹³ = x⁸*x⁴*x`. Handle nonnegative exponents while retaining integer-width behavior |
 
 Math approximations are tested; helper FMA does not fuse arbitrary IR operations. Code: [floating_math](ptx_math.py#L249).
 
@@ -289,15 +303,17 @@ bar.sync 0;
 
 | Step | What happens and why |
 | --- | --- |
-| Two `cp.async` sites | Participating threads copy 16-byte A/B chunks from global to shared memory, avoiding per-element register staging |
-| Commit → wait → barrier | Commit each thread's copy group; wait for its completion; synchronize the block before cooperative reads |
-| Two `ldmatrix` instructions | Load A/B into packed warp fragments; B's transpose matches the MMA operand layout |
-| `mma.sync` | A 32-thread warp jointly computes `C = A @ B + C`, using f16 inputs and f32 accumulation |
-| Final barrier → `RegStore` | Protect shared-buffer reuse, then map the distributed C values back to output coordinates |
+| Two `cp.async` sites | `cp_async_copy()` checks copy size, spaces and alignment; `shared_slab_address()` applies the IR's swizzle. Copies and matrix reads must agree on physical placement |
+| Commit → wait → barrier | The main visitor emits the IR's ordering: complete each thread's copies, then coordinate the block before cooperative reads |
+| Two `ldmatrix` instructions | `staged_matrix_load()` supplies the packed A/B register layout expected by MMA; B's transpose arranges that operand layout |
+| `mma.sync` | `mma_sync()` checks fragment roles/types and emits the warp-cooperative multiply/accumulate; scalar `Assign` lowering cannot supply these operand tuples |
+| Final barrier → `RegStore` | Protect buffer reuse; `reg_store()` maps the distributed accumulator back to output coordinates |
 
 `fragments[name]` tracks role, dtype and registers. Per thread: four packed A registers, two B and four f32 C; native m16n8k16 `mma.sync` computes cooperatively across the warp.
 
-The helper handles lane layouts, swizzles and guarded stores; the visitor preserves commit/wait/barrier order. Extensions include split-K, transposed B, multiple warps and buffering.
+**Why `ptx_tensor.py` here?** Lane zero's four accumulator registers belong to `C[0,0]`, `C[0,1]`, `C[8,0]`, `C[8,1]`. Storing all four consecutively would target the wrong row. The helper implements this hardware-specific layout and packing; the main compiler continues to handle parameters, control flow and shared register allocation.
+
+Extensions include split-K, transposed B, multiple warps and buffering.
 
 Code: [fragment allocation](ptx_tensor.py#L93), [matrix_load](ptx_tensor.py#L107), [mma_sync](ptx_tensor.py#L162), [reg_store](ptx_tensor.py#L172).
 
