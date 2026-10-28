@@ -1,5 +1,7 @@
 # Compiler walkthrough
 
+We built a Python compiler that translates Emmy's scheduled tensor kernels into PTX. We expanded correctness coverage first, then used reference PTX comparisons to improve our emission.
+
 ## 1. Our development workflow
 
 Start with a naive compiler for the public cases, then **generate more cases to expose missing features, bugs and optimization opportunities**.
@@ -28,11 +30,15 @@ Compare **our PTX against Emmy CUDA → nvcc PTX**: instruction selection, addre
 | Assembly failure or output mismatch | Trace IR → PTX, isolate the bug and retain a regression case |
 | Correct output with redundant or inefficient PTX | Optimize, rerun correctness checks and benchmark |
 
-Examples: strict f32 tanh failures led to a math fix without relaxing tolerance; grouped writes led to aligned vector stores. New cases exercise each change and repeat the loop.
+Examples: strict f32 tanh checks prompted a math fix; grouped writes prompted vector stores. Both became regression cases.
 
 ## 2. How the compiler runs
 
-Our compiler translates **scheduled Emmy Kernel IR directly into PTX**, preserving datatypes and launch metadata.
+### Inputs and launch setup
+
+`load_kernel()` pairs the IR with `meta.json`: the IR supplies the entry name and operations; metadata supplies argument order, launch dimensions and shared-memory size. Buffer arguments are 64-bit pointers; element datatypes control memory and arithmetic instructions. We compute each worker's Tile coordinates and turn element indices into byte addresses.
+
+### Statement emission
 
 ```mermaid
 flowchart LR
@@ -61,7 +67,7 @@ Code: [load_kernel](compile.py#L40) → [compile](compile.py#L778) → [statemen
 
 For `v0 = add(a, b)`, look up `a`/`b`, allocate a result, emit `add`, then bind `v0` to that register and type. Loop scopes save/restore bindings; accumulators update their carried registers.
 
-**Emit the body first, then prepend declarations from the counters.** Three allocated f32 names produce `.reg .f32 %f<4>;`: names start at one, leaving `%f0` unused. These are virtual names; **ptxas performs physical register allocation**. We do not run liveness analysis.
+**Emit the body first, then prepend declarations from the counters.** Three allocated f32 names produce `.reg .f32 %f<4>;`, with `%f0` unused. These are virtual names; **ptxas performs physical register allocation**. We do not run liveness analysis.
 
 Code: [reg](compile.py#L114), [data_reg](compile.py#L133), [declarations](compile.py#L826).
 
@@ -84,6 +90,15 @@ The `N=64` tile covers 128 elements. Each worker computes two adds, then writes 
 
 Code: [arithmetic](compile.py#L247), [vector_store](compile.py#L352).
 
+Two local emission improvements came from comparing our PTX with nvcc's:
+
+| Before | Our improvement | Why it is safe |
+| --- | --- | --- |
+| Divide/remainder when decoding power-of-two Tile extents | Shift/mask instructions | Worker indices are nonnegative; Tile bounds establish their range |
+| Separate stores for a grouped Write | One `st.global.v2` or `st.global.v4` | Prove alignment and contiguous offsets; retain scalar fallback |
+
+These simplify indexing and memory instructions while preserving arithmetic and reduction order. Code: [Tile coordinates](compile.py#L405).
+
 ### Reductions: partial sums → one result
 
 ```python
@@ -96,7 +111,7 @@ result = torch.randn(64, 512).sum(-1)
 | `WarpShuffle(acc0, length=32)` | `shfl.sync.bfly.b32` + add: warp sums |
 | `Sync` + `TreeHalve` | `bar.sync` + shared-memory tree: final sum |
 
-**Beyond sum:** sequential loops, varied reduction widths, RMSNorm, L2 normalization and online softmax. Accumulator types, identities and coupled-state merges remain explicit.
+**Beyond sum:** sequential loops, varied reduction widths, RMSNorm, L2 normalization and online softmax. RMSNorm composes square, reduction, reciprocal square root and scaling. Online softmax combines a running maximum with a rescaled sum; we execute the IR's coupled merge program before updating either carried state.
 
 Code: [counted_loop](compile.py#L524), [merge_states](compile.py#L489).
 
