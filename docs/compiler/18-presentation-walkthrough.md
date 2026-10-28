@@ -1,6 +1,30 @@
 # Compiler walkthrough
 
-## 1. How the compiler runs
+## 1. Our development workflow
+
+Start with a naive compiler for the public cases, then **generate more cases to expose missing features, bugs and optimization opportunities**.
+
+```mermaid
+flowchart LR
+    A[Write PyTorch cases] --> B[Emmy generates Kernel IR]
+    B --> C[Our compiler emits PTX]
+    C --> D[Assemble + run on GPU]
+    D --> E[Compare + inspect + profile]
+    E --> F[Fix / extend / optimize]
+    F --> A
+```
+
+Vary operations, sizes, datatypes and schedules **before tracing through pinned Emmy**. Use its unchanged IR; compare GPU output with independent NumPy results and a typed-IR interpreter.
+
+| What the test reveals | Our next step |
+| --- | --- |
+| Unsupported generated IR | Add the missing PTX emission feature |
+| Assembly failure or output mismatch | Trace IR → PTX, isolate the bug and retain a regression case |
+| Correct output with inefficient PTX/SASS | Optimize, rerun correctness checks and benchmark |
+
+Examples: strict f32 tanh failures led to a math fix without relaxing tolerance; grouped writes led to aligned vector stores. New cases exercise each change and repeat the loop.
+
+## 2. How the compiler runs
 
 Our compiler translates **scheduled Emmy Kernel IR directly into PTX**, preserving datatypes and launch metadata.
 
@@ -17,7 +41,7 @@ flowchart LR
 
 Code: [load_kernel](../../compile.py#L40) → [compile](../../compile.py#L778) → [statement](../../compile.py#L621).
 
-## 2. Features: PyTorch → IR → PTX
+## 3. Features: PyTorch → IR → PTX
 
 ### Pointwise: two elements per worker
 
@@ -69,23 +93,6 @@ result = a @ b
 **Beyond basic matmul:** guarded edges, split-K, transposed B, multiple warps, swizzles and double/triple buffering. The public scalar matmul also supports dynamic shared memory.
 
 Code: [tensor emission](../../ptx_tensor.py).
-
-## 3. Our validation and optimization loop
-
-```mermaid
-flowchart LR
-    A[Naive baseline] --> B[Extend PyTorch cases]
-    B --> C[Emmy → unchanged IR]
-    C --> D[Our PTX → GPU]
-    D --> E[Compare + inspect + measure]
-    E --> B
-```
-
-- Vary operations, sizes, datatypes and schedules **before Emmy tracing**.
-- Check independent NumPy results and a typed-IR interpreter; retain failures.
-- Optimize coordinate arithmetic, aligned vector stores and native math.
-- Native tanh failed strict f32 checks: **fix the implementation, keep the tolerance**.
-- Inspect PTX/SASS and benchmark after correctness; register counts alone do not prove speed.
 
 ## 4. Verified coverage
 
