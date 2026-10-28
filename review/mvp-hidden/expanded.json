@@ -1,0 +1,1001 @@
+{
+  "pipeline": "PyTorch -> Emmy 0.3.11 -> unchanged Kernel IR -> our PTX",
+  "runner": true,
+  "cases": [
+    {
+      "id": "hidden_mixed_f16_f32",
+      "family": "mixed_inputs",
+      "dtype": "f16+f32",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.448,
+            "registers": {
+              "k_mul_pointwise": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f16_f64",
+      "family": "mixed_inputs",
+      "dtype": "f16+f64",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); y = torch.randn((33,), dtype=torch.float64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 28.384,
+            "registers": {
+              "k_mul_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f16_i32",
+      "family": "mixed_inputs",
+      "dtype": "f16+i32",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); y = torch.randint(-3, 4, (33,), dtype=torch.int32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.904,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f16_i64",
+      "family": "mixed_inputs",
+      "dtype": "f16+i64",
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); y = torch.randint(-3, 4, (33,), dtype=torch.int64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 27.456,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f32_f16",
+      "family": "mixed_inputs",
+      "dtype": "f32+f16",
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); y = torch.randn((33,), dtype=torch.float16); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.032,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f32_f64",
+      "family": "mixed_inputs",
+      "dtype": "f32+f64",
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); y = torch.randn((33,), dtype=torch.float64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.616,
+            "registers": {
+              "k_mul_pointwise": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f32_i32",
+      "family": "mixed_inputs",
+      "dtype": "f32+i32",
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); y = torch.randint(-3, 4, (33,), dtype=torch.int32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.904,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f32_i64",
+      "family": "mixed_inputs",
+      "dtype": "f32+i64",
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); y = torch.randint(-3, 4, (33,), dtype=torch.int64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.224,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f64_f16",
+      "family": "mixed_inputs",
+      "dtype": "f64+f16",
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float16); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.808,
+            "registers": {
+              "k_mul_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f64_f32",
+      "family": "mixed_inputs",
+      "dtype": "f64+f32",
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randn((33,), dtype=torch.float32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.936,
+            "registers": {
+              "k_mul_pointwise": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f64_i32",
+      "family": "mixed_inputs",
+      "dtype": "f64+i32",
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randint(-3, 4, (33,), dtype=torch.int32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_f64_i64",
+      "family": "mixed_inputs",
+      "dtype": "f64+i64",
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randint(-3, 4, (33,), dtype=torch.int64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i32_f16",
+      "family": "mixed_inputs",
+      "dtype": "i32+f16",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int32); y = torch.randn((33,), dtype=torch.float16); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.84,
+            "registers": {
+              "k_mul_pointwise": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i32_f32",
+      "family": "mixed_inputs",
+      "dtype": "i32+f32",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int32); y = torch.randn((33,), dtype=torch.float32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 23.008,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i32_f64",
+      "family": "mixed_inputs",
+      "dtype": "i32+f64",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int32); y = torch.randn((33,), dtype=torch.float64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i32_i64",
+      "family": "mixed_inputs",
+      "dtype": "i32+i64",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int32); y = torch.randint(-3, 4, (33,), dtype=torch.int64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.576,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i64_f16",
+      "family": "mixed_inputs",
+      "dtype": "i64+f16",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int64); y = torch.randn((33,), dtype=torch.float16); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.84,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i64_f32",
+      "family": "mixed_inputs",
+      "dtype": "i64+f32",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int64); y = torch.randn((33,), dtype=torch.float32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i64_f64",
+      "family": "mixed_inputs",
+      "dtype": "i64+f64",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int64); y = torch.randn((33,), dtype=torch.float64); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mixed_i64_i32",
+      "family": "mixed_inputs",
+      "dtype": "i64+i32",
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int64); y = torch.randint(-3, 4, (33,), dtype=torch.int32); (x+y)*(x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.16,
+            "registers": {
+              "k_mul_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_multiple_pointwise_outputs_f32",
+      "family": "multi_outputs",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 33); y = torch.randn(3, 33); (x+y, x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 2,
+        "Load": 12,
+        "Assign": 6,
+        "Write": 6
+      },
+      "operations": {
+        "add": 3,
+        "subtract": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_add_pointwise": 30
+            }
+          },
+          {
+            "entry": "k_sub_pointwise",
+            "median_us": 20.128,
+            "registers": {
+              "k_sub_pointwise": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_multiple_reduction_outputs_f32",
+      "family": "multi_outputs",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 33); y = torch.randn(3, 33); (x.sum(-1), y.mean(-1))",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 2,
+        "StridedLoop": 2,
+        "Load": 3,
+        "Accum": 2,
+        "WarpShuffle": 2,
+        "Smem": 2,
+        "Cond": 4,
+        "Write": 4,
+        "Sync": 2,
+        "TreeHalve": 2,
+        "Assign": 2
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 22.496,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          },
+          {
+            "entry": "k_mean_6a35d3",
+            "median_us": 20.704,
+            "registers": {
+              "k_mean_6a35d3": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_rank4_broadcast_f32",
+      "family": "rank4_broadcast",
+      "dtype": "f32",
+      "code": "x = torch.randn(2, 3, 1, 33); y = torch.randn(1, 3, 5, 1); torch.relu(x+y) * (x-y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 12,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "subtract": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.0,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 23
+  },
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f",
+    "tools/test_mvp_hidden_variants.py": "efe3412695e23218a75b916628d7ad20012d964c21d642a2e300314a0a5ca3ca"
+  }
+}

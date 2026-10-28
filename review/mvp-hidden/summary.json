@@ -1,0 +1,773 @@
+{
+  "pipeline": "PyTorch -> Emmy 0.3.11 -> unchanged Kernel IR -> our PTX -> hosted GPU",
+  "attempted": 76,
+  "generated_and_executed": 71,
+  "statuses": {
+    "pass": 62,
+    "upstream_generation_failed": 5,
+    "wrong_result": 9
+  },
+  "gpu_vs_ir": {
+    "pass": 71
+  },
+  "gpu_vs_expression": {
+    "pass": 62,
+    "wrong_result": 9
+  },
+  "families": {
+    "chain_rank3": 5,
+    "where_rank3": 5,
+    "row_broadcast": 5,
+    "column_broadcast": 5,
+    "masked_row_sum": 5,
+    "column_sum": 5,
+    "all_sum_rank3": 5,
+    "strided_slice": 5,
+    "mean_rank3": 3,
+    "two_reductions": 3,
+    "math_composition": 3,
+    "keepdim_center": 4,
+    "mixed_inputs": 20,
+    "multi_outputs": 2,
+    "rank4_broadcast": 1
+  },
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  },
+  "reports": [
+    "validation.json",
+    "expanded.json"
+  ],
+  "retained_expression_failures": [
+    "hidden_strided_slice_f16_w32",
+    "hidden_strided_slice_f32_w64",
+    "hidden_masked_row_sum_f64_w128",
+    "hidden_column_sum_f64_w128",
+    "hidden_strided_slice_f64_w128",
+    "hidden_mean_rank3_f64_w128",
+    "hidden_two_reductions_f64_w128",
+    "hidden_strided_slice_i32_w256",
+    "hidden_strided_slice_i64_w128"
+  ],
+  "generation_failures": [
+    "hidden_all_sum_rank3_f16_w32",
+    "hidden_all_sum_rank3_f32_w64",
+    "hidden_all_sum_rank3_f64_w128",
+    "hidden_all_sum_rank3_i32_w256",
+    "hidden_all_sum_rank3_i64_w128"
+  ],
+  "fixture_provenance": [
+    {
+      "id": "hidden_chain_rank3_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "f7222cca87f5f496c2c25e43b633e5bc130947b5bd95f08c3923032c4187ac7a",
+      "expected_sha256": "bfcf8553df29a5f06e9b8f8596d61ec0aea2e82f55c06c27863c01e377afb523"
+    },
+    {
+      "id": "hidden_where_rank3_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "ebebd37c9dfd7834bed7782df58c8900ddad04c75d28f3d19c08a9725499bf2a",
+      "expected_sha256": "a9924dcacc639e62eed92fed70466c1e81a520c3d0fbfb111ea0709e616a1b25"
+    },
+    {
+      "id": "hidden_row_broadcast_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "70524d409ec59e37aac8fb8bde1095ff6171cc4416cd485975d710b08a129158",
+      "expected_sha256": "593e284cff9b6b7d6abecb28900b7bebfa5a49cfce5c173308f145fb9a2e23d5"
+    },
+    {
+      "id": "hidden_column_broadcast_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "afe33d7e25d4672d37c9d3bb6a610f096376e616eb1990ac9f4795996227c3f0",
+      "expected_sha256": "cb45d445cd7fddd2823a9a14bd72b5bffa8e044e810fc22f36420e248e06c0df"
+    },
+    {
+      "id": "hidden_masked_row_sum_f16_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "4d163768bee9cedde540e46b560f4dbd87be45521906b0c2f364f92288685ef2",
+      "expected_sha256": "1ff5aae3fe95cd84784b9d1da66486ee764cb3a7437012702ed93229e136dc53"
+    },
+    {
+      "id": "hidden_column_sum_f16_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "aa3e6eb855f80d1f30d09dd69c617788da1532d748abe9f1108cef645fc58e3b",
+      "expected_sha256": "71116e893fee66250bedb6d878cec6784f50d5a73136e07fd2748b4a88904791"
+    },
+    {
+      "id": "hidden_strided_slice_f16_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7b7d784acda3f264d1322b4ae7a0c7bdc23485ad6607e4f12feba75cbe619c89",
+      "expected_sha256": "4c4187815e2d2975184da6aacd77e638c0a61a4af877751f432935b4fe1fccfe"
+    },
+    {
+      "id": "hidden_mean_rank3_f16_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "2f0359337e8e0d297621830b8b01376d698165e767f90140b6084ce5abaa5d25",
+      "expected_sha256": "dd84ef6bd92b7b55218edce8d820ad1ecb749d07f0aa6d8c67096e6041117b12"
+    },
+    {
+      "id": "hidden_two_reductions_f16_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "a13d043a2093491d6d692534da864d9d2cad4eee461458be3ead04dc7a0f262b",
+      "expected_sha256": "6173410d440fa34d4d8aa634bda3217fb8342ee980802ebef6884f3dae87ff34"
+    },
+    {
+      "id": "hidden_math_composition_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "9fca3badefcd0ea973f3c4f8e8f392af05cc2f80a00c29a28a2c2e24388349c7",
+      "expected_sha256": "f1668a9a7c6df150d21930f0033150e99cf1a4fc0f5e254a75754ff77ba6cc57"
+    },
+    {
+      "id": "hidden_chain_rank3_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0e173310300e6a0afaddd68fc840cfe015c4125e6c133d888499f415c2aabc79",
+      "expected_sha256": "052e9b877cf343d2e4ec660a217a47a4dfe218e7438cc5955c0fb31c27ff4885"
+    },
+    {
+      "id": "hidden_where_rank3_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "16187a2601dd45414048695e008052f66f2e9587259f3747986e2601ccc4627e",
+      "expected_sha256": "bf51d7da98da191f3b9b7aa2aab479c126788f1cb017af9811e361aea74f42fa"
+    },
+    {
+      "id": "hidden_row_broadcast_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "65c8002cb0a3ad5dbe4a8e4c4b0ac8f51500f8d2d80c73a66bfa49ace9fa5649",
+      "expected_sha256": "a9ba5e245d42a4737ca454f4f3e2d31a38fb80f49f544d118106ddd276140361"
+    },
+    {
+      "id": "hidden_column_broadcast_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7b1c93567560920b0763e180a487ae005966e4d912f3a4a7e610a712ecb340c2",
+      "expected_sha256": "cf50c60059afd6c3e52856aded7857658a8663ac259daae9ead95f67eaba0777"
+    },
+    {
+      "id": "hidden_masked_row_sum_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "08e5fa484c3b10ede8f03aacfb8bef5c2dd152fd1c131432b6d0a11eca44aef5",
+      "expected_sha256": "350c19d9e8c49895042812f793e3177d5b0b58c99b233f0e4d5315871e088b3a"
+    },
+    {
+      "id": "hidden_column_sum_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "b5207a2c0ae876caa4a82da184e7c5ac91b7dcb557840bfcf62a0c463403602d",
+      "expected_sha256": "14199af9c77a48920ffc2ddfd76732ba2d9bac09c98f5b7eb71cf2cf2e636c6e"
+    },
+    {
+      "id": "hidden_strided_slice_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "1e78128f533a26034209b8c8c7c492e1bac10246b55525edcd0a2de4bf59e063",
+      "expected_sha256": "f3a77110437425f573a35b7271f025c55a205d8bce3b029a22c26e39c4ea2485"
+    },
+    {
+      "id": "hidden_mean_rank3_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "873bc3b270c8f4e290beeea787924cc668f5208d2287e552f7e7ca894d1a4f9d",
+      "expected_sha256": "429d33a7bf110757a982e4515b94cc0a3959dcf86444bb283a653a9052666966"
+    },
+    {
+      "id": "hidden_two_reductions_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "ce40998e5795aeff050c6f76c5ad03ba5d4c5cdcce60de256ab9880003ce8126",
+      "expected_sha256": "059d8731732762bccb983116e6790e831b53b27f1675a82340f5a2402e2dc8c5"
+    },
+    {
+      "id": "hidden_math_composition_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "68b139da53a0d8cd0d4827c9c10df414c90d442cbd917072b3f644c3f975dece",
+      "expected_sha256": "5a4337ee22296f8e749d9eea324047e9ae68a82f95b72d93422de7910457a166"
+    },
+    {
+      "id": "hidden_chain_rank3_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7e974573a1abadba712fd0b7435d97a8b95f1d3c2dde982e0db299bd74f315e7",
+      "expected_sha256": "d1a081b95ddea8acd95118608aebd7856cfcff9da84f4e66fed70c13a090f64f"
+    },
+    {
+      "id": "hidden_where_rank3_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "9635c6fc3c35e91bfc4485b0cd8bbc50f902b548c464ac2752efe88b7924eb34",
+      "expected_sha256": "8c51043dacb5db6363399b14618da37eb6f324db515cc398d012f613c8287c59"
+    },
+    {
+      "id": "hidden_row_broadcast_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "6a82914857a2c475b7f79e88c686f036743eab649294559a28837269b9486eea",
+      "expected_sha256": "821826e75bcb63f29cff40871eaa6a7e57853ff4193349911a34d982204e67c1"
+    },
+    {
+      "id": "hidden_column_broadcast_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "d73f9804dc7cbe541865136248e49aa9a543b1ce5de4b97a47b68b6cc43c7173",
+      "expected_sha256": "3d77e068d06c5ba5f942652dc3f2c493af858abe08d36830567d43677a5a9d8e"
+    },
+    {
+      "id": "hidden_masked_row_sum_f64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "04419ffdd306c6e842f911d18d7d353d5a5f37689ef2a5bbf755fec18e781463",
+      "expected_sha256": "ce0d95ae14d90cfd3628a30059400c8791d5be72e26193297320ea2d99693444"
+    },
+    {
+      "id": "hidden_column_sum_f64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "a79e4d934617f4e7c73490b2492b3eb2384a583c85331c7691fb7c4e2cf6d2cc",
+      "expected_sha256": "574565ae732a2a24e572399a3397565a6c450c5760b692f2252355b4ddfc2947"
+    },
+    {
+      "id": "hidden_strided_slice_f64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "5664127970713e0acf9e46887b8cb3ffc20396305ba302740c3e9c3165d5e7c7",
+      "expected_sha256": "814cb1f2215c1c2d73d01585ee17c18f102bbd5d010bc6bbb75a74917e163db0"
+    },
+    {
+      "id": "hidden_mean_rank3_f64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e918fad7afedaee2a2ffd87a09e62bb82ab0602d5ed329128bca5c7e58a5e24b",
+      "expected_sha256": "f0a828c9d63bd6058a19a4a2925908a37ce7126aa5703e42a9cc30ef2ee834b8"
+    },
+    {
+      "id": "hidden_two_reductions_f64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "1808f64fee114fc80fff14a9c6a2a4d9e3507e02f3443f9fdbc9b8882036e86f",
+      "expected_sha256": "2e5517c89a0f7d039a0b89b03901f3eec2294b314b3bc7430c8190fd709e3eba"
+    },
+    {
+      "id": "hidden_math_composition_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0bb15dee18b0a98f783b2df8cc87ea820b5cc91dea493f3b5320f46f34fd49bb",
+      "expected_sha256": "ec879a4162a0076c75a7ed1863aab06141a53871c754be9b217d45c1052f47c0"
+    },
+    {
+      "id": "hidden_chain_rank3_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "75342bd44186007435dfa501edbaa9e9b908bfe3583d214803e5816ec41f392b",
+      "expected_sha256": "b2ca0d8336ef825497f0511b4550647d5d5bf1b7eb828513b220b83b8b08bf20"
+    },
+    {
+      "id": "hidden_where_rank3_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0c375a81d0d65210c2ae6d7307ac27e01297e313a810839bf80d643fc6030ea6",
+      "expected_sha256": "f61cf103a493089afb57e9e0a306f74ccf8f110b2ee7627b343faa12f8beddec"
+    },
+    {
+      "id": "hidden_row_broadcast_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "3ad149acd9c2c6b3c2847614fd84e9808090a9ee51dda088e76f40fa3588dbe3",
+      "expected_sha256": "56bdb7202f8933f40070a3314db212ea0a1c84bf848e1d611f2c3f851189d8da"
+    },
+    {
+      "id": "hidden_column_broadcast_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "21dd061f2c5293d7032aab6dbc74d839f3b477880cadae15e34dc3e9b5a31ad3",
+      "expected_sha256": "51cbd0c196e642c13ae55b886bc56e609e44c6e771fe3045123b10c98c528019"
+    },
+    {
+      "id": "hidden_masked_row_sum_i32_w256",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7ca6d79f186186c2f2a6f71de2cf6adf79ad30e1806fea42d361e565d0776da6",
+      "expected_sha256": "ba6b7c8b48c52f2076cd955d6c64929e3369d86a81cdad3a4719369420446d77"
+    },
+    {
+      "id": "hidden_column_sum_i32_w256",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "9275c087fcc8f080daedc43c0187a2b71ee51fdb07759ebf22ab1ae47c299e66",
+      "expected_sha256": "1995d18471a16e71ba044c9c83e97bc2fa497dc37f866f494d63d4663e2f20dc"
+    },
+    {
+      "id": "hidden_strided_slice_i32_w256",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "1e305d63c826ba18c6b43f1ba01e40db5a645c5b1e30d9302f54cf1670c6a4db",
+      "expected_sha256": "10192b4a986f377d338fe100d53aedfe0ebc24149d7e8ef76df68b0d5c460bd3"
+    },
+    {
+      "id": "hidden_chain_rank3_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "972ddb1e252ab48d00075fbf3874c09d9755e6c843b74c23ead143b094c6fc6e",
+      "expected_sha256": "d9375c3531f5c05751de53ce144134a85a2629cd0486221bb9d704f7ba518ee7"
+    },
+    {
+      "id": "hidden_where_rank3_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "3da3349891ba9998915ec3f732bc3c9a8c793ca709156df2ec24a9cf68db22a7",
+      "expected_sha256": "d775842cf63d75f1a0307054aa9665c78cfb43d63c2d0e5408acb5d8f3734ea7"
+    },
+    {
+      "id": "hidden_row_broadcast_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "8e923eabcf59d6b1d78f77722a0e841b9eec833ba0c22f045605572f04a82dcb",
+      "expected_sha256": "95756eb73cc444b5bf4f0852b13aa73e11dadfdd9c9994384b5a37d69a71e9e2"
+    },
+    {
+      "id": "hidden_column_broadcast_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e182aafb664443caedec9ee34d3db86772d74df84dc239dd0601b5386e7046a1",
+      "expected_sha256": "ed16b61e2e96d73e928d4cc41c0081840e27bc48ef2f498678190e2afb174c42"
+    },
+    {
+      "id": "hidden_masked_row_sum_i64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "f48e95fd58757f05443416dc5f44eb67e76a56bd3cc0ff09fe1c100d5bf8367c",
+      "expected_sha256": "ba6b7c8b48c52f2076cd955d6c64929e3369d86a81cdad3a4719369420446d77"
+    },
+    {
+      "id": "hidden_column_sum_i64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7d57d9178d59e18ed3eb423e11d8b4a805f6ca968d1f0264e209ae0019163c7d",
+      "expected_sha256": "1995d18471a16e71ba044c9c83e97bc2fa497dc37f866f494d63d4663e2f20dc"
+    },
+    {
+      "id": "hidden_strided_slice_i64_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0c17c7e080b7d6ebbf1f7108255a50a68db7a48e14d2c589311a3c2e701bf03e",
+      "expected_sha256": "5f801c8f8bc5124fd1bf790d024b535be9cc91f65afc24fee2f5187539631eba"
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "d62a45d5e6354008161ae5915027585514f7b648879a0d7b06044cd27f40bcab",
+      "expected_sha256": "780b9ca596134e3cc82e843e1f690e5e0c8c7d11c5b73c09cce31396ba1623df"
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e40f7f365992a764cb7e07d2cb67bcfb09dfc52292e37bac149cd8591881609e",
+      "expected_sha256": "de5ae57eb172f2fa4e0c61f0401020c836a08387e604575c75f8106b70454552"
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w128",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e20190806dfc7c826b1e516759ee75d77c2592aa00632cb84149488b8b900924",
+      "expected_sha256": "1579b7cfce9390732b79254d3a4a78222bf0919de60ff21f761e0c8765d33f15"
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w256",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "caab91340195c0389d0e0ef3a40228ea58dd11cd6825546b31a4fe78f7839fc8",
+      "expected_sha256": "c0a3ee4e70c25886a8ffa307a7c2bebfb85c0865a90584c0ad66dc77c29ed9ad"
+    },
+    {
+      "id": "hidden_mixed_f16_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "67a851c4ca71549744c5d9b698e87000ecdc1ddba06d8d01783019a93a20651c",
+      "expected_sha256": "7c7c773998352d0a10287926ef45dc54c23a9b3e485afb68f9b1f3790f8b26df"
+    },
+    {
+      "id": "hidden_mixed_f16_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "d5981564fc31c1976dfc9e8c11e2aa70c6e58c658acf234a717a19e678d9b758",
+      "expected_sha256": "9d34d54a302f4713936c72c8f9e8b223c6de65de971da710c601e5efaea711ef"
+    },
+    {
+      "id": "hidden_mixed_f16_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "58f1ceebc008da67f4dbf993808acbeeceb28b89246076a2c9e0870e688b1d0a",
+      "expected_sha256": "4b612f7cfe270f6ae1de9bd08c790328fa4352d73bfc49ff71c4701f9204d023"
+    },
+    {
+      "id": "hidden_mixed_f16_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "5f657c9e32f6f16b3ceb5a726b255f21590a61f1e530a20f6cadd2bf6efb7901",
+      "expected_sha256": "4b612f7cfe270f6ae1de9bd08c790328fa4352d73bfc49ff71c4701f9204d023"
+    },
+    {
+      "id": "hidden_mixed_f32_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "d8acaf1cfd7d7e5debfde5c8092ce7cb0599ede172523972cfcba37d3b0cad50",
+      "expected_sha256": "aa9ccc5817d93f3f05bf1635f986bf4c18db66a1980183ca513dcc2dac52ac8f"
+    },
+    {
+      "id": "hidden_mixed_f32_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "7ee5e9a554833f0990d2ee432d994f46918e53409c34ba2bddebad66a5ba1dd2",
+      "expected_sha256": "6ec5ba27c83bab2ffad974efa449ecb8153087a0d0b4acacfa264e979c786b63"
+    },
+    {
+      "id": "hidden_mixed_f32_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "5f6c4b9753ac8853d76b2ebde23b81658b21551e165af4015b63836fb4299413",
+      "expected_sha256": "1a1c12b95e92e76ae6e453fd24f5895cba996f7e9a27b5be8c7607e86de4a97e"
+    },
+    {
+      "id": "hidden_mixed_f32_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "6b3644b77fa5aeadec8faa87c8255f7a880e21873fd2dcfb9eb0853fc6d2263c",
+      "expected_sha256": "1a1c12b95e92e76ae6e453fd24f5895cba996f7e9a27b5be8c7607e86de4a97e"
+    },
+    {
+      "id": "hidden_mixed_f64_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0f2016197faf6fc3f373224455bcac7dfbf27305c5ed0571ec3c6f396fc21ff5",
+      "expected_sha256": "f548c2e2517058c17fb16ca3d0209935b944c288a622bd520a3be893a991d8bf"
+    },
+    {
+      "id": "hidden_mixed_f64_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "70afe2e44bc6738a0dfa696d8fb1626f0b277ea3aa5f49d5bbbb5b69e2ff96cb",
+      "expected_sha256": "6055f67d0bd8004c0a5043c60163433acc0982dad5f5973a41b9cda98ca4811f"
+    },
+    {
+      "id": "hidden_mixed_f64_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "d7dc123610e32fde65f074ba1829123c69c80717d394757b59860d8ab364d428",
+      "expected_sha256": "f65becf110eb469abcd6403e5debb96c6f872b0abe6050c236936eade55bea27"
+    },
+    {
+      "id": "hidden_mixed_f64_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "fc91b05825d36dafed1a3251b5fbe4b6ec8795bcc6d3deffce950b800a189cc3",
+      "expected_sha256": "f65becf110eb469abcd6403e5debb96c6f872b0abe6050c236936eade55bea27"
+    },
+    {
+      "id": "hidden_mixed_i32_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "433a7a0baa7cf0b5627e41ae7c85553db47bb4e132100159a92d4a5301e737ef",
+      "expected_sha256": "81989b80adc59ed347808dda6ab4ecc697d06ff6e15b13ad8aff30a1377d376d"
+    },
+    {
+      "id": "hidden_mixed_i32_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0aaf0452a6ea95cfd0ed598a7f6bcd6b5e2b6a1c7575ae6ed660fa86f01389a3",
+      "expected_sha256": "903d49ad58a33a2fe0e6acc51259646a1ad6cc2e54bbe2d073816698a274f83e"
+    },
+    {
+      "id": "hidden_mixed_i32_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e2af1104d32b554982ea04d048e551ede991b60c21d95a9026521aaa5b609c9a",
+      "expected_sha256": "05123188aa08db41423f2c61292cdcbb10a548bc6073ad77b263ee90b6f17c70"
+    },
+    {
+      "id": "hidden_mixed_i32_i64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "0150584a1cb14133875fef69712c92b5b6f09df3b3cf8a4fd9968959904c0a82",
+      "expected_sha256": "c96794ac5e94317b0e5f79ed6cd1eaed510ac351bf028805f78ad35ebdca7306"
+    },
+    {
+      "id": "hidden_mixed_i64_f16",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "e4846f2150e430a199aa5758a800e035d3f6df703b4495ea5daa15347d2b00b7",
+      "expected_sha256": "81989b80adc59ed347808dda6ab4ecc697d06ff6e15b13ad8aff30a1377d376d"
+    },
+    {
+      "id": "hidden_mixed_i64_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "4a1971cc3386b03780436ec8ee2772328b3b94f0cf1ab4b542da96ad71e3f242",
+      "expected_sha256": "903d49ad58a33a2fe0e6acc51259646a1ad6cc2e54bbe2d073816698a274f83e"
+    },
+    {
+      "id": "hidden_mixed_i64_f64",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "dfc39acea6a6cfba2d7ff1fb45fa3f75d333da8ef67f190bdf90a8e4fcb2f3fe",
+      "expected_sha256": "05123188aa08db41423f2c61292cdcbb10a548bc6073ad77b263ee90b6f17c70"
+    },
+    {
+      "id": "hidden_mixed_i64_i32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "b0c708067d89a62f5244e3436165c947dcbfc22b35504e5d3a56c8adcad2ce60",
+      "expected_sha256": "c96794ac5e94317b0e5f79ed6cd1eaed510ac351bf028805f78ad35ebdca7306"
+    },
+    {
+      "id": "hidden_multiple_pointwise_outputs_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "62ee6e209ec2b910a4d1ece2c8eb609992eabdfe9493d39c9c3fcf34c886885b",
+      "expected_sha256": "94a2205c2766bc80997c3709c50d3427c11b8f48703ad03d47e6f94fc8ad182d"
+    },
+    {
+      "id": "hidden_multiple_reduction_outputs_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "4e2335c11ff08311e84f274305b00e4627ef649b2eb5ea749ee7bf3532cec85e",
+      "expected_sha256": "d8855937707c4a6b47d0fc7a0076549c7414203530b4f92628d9ead243b66ee6"
+    },
+    {
+      "id": "hidden_rank4_broadcast_f32",
+      "versions": {
+        "emmy-ml": "0.3.11",
+        "torch": "2.14.1+cpu",
+        "numpy": "2.5.4"
+      },
+      "metadata_sha256": "ae3e46575e7a960cd5f9e55e881273eb34432dd4c363d762a47c54cd09be74e4",
+      "expected_sha256": "47050bcc07c9df4dc679a3a460a5cce4a146ad0dfd6c85e013c9bd7f0320e13a"
+    }
+  ]
+}

@@ -104,6 +104,8 @@ Code: [tensor emission](../../ptx_tensor.py).
 
 **MVP: 8/8 · Local tests: 47 · Generated matmul: 9 global + 9 shared**, passing both references. Public fused examples and 512×512 scalar matmul also pass. Hidden coverage remains unproven.
 
+[Fresh hidden-style MVP variants](19-mvp-hidden-coverage.md): 71/71 GPU results match the IR; 62/71 match NumPy. Nine generated-program/precision disagreements and five Emmy generation failures remain recorded.
+
 ```bash
 python tools/test_mvp.py
 python tools/test_matmul.py --suite shared --runner

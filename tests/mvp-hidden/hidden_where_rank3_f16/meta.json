@@ -1,0 +1,69 @@
+{
+ "id": "hidden_where_rank3_f16",
+ "code": "x = torch.randn((2, 3, 33), dtype=torch.float16); y = torch.randn((2, 3, 33), dtype=torch.float16); torch.where(x > y, x-y, x+y)",
+ "rtol": 0.006,
+ "atol": 0.006,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "where"
+ ],
+ "kernels": [
+  {
+   "node": "where",
+   "entry": "k_where_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "where"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "f16",
+     "shape": [
+      2,
+      3,
+      33
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      2,
+      3,
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "where",
+     "dtype": "f16",
+     "shape": [
+      2,
+      3,
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

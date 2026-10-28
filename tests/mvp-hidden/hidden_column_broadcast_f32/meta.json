@@ -1,0 +1,66 @@
+{
+ "id": "hidden_column_broadcast_f32",
+ "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 1), dtype=torch.float32); torch.relu(x + y) * y",
+ "rtol": 0.0001,
+ "atol": 1e-05,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "mul"
+ ],
+ "kernels": [
+  {
+   "node": "mul",
+   "entry": "k_mul_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "mul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "f32",
+     "shape": [
+      3,
+      1
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      3,
+      129
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mul",
+     "dtype": "f32",
+     "shape": [
+      3,
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

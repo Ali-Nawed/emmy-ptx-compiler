@@ -1,0 +1,163 @@
+{
+  "inputs": [
+    "x",
+    "y"
+  ],
+  "outputs": [
+    "add_3"
+  ],
+  "nodes": {
+    "add_2_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "add_2_c1",
+        "value": 1.0,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "add_2_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "add_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "add_c1",
+        "value": 1.0,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "add_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "mul_1_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "mul_1_c1",
+        "value": 0.125,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mul_1_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "mul_3_c1": {
+      "op": "ConstantOp",
+      "op_fields": {
+        "name": "mul_3_c1",
+        "value": 0.125,
+        "context_value": null,
+        "load_ops": [],
+        "source_path": null,
+        "source_parts": [],
+        "source_shape": null,
+        "source_dtype": null,
+        "source_graph": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mul_3_c1",
+          "shape": [
+            1
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "x": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "x",
+          "shape": [
+            129
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "y": {
+      "op": "InputOp",
+      "op_fields": {},
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "shape": [
+            129
+          ],
+          "dtype": "f16"
+        }
+      ]
+    },
+    "add_3": {
+      "op": "KernelOp",
+      "op_fields": {
+        "body": [
+          "Tile(axes=(Axis(name='a0', extent=Dim(43), window=None),), body=(Load(names=('in4__u0',), input='x', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=0, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v0__u0', op=ElementwiseImpl('multiply'), args=('in4__u0', 'in4__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in0__u0',), input='add_2_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v1__u0', op=ElementwiseImpl('add'), args=('in0__u0', 'v0__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v2__u0', op=ElementwiseImpl('multiply'), args=('in4__u0', 'in4__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in1__u0',), input='add_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v3__u0', op=ElementwiseImpl('add'), args=('in1__u0', 'v2__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v4__u0', op=ElementwiseImpl('log'), args=('v3__u0',), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in2__u0',), input='mul_1_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Load(names=('in5__u0',), input='y', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=0, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v5__u0', op=ElementwiseImpl('multiply'), args=('in2__u0', 'in5__u0'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v6__u0', op=ElementwiseImpl('exp'), args=('v5__u0',), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v7__u0', op=ElementwiseImpl('add'), args=('v4__u0', 'v6__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in3__u0',), input='mul_3_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v8__u0', op=ElementwiseImpl('multiply'), args=('in3__u0', 'in5__u0'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v9__u0', op=ElementwiseImpl('pow'), args=('v1__u0', 'v8__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v10__u0', op=ElementwiseImpl('add'), args=('v7__u0', 'v9__u0'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in4__u1',), input='x', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=1, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v0__u1', op=ElementwiseImpl('multiply'), args=('in4__u1', 'in4__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in0__u1',), input='add_2_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v1__u1', op=ElementwiseImpl('add'), args=('in0__u1', 'v0__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v2__u1', op=ElementwiseImpl('multiply'), args=('in4__u1', 'in4__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in1__u1',), input='add_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v3__u1', op=ElementwiseImpl('add'), args=('in1__u1', 'v2__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v4__u1', op=ElementwiseImpl('log'), args=('v3__u1',), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in2__u1',), input='mul_1_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Load(names=('in5__u1',), input='y', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=1, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v5__u1', op=ElementwiseImpl('multiply'), args=('in2__u1', 'in5__u1'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v6__u1', op=ElementwiseImpl('exp'), args=('v5__u1',), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v7__u1', op=ElementwiseImpl('add'), args=('v4__u1', 'v6__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in3__u1',), input='mul_3_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v8__u1', op=ElementwiseImpl('multiply'), args=('in3__u1', 'in5__u1'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v9__u1', op=ElementwiseImpl('pow'), args=('v1__u1', 'v8__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v10__u1', op=ElementwiseImpl('add'), args=('v7__u1', 'v9__u1'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in4__u2',), input='x', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=2, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v0__u2', op=ElementwiseImpl('multiply'), args=('in4__u2', 'in4__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in0__u2',), input='add_2_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v1__u2', op=ElementwiseImpl('add'), args=('in0__u2', 'v0__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v2__u2', op=ElementwiseImpl('multiply'), args=('in4__u2', 'in4__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in1__u2',), input='add_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v3__u2', op=ElementwiseImpl('add'), args=('in1__u2', 'v2__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v4__u2', op=ElementwiseImpl('log'), args=('v3__u2',), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in2__u2',), input='mul_1_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Load(names=('in5__u2',), input='y', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=2, dtype='int')),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v5__u2', op=ElementwiseImpl('multiply'), args=('in2__u2', 'in5__u2'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v6__u2', op=ElementwiseImpl('exp'), args=('v5__u2',), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v7__u2', op=ElementwiseImpl('add'), args=('v4__u2', 'v6__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Load(names=('in3__u2',), input='mul_3_c1', index=(Literal(value=0, dtype='int'),), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v8__u2', op=ElementwiseImpl('multiply'), args=('in3__u2', 'in5__u2'), dtype=DataType(name='f16', np=dtype('float16'), nbytes=2)), Assign(name='v9__u2', op=ElementwiseImpl('pow'), args=('v1__u2', 'v8__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Assign(name='v10__u2', op=ElementwiseImpl('add'), args=('v7__u2', 'v9__u2'), dtype=DataType(name='f32', np=dtype('float32'), nbytes=4)), Write(output='add_3', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=0, dtype='int')),), values=('v10__u0',), value_dtype=DataType(name='f32', np=dtype('float32'), nbytes=4), atomic=False, swizzle='NONE'), Write(output='add_3', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=1, dtype='int')),), values=('v10__u1',), value_dtype=DataType(name='f32', np=dtype('float32'), nbytes=4), atomic=False, swizzle='NONE'), Write(output='add_3', index=(BinaryExpr(op='+', left=BinaryExpr(op='*', left=Var(name='a0'), right=Literal(value=3, dtype='int')), right=Literal(value=2, dtype='int')),), values=('v10__u2',), value_dtype=DataType(name='f32', np=dtype('float32'), nbytes=4), atomic=False, swizzle='NONE')), block_threads=None, aux_threads=0, raster_axes=None, raster_group=None, raster_orient='m')"
+        ],
+        "name": "k_add_3_pointwise",
+        "zero_delegated": [],
+        "serial": []
+      },
+      "inputs": [
+        "mul_1_c1",
+        "add_c1",
+        "mul_3_c1",
+        "add_2_c1",
+        "x",
+        "y"
+      ],
+      "outputs": [
+        {
+          "name": "add_3",
+          "shape": [
+            129
+          ],
+          "dtype": "f16"
+        }
+      ]
+    }
+  }
+}

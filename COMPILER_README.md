@@ -81,6 +81,8 @@ Omit `--runner` for local assembly/reference checks; add `--reuse` to reuse save
 
 ## Features and current limits
 
+For pointwise/reduction variations beyond the eight public cases, see the [hidden-style MVP coverage audit](docs/compiler/19-mvp-hidden-coverage.md). Run `python tools/test_mvp_hidden_variants.py` to generate the fresh matrix, then `python tools/test_mvp_hidden_variants.py --reuse --runner` for hosted checks. Its recorded expression failures remain failures; this is not a claim of complete hidden-set coverage.
+
 - Pointwise arithmetic, conversions, comparisons and `where` across f16/f32/f64/i32/i64; supported math functions use native PTX or accuracy-preserving helpers.
 - Ordinary/strided loops, warp/shared reductions, normalization and online softmax patterns.
 - Aligned grouped stores with scalar fallback and simpler coordinate arithmetic.

@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int64); y = torch.randint(-3, 4, (129,), dtype=torch.int64); torch.relu(x + y) * y",
+  "knobs": "",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_mul_pointwise.ir.json": {
+      "sha256": "fda993d45ab4ce91e7e6bd47c148d70305f8ee128474e1e4d089d5388fa21dd3",
+      "upstream_dump_sha256": "fda993d45ab4ce91e7e6bd47c148d70305f8ee128474e1e4d089d5388fa21dd3"
+    }
+  }
+}

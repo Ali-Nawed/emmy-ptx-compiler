@@ -24,6 +24,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 16. [First native tensor-core matmul](16-first-tensor-core-matmul.md)
 17. [Shared-memory staging and native asynchronous copies](17-shared-memory-async-copies.md)
 18. [Presentation walkthrough and feature/run checklist](18-presentation-walkthrough.md)
+19. [Hidden-style MVP coverage: fresh PyTorch matrix and remaining gaps](19-mvp-hidden-coverage.md)
 
 ## The complete path
 

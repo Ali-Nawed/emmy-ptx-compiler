@@ -1,0 +1,66 @@
+{
+ "id": "hidden_keepdim_center_f32_w256",
+ "code": "x = torch.randn(3, 257); x - x.mean(-1, keepdim=True)",
+ "rtol": 0.0001,
+ "atol": 1e-05,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "sub"
+ ],
+ "kernels": [
+  {
+   "node": "sub",
+   "entry": "k_mean_2e92bc",
+   "arg_order": [
+    "mean_count",
+    "x",
+    "sub"
+   ],
+   "grid": [
+    3,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "mean_count",
+     "dtype": "f32",
+     "shape": [
+      1
+     ],
+     "data": [
+      257.0
+     ]
+    },
+    {
+     "name": "x",
+     "dtype": "f32",
+     "shape": [
+      3,
+      257
+     ],
+     "seed": 0
+    },
+    {
+     "name": "sub",
+     "dtype": "f32",
+     "shape": [
+      3,
+      257
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "id": "hidden_strided_slice_f16_w32",
+ "code": "x = torch.randn((257,), dtype=torch.float16); x[::2] + x[1::2].sum()",
+ "rtol": 0.006,
+ "atol": 0.006,
+ "graph_inputs": [
+  "x"
+ ],
+ "graph_outputs": [
+  "add"
+ ],
+ "kernels": [
+  {
+   "node": "add",
+   "entry": "k_slice_reduce_3f2df5",
+   "arg_order": [
+    "x",
+    "add"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    32,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "x",
+     "dtype": "f16",
+     "shape": [
+      257
+     ],
+     "seed": 0
+    },
+    {
+     "name": "add",
+     "dtype": "f16",
+     "shape": [
+      129
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

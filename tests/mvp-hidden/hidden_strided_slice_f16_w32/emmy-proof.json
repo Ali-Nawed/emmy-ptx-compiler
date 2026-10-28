@@ -1,0 +1,18 @@
+{
+  "pipeline": "PyTorch expression -> Emmy -> unchanged Kernel IR -> our compiler",
+  "code": "x = torch.randn((257,), dtype=torch.float16); x[::2] + x[1::2].sum()",
+  "knobs": "WORK=t32,REDUCE=coop",
+  "target": "sm_89",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.4"
+  },
+  "entry_name_normalization": "organizer packager only; no body/type/shape/schedule rewriting",
+  "kernels": {
+    "k_slice_reduce_3f2df5.ir.json": {
+      "sha256": "0755fcf84d7cc22e778a1d127a991b01720a450a140f7c43154b13035344a116",
+      "upstream_dump_sha256": "0755fcf84d7cc22e778a1d127a991b01720a450a140f7c43154b13035344a116"
+    }
+  }
+}

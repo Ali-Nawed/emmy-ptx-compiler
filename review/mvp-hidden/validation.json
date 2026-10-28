@@ -1,0 +1,2732 @@
+{
+  "pipeline": "PyTorch -> Emmy 0.3.11 -> unchanged Kernel IR -> our PTX",
+  "runner": true,
+  "cases": [
+    {
+      "id": "hidden_chain_rank3_f16",
+      "family": "chain_rank3",
+      "dtype": "f16",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float16); y = torch.randn((2, 3, 33), dtype=torch.float16); torch.relu(x-y) * (x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 1
+      },
+      "operations": {
+        "add": 2,
+        "subtract": 2,
+        "relu": 2,
+        "multiply": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.832,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_where_rank3_f16",
+      "family": "where_rank3",
+      "dtype": "f16",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float16); y = torch.randn((2, 3, 33), dtype=torch.float16); torch.where(x > y, x-y, x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 1
+      },
+      "operations": {
+        "add": 2,
+        "greater": 2,
+        "subtract": 2,
+        "where": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_where_pointwise",
+            "median_us": 20.32,
+            "registers": {
+              "k_where_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_row_broadcast_f16",
+      "family": "row_broadcast",
+      "dtype": "f16",
+      "code": "x = torch.randn((3, 129), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 21.12,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_broadcast_f16",
+      "family": "column_broadcast",
+      "dtype": "f16",
+      "code": "x = torch.randn((3, 129), dtype=torch.float16); y = torch.randn((3, 1), dtype=torch.float16); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.16,
+            "registers": {
+              "k_mul_pointwise": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_masked_row_sum_f16_w32",
+      "family": "masked_row_sum",
+      "dtype": "f16",
+      "code": "x = torch.randn((3, 129), dtype=torch.float16); y = torch.randn((3, 129), dtype=torch.float16); torch.where(x > y, x-y, x+y).sum(-1)",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Assign": 5,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Cond": 1,
+        "Write": 1
+      },
+      "operations": {
+        "add": 1,
+        "greater": 1,
+        "subtract": 1,
+        "where": 1,
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.584,
+            "registers": {
+              "k_sum_1_reduce": 30
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_sum_f16_w32",
+      "family": "column_sum",
+      "dtype": "f16",
+      "code": "x = torch.randn((33, 3), dtype=torch.float16); x.sum(0)",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Cond": 1,
+        "Assign": 1,
+        "Write": 1
+      },
+      "operations": {
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.16,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_all_sum_rank3_f16_w32",
+      "family": "all_sum_rank3",
+      "dtype": "f16",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float16); x.sum()",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "upstream_generation_failed",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/mvp-hidden/hidden_all_sum_rank3_f16_w32; regenerate from its PyTorch expression"
+    },
+    {
+      "id": "hidden_strided_slice_f16_w32",
+      "family": "strided_slice",
+      "dtype": "f16",
+      "code": "x = torch.randn((257,), dtype=torch.float16); x[::2] + x[1::2].sum()",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Assign": 2,
+        "Write": 1
+      },
+      "operations": {
+        "copy": 1,
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "float16",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 7.390625,
+            "expected": 12.2265625
+          },
+          {
+            "index": 1,
+            "got": 7.1328125,
+            "expected": 12.7421875
+          },
+          {
+            "index": 2,
+            "got": 7.90625,
+            "expected": 11.5625
+          },
+          {
+            "index": 3,
+            "got": 7.37109375,
+            "expected": 13.40625
+          },
+          {
+            "index": 4,
+            "got": 6.73046875,
+            "expected": 11.3984375
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_slice_reduce_3f2df5",
+            "median_us": 20.032,
+            "registers": {
+              "k_slice_reduce_3f2df5": 18
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "float16",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 7.390625,
+                  "expected": 12.2265625
+                },
+                {
+                  "index": 1,
+                  "got": 7.1328125,
+                  "expected": 12.7421875
+                },
+                {
+                  "index": 2,
+                  "got": 7.90625,
+                  "expected": 11.5625
+                },
+                {
+                  "index": 3,
+                  "got": 7.37109375,
+                  "expected": 13.40625
+                },
+                {
+                  "index": 4,
+                  "got": 6.73046875,
+                  "expected": 11.3984375
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mean_rank3_f16_w32",
+      "family": "mean_rank3",
+      "dtype": "f16",
+      "code": "x = torch.randn((2, 3, 129), dtype=torch.float16); x.mean(-1)",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Cond": 1,
+        "Assign": 2,
+        "Write": 1
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_38d3b4",
+            "median_us": 19.904,
+            "registers": {
+              "k_mean_38d3b4": 15
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_two_reductions_f16_w32",
+      "family": "two_reductions",
+      "dtype": "f16",
+      "code": "x = torch.randn((3, 129), dtype=torch.float16); y = torch.randn((3, 129), dtype=torch.float16); x.sum(-1) + y.sum(-1)",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 2,
+        "WarpShuffle": 1,
+        "Loop": 1,
+        "Assign": 3,
+        "Write": 1
+      },
+      "operations": {
+        "copy": 2,
+        "add": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 20.16,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_math_composition_f16",
+      "family": "math_composition",
+      "dtype": "f16",
+      "code": "x = torch.randn((129,), dtype=torch.float16); y = torch.randn((129,), dtype=torch.float16); torch.log(x*x + 1) + torch.exp(y * 0.125) + torch.pow(x*x + 1, y * 0.125)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 18,
+        "Assign": 33,
+        "Write": 3
+      },
+      "operations": {
+        "multiply": 12,
+        "add": 12,
+        "log": 3,
+        "exp": 3,
+        "pow": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_3_pointwise",
+            "median_us": 25.792,
+            "registers": {
+              "k_add_3_pointwise": 36
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_chain_rank3_f32",
+      "family": "chain_rank3",
+      "dtype": "f32",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float32); y = torch.randn((2, 3, 33), dtype=torch.float32); torch.relu(x-y) * (x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 1
+      },
+      "operations": {
+        "add": 2,
+        "subtract": 2,
+        "relu": 2,
+        "multiply": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.544,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_where_rank3_f32",
+      "family": "where_rank3",
+      "dtype": "f32",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float32); y = torch.randn((2, 3, 33), dtype=torch.float32); torch.where(x > y, x-y, x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 1
+      },
+      "operations": {
+        "add": 2,
+        "greater": 2,
+        "subtract": 2,
+        "where": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_where_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_where_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_row_broadcast_f32",
+      "family": "row_broadcast",
+      "dtype": "f32",
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.256,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_broadcast_f32",
+      "family": "column_broadcast",
+      "dtype": "f32",
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 1), dtype=torch.float32); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.352,
+            "registers": {
+              "k_mul_pointwise": 22
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_masked_row_sum_f32_w64",
+      "family": "masked_row_sum",
+      "dtype": "f32",
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 129), dtype=torch.float32); torch.where(x > y, x-y, x+y).sum(-1)",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Assign": 4,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1
+      },
+      "operations": {
+        "add": 1,
+        "greater": 1,
+        "subtract": 1,
+        "where": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.256,
+            "registers": {
+              "k_sum_1_reduce": 32
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_sum_f32_w64",
+      "family": "column_sum",
+      "dtype": "f32",
+      "code": "x = torch.randn((33, 3), dtype=torch.float32); x.sum(0)",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1
+      },
+      "operations": {},
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.224,
+            "registers": {
+              "k_sum_1_reduce": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_all_sum_rank3_f32_w64",
+      "family": "all_sum_rank3",
+      "dtype": "f32",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float32); x.sum()",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "upstream_generation_failed",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/mvp-hidden/hidden_all_sum_rank3_f32_w64; regenerate from its PyTorch expression"
+    },
+    {
+      "id": "hidden_strided_slice_f32_w64",
+      "family": "strided_slice",
+      "dtype": "f32",
+      "code": "x = torch.randn((257,), dtype=torch.float32); x[::2] + x[1::2].sum()",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 1
+      },
+      "operations": {
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "float32",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 7.3888468742370605,
+            "expected": 12.226394653320312
+          },
+          {
+            "index": 1,
+            "got": 7.131011962890625,
+            "expected": 12.741086959838867
+          },
+          {
+            "index": 2,
+            "got": 7.903539657592773,
+            "expected": 11.564994812011719
+          },
+          {
+            "index": 3,
+            "got": 7.368016719818115,
+            "expected": 13.404664039611816
+          },
+          {
+            "index": 4,
+            "got": 6.727447509765625,
+            "expected": 11.396928787231445
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_slice_reduce_266606",
+            "median_us": 20.928,
+            "registers": {
+              "k_slice_reduce_266606": 19
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "float32",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 7.3888468742370605,
+                  "expected": 12.226394653320312
+                },
+                {
+                  "index": 1,
+                  "got": 7.131011962890625,
+                  "expected": 12.741086959838867
+                },
+                {
+                  "index": 2,
+                  "got": 7.903539657592773,
+                  "expected": 11.564994812011719
+                },
+                {
+                  "index": 3,
+                  "got": 7.368016719818115,
+                  "expected": 13.404664039611816
+                },
+                {
+                  "index": 4,
+                  "got": 6.727447509765625,
+                  "expected": 11.396928787231445
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mean_rank3_f32_w64",
+      "family": "mean_rank3",
+      "dtype": "f32",
+      "code": "x = torch.randn((2, 3, 129), dtype=torch.float32); x.mean(-1)",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 2
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_ac99fd",
+            "median_us": 20.416,
+            "registers": {
+              "k_mean_ac99fd": 16
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_two_reductions_f32_w64",
+      "family": "two_reductions",
+      "dtype": "f32",
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 129), dtype=torch.float32); x.sum(-1) + y.sum(-1)",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 2,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Loop": 1,
+        "Assign": 1
+      },
+      "operations": {
+        "add": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 20.32,
+            "registers": {
+              "k_add_reduce": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_math_composition_f32",
+      "family": "math_composition",
+      "dtype": "f32",
+      "code": "x = torch.randn((129,), dtype=torch.float32); y = torch.randn((129,), dtype=torch.float32); torch.log(x*x + 1) + torch.exp(y * 0.125) + torch.pow(x*x + 1, y * 0.125)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 18,
+        "Assign": 33,
+        "Write": 3
+      },
+      "operations": {
+        "multiply": 12,
+        "add": 12,
+        "log": 3,
+        "exp": 3,
+        "pow": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_3_pointwise",
+            "median_us": 25.76,
+            "registers": {
+              "k_add_3_pointwise": 36
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_chain_rank3_f64",
+      "family": "chain_rank3",
+      "dtype": "f64",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float64); y = torch.randn((2, 3, 33), dtype=torch.float64); torch.relu(x-y) * (x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "subtract": 2,
+        "relu": 2,
+        "multiply": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_mul_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_where_rank3_f64",
+      "family": "where_rank3",
+      "dtype": "f64",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float64); y = torch.randn((2, 3, 33), dtype=torch.float64); torch.where(x > y, x-y, x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "greater": 2,
+        "subtract": 2,
+        "where": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_where_pointwise",
+            "median_us": 20.192,
+            "registers": {
+              "k_where_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_row_broadcast_f64",
+      "family": "row_broadcast",
+      "dtype": "f64",
+      "code": "x = torch.randn((3, 129), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.128,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_broadcast_f64",
+      "family": "column_broadcast",
+      "dtype": "f64",
+      "code": "x = torch.randn((3, 129), dtype=torch.float64); y = torch.randn((3, 1), dtype=torch.float64); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 28.352,
+            "registers": {
+              "k_mul_pointwise": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_masked_row_sum_f64_w128",
+      "family": "masked_row_sum",
+      "dtype": "f64",
+      "code": "x = torch.randn((3, 129), dtype=torch.float64); y = torch.randn((3, 129), dtype=torch.float64); torch.where(x > y, x-y, x+y).sum(-1)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Assign": 5,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1
+      },
+      "operations": {
+        "add": 1,
+        "greater": 1,
+        "subtract": 1,
+        "where": 1,
+        "copy": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sum_1",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": 69.05110168457031,
+            "expected": 69.05110098464945
+          },
+          {
+            "index": 1,
+            "got": 55.9229736328125,
+            "expected": 55.92297488579823
+          },
+          {
+            "index": 2,
+            "got": 52.36266326904297,
+            "expected": 52.3626624388866
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.128,
+            "registers": {
+              "k_sum_1_reduce": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 69.05110168457031,
+                  "expected": 69.05110098464945
+                },
+                {
+                  "index": 1,
+                  "got": 55.9229736328125,
+                  "expected": 55.92297488579823
+                },
+                {
+                  "index": 2,
+                  "got": 52.36266326904297,
+                  "expected": 52.3626624388866
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_sum_f64_w128",
+      "family": "column_sum",
+      "dtype": "f64",
+      "code": "x = torch.randn((33, 3), dtype=torch.float64); x.sum(0)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 1
+      },
+      "operations": {
+        "copy": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "sum_1",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": -2.92244553565979,
+            "expected": -2.9224449790509506
+          },
+          {
+            "index": 1,
+            "got": 2.27579927444458,
+            "expected": 2.27579919722036
+          },
+          {
+            "index": 2,
+            "got": 10.157835006713867,
+            "expected": 10.15783534581958
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.84,
+            "registers": {
+              "k_sum_1_reduce": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "sum_1",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -2.92244553565979,
+                  "expected": -2.9224449790509506
+                },
+                {
+                  "index": 1,
+                  "got": 2.27579927444458,
+                  "expected": 2.27579919722036
+                },
+                {
+                  "index": 2,
+                  "got": 10.157835006713867,
+                  "expected": 10.15783534581958
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_all_sum_rank3_f64_w128",
+      "family": "all_sum_rank3",
+      "dtype": "f64",
+      "code": "x = torch.randn((2, 3, 33), dtype=torch.float64); x.sum()",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "upstream_generation_failed",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/mvp-hidden/hidden_all_sum_rank3_f64_w128; regenerate from its PyTorch expression"
+    },
+    {
+      "id": "hidden_strided_slice_f64_w128",
+      "family": "strided_slice",
+      "dtype": "f64",
+      "code": "x = torch.randn((257,), dtype=torch.float64); x[::2] + x[1::2].sum()",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 2
+      },
+      "operations": {
+        "copy": 1,
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "float64",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 7.388847057641245,
+            "expected": 12.2263949108755
+          },
+          {
+            "index": 1,
+            "got": 7.13101197325655,
+            "expected": 12.74108734022539
+          },
+          {
+            "index": 2,
+            "got": 7.903539486991134,
+            "expected": 11.564995316620996
+          },
+          {
+            "index": 3,
+            "got": 7.3680169537008915,
+            "expected": 13.404664734912245
+          },
+          {
+            "index": 4,
+            "got": 6.72744746338674,
+            "expected": 11.396929453975115
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_slice_reduce_b48d91",
+            "median_us": 20.128,
+            "registers": {
+              "k_slice_reduce_b48d91": 23
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "float64",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 7.388847057641245,
+                  "expected": 12.2263949108755
+                },
+                {
+                  "index": 1,
+                  "got": 7.13101197325655,
+                  "expected": 12.74108734022539
+                },
+                {
+                  "index": 2,
+                  "got": 7.903539486991134,
+                  "expected": 11.564995316620996
+                },
+                {
+                  "index": 3,
+                  "got": 7.3680169537008915,
+                  "expected": 13.404664734912245
+                },
+                {
+                  "index": 4,
+                  "got": 6.72744746338674,
+                  "expected": 11.396929453975115
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_mean_rank3_f64_w128",
+      "family": "mean_rank3",
+      "dtype": "f64",
+      "code": "x = torch.randn((2, 3, 129), dtype=torch.float64); x.mean(-1)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 2
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "mean",
+        "dtype": "float64",
+        "mismatch_count": 6,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0.05727788805961609,
+            "expected": 0.05727788397058935
+          },
+          {
+            "index": 1,
+            "got": -0.05743033438920975,
+            "expected": -0.057430337490292055
+          },
+          {
+            "index": 2,
+            "got": -0.11490082740783691,
+            "expected": -0.11490083845108778
+          },
+          {
+            "index": 3,
+            "got": 0.017091887071728706,
+            "expected": 0.01709189885444324
+          },
+          {
+            "index": 4,
+            "got": -0.014584507793188095,
+            "expected": -0.01458451085514599
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_23a0f7",
+            "median_us": 20.352,
+            "registers": {
+              "k_mean_23a0f7": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "mean",
+              "dtype": "float64",
+              "mismatch_count": 6,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0.05727788805961609,
+                  "expected": 0.05727788397058935
+                },
+                {
+                  "index": 1,
+                  "got": -0.05743033438920975,
+                  "expected": -0.057430337490292055
+                },
+                {
+                  "index": 2,
+                  "got": -0.11490082740783691,
+                  "expected": -0.11490083845108778
+                },
+                {
+                  "index": 3,
+                  "got": 0.017091887071728706,
+                  "expected": 0.01709189885444324
+                },
+                {
+                  "index": 4,
+                  "got": -0.014584507793188095,
+                  "expected": -0.01458451085514599
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_two_reductions_f64_w128",
+      "family": "two_reductions",
+      "dtype": "f64",
+      "code": "x = torch.randn((3, 129), dtype=torch.float64); y = torch.randn((3, 129), dtype=torch.float64); x.sum(-1) + y.sum(-1)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Accum": 2,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Loop": 1,
+        "Assign": 3
+      },
+      "operations": {
+        "copy": 2,
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "float64",
+        "mismatch_count": 3,
+        "examples": [
+          {
+            "index": 0,
+            "got": -0.6182746887207031,
+            "expected": -0.6182773318141725
+          },
+          {
+            "index": 1,
+            "got": -25.495959281921387,
+            "expected": -25.495959124092312
+          },
+          {
+            "index": 2,
+            "got": -22.018392086029053,
+            "expected": -22.018393371560727
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_reduce",
+            "median_us": 25.504,
+            "registers": {
+              "k_add_reduce": 48
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "float64",
+              "mismatch_count": 3,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": -0.6182746887207031,
+                  "expected": -0.6182773318141725
+                },
+                {
+                  "index": 1,
+                  "got": -25.495959281921387,
+                  "expected": -25.495959124092312
+                },
+                {
+                  "index": 2,
+                  "got": -22.018392086029053,
+                  "expected": -22.018393371560727
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_math_composition_f64",
+      "family": "math_composition",
+      "dtype": "f64",
+      "code": "x = torch.randn((129,), dtype=torch.float64); y = torch.randn((129,), dtype=torch.float64); torch.log(x*x + 1) + torch.exp(y * 0.125) + torch.pow(x*x + 1, y * 0.125)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 18,
+        "Assign": 33,
+        "Write": 3
+      },
+      "operations": {
+        "multiply": 12,
+        "add": 12,
+        "log": 3,
+        "exp": 3,
+        "pow": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_add_3_pointwise",
+            "median_us": 30.752,
+            "registers": {
+              "k_add_3_pointwise": 38
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_chain_rank3_i32",
+      "family": "chain_rank3",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int32); y = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int32); torch.relu(x-y) * (x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "subtract": 2,
+        "relu": 2,
+        "multiply": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.096,
+            "registers": {
+              "k_mul_pointwise": 29
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_where_rank3_i32",
+      "family": "where_rank3",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int32); y = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int32); torch.where(x > y, x-y, x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "greater": 2,
+        "subtract": 2,
+        "where": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_where_pointwise",
+            "median_us": 20.48,
+            "registers": {
+              "k_where_pointwise": 28
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_row_broadcast_i32",
+      "family": "row_broadcast",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int32); y = torch.randint(-3, 4, (129,), dtype=torch.int32); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 19.648,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_broadcast_i32",
+      "family": "column_broadcast",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int32); y = torch.randint(-3, 4, (3, 1), dtype=torch.int32); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 21.568,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_masked_row_sum_i32_w256",
+      "family": "masked_row_sum",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int32); y = torch.randint(-3, 4, (3, 129), dtype=torch.int32); torch.where(x > y, x-y, x+y).sum(-1)",
+      "knobs": "WORK=t256,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Assign": 5,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1
+      },
+      "operations": {
+        "add": 1,
+        "greater": 1,
+        "subtract": 1,
+        "where": 1,
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 34.592,
+            "registers": {
+              "k_sum_1_reduce": 29
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_sum_i32_w256",
+      "family": "column_sum",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (33, 3), dtype=torch.int32); x.sum(0)",
+      "knobs": "WORK=t256,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 1
+      },
+      "operations": {
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.288,
+            "registers": {
+              "k_sum_1_reduce": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_all_sum_rank3_i32_w256",
+      "family": "all_sum_rank3",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int32); x.sum()",
+      "knobs": "WORK=t256,REDUCE=coop",
+      "status": "upstream_generation_failed",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/mvp-hidden/hidden_all_sum_rank3_i32_w256; regenerate from its PyTorch expression"
+    },
+    {
+      "id": "hidden_strided_slice_i32_w256",
+      "family": "strided_slice",
+      "dtype": "i32",
+      "code": "x = torch.randint(-3, 4, (257,), dtype=torch.int32); x[::2] + x[1::2].sum()",
+      "knobs": "WORK=t256,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 2
+      },
+      "operations": {
+        "copy": 1,
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "int32",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 1,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 2,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 3,
+            "got": 0,
+            "expected": 7
+          },
+          {
+            "index": 4,
+            "got": 0,
+            "expected": 6
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_slice_reduce_915d1a",
+            "median_us": 19.744,
+            "registers": {
+              "k_slice_reduce_915d1a": 21
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "int32",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 1,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 2,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 3,
+                  "got": 0,
+                  "expected": 7
+                },
+                {
+                  "index": 4,
+                  "got": 0,
+                  "expected": 6
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_chain_rank3_i64",
+      "family": "chain_rank3",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int64); y = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int64); torch.relu(x-y) * (x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "subtract": 2,
+        "relu": 2,
+        "multiply": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 21.248,
+            "registers": {
+              "k_mul_pointwise": 29
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_where_rank3_i64",
+      "family": "where_rank3",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int64); y = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int64); torch.where(x > y, x-y, x+y)",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 4,
+        "Assign": 8,
+        "Write": 2
+      },
+      "operations": {
+        "add": 2,
+        "greater": 2,
+        "subtract": 2,
+        "where": 2
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_where_pointwise",
+            "median_us": 20.16,
+            "registers": {
+              "k_where_pointwise": 27
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_row_broadcast_i64",
+      "family": "row_broadcast",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int64); y = torch.randint(-3, 4, (129,), dtype=torch.int64); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.64,
+            "registers": {
+              "k_mul_pointwise": 26
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_broadcast_i64",
+      "family": "column_broadcast",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int64); y = torch.randint(-3, 4, (3, 1), dtype=torch.int64); torch.relu(x + y) * y",
+      "knobs": "",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "Load": 6,
+        "Assign": 9,
+        "Write": 3
+      },
+      "operations": {
+        "add": 3,
+        "relu": 3,
+        "multiply": 3
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mul_pointwise",
+            "median_us": 20.064,
+            "registers": {
+              "k_mul_pointwise": 24
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_masked_row_sum_i64_w128",
+      "family": "masked_row_sum",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int64); y = torch.randint(-3, 4, (3, 129), dtype=torch.int64); torch.where(x > y, x-y, x+y).sum(-1)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 2,
+        "Assign": 5,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1
+      },
+      "operations": {
+        "add": 1,
+        "greater": 1,
+        "subtract": 1,
+        "where": 1,
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 19.968,
+            "registers": {
+              "k_sum_1_reduce": 34
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_column_sum_i64_w128",
+      "family": "column_sum",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (33, 3), dtype=torch.int64); x.sum(0)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 1,
+        "Load": 1,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 2,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 1
+      },
+      "operations": {
+        "copy": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_sum_1_reduce",
+            "median_us": 20.192,
+            "registers": {
+              "k_sum_1_reduce": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_all_sum_rank3_i64_w128",
+      "family": "all_sum_rank3",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (2, 3, 33), dtype=torch.int64); x.sum()",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "upstream_generation_failed",
+      "error": "Missing Emmy generation proof: /mnt/c/Users/12066/Documents/Codex/2026-10-21/im-wo/work/emmy-hackathon-2026/tests/mvp-hidden/hidden_all_sum_rank3_i64_w128; regenerate from its PyTorch expression"
+    },
+    {
+      "id": "hidden_strided_slice_i64_w128",
+      "family": "strided_slice",
+      "dtype": "i64",
+      "code": "x = torch.randint(-3, 4, (257,), dtype=torch.int64); x[::2] + x[1::2].sum()",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "wrong_result",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 2,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 2
+      },
+      "operations": {
+        "copy": 1,
+        "add": 1
+      },
+      "ir_vs_expression": "wrong_result",
+      "reference_details": {
+        "output": "add",
+        "dtype": "int64",
+        "mismatch_count": 129,
+        "examples": [
+          {
+            "index": 0,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 1,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 2,
+            "got": 0,
+            "expected": 6
+          },
+          {
+            "index": 3,
+            "got": 0,
+            "expected": 7
+          },
+          {
+            "index": 4,
+            "got": 0,
+            "expected": 6
+          }
+        ]
+      },
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_slice_reduce_27a382",
+            "median_us": 19.712,
+            "registers": {
+              "k_slice_reduce_27a382": 25
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "wrong_result",
+            "details": {
+              "output": "add",
+              "dtype": "int64",
+              "mismatch_count": 129,
+              "examples": [
+                {
+                  "index": 0,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 1,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 2,
+                  "got": 0,
+                  "expected": 6
+                },
+                {
+                  "index": 3,
+                  "got": 0,
+                  "expected": 7
+                },
+                {
+                  "index": 4,
+                  "got": 0,
+                  "expected": 6
+                }
+              ]
+            }
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w32",
+      "family": "keepdim_center",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 31); x - x.mean(-1, keepdim=True)",
+      "knobs": "WORK=t32,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 3,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Assign": 3,
+        "Write": 1
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1,
+        "subtract": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_425dd1",
+            "median_us": 20.256,
+            "registers": {
+              "k_mean_425dd1": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w64",
+      "family": "keepdim_center",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 32); x - x.mean(-1, keepdim=True)",
+      "knobs": "WORK=t64,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 3,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 3
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1,
+        "subtract": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_615911",
+            "median_us": 19.744,
+            "registers": {
+              "k_mean_615911": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w128",
+      "family": "keepdim_center",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 33); x - x.mean(-1, keepdim=True)",
+      "knobs": "WORK=t128,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 3,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 3
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1,
+        "subtract": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_edb46a",
+            "median_us": 20.928,
+            "registers": {
+              "k_mean_edb46a": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "id": "hidden_keepdim_center_f32_w256",
+      "family": "keepdim_center",
+      "dtype": "f32",
+      "code": "x = torch.randn(3, 257); x - x.mean(-1, keepdim=True)",
+      "knobs": "WORK=t256,REDUCE=coop",
+      "status": "pass",
+      "nodes": {
+        "Tile": 1,
+        "StridedLoop": 2,
+        "Load": 3,
+        "Accum": 1,
+        "WarpShuffle": 1,
+        "Smem": 1,
+        "Cond": 1,
+        "Write": 2,
+        "Sync": 1,
+        "TreeHalve": 1,
+        "Assign": 3
+      },
+      "operations": {
+        "reciprocal": 1,
+        "multiply": 1,
+        "subtract": 1
+      },
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_mean_2e92bc",
+            "median_us": 20.032,
+            "registers": {
+              "k_mean_2e92bc": 20
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "statuses": {
+    "pass": 39,
+    "upstream_generation_failed": 5,
+    "wrong_result": 9
+  },
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f",
+    "tools/test_mvp_hidden_variants.py": "69e6821d50826c26cb918b18431daaee6f173d1b8db284e97d293ca1975a2446"
+  }
+}

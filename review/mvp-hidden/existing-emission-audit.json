@@ -1,0 +1,4704 @@
+{
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  },
+  "check": "Provenance verification and emission only; no GPU execution",
+  "counts": {
+    "activations:emits": 30,
+    "coverage-probes:emits": 7,
+    "native-math-edges:emits": 6,
+    "normalization:emits": 18,
+    "pytorch-only:emits": 34,
+    "serial-loops:emits": 18,
+    "where:emits": 41
+  },
+  "cases": [
+    {
+      "fixture": "tests/activations/sigmoid_edges_f16",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-80.0, -20.0, -8.0, -1.0, -0.5, -0.125, -0.125, -0.125, -0.01000213623046875, -1.0132789611816406e-06, -0.0, -5.960464477539063e-08, -0.0, 0.0, 5.960464477539063e-08, 0.0, 1.0132789611816406e-06, 0.01000213623046875, 0.125, 0.125, 0.125, 0.5, 1.0, 8.0, 20.0, 80.0], dtype=torch.float16); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_edges_f32",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-80.0, -20.0, -8.0, -1.0, -0.5, -0.1250000149011612, -0.125, -0.1249999925494194, -0.009999999776482582, -9.999999974752427e-07, -9.999999960041972e-13, -1.401298464324817e-45, -0.0, 0.0, 1.401298464324817e-45, 9.999999960041972e-13, 9.999999974752427e-07, 0.009999999776482582, 0.1249999925494194, 0.125, 0.1250000149011612, 0.5, 1.0, 8.0, 20.0, 80.0], dtype=torch.float32); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_edges_f64",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-700.0, -20.0, -8.0, -1.0, -0.5, -0.12500001, -0.125, -0.12499999, -0.01, -1e-06, -1e-12, -5e-324, -0.0, 0.0, 5e-324, 1e-12, 1e-06, 0.01, 0.12499999, 0.125, 0.12500001, 0.5, 1.0, 8.0, 20.0, 700.0], dtype=torch.float64); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f16_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float16); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f16_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f16_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float16); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f32_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float32); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f32_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f32_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float32); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f64_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float64); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f64_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/sigmoid_f64_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float64); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/silu_composed_f16",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "multiply",
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x * torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/silu_composed_f32",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "multiply",
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x * torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/silu_composed_f64",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "multiply",
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x * torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_edges_f16",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-80.0, -20.0, -8.0, -1.0, -0.5, -0.125, -0.125, -0.125, -0.01000213623046875, -1.0132789611816406e-06, -0.0, -5.960464477539063e-08, -0.0, 0.0, 5.960464477539063e-08, 0.0, 1.0132789611816406e-06, 0.01000213623046875, 0.125, 0.125, 0.125, 0.5, 1.0, 8.0, 20.0, 80.0], dtype=torch.float16); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_edges_f32",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-80.0, -20.0, -8.0, -1.0, -0.5, -0.1250000149011612, -0.125, -0.1249999925494194, -0.009999999776482582, -9.999999974752427e-07, -9.999999960041972e-13, -1.401298464324817e-45, -0.0, 0.0, 1.401298464324817e-45, 9.999999960041972e-13, 9.999999974752427e-07, 0.009999999776482582, 0.1249999925494194, 0.125, 0.1250000149011612, 0.5, 1.0, 8.0, 20.0, 80.0], dtype=torch.float32); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_edges_f64",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          26
+        ],
+        [
+          26
+        ]
+      ],
+      "code": "x = torch.tensor([-700.0, -20.0, -8.0, -1.0, -0.5, -0.12500001, -0.125, -0.12499999, -0.01, -1e-06, -1e-12, -5e-324, -0.0, 0.0, 5e-324, 1e-12, 1e-06, 0.01, 0.12499999, 0.125, 0.12500001, 0.5, 1.0, 8.0, 20.0, 700.0], dtype=torch.float64); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f16_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float16); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f16_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f16_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float16); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f32_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float32); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f32_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f32_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float32); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f64_1",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float64); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f64_129",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_f64_33",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float64); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/activations/tanh_sum_f16",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "copy",
+        "tanh"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129, dtype=torch.float16); torch.tanh(x).sum(-1)"
+    },
+    {
+      "fixture": "tests/activations/tanh_sum_f32",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129, dtype=torch.float32); torch.tanh(x).sum(-1)"
+    },
+    {
+      "fixture": "tests/activations/tanh_sum_f64",
+      "group": "activations",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "copy",
+        "tanh"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129, dtype=torch.float64); torch.tanh(x).sum(-1)"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_column_broadcast",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); b = torch.randn(3, 1); x + b"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_row_broadcast",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); w = torch.randn(129); x + w"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_sigmoid",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "sigmoid"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); torch.sigmoid(x)"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_tanh",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "tanh"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); torch.tanh(x)"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_two_row_sums",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); y = torch.randn(3, 129); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_variance_composition",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "multiply",
+        "reciprocal",
+        "subtract"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); (x*x).mean(-1) - x.mean(-1)**2"
+    },
+    {
+      "fixture": "tests/coverage-probes/probe_where",
+      "group": "coverage-probes",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_exp_edges_f16",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "exp"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          12
+        ],
+        [
+          12
+        ]
+      ],
+      "code": "x = torch.tensor([-17.375, -17.34375, -17.328125, -17.3125, -17.28125, -16.0, -10.0, 0.0, 10.0, 11.0, 11.078125, 11.0859375], dtype=torch.float16); torch.exp(x)"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_exp_edges_f32",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "exp"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          67
+        ],
+        [
+          67
+        ]
+      ],
+      "code": "x = torch.tensor([-103.97207641601562, -103.97208404541016, -103.97209167480469, -103.97209930419922, -103.97210693359375, -103.97211456298828, -103.97212219238281, -103.97212982177734, -103.97213745117188, -103.9721450805664, -103.97215270996094, -103.97216033935547, -103.97216796875, -103.97217559814453, -103.97218322753906, -103.9721908569336, -103.97219848632812, -103.97220611572266, -103.97221374511719, -103.97222137451172, -103.97222900390625, -103.9720687866211, -103.97206115722656, -103.97205352783203, -103.9720458984375, -103.97203826904297, -103.97203063964844, -103.9720230102539, -103.97201538085938, -103.97200775146484, -103.97200012207031, -103.97199249267578, -103.97198486328125, -103.97197723388672, -103.97196960449219, -103.97196197509766, -103.97195434570312, -103.9719467163086, -103.97193908691406, -103.97193145751953, -103.971923828125, -100.0, -90.0, -87.3365478515625, 0.0, 80.0, 88.72283172607422, 88.72282409667969, 88.72281646728516, 88.72280883789062, 88.7228012084961, 88.72279357910156, 88.72278594970703, 88.7227783203125, 88.72277069091797, 88.72276306152344, 88.7227554321289, 88.72274780273438, 88.72274017333984, 88.72273254394531, 88.72272491455078, 88.72271728515625, 88.72270965576172, 88.72270202636719, 88.72269439697266, 88.72268676757812, 88.7226791381836], dtype=torch.float32); torch.exp(x)"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_log_edges_f16",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          71
+        ],
+        [
+          71
+        ]
+      ],
+      "code": "x = torch.tensor([1.0, 0.99951171875, 0.9990234375, 0.99853515625, 0.998046875, 0.99755859375, 0.9970703125, 0.99658203125, 0.99609375, 0.99560546875, 0.9951171875, 0.99462890625, 0.994140625, 0.99365234375, 0.9931640625, 0.99267578125, 0.9921875, 0.99169921875, 0.9912109375, 0.99072265625, 0.990234375, 0.98974609375, 0.9892578125, 0.98876953125, 0.98828125, 0.98779296875, 0.9873046875, 0.98681640625, 0.986328125, 0.98583984375, 0.9853515625, 0.98486328125, 0.984375, 1.0009765625, 1.001953125, 1.0029296875, 1.00390625, 1.0048828125, 1.005859375, 1.0068359375, 1.0078125, 1.0087890625, 1.009765625, 1.0107421875, 1.01171875, 1.0126953125, 1.013671875, 1.0146484375, 1.015625, 1.0166015625, 1.017578125, 1.0185546875, 1.01953125, 1.0205078125, 1.021484375, 1.0224609375, 1.0234375, 1.0244140625, 1.025390625, 1.0263671875, 1.02734375, 1.0283203125, 1.029296875, 1.0302734375, 1.03125, 0.5, 0.75, 1.25, 2.0, 5.960464477539063e-08, 6.103515625e-05], dtype=torch.float16); torch.log(x)"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_log_edges_f32",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          71
+        ],
+        [
+          71
+        ]
+      ],
+      "code": "x = torch.tensor([1.0, 0.9999999403953552, 0.9999998807907104, 0.9999998211860657, 0.9999997615814209, 0.9999997019767761, 0.9999996423721313, 0.9999995827674866, 0.9999995231628418, 0.999999463558197, 0.9999994039535522, 0.9999993443489075, 0.9999992847442627, 0.9999992251396179, 0.9999991655349731, 0.9999991059303284, 0.9999990463256836, 0.9999989867210388, 0.999998927116394, 0.9999988675117493, 0.9999988079071045, 0.9999987483024597, 0.9999986886978149, 0.9999986290931702, 0.9999985694885254, 0.9999985098838806, 0.9999984502792358, 0.9999983906745911, 0.9999983310699463, 0.9999982714653015, 0.9999982118606567, 0.999998152256012, 0.9999980926513672, 1.0000001192092896, 1.000000238418579, 1.0000003576278687, 1.0000004768371582, 1.0000005960464478, 1.0000007152557373, 1.0000008344650269, 1.0000009536743164, 1.000001072883606, 1.0000011920928955, 1.000001311302185, 1.0000014305114746, 1.0000015497207642, 1.0000016689300537, 1.0000017881393433, 1.0000019073486328, 1.0000020265579224, 1.000002145767212, 1.0000022649765015, 1.000002384185791, 1.0000025033950806, 1.0000026226043701, 1.0000027418136597, 1.0000028610229492, 1.0000029802322388, 1.0000030994415283, 1.0000032186508179, 1.0000033378601074, 1.000003457069397, 1.0000035762786865, 1.000003695487976, 1.0000038146972656, 0.5, 0.75, 1.25, 2.0, 1.401298464324817e-45, 1.1754943508222875e-38], dtype=torch.float32); torch.log(x)"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_log_exp_f16",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "exp",
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          11
+        ],
+        [
+          11
+        ]
+      ],
+      "code": "x = torch.tensor([-10.0, -1.0, -0.0999755859375, -0.01000213623046875, -0.0010004043579101562, 0.0, 0.0010004043579101562, 0.01000213623046875, 0.0999755859375, 1.0, 10.0], dtype=torch.float16); torch.log(torch.exp(x))"
+    },
+    {
+      "fixture": "tests/native-math-edges/native_log_exp_f32",
+      "group": "native-math-edges",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "exp",
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          11
+        ],
+        [
+          11
+        ]
+      ],
+      "code": "x = torch.tensor([-10.0, -1.0, -0.10000000149011612, -0.009999999776482582, -0.0010000000474974513, 0.0, 0.0010000000474974513, 0.009999999776482582, 0.10000000149011612, 1.0, 10.0], dtype=torch.float32); torch.log(torch.exp(x))"
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "divide",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "code": "x = torch.randn(3, 1); x / torch.sqrt((x * x).sum(-1, keepdim=True))"
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x1025",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "multiply",
+        "reciprocal",
+        "sqrt"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1025
+        ],
+        [
+          3,
+          1025
+        ]
+      ],
+      "code": "x = torch.randn(3, 1025); x / torch.sqrt((x * x).sum(-1, keepdim=True))"
+    },
+    {
+      "fixture": "tests/normalization/norm_l2norm_f32_3x129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "multiply",
+        "reciprocal",
+        "sqrt"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); x / torch.sqrt((x * x).sum(-1, keepdim=True))"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float16); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f16_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float32); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f32_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float64); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_reciprocal_f64_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); torch.reciprocal(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "divide",
+        "multiply",
+        "reciprocal",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "code": "x = torch.randn(3, 1); x / torch.sqrt((x * x).mean(-1, keepdim=True) + 1e-5)"
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x1025",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal",
+        "sqrt"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          3,
+          1025
+        ],
+        [
+          3,
+          1025
+        ]
+      ],
+      "code": "x = torch.randn(3, 1025); x / torch.sqrt((x * x).mean(-1, keepdim=True) + 1e-5)"
+    },
+    {
+      "fixture": "tests/normalization/norm_rmsnorm_f32_3x129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "reciprocal",
+        "sqrt"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); x / torch.sqrt((x * x).mean(-1, keepdim=True) + 1e-5)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float16); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f16_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float32); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f32_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_1",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float64); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/normalization/norm_sqrt_f64_129",
+      "group": "normalization",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "multiply",
+        "sqrt"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); torch.sqrt(x * x + 1)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x.to(torch.float16)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "f32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x.to(torch.float32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "f64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x.to(torch.float64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_i32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "i32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x.to(torch.int32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f16_to_i64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); x.to(torch.int64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "f32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x.to(torch.float16)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x.to(torch.float32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "f64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x.to(torch.float64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_i32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x.to(torch.int32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f32_to_i64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); x.to(torch.int64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "f64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.float16)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "f64"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.float32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.float64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_i32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64",
+        "i32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.int32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_f64_to_i64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); x.to(torch.int64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "i32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.to(torch.float16)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i32"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.to(torch.float32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64",
+        "i32"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.to(torch.float64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_i32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "i32"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.to(torch.int32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i32_to_i64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "i32",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int32); x.to(torch.int64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.to(torch.float16)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i64"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.to(torch.float32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.to(torch.float64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_i32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "i32",
+        "i64"
+      ],
+      "ops": [
+        "copy"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.to(torch.int32)"
+    },
+    {
+      "fixture": "tests/pytorch-only/convert_i64_to_i64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [],
+      "nodes": [
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-8, 9, (129,), dtype=torch.int64); x.to(torch.int64)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "exp"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-10.0, -9.921875, -9.84375, -9.765625, -9.6875, -9.609375, -9.53125, -9.453125, -9.375, -9.296875, -9.21875, -9.140625, -9.0625, -8.984375, -8.90625, -8.828125, -8.75, -8.671875, -8.59375, -8.515625, -8.4375, -8.359375, -8.28125, -8.203125, -8.125, -8.046875, -7.96875, -7.890625, -7.8125, -7.734375, -7.65625, -7.578125, -7.5, -7.421875, -7.34375, -7.265625, -7.1875, -7.109375, -7.03125, -6.953125, -6.875, -6.796875, -6.71875, -6.640625, -6.5625, -6.484375, -6.40625, -6.328125, -6.25, -6.171875, -6.09375, -6.015625, -5.9375, -5.859375, -5.78125, -5.703125, -5.625, -5.546875, -5.46875, -5.390625, -5.3125, -5.234375, -5.15625, -5.078125, -5.0, -4.921875, -4.84375, -4.765625, -4.6875, -4.609375, -4.53125, -4.453125, -4.375, -4.296875, -4.21875, -4.140625, -4.0625, -3.984375, -3.90625, -3.828125, -3.75, -3.671875, -3.59375, -3.515625, -3.4375, -3.359375, -3.28125, -3.203125, -3.125, -3.046875, -2.96875, -2.890625, -2.8125, -2.734375, -2.65625, -2.578125, -2.5, -2.421875, -2.34375, -2.265625, -2.1875, -2.109375, -2.03125, -1.953125, -1.875, -1.796875, -1.71875, -1.640625, -1.5625, -1.484375, -1.40625, -1.328125, -1.25, -1.171875, -1.09375, -1.015625, -0.9375, -0.859375, -0.78125, -0.703125, -0.625, -0.546875, -0.46875, -0.390625, -0.3125, -0.234375, -0.15625, -0.078125, 0.0, 0.078125, 0.15625, 0.234375, 0.3125, 0.390625, 0.46875, 0.546875, 0.625, 0.703125, 0.78125, 0.859375, 0.9375, 1.015625, 1.09375, 1.171875, 1.25, 1.328125, 1.40625, 1.484375, 1.5625, 1.640625, 1.71875, 1.796875, 1.875, 1.953125, 2.03125, 2.109375, 2.1875, 2.265625, 2.34375, 2.421875, 2.5, 2.578125, 2.65625, 2.734375, 2.8125, 2.890625, 2.96875, 3.046875, 3.125, 3.203125, 3.28125, 3.359375, 3.4375, 3.515625, 3.59375, 3.671875, 3.75, 3.828125, 3.90625, 3.984375, 4.0625, 4.140625, 4.21875, 4.296875, 4.375, 4.453125, 4.53125, 4.609375, 4.6875, 4.765625, 4.84375, 4.921875, 5.0, 5.078125, 5.15625, 5.234375, 5.3125, 5.390625, 5.46875, 5.546875, 5.625, 5.703125, 5.78125, 5.859375, 5.9375, 6.015625, 6.09375, 6.171875, 6.25, 6.328125, 6.40625, 6.484375, 6.5625, 6.640625, 6.71875, 6.796875, 6.875, 6.953125, 7.03125, 7.109375, 7.1875, 7.265625, 7.34375, 7.421875, 7.5, 7.578125, 7.65625, 7.734375, 7.8125, 7.890625, 7.96875, 8.046875, 8.125, 8.203125, 8.28125, 8.359375, 8.4375, 8.515625, 8.59375, 8.671875, 8.75, 8.828125, 8.90625, 8.984375, 9.0625, 9.140625, 9.21875, 9.296875, 9.375, 9.453125, 9.53125, 9.609375, 9.6875, 9.765625, 9.84375, 9.921875, 10.0], dtype=torch.float16); torch.exp(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "exp"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-80.0, -79.375, -78.75, -78.125, -77.5, -76.875, -76.25, -75.625, -75.0, -74.375, -73.75, -73.125, -72.5, -71.875, -71.25, -70.625, -70.0, -69.375, -68.75, -68.125, -67.5, -66.875, -66.25, -65.625, -65.0, -64.375, -63.75, -63.125, -62.5, -61.875, -61.25, -60.625, -60.0, -59.375, -58.75, -58.125, -57.5, -56.875, -56.25, -55.625, -55.0, -54.375, -53.75, -53.125, -52.5, -51.875, -51.25, -50.625, -50.0, -49.375, -48.75, -48.125, -47.5, -46.875, -46.25, -45.625, -45.0, -44.375, -43.75, -43.125, -42.5, -41.875, -41.25, -40.625, -40.0, -39.375, -38.75, -38.125, -37.5, -36.875, -36.25, -35.625, -35.0, -34.375, -33.75, -33.125, -32.5, -31.875, -31.25, -30.625, -30.0, -29.375, -28.75, -28.125, -27.5, -26.875, -26.25, -25.625, -25.0, -24.375, -23.75, -23.125, -22.5, -21.875, -21.25, -20.625, -20.0, -19.375, -18.75, -18.125, -17.5, -16.875, -16.25, -15.625, -15.0, -14.375, -13.75, -13.125, -12.5, -11.875, -11.25, -10.625, -10.0, -9.375, -8.75, -8.125, -7.5, -6.875, -6.25, -5.625, -5.0, -4.375, -3.75, -3.125, -2.5, -1.875, -1.25, -0.625, 0.0, 0.625, 1.25, 1.875, 2.5, 3.125, 3.75, 4.375, 5.0, 5.625, 6.25, 6.875, 7.5, 8.125, 8.75, 9.375, 10.0, 10.625, 11.25, 11.875, 12.5, 13.125, 13.75, 14.375, 15.0, 15.625, 16.25, 16.875, 17.5, 18.125, 18.75, 19.375, 20.0, 20.625, 21.25, 21.875, 22.5, 23.125, 23.75, 24.375, 25.0, 25.625, 26.25, 26.875, 27.5, 28.125, 28.75, 29.375, 30.0, 30.625, 31.25, 31.875, 32.5, 33.125, 33.75, 34.375, 35.0, 35.625, 36.25, 36.875, 37.5, 38.125, 38.75, 39.375, 40.0, 40.625, 41.25, 41.875, 42.5, 43.125, 43.75, 44.375, 45.0, 45.625, 46.25, 46.875, 47.5, 48.125, 48.75, 49.375, 50.0, 50.625, 51.25, 51.875, 52.5, 53.125, 53.75, 54.375, 55.0, 55.625, 56.25, 56.875, 57.5, 58.125, 58.75, 59.375, 60.0, 60.625, 61.25, 61.875, 62.5, 63.125, 63.75, 64.375, 65.0, 65.625, 66.25, 66.875, 67.5, 68.125, 68.75, 69.375, 70.0, 70.625, 71.25, 71.875, 72.5, 73.125, 73.75, 74.375, 75.0, 75.625, 76.25, 76.875, 77.5, 78.125, 78.75, 79.375, 80.0], dtype=torch.float32); torch.exp(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_exp_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "exp"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-700.0, -694.53125, -689.0625, -683.59375, -678.125, -672.65625, -667.1875, -661.71875, -656.25, -650.78125, -645.3125, -639.84375, -634.375, -628.90625, -623.4375, -617.96875, -612.5, -607.03125, -601.5625, -596.09375, -590.625, -585.15625, -579.6875, -574.21875, -568.75, -563.28125, -557.8125, -552.34375, -546.875, -541.40625, -535.9375, -530.46875, -525.0, -519.53125, -514.0625, -508.59375, -503.125, -497.65625, -492.1875, -486.71875, -481.25, -475.78125, -470.3125, -464.84375, -459.375, -453.90625, -448.4375, -442.96875, -437.5, -432.03125, -426.5625, -421.09375, -415.625, -410.15625, -404.6875, -399.21875, -393.75, -388.28125, -382.8125, -377.34375, -371.875, -366.40625, -360.9375, -355.46875, -350.0, -344.53125, -339.0625, -333.59375, -328.125, -322.65625, -317.1875, -311.71875, -306.25, -300.78125, -295.3125, -289.84375, -284.375, -278.90625, -273.4375, -267.96875, -262.5, -257.03125, -251.5625, -246.09375, -240.625, -235.15625, -229.6875, -224.21875, -218.75, -213.28125, -207.8125, -202.34375, -196.875, -191.40625, -185.9375, -180.46875, -175.0, -169.53125, -164.0625, -158.59375, -153.125, -147.65625, -142.1875, -136.71875, -131.25, -125.78125, -120.3125, -114.84375, -109.375, -103.90625, -98.4375, -92.96875, -87.5, -82.03125, -76.5625, -71.09375, -65.625, -60.15625, -54.6875, -49.21875, -43.75, -38.28125, -32.8125, -27.34375, -21.875, -16.40625, -10.9375, -5.46875, 0.0, 5.46875, 10.9375, 16.40625, 21.875, 27.34375, 32.8125, 38.28125, 43.75, 49.21875, 54.6875, 60.15625, 65.625, 71.09375, 76.5625, 82.03125, 87.5, 92.96875, 98.4375, 103.90625, 109.375, 114.84375, 120.3125, 125.78125, 131.25, 136.71875, 142.1875, 147.65625, 153.125, 158.59375, 164.0625, 169.53125, 175.0, 180.46875, 185.9375, 191.40625, 196.875, 202.34375, 207.8125, 213.28125, 218.75, 224.21875, 229.6875, 235.15625, 240.625, 246.09375, 251.5625, 257.03125, 262.5, 267.96875, 273.4375, 278.90625, 284.375, 289.84375, 295.3125, 300.78125, 306.25, 311.71875, 317.1875, 322.65625, 328.125, 333.59375, 339.0625, 344.53125, 350.0, 355.46875, 360.9375, 366.40625, 371.875, 377.34375, 382.8125, 388.28125, 393.75, 399.21875, 404.6875, 410.15625, 415.625, 421.09375, 426.5625, 432.03125, 437.5, 442.96875, 448.4375, 453.90625, 459.375, 464.84375, 470.3125, 475.78125, 481.25, 486.71875, 492.1875, 497.65625, 503.125, 508.59375, 514.0625, 519.53125, 525.0, 530.46875, 535.9375, 541.40625, 546.875, 552.34375, 557.8125, 563.28125, 568.75, 574.21875, 579.6875, 585.15625, 590.625, 596.09375, 601.5625, 607.03125, 612.5, 617.96875, 623.4375, 628.90625, 634.375, 639.84375, 645.3125, 650.78125, 656.25, 661.71875, 667.1875, 672.65625, 678.125, 683.59375, 689.0625, 694.53125, 700.0], dtype=torch.float64); torch.exp(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, 1.1920928955078125e-07, 1.1920928955078125e-07, 1.1920928955078125e-07, 1.1920928955078125e-07, 1.1920928955078125e-07, 1.7881393432617188e-07, 1.7881393432617188e-07, 1.7881393432617188e-07, 2.384185791015625e-07, 2.384185791015625e-07, 2.384185791015625e-07, 2.980232238769531e-07, 2.980232238769531e-07, 3.5762786865234375e-07, 4.172325134277344e-07, 4.172325134277344e-07, 4.76837158203125e-07, 5.364418029785156e-07, 5.960464477539062e-07, 6.556510925292969e-07, 7.748603820800781e-07, 8.344650268554688e-07, 9.5367431640625e-07, 1.0132789611816406e-06, 1.1324882507324219e-06, 1.2516975402832031e-06, 1.430511474609375e-06, 1.5497207641601562e-06, 1.7285346984863281e-06, 1.9669532775878906e-06, 2.1457672119140625e-06, 2.384185791015625e-06, 2.682209014892578e-06, 2.9802322387695312e-06, 3.2782554626464844e-06, 3.635883331298828e-06, 4.0531158447265625e-06, 4.5299530029296875e-06, 5.0067901611328125e-06, 5.602836608886719e-06, 6.198883056640625e-06, 6.9141387939453125e-06, 7.68899917602539e-06, 8.52346420288086e-06, 9.47713851928711e-06, 1.055002212524414e-05, 1.1682510375976562e-05, 1.2993812561035156e-05, 1.4483928680419922e-05, 1.609325408935547e-05, 1.7881393432617188e-05, 1.9848346710205078e-05, 2.205371856689453e-05, 2.4497509002685547e-05, 2.7239322662353516e-05, 3.0279159545898438e-05, 3.361701965332031e-05, 3.737211227416992e-05, 4.1544437408447266e-05, 4.6193599700927734e-05, 5.131959915161133e-05, 5.704164505004883e-05, 6.341934204101562e-05, 7.045269012451172e-05, 7.832050323486328e-05, 8.702278137207031e-05, 9.673833847045898e-05, 0.0001074671745300293, 0.00011944770812988281, 0.0001327991485595703, 0.0001475811004638672, 0.000164031982421875, 0.00018227100372314453, 0.00020253658294677734, 0.000225067138671875, 0.00025010108947753906, 0.0002779960632324219, 0.000308990478515625, 0.00034332275390625, 0.00038170814514160156, 0.0004241466522216797, 0.00047135353088378906, 0.0005240440368652344, 0.0005822181701660156, 0.0006470680236816406, 0.0007190704345703125, 0.0007991790771484375, 0.0008883476257324219, 0.0009870529174804688, 0.0010967254638671875, 0.0012197494506835938, 0.0013551712036132812, 0.0015058517456054688, 0.0016736984252929688, 0.0018606185913085938, 0.00206756591796875, 0.0022983551025390625, 0.0025539398193359375, 0.002838134765625, 0.003154754638671875, 0.003505706787109375, 0.003894805908203125, 0.004329681396484375, 0.004810333251953125, 0.00534820556640625, 0.00594329833984375, 0.0066070556640625, 0.0073394775390625, 0.00815582275390625, 0.009063720703125, 0.01007843017578125, 0.011199951171875, 0.01244354248046875, 0.01383209228515625, 0.01537322998046875, 0.01708984375, 0.01898193359375, 0.0211029052734375, 0.0234527587890625, 0.02606201171875, 0.028961181640625, 0.032196044921875, 0.0357666015625, 0.039764404296875, 1.0009765625, 0.049102783203125, 0.054595947265625, 0.0606689453125, 0.06744384765625, 0.074951171875, 0.083251953125, 0.092529296875, 0.10284423828125, 0.11431884765625, 0.1270751953125, 0.1412353515625, 0.156982421875, 0.1744384765625, 0.19384765625, 0.2154541015625, 0.2393798828125, 0.26611328125, 0.295654296875, 0.32861328125, 0.365234375, 0.406005859375, 0.451171875, 0.50146484375, 0.55712890625, 0.619140625, 0.68798828125, 0.7646484375, 0.85009765625, 0.94482421875, 1.0498046875, 1.1669921875, 1.296875, 1.44140625, 1.6015625, 1.7802734375, 1.978515625, 2.19921875, 2.443359375, 2.716796875, 3.017578125, 3.353515625, 3.728515625, 4.14453125, 4.60546875, 5.1171875, 5.6875, 6.3203125, 7.0234375, 7.80859375, 8.6796875, 9.640625, 10.71875, 11.9140625, 13.234375, 14.7109375, 16.34375, 18.171875, 20.1875, 22.4375, 24.9375, 27.71875, 30.8125, 34.25, 38.0625, 42.28125, 47.0, 52.25, 58.0625, 64.5, 71.6875, 79.6875, 88.5625, 98.4375, 109.375, 121.5625, 135.125, 150.125, 166.875, 185.5, 206.125, 229.125, 254.625, 283.0, 314.5, 349.5, 388.5, 431.75, 479.75, 533.0, 592.5, 658.5, 732.0, 813.5, 904.0, 1005.0, 1117.0, 1241.0, 1379.0, 1533.0, 1704.0, 1893.0, 2104.0, 2338.0, 2600.0, 2888.0, 3210.0, 3568.0, 3966.0, 4408.0, 4896.0, 5444.0, 6048.0, 6724.0, 7472.0, 8304.0, 9232.0, 10256.0, 11400.0, 12672.0, 14080.0, 15648.0, 17392.0, 19328.0, 21472.0, 23872.0, 26528.0, 29488.0, 32768.0], dtype=torch.float16); torch.log(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([1.401298464324817e-45, 2.802596928649634e-45, 5.605193857299268e-45, 1.2611686178923354e-44, 2.802596928649634e-44, 5.885453550164232e-44, 1.2471556332490872e-43, 2.620428128287408e-43, 5.5351289340830274e-43, 1.1686829192468974e-42, 2.466285297211678e-42, 5.20722509343102e-42, 1.099318645262819e-41, 2.320830516614762e-41, 4.90006047005102e-41, 1.034550630241726e-40, 2.184231942312379e-40, 4.611547129231184e-40, 9.736305808036688e-40, 2.0556165653612542e-39, 4.3400021115158564e-39, 9.163003777715191e-39, 1.9345763276485766e-38, 4.084452355251411e-38, 8.623464632593135e-38, 1.8206637104967793e-37, 3.8439500221565785e-37, 8.11569382048834e-37, 1.7134586158366455e-36, 3.6176089759240705e-36, 7.637822614610333e-36, 1.6125661667292386e-35, 3.404595251148945e-35, 7.188089410149487e-35, 1.5176144052006813e-34, 3.204124619329226e-34, 6.764837286690316e-34, 1.4282535542399114e-33, 3.0154580056109894e-33, 6.366507526096249e-33, 1.344154574151857e-32, 2.8379005022742444e-32, 5.991632238980246e-32, 1.2650075403407942e-31, 2.6707981616078197e-31, 5.638830414171342e-31, 1.1905208361681709e-30, 2.5135351200808003e-30, 5.306802536787232e-30, 1.1204200518817425e-29, 2.365532181063683e-29, 4.994325142903626e-29, 1.0544470056638762e-28, 2.2262438117341833e-28, 4.700247436716604e-28, 9.923587075978504e-28, 2.095157364147659e-27, 4.423485525918325e-27, 9.33926185678136e-27, 1.971789417851007e-26, 4.163019909863078e-26, 8.789343992338278e-26, 1.8556857018223144e-25, 3.9178912443269636e-25, 8.271806125530277e-25, 1.746418531732179e-24, 3.687196613292711e-24, 7.784742103402383e-24, 1.6435850695963742e-23, 3.470085526096879e-23, 7.326358223889067e-23, 1.546806919546264e-22, 3.265758434741133e-22, 6.894964399832546e-22, 1.455727210374657e-21, 3.073462671258583e-21, 6.488972199846729e-21, 1.3700104578401362e-20, 2.892490012736829e-20, 6.106885761901765e-20, 1.289340896447124e-19, 2.722173072247763e-19, 5.747297941915775e-19, 1.2134214326463945e-18, 2.561885063375746e-18, 5.408883153876576e-18, 1.1419723010300854e-17, 2.4110351129146556e-17, 5.0903950433962025e-17, 1.0747301603783842e-16, 2.269067593307282e-16, 4.790660060388305e-16, 1.0114474421513988e-15, 2.1354594220040265e-15, 4.508574689667455e-15, 9.518910521464675e-15, 2.0097183127203676e-14, 4.243099063295022e-14, 8.958414251299812e-14, 1.8913813386572248e-13, 3.993255108091648e-13, 8.4309208919775e-13, 1.7800122270247853e-12, 3.758122719271784e-12, 7.934488135963313e-12, 1.675200776707353e-11, 3.53683540788019e-11, 7.467286511353421e-11, 1.5765609651108292e-10, 3.328577968808588e-10, 7.027594617348143e-10, 1.4837292505731625e-09, 3.132583303866454e-09, 6.613792624676762e-09, 1.3963637357505831e-08, 2.948129207425154e-08, 6.224356496886685e-08, 1.3141423949036835e-07, 2.774536369543057e-07, 5.857851874679909e-07, 1.2367626140985521e-06, 2.611164973131963e-06, 5.512927145900903e-06, 1.1639390322670806e-05, 2.4574132112320513e-05, 5.188312934478745e-05, 0.00010954034951282665, 0.00023127147869672626, 1.0000001192092896, 0.0010309035424143076, 0.002176536712795496, 0.0045953006483614445, 0.009702013805508614, 0.020483769476413727, 0.04324718564748764, 0.09130736440420151, 0.19277635216712952, 0.4070068597793579, 0.8593096733093262, 1.8142521381378174, 3.8304131031036377, 8.087114334106445, 17.074247360229492, 36.04869079589844, 76.1092529296875, 160.68873596191406, 339.2605895996094, 716.277587890625, 1512.27001953125, 3192.841064453125, 6741.0146484375, 14232.2392578125, 30048.388671875, 63440.87109375, 133942.109375, 282790.65625, 597053.1875, 1260552.75, 2661392.75, 5618973.0, 11863283.0, 25046836.0, 52881144.0, 111647448.0, 235720176.0, 497673728.0, 1050733760.0, 2218404096.0, 4683695104.0, 9888640000.0, 20877791232.0, 44079079424.0, 93063733248.0, 196484562944.0, 414835965952.0, 875839160320.0, 1849150799872.0, 3904094076928.0, 8242676629504.0, 17402683195392.0, 36742115622912.0, 77573274992640.0, 163779719462912.0, 345786541932544.0, 730055789510656.0, 1541359743795200.0, 3254257797038080.0, 6870683342602240.0, 1.4506007229104128e+16, 3.062639388052685e+16, 6.466120938264986e+16, 1.3651858493014016e+17, 2.8823037615171174e+17, 6.08538041971114e+17, 1.2848005026550907e+18, 2.7125867200664044e+18, 5.727058101434057e+18, 1.209148330228056e+19, 2.55286324975171e+19, 5.389835466269576e+19, 1.1379507302049094e+20, 2.4025444411500816e+20, 5.072468999552033e+20, 1.0709454360770773e+21, 2.2610768067051662e+21, 4.773789709314868e+21, 1.0078856681771659e+22, 2.127939114573528e+22, 4.4926973133925575e+22, 9.485388761015415e+22, 2.0026410466047368e+23, 4.228156591856755e+23, 8.926866566603748e+23, 1.8847207034879098e+24, 3.9791927045393193e+24, 8.401231205909413e+24, 1.7737437941037804e+25, 3.744888041214734e+25, 7.906546599467001e+25, 1.6693013959296392e+26, 3.524379951425607e+26, 7.440990070611449e+26, 1.571008990044034e+27, 3.3168562204186874e+27, 7.002846251999657e+27, 1.4785042353541602e+28, 3.1215517750175405e+28, 6.590502079164145e+28, 1.3914463230981672e+29, 2.9377471656399806e+29, 6.2024373633044974e+29, 1.3095146435513918e+30, 2.764765596888782e+30, 5.837222762145511e+30, 1.232407269379332e+31, 2.601969590845583e+31, 5.493513183263458e+31, 1.1598401430600459e+32, 2.4487593268757227e+32, 5.170041868849827e+32, 1.091545969885891e+33, 2.3045703768568367e+33, 4.865617480537828e+33, 1.027273097923975e+34, 2.16887169159201e+34, 4.5791179223959145e+34, 9.667848222068112e+34, 2.041163469812056e+35, 4.309488738762573e+35, 9.098581990178745e+35, 1.9209747434187297e+36, 4.05573559143945e+36, 8.562835292373264e+36, 1.80786319940705e+37, 3.816924099130524e+37, 8.058634872036087e+37, 1.7014118346046923e+38], dtype=torch.float32); torch.log(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_log_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "log"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([5e-324, 1.443e-321, 4.22184e-319, 1.234132e-316, 3.607618527e-314, 1.054580159676e-311, 3.08275197315188e-309, 9.011510069458802e-307, 2.634247400997657e-304, 7.700440121773794e-302, 2.250995029797368e-299, 6.580115609035184e-297, 1.9235014229314448e-294, 5.622785288056342e-292, 1.6436543284381885e-289, 4.804735398899552e-287, 1.404521732703641e-284, 4.105702258002906e-282, 1.2001801495033896e-279, 3.508370312178052e-277, 1.0255678909924812e-274, 2.997943219915683e-272, 8.763596860604429e-270, 2.5617773353744772e-267, 7.488595402579627e-265, 2.189068516188553e-262, 6.3990918335863446e-260, 1.8705844970977785e-257, 5.468098367360826e-255, 1.598436200103459e-252, 4.6725536267818715e-250, 1.3658823163376361e-247, 3.992751396988856e-245, 1.1671623189984766e-242, 3.411852488279785e-240, 9.973537709621821e-238, 2.9154676172826216e-235, 8.52250392478429e-233, 2.491300974066784e-230, 7.282578685985408e-228, 2.12884564609604e-225, 6.223048154115264e-223, 1.819123354455277e-220, 5.317666996576684e-218, 1.5544620554304519e-215, 4.5440082715382956e-213, 1.3283058984730723e-210, 3.8829078964705525e-208, 1.1350528330714188e-205, 3.31798994005117e-203, 9.699158419340347e-201, 2.835260978579397e-198, 8.288043631317162e-196, 2.4227634688160106e-193, 7.08222963939265e-191, 2.0702795510452214e-188, 6.051847564552514e-186, 1.7690779453474973e-183, 5.17137410242476e-181, 1.5116976715221207e-178, 4.4189992926906994e-176, 1.2917632352465493e-173, 3.7760862706963703e-171, 1.1038267025009534e-168, 3.22670961892359e-166, 9.432327503279463e-164, 2.757260882954866e-161, 8.060033511378596e-159, 2.3561114802791546e-156, 6.88739234106948e-154, 2.0133246519473793e-151, 5.885356827965471e-149, 1.7204093219132295e-146, 5.0291058323971225e-144, 1.4701097669782552e-141, 4.2974294019474095e-139, 1.2562258873146602e-136, 3.6722033856900053e-134, 1.073459625537504e-131, 3.137940485947782e-129, 9.172837300163723e-127, 2.681406626800987e-124, 7.838296115994465e-122, 2.2912931365174062e-119, 6.697915158804497e-117, 1.9579366236277408e-114, 5.723446372866624e-112, 1.673079607775308e-109, 4.8907514661513e-107, 1.4296659759942182e-104, 4.1792039874885535e-102, 1.2216661977210586e-99, 3.571178394551425e-97, 1.0439279689903345e-94, 3.0516134565077436e-92, 8.920485861630707e-90, 2.6076391765102122e-87, 7.622658877941235e-85, 2.2282579926267944e-82, 6.513650631898929e-80, 1.9040723603293915e-77, 5.5659901923745e-75, 1.6270519685633034e-72, 4.756203329342125e-70, 1.3903348231722435e-67, 4.06423104033437e-65, 1.1880572703724217e-62, 3.472932674537728e-60, 1.0152087498350075e-57, 2.9676613465556032e-55, 8.675076795064601e-53, 2.5359011225325563e-50, 7.412953977445441e-48, 2.1669569914794146e-45, 6.334455356405288e-43, 1.8516899421662023e-40, 5.412865746148762e-38, 1.5822905832471595e-35, 4.6253567098241286e-33, 1.3520856990256939e-30, 3.9524210827391757e-28, 1.1553729491065536e-25, 3.3773897658749665e-23, 9.87279617326836e-21, 2.886018820325604e-18, 8.436419110753569e-16, 2.466136634696589e-13, 7.209018211577882e-11, 1.0000000000000002, 6.160189873523181e-06, 0.0018007486024986582, 0.5263953865023132, 153.876061625946, 44981.09776159272, 13148888.361572158, 3843687098.55528, 1123587797336.3408, 328447531225329.2, 9.601188356064075e+16, 2.8066223394865156e+19, 8.204327073251924e+21, 2.3982914187595802e+24, 7.010692867240867e+26, 2.0493678997610198e+29, 5.990718561065437e+31, 1.7512086962072053e+34, 5.1191386582619363e+36, 1.4964281903846334e+39, 4.374363498366581e+41, 1.278715286092248e+44, 3.737944465512622e+46, 1.0926770782537178e+49, 3.1941170029591216e+51, 9.337052667836403e+53, 2.7294101136929022e+56, 7.978620056831439e+58, 2.3323126741529835e+61, 6.817823597649679e+63, 1.9929882954286886e+66, 5.825909527910088e+68, 1.7030316688384184e+71, 4.978307423368092e+73, 1.4552603603939956e+76, 4.254021570852024e+78, 1.2435368967498602e+81, 3.635110889361457e+83, 1.0626167355782342e+86, 3.1062445165992998e+88, 9.080183544872125e+90, 2.654322052496758e+93, 7.759122404909296e+95, 2.2681490528903687e+98, 6.630260302212123e+100, 1.9381597350963348e+103, 5.665634511356042e+105, 1.6561800265999818e+108, 4.841350558372339e+110, 1.4152250874061117e+113, 4.136990337458641e+115, 1.2093262905333836e+118, 3.535106339826819e+120, 1.0333833748352458e+123, 3.0207894663734405e+125, 8.83038107866558e+127, 2.5812997185820914e+130, 7.545663293343273e+132, 2.2057506196058312e+135, 6.4478570097126784e+137, 1.884839548413246e+140, 5.509768777302579e+142, 1.6106173071811282e+145, 4.70816147653546e+147, 1.3762912139525215e+150, 4.0231787185785986e+152, 1.176056843023784e+155, 3.4378529883249276e+157, 1.0049542451491538e+160, 2.9376853468518706e+162, 8.587450860339761e+164, 2.5102862822860574e+167, 7.338076597487787e+169, 2.145068812691771e+172, 6.270471764710334e+174, 1.8329862389211532e+177, 5.35819102317499e+179, 1.5663080513758305e+182, 4.578636523397106e+184, 1.338428439729428e+187, 3.912498140270445e+189, 1.1437026622591962e+192, 3.343275147393056e+194, 9.773072215375257e+196, 2.8568674822177515e+199, 8.351203829347546e+201, 2.4412264773712492e+204, 7.136200762907307e+206, 2.0860564065058012e+209, 6.097966517061707e+211, 1.782559451759593e+214, 5.210783283520786e+216, 1.5232177754866594e+219, 4.452674896106666e+221, 1.3016072980164716e+224, 3.804862465326404e+226, 1.1122385685844946e+229, 3.251299211785732e+231, 9.504207876923186e+233, 2.7782729759330956e+236, 8.121456126335232e+238, 2.3740665580147242e+241, 6.939878679646557e+243, 2.0286674746173706e+246, 5.930207014483456e+248, 1.733519942259721e+251, 5.0674308382030444e+253, 1.48131294448783e+256, 4.330178564973407e+258, 1.2657991327442428e+261, 3.700187926236055e+263, 1.0816400750552143e+266, 3.161853601191424e+268, 9.242740192348035e+270, 2.7018406617895093e+273, 7.89802895005392e+275, 2.308754256980294e+278, 6.748957559959614e+280, 1.9728573540654998e+283, 5.767062698070391e+285, 1.6858295454021314e+288, 4.928022123119405e+290, 1.440560945926555e+293, 4.211052197174824e+295, 1.2309760761926834e+298, 3.598393059994233e+300, 1.0518833683805771e+303, 3.0748687045251316e+305, 8.98846567431158e+307], dtype=torch.float64); torch.log(x)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f16",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "pow"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.0999755859375, 1.0], dtype=torch.float16); y = torch.tensor([-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0], dtype=torch.float16); torch.pow(x, y)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f32",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "pow"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.10000000149011612, 1.0], dtype=torch.float32); y = torch.tensor([-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0], dtype=torch.float32); torch.pow(x, y)"
+    },
+    {
+      "fixture": "tests/pytorch-only/range_power_f64",
+      "group": "pytorch-only",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "pow"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          257
+        ],
+        [
+          257
+        ],
+        [
+          257
+        ]
+      ],
+      "code": "x = torch.tensor([-2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0, 2.0, 10.0, -2.0, -1.0, -0.5, 0.1, 1.0], dtype=torch.float64); y = torch.tensor([-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0, 1.0], dtype=torch.float64); torch.pow(x, y)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f16_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 129), dtype=torch.float16); y = torch.randn((3, 129), dtype=torch.float16); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f16_3x1_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 1), dtype=torch.float16); y = torch.randn((3, 1), dtype=torch.float16); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f16_3x33_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          33
+        ],
+        [
+          3,
+          33
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 33), dtype=torch.float16); y = torch.randn((3, 33), dtype=torch.float16); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f32_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 129), dtype=torch.float32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f32_3x1_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 1), dtype=torch.float32); y = torch.randn((3, 1), dtype=torch.float32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f32_3x257_w256",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          257
+        ],
+        [
+          3,
+          257
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 257), dtype=torch.float32); y = torch.randn((3, 257), dtype=torch.float32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f32_3x257_w32",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Load",
+        "Loop",
+        "StridedLoop",
+        "Tile",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          257
+        ],
+        [
+          3,
+          257
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 257), dtype=torch.float32); y = torch.randn((3, 257), dtype=torch.float32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f32_3x33_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          33
+        ],
+        [
+          3,
+          33
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 33), dtype=torch.float32); y = torch.randn((3, 33), dtype=torch.float32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f64_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 129), dtype=torch.float64); y = torch.randn((3, 129), dtype=torch.float64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f64_3x1_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 1), dtype=torch.float64); y = torch.randn((3, 1), dtype=torch.float64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_f64_3x33_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          33
+        ],
+        [
+          3,
+          33
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randn((3, 33), dtype=torch.float64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i32_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i32",
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int32); y = torch.randint(-3, 4, (3, 129), dtype=torch.int32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i32_3x1_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i32",
+        "i64"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 1), dtype=torch.int32); y = torch.randint(-3, 4, (3, 1), dtype=torch.int32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i32_3x33_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i32",
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          33
+        ],
+        [
+          3,
+          33
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int32); y = torch.randint(-3, 4, (3, 33), dtype=torch.int32); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i64_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 129), dtype=torch.int64); y = torch.randint(-3, 4, (3, 129), dtype=torch.int64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i64_3x1_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 1), dtype=torch.int64); y = torch.randint(-3, 4, (3, 1), dtype=torch.int64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_2sums_i64_3x33_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "copy"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          33
+        ],
+        [
+          3,
+          33
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (3, 33), dtype=torch.int64); y = torch.randint(-3, 4, (3, 33), dtype=torch.int64); x.sum(-1) + y.sum(-1)"
+    },
+    {
+      "fixture": "tests/serial-loops/loop_3sums_f32_3x129_w128",
+      "group": "serial-loops",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "add"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Loop",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn((3, 129), dtype=torch.float32); y = torch.randn((3, 129), dtype=torch.float32); z = torch.randn((3, 129), dtype=torch.float32); x.sum(-1) + y.sum(-1) + z.sum(-1)"
+    },
+    {
+      "fixture": "tests/where/where_and",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "bitwise_and",
+        "greater",
+        "less",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where((x > y) & (x < 1), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_column_broadcast",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); y = torch.randn((3, 1)); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_eq_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x == y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_ge_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x >= y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f16_1",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float16); y = torch.randn(1, dtype=torch.float16); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f16_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); y = torch.randn(129, dtype=torch.float16); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f16_33",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f16"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float16); y = torch.randn(33, dtype=torch.float16); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f32_1",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float32); y = torch.randn(1, dtype=torch.float32); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f32_33",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float32); y = torch.randn(33, dtype=torch.float32); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f64_1",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randn(1, dtype=torch.float64); y = torch.randn(1, dtype=torch.float64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f64_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); y = torch.randn(129, dtype=torch.float64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_f64_33",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randn(33, dtype=torch.float64); y = torch.randn(33, dtype=torch.float64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i32_1",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (1,), dtype=torch.int32); y = torch.randint(-3, 4, (1,), dtype=torch.int32); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (129,), dtype=torch.int32); y = torch.randint(-3, 4, (129,), dtype=torch.int32); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i32_33",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (33,), dtype=torch.int32); y = torch.randint(-3, 4, (33,), dtype=torch.int32); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i64_1",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (1,), dtype=torch.int64); y = torch.randint(-3, 4, (1,), dtype=torch.int64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i64_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (129,), dtype=torch.int64); y = torch.randint(-3, 4, (129,), dtype=torch.int64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_gt_i64_33",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          33
+        ],
+        [
+          33
+        ],
+        [
+          33
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (33,), dtype=torch.int64); y = torch.randint(-3, 4, (33,), dtype=torch.int64); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_le_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "less_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x <= y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_lt_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "less",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x < y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_masked_sum",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Accum",
+        "Assign",
+        "Cond",
+        "Load",
+        "Smem",
+        "StridedLoop",
+        "Sync",
+        "Tile",
+        "TreeHalve",
+        "WarpShuffle",
+        "Write"
+      ],
+      "shapes": [
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); y = torch.randn(3, 129); torch.where(x > y, x, y).sum(-1)"
+    },
+    {
+      "fixture": "tests/where/where_nan_eq_f32",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "divide",
+        "equal",
+        "negative",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          5
+        ],
+        [
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "code": "x = torch.tensor([0.0, 1.0, -1.0, 2.0, -0.0], dtype=torch.float32); y = torch.tensor([0.0, 1.0, 2.0, -1.0, 0.0], dtype=torch.float32); torch.where((x / x) == y, y, -y)"
+    },
+    {
+      "fixture": "tests/where/where_nan_lt_f32",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "divide",
+        "less",
+        "negative",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          5
+        ],
+        [
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "code": "x = torch.tensor([0.0, 1.0, -1.0, 2.0, -0.0], dtype=torch.float32); y = torch.tensor([0.0, 1.0, 2.0, -1.0, 0.0], dtype=torch.float32); torch.where((x / x) < y, y, -y)"
+    },
+    {
+      "fixture": "tests/where/where_nan_ne_f32",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "divide",
+        "negative",
+        "not_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          5
+        ],
+        [
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "code": "x = torch.tensor([0.0, 1.0, -1.0, 2.0, -0.0], dtype=torch.float32); y = torch.tensor([0.0, 1.0, 2.0, -1.0, 0.0], dtype=torch.float32); torch.where((x / x) != y, y, -y)"
+    },
+    {
+      "fixture": "tests/where/where_ne_f32_129",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "not_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x != y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_nested",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(x > y, torch.where(x > 0, x, y), y)"
+    },
+    {
+      "fixture": "tests/where/where_not",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "bitwise_not",
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where(~(x > y), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_or",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "bitwise_or",
+        "greater",
+        "less",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129); y = torch.randn(129); torch.where((x > y) | (x < -1), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_row_broadcast",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          129
+        ],
+        [
+          3,
+          129
+        ],
+        [
+          3,
+          129
+        ]
+      ],
+      "code": "x = torch.randn(3, 129); y = torch.randn((129,)); torch.where(x > y, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_scalar_f16",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f16",
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float16); y = torch.randn(129, dtype=torch.float16); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_scalar_f32",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float32); y = torch.randn(129, dtype=torch.float32); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_scalar_f64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "f64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randn(129, dtype=torch.float64); y = torch.randn(129, dtype=torch.float64); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_scalar_i32",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i32"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (129,), dtype=torch.int32); y = torch.randint(-3, 4, (129,), dtype=torch.int32); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_scalar_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "f32",
+        "i64"
+      ],
+      "ops": [
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ],
+        [
+          129
+        ]
+      ],
+      "code": "x = torch.randint(-3, 4, (129,), dtype=torch.int64); y = torch.randint(-3, 4, (129,), dtype=torch.int64); torch.where(x > 0, x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_eq_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) == (y + 1152921504606846976), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_ge_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "greater_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) >= (y + 1152921504606846976), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_gt_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "greater",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) > (y + 1152921504606846976), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_le_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "less_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) <= (y + 1152921504606846976), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_lt_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "less",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) < (y + 1152921504606846976), x, y)"
+    },
+    {
+      "fixture": "tests/where/where_wide_ne_i64",
+      "group": "where",
+      "status": "emits",
+      "dtypes": [
+        "i64"
+      ],
+      "ops": [
+        "add",
+        "not_equal",
+        "where"
+      ],
+      "nodes": [
+        "Assign",
+        "Load",
+        "Tile",
+        "Write"
+      ],
+      "shapes": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ],
+        [
+          7
+        ]
+      ],
+      "code": "x = torch.tensor([0, 1, -2, -1, 0, 1, -1], dtype=torch.int64); y = torch.tensor([1, 0, -1, -2, 0, -1, 1], dtype=torch.int64); torch.where((x + 1152921504606846976) != (y + 1152921504606846976), x, y)"
+    }
+  ]
+}

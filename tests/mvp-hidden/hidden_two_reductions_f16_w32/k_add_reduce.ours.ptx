@@ -1,0 +1,101 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_add_reduce(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<19>;
+    .reg .b64 %rd<13>;
+    .reg .f32 %f<25>;
+    .reg .b16 %h<9>;
+    .reg .pred %p<3>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    shr.u32 %r5, %r4, 5;
+    and.b32 %r6, %r4, 31;
+    and.b32 %r7, %r1, 31;
+    shr.u32 %r8, %r1, 5;
+    mov.f32 %f1, 0f00000000;
+    mov.s32 %r9, %r6;
+LOOP_1:
+    setp.ge.s32 %p1, %r9, 129;
+    @%p1 bra LOOP_DONE_2;
+    mul.lo.s32 %r10, %r5, 129;
+    add.s32 %r11, %r10, %r9;
+    mov.s32 %r12, %r11;
+    mul.wide.s32 %rd7, %r12, 2;
+    add.u64 %rd8, %rd4, %rd7;
+    ld.global.b16 %h1, [%rd8+0];
+    cvt.f32.f16 %f2, %h1;
+    add.rn.f32 %f3, %f1, %f2;
+    mov.f32 %f1, %f3;
+    add.s32 %r9, %r9, 32;
+    bra LOOP_1;
+LOOP_DONE_2:
+    activemask.b32 %r13;
+    shfl.sync.bfly.b32 %f4, %f1, 16, 31, %r13;
+    add.rn.f32 %f5, %f1, %f4;
+    mov.f32 %f1, %f5;
+    shfl.sync.bfly.b32 %f6, %f1, 8, 31, %r13;
+    add.rn.f32 %f7, %f1, %f6;
+    mov.f32 %f1, %f7;
+    shfl.sync.bfly.b32 %f8, %f1, 4, 31, %r13;
+    add.rn.f32 %f9, %f1, %f8;
+    mov.f32 %f1, %f9;
+    shfl.sync.bfly.b32 %f10, %f1, 2, 31, %r13;
+    add.rn.f32 %f11, %f1, %f10;
+    mov.f32 %f1, %f11;
+    shfl.sync.bfly.b32 %f12, %f1, 1, 31, %r13;
+    add.rn.f32 %f13, %f1, %f12;
+    mov.f32 %f1, %f13;
+    mov.f32 %f14, 0f00000000;
+    mov.s32 %r14, 0;
+LOOP_3:
+    setp.ge.s32 %p2, %r14, 129;
+    @%p2 bra LOOP_DONE_4;
+    mul.lo.s32 %r15, %r5, 129;
+    add.s32 %r16, %r15, %r14;
+    mov.s32 %r17, %r16;
+    mul.wide.s32 %rd9, %r17, 2;
+    add.u64 %rd10, %rd2, %rd9;
+    ld.global.b16 %h2, [%rd10+0];
+    cvt.f32.f16 %f15, %h2;
+    add.rn.f32 %f16, %f14, %f15;
+    mov.f32 %f14, %f16;
+    add.s32 %r14, %r14, 1;
+    bra LOOP_3;
+LOOP_DONE_4:
+    cvt.rn.f16.f32 %h3, %f14;
+    cvt.f32.f16 %f17, %h3;
+    mov.f32 %f18, %f17;
+    cvt.rn.f16.f32 %h4, %f18;
+    cvt.f32.f16 %f19, %h4;
+    cvt.rn.f16.f32 %h5, %f1;
+    cvt.f32.f16 %f20, %h5;
+    mov.f32 %f21, %f20;
+    cvt.rn.f16.f32 %h6, %f21;
+    cvt.f32.f16 %f22, %h6;
+    add.rn.f32 %f23, %f19, %f22;
+    cvt.rn.f16.f32 %h7, %f23;
+    cvt.f32.f16 %f24, %h7;
+    mov.s32 %r18, %r5;
+    mul.wide.s32 %rd11, %r18, 2;
+    add.u64 %rd12, %rd6, %rd11;
+    cvt.rn.f16.f32 %h8, %f24;
+    st.global.b16 [%rd12+0], %h8;
+DONE:
+    ret;
+}

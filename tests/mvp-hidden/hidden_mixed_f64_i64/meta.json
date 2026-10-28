@@ -1,0 +1,65 @@
+{
+ "id": "hidden_mixed_f64_i64",
+ "code": "x = torch.randn((3, 33), dtype=torch.float64); y = torch.randint(-3, 4, (33,), dtype=torch.int64); (x+y)*(x-y)",
+ "rtol": 1e-05,
+ "atol": 1e-06,
+ "graph_inputs": [
+  "x",
+  "y"
+ ],
+ "graph_outputs": [
+  "mul"
+ ],
+ "kernels": [
+  {
+   "node": "mul",
+   "entry": "k_mul_pointwise",
+   "arg_order": [
+    "y",
+    "x",
+    "mul"
+   ],
+   "grid": [
+    1,
+    1,
+    1
+   ],
+   "block": [
+    256,
+    1,
+    1
+   ],
+   "smem_bytes": 0,
+   "zero_outputs": [],
+   "args": [
+    {
+     "name": "y",
+     "dtype": "i64",
+     "shape": [
+      33
+     ],
+     "seed": 1
+    },
+    {
+     "name": "x",
+     "dtype": "f64",
+     "shape": [
+      3,
+      33
+     ],
+     "seed": 0
+    },
+    {
+     "name": "mul",
+     "dtype": "f64",
+     "shape": [
+      3,
+      33
+     ],
+     "output": true
+    }
+   ],
+   "final": true
+  }
+ ]
+}

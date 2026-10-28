@@ -1,0 +1,144 @@
+.version 8.0
+.target sm_89
+.address_size 64
+
+.visible .entry k_mul_pointwise(
+    .param .u64 arg_0,
+    .param .u64 arg_1,
+    .param .u64 arg_2
+)
+{
+    .reg .b32 %r<49>;
+    .reg .b64 %rd<25>;
+    .reg .f32 %f<28>;
+    .reg .b16 %h<22>;
+    .reg .pred %p<2>;
+
+    ld.param.u64 %rd1, [arg_0];
+    cvta.to.global.u64 %rd2, %rd1;
+    ld.param.u64 %rd3, [arg_1];
+    cvta.to.global.u64 %rd4, %rd3;
+    ld.param.u64 %rd5, [arg_2];
+    cvta.to.global.u64 %rd6, %rd5;
+    mov.u32 %r1, %tid.x;
+    mov.u32 %r2, %ctaid.x;
+    mov.u32 %r3, %ntid.x;
+    mad.lo.s32 %r4, %r2, %r3, %r1;
+    setp.ge.u32 %p1, %r4, 33;
+    @%p1 bra DONE;
+    div.u32 %r5, %r4, 11;
+    rem.u32 %r6, %r4, 11;
+    mul.lo.s32 %r7, %r5, 33;
+    mul.lo.s32 %r9, %r6, 3;
+    add.s32 %r10, %r9, 0;
+    add.s32 %r8, %r7, %r10;
+    mov.s32 %r11, %r8;
+    mul.wide.s32 %rd7, %r11, 2;
+    add.u64 %rd8, %rd4, %rd7;
+    ld.global.b16 %h1, [%rd8+0];
+    cvt.f32.f16 %f1, %h1;
+    mul.lo.s32 %r12, %r6, 3;
+    add.s32 %r13, %r12, 0;
+    mov.s32 %r14, %r13;
+    mul.wide.s32 %rd9, %r14, 4;
+    add.u64 %rd10, %rd2, %rd9;
+    ld.global.s32 %r15, [%rd10+0];
+    cvt.rn.f16.s32 %h2, %r15;
+    cvt.f32.f16 %f2, %h2;
+    add.rn.f32 %f3, %f1, %f2;
+    cvt.rn.f16.f32 %h3, %f3;
+    cvt.f32.f16 %f4, %h3;
+    cvt.rn.f16.s32 %h4, %r15;
+    cvt.f32.f16 %f5, %h4;
+    sub.rn.f32 %f6, %f1, %f5;
+    cvt.rn.f16.f32 %h5, %f6;
+    cvt.f32.f16 %f7, %h5;
+    mul.rn.f32 %f8, %f4, %f7;
+    cvt.rn.f16.f32 %h6, %f8;
+    cvt.f32.f16 %f9, %h6;
+    mul.lo.s32 %r16, %r5, 33;
+    mul.lo.s32 %r18, %r6, 3;
+    add.s32 %r19, %r18, 1;
+    add.s32 %r17, %r16, %r19;
+    mov.s32 %r20, %r17;
+    mul.wide.s32 %rd11, %r20, 2;
+    add.u64 %rd12, %rd4, %rd11;
+    ld.global.b16 %h7, [%rd12+0];
+    cvt.f32.f16 %f10, %h7;
+    mul.lo.s32 %r21, %r6, 3;
+    add.s32 %r22, %r21, 1;
+    mov.s32 %r23, %r22;
+    mul.wide.s32 %rd13, %r23, 4;
+    add.u64 %rd14, %rd2, %rd13;
+    ld.global.s32 %r24, [%rd14+0];
+    cvt.rn.f16.s32 %h8, %r24;
+    cvt.f32.f16 %f11, %h8;
+    add.rn.f32 %f12, %f10, %f11;
+    cvt.rn.f16.f32 %h9, %f12;
+    cvt.f32.f16 %f13, %h9;
+    cvt.rn.f16.s32 %h10, %r24;
+    cvt.f32.f16 %f14, %h10;
+    sub.rn.f32 %f15, %f10, %f14;
+    cvt.rn.f16.f32 %h11, %f15;
+    cvt.f32.f16 %f16, %h11;
+    mul.rn.f32 %f17, %f13, %f16;
+    cvt.rn.f16.f32 %h12, %f17;
+    cvt.f32.f16 %f18, %h12;
+    mul.lo.s32 %r25, %r5, 33;
+    mul.lo.s32 %r27, %r6, 3;
+    add.s32 %r28, %r27, 2;
+    add.s32 %r26, %r25, %r28;
+    mov.s32 %r29, %r26;
+    mul.wide.s32 %rd15, %r29, 2;
+    add.u64 %rd16, %rd4, %rd15;
+    ld.global.b16 %h13, [%rd16+0];
+    cvt.f32.f16 %f19, %h13;
+    mul.lo.s32 %r30, %r6, 3;
+    add.s32 %r31, %r30, 2;
+    mov.s32 %r32, %r31;
+    mul.wide.s32 %rd17, %r32, 4;
+    add.u64 %rd18, %rd2, %rd17;
+    ld.global.s32 %r33, [%rd18+0];
+    cvt.rn.f16.s32 %h14, %r33;
+    cvt.f32.f16 %f20, %h14;
+    add.rn.f32 %f21, %f19, %f20;
+    cvt.rn.f16.f32 %h15, %f21;
+    cvt.f32.f16 %f22, %h15;
+    cvt.rn.f16.s32 %h16, %r33;
+    cvt.f32.f16 %f23, %h16;
+    sub.rn.f32 %f24, %f19, %f23;
+    cvt.rn.f16.f32 %h17, %f24;
+    cvt.f32.f16 %f25, %h17;
+    mul.rn.f32 %f26, %f22, %f25;
+    cvt.rn.f16.f32 %h18, %f26;
+    cvt.f32.f16 %f27, %h18;
+    mul.lo.s32 %r34, %r5, 33;
+    mul.lo.s32 %r36, %r6, 3;
+    add.s32 %r37, %r36, 0;
+    add.s32 %r35, %r34, %r37;
+    mov.s32 %r38, %r35;
+    mul.wide.s32 %rd19, %r38, 2;
+    add.u64 %rd20, %rd6, %rd19;
+    cvt.rn.f16.f32 %h19, %f9;
+    st.global.b16 [%rd20+0], %h19;
+    mul.lo.s32 %r39, %r5, 33;
+    mul.lo.s32 %r41, %r6, 3;
+    add.s32 %r42, %r41, 1;
+    add.s32 %r40, %r39, %r42;
+    mov.s32 %r43, %r40;
+    mul.wide.s32 %rd21, %r43, 2;
+    add.u64 %rd22, %rd6, %rd21;
+    cvt.rn.f16.f32 %h20, %f18;
+    st.global.b16 [%rd22+0], %h20;
+    mul.lo.s32 %r44, %r5, 33;
+    mul.lo.s32 %r46, %r6, 3;
+    add.s32 %r47, %r46, 2;
+    add.s32 %r45, %r44, %r47;
+    mov.s32 %r48, %r45;
+    mul.wide.s32 %rd23, %r48, 2;
+    add.u64 %rd24, %rd6, %rd23;
+    cvt.rn.f16.f32 %h21, %f27;
+    st.global.b16 [%rd24+0], %h21;
+DONE:
+    ret;
+}
