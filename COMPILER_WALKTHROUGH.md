@@ -193,19 +193,51 @@ For `torch.randn(64, 512).sum(-1)`, 128 workers form partial sums, then cooperat
 
 Accumulators carry state; loops preserve scope. Extensions include RMSNorm, L2 normalization and online softmax's coupled maximum/sum merge. Code: [counted_loop](compile.py#L524), [merge_states](compile.py#L489).
 
-### Tensor cores: `ptx_tensor.py`
+### Tensor cores and async copies: `ptx_tensor.py`
 
-For f16 `a @ b`, the staged path follows:
+Small example using Emmy's shared-MMA schedule:
+
+```python
+a = torch.randn(16, 16, dtype=torch.float16)
+b = torch.randn(16, 8, dtype=torch.float16)
+result = a @ b
+```
+
+The generated IR follows:
 
 ```text
 CpAsyncCopy → shared memory → LdmatrixLoad → MmaSyncPtx → RegStore
 ```
+
+Selected **actual emitted instructions**, omitting address setup, loop control and output stores:
+
+```ptx
+cp.async.cg.shared.global [%r39], [%rd12], 16;
+cp.async.cg.shared.global [%r72], [%rd16], 16;
+cp.async.commit_group;
+cp.async.wait_group 0;
+bar.sync 0;
+ldmatrix.sync.aligned.m8n8.x4.shared.b16 {%r12, %r13, %r14, %r15}, [%r97];
+ldmatrix.sync.aligned.m8n8.x2.trans.shared.b16 {%r16, %r17}, [%r105];
+mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 {%f1, %f2, %f3, %f4}, {%r12, %r13, %r14, %r15}, {%r16, %r17}, {%f1, %f2, %f3, %f4};
+bar.sync 0;
+```
+
+| Step | What happens and why |
+| --- | --- |
+| Two `cp.async` sites | Participating threads copy 16-byte A/B chunks from global to shared memory, avoiding per-element register staging |
+| Commit → wait → barrier | Commit each thread's copy group; wait for its completion; synchronize the block before cooperative reads |
+| Two `ldmatrix` instructions | Load A/B into packed warp fragments; B's transpose matches the MMA operand layout |
+| `mma.sync` | A 32-thread warp jointly computes `C = A @ B + C`, using f16 inputs and f32 accumulation |
+| Final barrier → `RegStore` | Protect shared-buffer reuse, then map the distributed C values back to output coordinates |
 
 `fragments[name]` tracks role, dtype and registers. Per thread: four packed A registers, two B and four f32 C; native m16n8k16 `mma.sync` computes cooperatively across the warp.
 
 The helper handles lane layouts, swizzles and guarded stores; the visitor preserves commit/wait/barrier order. Extensions include split-K, transposed B, multiple warps and buffering.
 
 Code: [fragment allocation](ptx_tensor.py#L93), [matrix_load](ptx_tensor.py#L107), [mma_sync](ptx_tensor.py#L162), [reg_store](ptx_tensor.py#L172).
+
+Source: [actual Emmy IR](tests/matmul/matmul_mma_shared_f16_16x8x16/k_matmul_7421ac.ir.txt), [full PTX](tests/matmul/matmul_mma_shared_f16_16x8x16/k_matmul_7421ac.ours.ptx). This example passed both hosted references in the [shared-matmul report](review/matmul/shared-validation.json).
 
 ## 5. Evidence, reproduction and future work
 
