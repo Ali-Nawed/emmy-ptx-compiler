@@ -195,7 +195,9 @@ Accumulators carry state; loops preserve scope. Extensions include RMSNorm, L2 n
 
 ### Tensor cores and async copies: `ptx_tensor.py`
 
-Small example using Emmy's shared-MMA schedule:
+#### Same PyTorch expression, two Emmy schedules
+
+Both examples use identical f16 inputs and dimensions:
 
 ```python
 a = torch.randn(16, 16, dtype=torch.float16)
@@ -203,7 +205,69 @@ b = torch.randn(16, 8, dtype=torch.float16)
 result = a @ b
 ```
 
-The generated IR follows:
+`a @ b` stays unchanged; the fixture generator sets `EMMY_KNOBS` before tracing. The schedule selects the path; f16 alone does not. Our compiler follows the generated IR.
+
+| Path | Emmy schedule used to generate the fixture |
+| --- | --- |
+| CUDA-core scalar | `WORK=t8x4,TILE=f1x1,REDUCE=,STAGE=` |
+| Tensor-core, shared staging | `WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=d1/smem-async` |
+
+#### CUDA-core path: each worker runs a dot-product loop
+
+Actual scalar Kernel IR:
+
+```text
+Tile[a0, a1] (N=128)
+    for a2 in 0..16
+        in0 = load a[a0, a2]
+        in1 = load b[a2, a1]
+        f16 v0 = multiply(in0, in1)
+        f32 acc0 <- add(acc0, v0)
+    matmul[a0, a1] = acc0
+```
+
+Each worker accumulates one output across K. Selected actual PTX, omitting indexing and loop control:
+
+```ptx
+ld.global.b16 %h1, [%rd8+0];
+cvt.f32.f16 %f2, %h1;
+ld.global.b16 %h2, [%rd10+0];
+cvt.f32.f16 %f3, %h2;
+mul.rn.f32 %f4, %f2, %f3;
+cvt.rn.f16.f32 %h3, %f4;
+cvt.f32.f16 %f5, %h3;
+add.rn.f32 %f6, %f1, %f5;
+mov.f32 %f1, %f6;
+```
+
+This scalar IR rounds each product to f16 before f32 accumulation. Our emitter uses ordinary floating-point instructions; other CUDA-core implementations can use scalar FMA.
+
+| Difference | This scalar example | This tensor-core example |
+| --- | --- | --- |
+| Work ownership | 128 active workers, one output each; metadata launches 256 threads with a guard | 32 threads jointly compute 128 outputs, four per lane |
+| Compute IR | `Loop`, `Load`, `Assign`, `Accum`, `Write` | `RegFragment`, `LdmatrixLoad`, `MmaSyncPtx`, `RegStore` |
+| Arithmetic PTX | Scalar `mul.rn.f32` and `add.rn.f32` in a K loop | Warp-cooperative `mma.sync.m16n8k16` |
+| Memory in these schedules | Direct global loads | Shared buffers, `cp.async`, commit/wait, barriers and `ldmatrix` |
+| Numeric contract | Explicit f16 product rounding, f32 accumulator | Native f16-input/f32-accumulation MMA semantics |
+
+**`mma.sync` selects tensor cores; `cp.async` is optional transport.** Scalar kernels can stage too, and MMA also has a global-load path. Numeric contracts can differ; both passed IR/NumPy checks within recorded tolerances. Runtime speedup is unproven.
+
+#### Tensor-core path: arrange operands, then invoke MMA
+
+Actual tensor-core IR excerpts; copy indices and loops omitted:
+
+```text
+RegFragment a:f16 _a0[4] (16x8x16)
+RegFragment b:f16 _b0[2] (16x8x16)
+RegFragment c:f32 _c0_0[4] (16x8x16)
+Smem __half _a_smem[16, 16] align=256
+Smem __half _b_smem[16, 8] align=16
+LdmatrixLoad _a0 <- _a_smem[((a0_u * 16) + 0), _ki] (x4, ldm=16)
+LdmatrixLoad _b0 <- _b_smem[_ki, ((a1_u * 8) + 0)] (x2.trans, ldm=8)
+MmaSyncPtx _c0_0 += _a0 @ _b0 (m16n8k16 f16)
+```
+
+The staged data path follows:
 
 ```text
 CpAsyncCopy → shared memory → LdmatrixLoad → MmaSyncPtx → RegStore
@@ -237,7 +301,7 @@ The helper handles lane layouts, swizzles and guarded stores; the visitor preser
 
 Code: [fragment allocation](ptx_tensor.py#L93), [matrix_load](ptx_tensor.py#L107), [mma_sync](ptx_tensor.py#L162), [reg_store](ptx_tensor.py#L172).
 
-Source: [actual Emmy IR](tests/matmul/matmul_mma_shared_f16_16x8x16/k_matmul_7421ac.ir.txt), [full PTX](tests/matmul/matmul_mma_shared_f16_16x8x16/k_matmul_7421ac.ours.ptx). This example passed both hosted references in the [shared-matmul report](review/matmul/shared-validation.json).
+Matched source artifacts: [scalar IR](tests/walkthrough/matmul_scalar_f16_16x8x16/k_matmul_7421ac.ir.txt), [scalar PTX](tests/walkthrough/matmul_scalar_f16_16x8x16/k_matmul_7421ac.ours.ptx), [tensor-core IR](tests/walkthrough/matmul_tensor_f16_16x8x16/k_matmul_7421ac.ir.txt), [tensor-core PTX](tests/walkthrough/matmul_tensor_f16_16x8x16/k_matmul_7421ac.ours.ptx). Both passed hosted checks against both references in the [matched-path report](review/walkthrough/matmul-paths.json).
 
 ## 5. Evidence, reproduction and future work
 
@@ -247,6 +311,7 @@ Source: [actual Emmy IR](tests/matmul/matmul_mma_shared_f16_16x8x16/k_matmul_742
 
 ```bash
 python tools/generate_walkthrough_example.py --runner
+python tools/compare_matmul_paths.py --runner
 python tools/test_mvp.py
 ```
 

@@ -1,0 +1,176 @@
+{
+  "pipeline": "same PyTorch -> Emmy 0.3.11 with different schedules -> unchanged IR -> our PTX",
+  "runner": true,
+  "code": "a = torch.randn(16, 16, dtype=torch.float16); b = torch.randn(16, 8, dtype=torch.float16); a @ b",
+  "cases": [
+    {
+      "path": "scalar",
+      "fixture": "tests/walkthrough/matmul_scalar_f16_16x8x16",
+      "knobs": "WORK=t8x4,TILE=f1x1,REDUCE=,STAGE=",
+      "status": "pass",
+      "kernels": [
+        {
+          "node": "matmul",
+          "entry": "k_matmul_7421ac",
+          "arg_order": [
+            "b",
+            "a",
+            "matmul"
+          ],
+          "grid": [
+            1,
+            1,
+            1
+          ],
+          "block": [
+            256,
+            1,
+            1
+          ],
+          "smem_bytes": 0,
+          "zero_outputs": [],
+          "args": [
+            {
+              "name": "b",
+              "dtype": "f16",
+              "shape": [
+                16,
+                8
+              ],
+              "seed": 1
+            },
+            {
+              "name": "a",
+              "dtype": "f16",
+              "shape": [
+                16,
+                16
+              ],
+              "seed": 0
+            },
+            {
+              "name": "matmul",
+              "dtype": "f16",
+              "shape": [
+                16,
+                8
+              ],
+              "output": true
+            }
+          ],
+          "final": true
+        }
+      ],
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_7421ac",
+            "median_us": 20.256,
+            "registers": {
+              "k_matmul_7421ac": 40
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "tensor",
+      "fixture": "tests/walkthrough/matmul_tensor_f16_16x8x16",
+      "knobs": "WORK=w1x1,TILE=mma_m16n8k16_f16_f32/f1x1,STAGE=d1/smem-async",
+      "status": "pass",
+      "kernels": [
+        {
+          "node": "matmul",
+          "entry": "k_matmul_7421ac",
+          "arg_order": [
+            "b",
+            "a",
+            "matmul"
+          ],
+          "grid": [
+            1,
+            1,
+            1
+          ],
+          "block": [
+            32,
+            1,
+            1
+          ],
+          "smem_bytes": 0,
+          "zero_outputs": [],
+          "args": [
+            {
+              "name": "b",
+              "dtype": "f16",
+              "shape": [
+                16,
+                8
+              ],
+              "seed": 1
+            },
+            {
+              "name": "a",
+              "dtype": "f16",
+              "shape": [
+                16,
+                16
+              ],
+              "seed": 0
+            },
+            {
+              "name": "matmul",
+              "dtype": "f16",
+              "shape": [
+                16,
+                8
+              ],
+              "output": true
+            }
+          ],
+          "final": true
+        }
+      ],
+      "ir_vs_expression": "pass",
+      "reference_details": {},
+      "details": {
+        "kernels": [
+          {
+            "entry": "k_matmul_7421ac",
+            "median_us": 21.024,
+            "registers": {
+              "k_matmul_7421ac": 17
+            }
+          }
+        ],
+        "comparisons": {
+          "expression": {
+            "status": "pass",
+            "details": {}
+          },
+          "kernel_ir": {
+            "status": "pass",
+            "details": {}
+          }
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  }
+}
