@@ -20,7 +20,7 @@ source .venv/bin/activate
 python -m pip install emmy-ml==0.3.11 numpy==2.5.4 requests==2.34.2
 ```
 
-The private repository requires GitHub access. For an existing checkout, use `git pull --ff-only`, activate `.venv`, and install the dependencies above.
+For an existing checkout, use `git pull --ff-only`, activate `.venv`, and install the dependencies above.
 
 Generating PTX from supplied IR does not require a local GPU, PyTorch or the CUDA toolkit. Keep `compile.py`, `ptx_math.py` and `ptx_tensor.py` together at the repository root.
 
