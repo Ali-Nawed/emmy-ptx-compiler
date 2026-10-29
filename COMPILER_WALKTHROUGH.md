@@ -192,7 +192,7 @@ Code: [reg](compile.py#L114), [arithmetic](compile.py#L247), [activation](ptx_ma
 
 ### Try the examples
 
-From the repository root in the [pinned Ubuntu environment](COMPILER_README.md), with `ptxas` available:
+From the repository root in the [pinned Ubuntu environment](README.md), with `ptxas` available:
 
 ```bash
 # Compile and assemble the saved tensor-core kernel locally; no GPU needed.

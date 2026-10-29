@@ -39,7 +39,7 @@ The small API costs show that startup/import overhead dominates the current CLI.
 
 ## Reproduce
 
-Use the [compiler setup](../../COMPILER_README.md), with `nvcc` and `ptxas` on `PATH`:
+Use the [compiler setup](../../README.md), with `nvcc` and `ptxas` on `PATH`:
 
 ```bash
 python tools/benchmark_compile_time.py

@@ -1,6 +1,6 @@
 # Our Kernel IR to PTX compiler
 
-For setup, compilation and validation commands, see the root [compiler run guide](../../COMPILER_README.md). For the short presentation, see the [compiler walkthrough](../../COMPILER_WALKTHROUGH.md).
+For setup, compilation and validation commands, see the root [README](../../README.md). For the short presentation, see the [compiler walkthrough](../../COMPILER_WALKTHROUGH.md).
 
 Read these notes alongside [compile.py](../../compile.py). They describe the current implementation, including its limitations; they are not a plan for an additional compiler framework.
 

@@ -1,62 +1,155 @@
-# Emmy Kernel IR to PTX compiler
+# Emmy Kernel IR → PTX compiler
 
-Our work-in-progress compiler translates Emmy's typed Kernel IR directly into PTX.
-The original competition materials are retained below and in the problems/ directory.
+Our Python compiler translates Emmy's scheduled Kernel IR directly into PTX, including typed pointwise operations, reductions and selected native tensor-core paths.
 
-## Current implementation
+Start with the [compiler walkthrough](COMPILER_WALKTHROUGH.md) for the approach and examples, or the [implementation guide](docs/compiler/README.md) for details.
 
-- compile.py: direct lowering for f16/f32/f64/i32/i64 pointwise operations and typed sum/mean reductions.
-- explore_ir.py: editable Marimo notebook for inspecting parsed graph objects.
-- review/: generated PTX snapshots and test notes.
-- tools/expressions_extended.py and tools/test_extended.py: fresh PyTorch -> Emmy IR fixtures, independent NumPy expectations, and optional runner checks.
-- tools/ir_reference.py: independent NumPy interpreter of the supported typed Kernel IR, with separate expected_ir.npz files.
-- tests/EXTENDED.md: extended-suite usage and result definitions.
+## Setup on Ubuntu / WSL
 
-All eight public MVP problems passed. The 80-case PyTorch-generated suite now
-produces 77 GPU passes and three strict f64 reduction failures. Emmy 0.3.11 stamps
-these reductions with f32 state; our GPU results match a CPU trace of that IR,
-but lose precision against the independent f64 NumPy expectations. Expectations
-and tolerances remain unchanged. Wide integer reductions have the same upstream
-state-precision limitation. See [datatype validation](review/all-dtypes.md).
-Known gaps include lexical scope handling and broader reduction schedules.
-These results do not establish hidden-set correctness.
-
-Use `python tools/test_extended.py --reuse --ir-reference --runner` to compare
-our GPU output with both the original expression and the generated Kernel IR.
-The original expected.npz remains unchanged. See [IR checker notes](review/ir-reference.md).
-The hosted run matches the IR expectations on all 80 cases; the three original
-expression failures remain visible.
-
-An additional 317 boundary/schedule cases and 40 explicit-input reductions all
-match the typed IR on the hosted GPU; 333/357 match their original expressions.
-The remaining 24 expose the IR's accumulator precision or cancellation order.
-See [boundary coverage](tests/BOUNDARIES.md) and the subsequent
-[local Emmy/nvcc PTX comparison](review/ptx-comparison.md), which identifies
-coordinate decoding and grouped stores as the first optimization candidates.
-
-Those two emitter improvements are now implemented directly, with conservative
-alignment checks and scalar fallback. All 480 GPU regression cases match the IR
-checker; 453 match their original expressions, with the same 27 known precision
-failures. See [implementation and before/after evidence](review/emitter-optimizations.md).
+Tested on **Ubuntu 24.04 / WSL, Python 3.12**. Our compiler is Python: setup installs dependencies; there is no native compiler build step. In PowerShell, enter Ubuntu with `wsl -d Ubuntu`, then run:
 
 ```bash
-uv venv .venv --python 3.12
-uv pip install --python .venv/bin/python emmy-ml==0.3.11 numpy requests
-.venv/bin/python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json > out.ptx
+sudo apt-get update
+sudo apt-get install -y git python3.12 python3.12-venv
+
+git clone https://github.com/Ali-Nawed/emmy-ptx-compiler.git
+cd emmy-ptx-compiler
+
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install emmy-ml==0.3.11 numpy==2.5.4 requests==2.34.2
 ```
 
-For fixture generation, install CPU PyTorch in the same environment:
+The private repository requires GitHub access. For an existing checkout, use `git pull --ff-only`, activate `.venv`, and install the dependencies above.
+
+Generating PTX from supplied IR does not require a local GPU, PyTorch or the CUDA toolkit. Keep `compile.py`, `ptx_math.py` and `ptx_tensor.py` together at the repository root.
+
+## Compile a kernel
 
 ```bash
-uv pip install --python .venv/bin/python --index-url https://download.pytorch.org/whl/cpu torch==2.14.1+cpu
-.venv/bin/python tools/test_extended.py --dtypes f32 --ops add sum --sizes 129
+python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json > out.ptx
 ```
 
-Runner tests upload only PTX produced by our own compiler. Local reference CUDA
-and CUDA-generated PTX are retained for study and must not be uploaded by our workflow.
-The compiler itself does not use those references or invoke CUDA/Triton/LLVM code generation.
+The compiler reads the IR and its sibling `meta.json`, uses Emmy's typed parser, and writes **PTX to stdout**. Diagnostics go to stderr; failures return a nonzero exit code. The output targets `sm_89` with 64-bit addresses. Metadata supplies parameter order, launch dimensions and shared-memory requirements; PTX generation does not launch a kernel.
 
-Original upstream: https://github.com/cloudrift-ai/emmy-hackathon-2026
+Inspect the parsed IR and metadata:
+
+```bash
+python compile.py problems/p00_scalar_add/k_add_pointwise.ir.json --inspect
+```
+
+`--inspect` prints the parsed representation to stderr instead of generating PTX.
+
+## Try the saved tensor-core and scalar examples
+
+Emit the tensor-core example's PTX using only the base setup:
+
+```bash
+python compile.py tests/walkthrough/matmul_tensor_f16_16x8x16/k_matmul_7421ac.ir.json > /tmp/emmy-tensor.ptx
+```
+
+For local assembly and the test tools, install CUDA tools if they are absent. On the tested Ubuntu installation:
+
+```bash
+sudo apt-get install -y nvidia-cuda-toolkit
+ptxas --version
+```
+
+Install CPU PyTorch for expression-oracle checks and Emmy fixture generation:
+
+```bash
+python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.14.1+cpu
+```
+
+From the repo root with the virtual environment active:
+
+```bash
+# Assemble the emitted tensor-core kernel. This does not execute it.
+ptxas -arch=sm_89 /tmp/emmy-tensor.ptx -o /tmp/emmy-tensor.cubin
+
+# Check both saved matmul paths locally against the expression/IR references.
+python tools/compare_matmul_paths.py --reuse
+
+# Execute both paths on the competition GPU; only our PTX is uploaded.
+python tools/compare_matmul_paths.py --reuse --runner
+
+# Regenerate both cases from PyTorch -> Emmy -> unchanged Kernel IR.
+python tools/compare_matmul_paths.py
+
+# Regenerate and validate the tanh walkthrough example locally.
+python tools/generate_walkthrough_example.py
+```
+
+These commands need no local GPU. The matched examples use the same f16 `a @ b` expression and shapes; Emmy's schedule selects scalar arithmetic or tensor-core MMA. Local checks report `assembled_not_executed`; `--runner` is required for GPU execution. Reports are in `review/walkthrough/`.
+
+The [fresh-environment check](review/setup-validation.json) records a fresh virtual environment and tracked checkout, including successful local regeneration of these examples. System prerequisites were already installed for that check; repository contents were extracted from a Git archive to avoid depending on GitHub credentials.
+
+## Validate on the competition GPU
+
+Compile and test one public problem through the supplied runner client:
+
+```bash
+python submit.py p00_scalar_add --compiler compile.py
+```
+
+Run all eight public MVP problems:
+
+```bash
+python tools/test_mvp.py
+```
+
+These commands contact the hosted runner and upload **only PTX generated by our compiler**. They use the original problem metadata, inputs and expected outputs. MVP results and logs are saved under `review/presentation/`.
+
+## Generate and test additional cases
+
+Use the CPU PyTorch and CUDA-tool setup above. Fixture generation uses upstream Emmy tooling; local assembly requires `ptxas` on `PATH`. The commands below do not need a local GPU.
+
+Generate a small pointwise/reduction sample, assemble our PTX, and compute both references:
+
+```bash
+python tools/test_extended.py --dtypes f32 --ops add sum --sizes 129 --ir-reference
+```
+
+Execute that sample on the hosted GPU:
+
+```bash
+python tools/test_extended.py --dtypes f32 --ops add sum --sizes 129 --ir-reference --reuse --runner
+```
+
+The pipeline is **PyTorch → pinned Emmy → unchanged Kernel IR → our compiler → PTX**. Independent NumPy expression results and a typed-IR interpreter provide separate checks. Reports distinguish expression mismatches from IR mismatches; tolerances and expectations remain unchanged. Use `--generate-only` to generate fixtures without compiling or assembling our PTX.
+
+Run generated tensor-core and shared-memory suites:
+
+```bash
+python tools/test_matmul.py --suite global --runner
+python tools/test_matmul.py --suite shared --runner
+```
+
+Omit `--runner` for local assembly/reference checks; add `--reuse` to reuse saved fixtures. Matmul reports are written to `review/matmul/`. Generation failures and unsupported cases remain visible in reports, so inspect individual statuses as well as the exit code.
+
+## Compile-time measurements
+
+On this local WSL machine, the measured **fresh-process CLI** took roughly **420–492 ms** to produce PTX across six kernels; nvcc took **414–456 ms** from saved Emmy CUDA. This does not establish a material CLI speedup. Once imported, our parse-and-emit API took **0.78–2.99 ms**, excluding startup/imports; that is a different measurement boundary.
+
+The [benchmark report](review/compile-time/README.md) includes per-kernel medians, assembly times and limitations. Reproduce locally with Python dependencies plus `nvcc` and `ptxas`:
+
+```bash
+python tools/benchmark_compile_time.py
+```
+
+The comparison creates no GPU submissions and executes no reference kernels. It excludes Emmy tracing/rendering and times our IR input versus nvcc's CUDA input through PTX, with assembly reported separately.
+
+## Features and current limits
+
+For pointwise/reduction variations beyond the eight public cases, see the [hidden-style MVP coverage audit](docs/compiler/19-mvp-hidden-coverage.md). Run `python tools/test_mvp_hidden_variants.py` to generate the fresh matrix, then `python tools/test_mvp_hidden_variants.py --reuse --runner` for hosted checks. Its recorded expression failures remain failures; this is not a claim of complete hidden-set coverage.
+
+- Pointwise arithmetic, conversions, comparisons and `where` across f16/f32/f64/i32/i64; supported math functions use native PTX or accuracy-preserving helpers.
+- Ordinary/strided loops, warp/shared reductions, normalization and online softmax patterns.
+- Aligned grouped stores with scalar fallback and simpler coordinate arithmetic.
+- Native f16-input/f32-accumulator tensor-core matmul, asynchronous shared-memory copies, swizzles and buffered schedules.
+- Unsupported forms fail explicitly. Atomic accumulation for public m02 and arrayed register fragments remain future work. Historical f64 expression-reference differences are documented; passing public cases does not establish hidden-set completeness.
+
+The compiler emits PTX directly: it does not invoke CUDA, Triton or LLVM to translate kernels. See the [feature walkthrough](COMPILER_WALKTHROUGH.md) and [testing policy](docs/compiler/12-required-test-pipeline.md) for evidence and scope.
 
 ---
 
