@@ -1,0 +1,44 @@
+{
+  "check": "Fresh dependency install and fresh tracked checkout; local compilation/assembly/oracles, no GPU execution",
+  "checkout_method": "git archive HEAD extracted on Linux temporary storage; no existing virtualenv reused",
+  "checkout_revision": "683383d2572d48f9c3241f97323eb63485a71498",
+  "python": "Python 3.12.3",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "versions": {
+    "emmy-ml": "0.3.11",
+    "numpy": "2.5.4",
+    "requests": "2.34.2",
+    "torch": "2.14.1+cpu"
+  },
+  "system_prerequisites": "Python 3.12 and CUDA tools already installed",
+  "checks": {
+    "public_add_cli": true,
+    "tensor_cli": true,
+    "tensor_ptxas": true,
+    "tanh_fresh_generation_ir_vs_numpy": "pass",
+    "matmul_fresh_generation": [
+      {
+        "path": "scalar",
+        "status": "assembled_not_executed",
+        "ir_vs_expression": "pass"
+      },
+      {
+        "path": "tensor",
+        "status": "assembled_not_executed",
+        "ir_vs_expression": "pass"
+      }
+    ],
+    "matmul_saved_reuse": "Both scalar and tensor paths assembled and matched expression/IR locally before regeneration"
+  },
+  "compiler_text_identical_after_line_ending_normalization": true,
+  "checkout_compiler_sha256": {
+    "compile.py": "43e83b44386586aece95abc6dd74448729d35756653c2d9404912678b2e5b4df",
+    "ptx_math.py": "0e8e09faa714cb1f237a58cc682878c7f098982ba841952c07ef8d7fcbbee443",
+    "ptx_tensor.py": "f137473c1d59bcd4c4a045a79a15e2c9c98c11b53b80fd29f80aded64b973793"
+  },
+  "working_compiler_sha256": {
+    "compile.py": "a21e25a3b6a6e7bee83318c09f7cf8fd3988e3582f29cad20ec89d823b98f47d",
+    "ptx_math.py": "8c0a2a4719e6ad2dec19676eaef7843447d02f489185ea535bc613614818bb8e",
+    "ptx_tensor.py": "778c507a2f5c6403e9ebb19a17a4895953df0452a1d4cdb072f8a42c2d7fec6f"
+  }
+}
