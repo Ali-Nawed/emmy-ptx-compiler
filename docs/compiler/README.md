@@ -25,6 +25,7 @@ Read these notes alongside [compile.py](../../compile.py). They describe the cur
 17. [Shared-memory staging and native asynchronous copies](17-shared-memory-async-copies.md)
 18. [Compiler walkthrough](../../COMPILER_WALKTHROUGH.md)
 19. [Hidden-style MVP coverage: fresh PyTorch matrix and remaining gaps](19-mvp-hidden-coverage.md)
+20. [Detailed math and scalar/tensor-core matmul examples](20-math-and-matmul-examples.md)
 
 ## The complete path
 
